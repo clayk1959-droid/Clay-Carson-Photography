@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "gallery:sync": "node scripts/sync-gallery.mjs",
     "save": "node scripts/save.mjs",
-    "collection:add": "node scripts/add-collection.mjs"
+    "collection:add": "node scripts/add-collection.mjs",
+    "hero:set": "node scripts/set-hero-photo.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

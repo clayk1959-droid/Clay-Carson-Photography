@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Wednesday, August 5, 2026
+Last updated: Thursday, August 6, 2026
 
 ## Current status
 
@@ -14,6 +14,10 @@ Last updated: Wednesday, August 5, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 51 — Thursday, August 6, 2026
+
+- Updated hero for to higher resolution
 
 Entries below Version 50 predate the move off ChatGPT Sites and are kept for
 reference. From Version 51 onward, run `npm run save` to add a new entry here
