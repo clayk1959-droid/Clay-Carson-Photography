@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 type GalleryPhoto = {
   src: string;
@@ -8,17 +8,25 @@ type GalleryPhoto = {
   altText: string;
   width: number;
   height: number;
+  filename: string;
+  date: string | null;
+  description: string;
 };
 
 export function Gallery({
   name,
+  slug,
   photographs,
+  editable = false,
 }: {
   name: string;
+  slug: string;
   photographs: GalleryPhoto[];
+  editable?: boolean;
 }) {
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
   const [activePhotoWidth, setActivePhotoWidth] = useState<number | null>(null);
+  const [editingPhoto, setEditingPhoto] = useState<number | null>(null);
   const activeImage = useRef<HTMLImageElement | null>(null);
   const dialog = useRef<HTMLDivElement | null>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
@@ -31,6 +39,9 @@ export function Gallery({
     document.body.style.overflow = "hidden";
 
     function handleKeyDown(event: KeyboardEvent) {
+      // The edit form has its own Escape handler and text inputs — don't
+      // let the lightbox also react while it's open on top.
+      if (editingPhoto !== null) return;
       if (event.key === "Escape") closePhoto();
       if (event.key === "ArrowLeft") {
         setActivePhoto((current) =>
@@ -66,7 +77,7 @@ export function Gallery({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [activePhoto, photographs.length]);
+  }, [activePhoto, photographs.length, editingPhoto]);
 
   useEffect(() => {
     if (activePhoto !== null) {
@@ -114,27 +125,46 @@ export function Gallery({
     <>
       <div className="photo-gallery">
         {photographs.map((photograph, index) => (
-          <button
-            className="gallery-thumb"
-            type="button"
-            key={photograph.src}
-            onClick={() => openPhoto(index)}
-            aria-label={`Open ${name} photograph ${index + 1} of ${photographs.length}`}
-          >
-            <img
-              src={photograph.src.replace(
-                "/galleries/",
-                "/gallery-thumbnails/",
-              )}
-              alt={photograph.altText}
-              width={photograph.width}
-              height={photograph.height}
-              loading={index < 4 ? "eager" : "lazy"}
-            />
-            <span className="gallery-thumb-number" aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-          </button>
+          <div className="gallery-thumb-wrap" key={photograph.src}>
+            <button
+              className="gallery-thumb"
+              type="button"
+              onClick={() => openPhoto(index)}
+              aria-label={`Open ${name} photograph ${index + 1} of ${photographs.length}`}
+            >
+              <img
+                src={photograph.src.replace(
+                  "/galleries/",
+                  "/gallery-thumbnails/",
+                )}
+                alt={photograph.altText}
+                width={photograph.width}
+                height={photograph.height}
+                loading={index < 4 ? "eager" : "lazy"}
+              />
+              <span className="gallery-thumb-number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </button>
+            {editable && (
+              <button
+                className="gallery-edit-button"
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setEditingPhoto(index);
+                }}
+                aria-label={`Edit caption, date, and position for photograph ${index + 1}`}
+              >
+                <svg viewBox="0 0 20 20" width="13" height="13" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M14.85 2.85a1.5 1.5 0 0 1 2.12 0l.18.18a1.5 1.5 0 0 1 0 2.12L7.5 14.8l-3.1.8.8-3.1 9.65-9.65Z"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>
         ))}
       </div>
 
@@ -155,6 +185,19 @@ export function Gallery({
           >
             Close
           </button>
+          {editable && (
+            <button
+              className="lightbox-edit"
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                setEditingPhoto(activePhoto);
+              }}
+              aria-label="Edit caption, date, and position for this photograph"
+            >
+              Edit
+            </button>
+          )}
           <button
             className="lightbox-arrow lightbox-previous"
             type="button"
@@ -230,6 +273,183 @@ export function Gallery({
           </button>
         </div>
       )}
+
+      {editingPhoto !== null && (
+        <EditPhotoForm
+          slug={slug}
+          photograph={photographs[editingPhoto]}
+          position={editingPhoto + 1}
+          total={photographs.length}
+          onClose={() => setEditingPhoto(null)}
+        />
+      )}
+
+      {editable && <SyncButton />}
     </>
+  );
+}
+
+function SyncButton() {
+  const [status, setStatus] = useState<"idle" | "syncing" | "done" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSync() {
+    setStatus("syncing");
+    setMessage("");
+    try {
+      const response = await fetch("/api/gallery-sync", { method: "POST" });
+      const body = await response.json();
+      if (!response.ok || !body.ok) throw new Error(body.output || "Sync failed.");
+      setStatus("done");
+      setMessage(body.output);
+    } catch (error) {
+      setStatus("error");
+      setMessage(error instanceof Error ? error.message : "Sync failed.");
+    }
+  }
+
+  return (
+    <div className="sync-gallery">
+      <button
+        type="button"
+        className="sync-gallery-button"
+        disabled={status === "syncing"}
+        onClick={handleSync}
+      >
+        {status === "syncing" ? "Syncing…" : "Sync Gallery"}
+      </button>
+      {status === "done" && (
+        <pre className="sync-gallery-status">{message}</pre>
+      )}
+      {status === "error" && (
+        <pre className="sync-gallery-status is-error">{message}</pre>
+      )}
+    </div>
+  );
+}
+
+function EditPhotoForm({
+  slug,
+  photograph,
+  position,
+  total,
+  onClose,
+}: {
+  slug: string;
+  photograph: GalleryPhoto;
+  position: number;
+  total: number;
+  onClose: () => void;
+}) {
+  const [caption, setCaption] = useState(photograph.description);
+  const [date, setDate] = useState(photograph.date ?? "");
+  const [order, setOrder] = useState(String(position));
+  const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
+  async function submitChange(body: Record<string, unknown>) {
+    setStatus("saving");
+    setErrorMessage("");
+    try {
+      const response = await fetch("/api/gallery-overrides", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, filename: photograph.filename, ...body }),
+      });
+      if (!response.ok) throw new Error(await response.text());
+      setStatus("saved");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
+    }
+  }
+
+  function handleSave(event: FormEvent) {
+    event.preventDefault();
+    submitChange({ caption: caption.trim(), date: date || null, order: Number(order) });
+  }
+
+  return (
+    <div className="edit-photo-overlay" onClick={onClose}>
+      <form
+        className="edit-photo-form"
+        onClick={(event) => event.stopPropagation()}
+        onSubmit={handleSave}
+      >
+        <h2>
+          Edit photograph {position} of {total}
+        </h2>
+
+        <label>
+          Caption
+          <input
+            type="text"
+            value={caption}
+            onChange={(event) => setCaption(event.target.value)}
+            required
+          />
+        </label>
+
+        <label>
+          Date
+          <input
+            type="date"
+            value={date}
+            onChange={(event) => setDate(event.target.value)}
+          />
+        </label>
+
+        <label>
+          Position
+          <input
+            type="number"
+            min={1}
+            max={total}
+            value={order}
+            onChange={(event) => setOrder(event.target.value)}
+            required
+          />
+        </label>
+
+        {status === "error" && <p className="edit-photo-status is-error">{errorMessage}</p>}
+        {status === "saved" && (
+          <p className="edit-photo-status">
+            Saved — click <strong>Sync Gallery</strong> (bottom right) to apply.
+          </p>
+        )}
+
+        <div className="edit-photo-actions">
+          <button
+            type="button"
+            className="edit-photo-reset"
+            disabled={status === "saving"}
+            onClick={() => submitChange({ reset: true })}
+          >
+            Reset to auto-detected
+          </button>
+          <button type="button" onClick={onClose}>
+            Close
+          </button>
+          <button type="submit" disabled={status === "saving"}>
+            {status === "saving" ? "Saving…" : "Save"}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

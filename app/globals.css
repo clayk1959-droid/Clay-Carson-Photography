@@ -71,18 +71,46 @@ h1 em, h2 em { font-weight: 400; }
 .gallery-thumb:active { transform: scale(.985); }
 .gallery-thumb:focus-visible { outline: 2px solid #f5f2eb; outline-offset: 3px; }
 .gallery-thumb-number { position: absolute; right: 8px; bottom: 8px; min-width: 27px; padding: 6px 5px 5px; background: rgba(7, 8, 7, .78); color: #f5f2eb; font-size: 9px; font-weight: 500; line-height: 1; letter-spacing: .12em; text-align: center; }
+.gallery-thumb-wrap { position: relative; }
+.gallery-edit-button { position: absolute; left: 8px; top: 8px; z-index: 1; width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid rgba(245, 242, 235, .35); border-radius: 50%; background: rgba(7, 8, 7, .78); color: #f5f2eb; cursor: pointer; opacity: 0; transition: opacity .15s ease, background .15s ease; }
+.gallery-thumb-wrap:hover .gallery-edit-button, .gallery-edit-button:focus-visible { opacity: 1; }
+.gallery-edit-button:hover { background: #171917; }
 .empty-collection { max-width: 1440px; min-height: 48svh; margin: 0 auto; padding: 50px 5vw 110px; }
 .empty-collection p { margin: 0; color: #8f938c; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 15px; }
 .gallery-lightbox { position: fixed; inset: 0; z-index: 1000; padding: 34px 5vw 26px; background: rgba(5, 6, 5, .97); display: grid; grid-template-columns: 70px minmax(0, 1fr) 70px; align-items: center; }
 .gallery-lightbox figure { height: calc(100svh - 60px); margin: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: 12px; touch-action: pan-y; }
 .gallery-lightbox figure img { max-width: 100%; width: auto; height: 100%; min-height: 0; object-fit: contain; }
 .gallery-lightbox figcaption { max-width: 100%; color: #d7d9d3; display: grid; grid-template-columns: minmax(0, 66%) 1fr; align-items: start; gap: 30px; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 13.5px; letter-spacing: .02em; }
-.lightbox-caption { max-width: 100%; line-height: 1.25; text-align: left; overflow-wrap: anywhere; }
+.lightbox-caption { max-width: 100%; line-height: 1.2; text-align: left; overflow-wrap: anywhere; font-size: 23px; }
 .lightbox-count { justify-self: end; color: #8f938c; font-family: 'DM Sans', sans-serif; font-size: 13.5px; letter-spacing: .18em; text-align: right; }
-.lightbox-close { position: absolute; top: 22px; right: 28px; z-index: 2; padding: 8px 0; border: 0; border-bottom: 1px solid #70736e; background: transparent; color: #f5f2eb; font: inherit; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
+.lightbox-close, .lightbox-edit { position: absolute; top: 22px; z-index: 2; padding: 8px 0; border: 0; border-bottom: 1px solid #70736e; background: transparent; color: #f5f2eb; font: inherit; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
+.lightbox-close { right: 28px; }
+.lightbox-edit { right: 100px; }
 .lightbox-arrow { width: 54px; height: 54px; border: 1px solid #555953; border-radius: 50%; background: transparent; color: #f5f2eb; font: inherit; font-size: 32px; line-height: 1; cursor: pointer; }
 .lightbox-previous { justify-self: start; }
 .lightbox-next { justify-self: end; }
+
+.edit-photo-overlay { position: fixed; inset: 0; z-index: 1100; padding: 24px; display: grid; place-items: center; background: rgba(5, 6, 5, .82); }
+.edit-photo-form { width: min(360px, 100%); padding: 28px 26px; border: 1px solid #343733; background: #0c0d0c; color: #f5f2eb; display: grid; gap: 16px; }
+.edit-photo-form h2 { margin: 0; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 18px; font-weight: 400; }
+.edit-photo-form label { display: grid; gap: 6px; font-size: 9px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #969a93; }
+.edit-photo-form input { padding: 9px 10px; border: 1px solid #3f423e; background: #131513; color: #f5f2eb; font: inherit; font-size: 13px; letter-spacing: normal; text-transform: none; }
+.edit-photo-form input:focus-visible { outline: 2px solid #f5f2eb; outline-offset: 1px; }
+.edit-photo-status { margin: 0; font-size: 11px; letter-spacing: .04em; color: #b7bab2; }
+.edit-photo-status.is-error { color: #e08a7d; }
+.edit-photo-status code { font-family: inherit; background: #171917; padding: 1px 5px; }
+.edit-photo-actions { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.edit-photo-actions button { padding: 8px 0; border: 0; border-bottom: 1px solid #70736e; background: transparent; color: #f5f2eb; font: inherit; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.edit-photo-actions button:disabled { opacity: .5; cursor: default; }
+.edit-photo-reset { color: #b7bab2; margin-right: auto; }
+.edit-photo-actions button[type="submit"] { color: #0c0d0c; background: #f5f2eb; border-bottom-color: #f5f2eb; padding: 8px 16px; }
+
+.sync-gallery { position: fixed; right: 24px; bottom: 24px; z-index: 900; display: grid; justify-items: end; gap: 8px; }
+.sync-gallery-button { padding: 11px 18px; border: 1px solid #3f423e; background: #0c0d0c; color: #f5f2eb; font: inherit; font-size: 9px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
+.sync-gallery-button:hover { background: #171917; }
+.sync-gallery-button:disabled { opacity: .6; cursor: default; }
+.sync-gallery-status { max-width: 320px; margin: 0; padding: 10px 12px; border: 1px solid #3f423e; background: #0c0d0c; color: #b7bab2; font-family: inherit; font-size: 11px; line-height: 1.5; white-space: pre-wrap; }
+.sync-gallery-status.is-error { color: #e08a7d; }
 .statement { padding: 140px 9vw 155px; display: grid; grid-template-columns: 1fr 2.7fr 1fr; gap: 6vw; border-bottom: 1px solid #c9c6bd; }
 .statement-copy { margin: 0; font-size: clamp(42px, 4.6vw, 72px); line-height: 1.05; letter-spacing: -.018em; }
 .statement-note { align-self: end; margin: 0; font-size: 13px; line-height: 1.75; color: #666b63; }
@@ -145,8 +173,11 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .gallery-lightbox { padding: 62px 14px 22px; grid-template-columns: 44px minmax(0, 1fr) 44px; }
   .gallery-lightbox figure { height: calc(100svh - 92px); }
   .gallery-lightbox figcaption { font-size: 13.5px; }
+  .lightbox-caption { font-size: 15px; }
   .lightbox-arrow { width: 38px; height: 38px; font-size: 25px; }
-  .lightbox-close { top: 17px; right: 18px; }
+  .lightbox-close, .lightbox-edit { top: 17px; }
+  .lightbox-close { right: 18px; }
+  .lightbox-edit { right: 72px; }
   .hero-copy { left: 7vw; right: 7vw; }
   .hero-copy .eyebrow { font-size: 12px; letter-spacing: .12em; white-space: nowrap; }
   h1 { font-size: clamp(57px, 17vw, 88px); }

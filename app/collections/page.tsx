@@ -8,23 +8,6 @@ export default function CollectionsPage() {
         <h1 className="page-title">Collections</h1>
 
         <div className="collection-index">
-          <a className="collection-card" href="/collections/gulf-shores-2025">
-            <div className="collection-cover">
-              <img
-                src="/gallery-thumbnails/gulf-shores-2025/gulf-shores-2025-14.jpg"
-                alt="Gulf Shores 2025 collection"
-              />
-            </div>
-            <div className="collection-details">
-              <div>
-                <p className="collection-date">September 2025</p>
-                <h2>Gulf Shores 2025</h2>
-              </div>
-              <p className="collection-count">17 photographs</p>
-              <span className="collection-link">View collection&nbsp; →</span>
-            </div>
-          </a>
-
           <a className="collection-card" href="/collections/christian">
             <div className="collection-cover">
               <img
@@ -38,6 +21,23 @@ export default function CollectionsPage() {
                 <h2>Christian</h2>
               </div>
               <p className="collection-count">16 photographs</p>
+              <span className="collection-link">View collection&nbsp; →</span>
+            </div>
+          </a>
+
+          <a className="collection-card" href="/collections/gulf-shores-2025">
+            <div className="collection-cover">
+              <img
+                src="/gallery-thumbnails/gulf-shores-2025/gulf-shores-2025-14.jpg"
+                alt="Gulf Shores 2025 collection"
+              />
+            </div>
+            <div className="collection-details">
+              <div>
+                <p className="collection-date">September 2025</p>
+                <h2>Gulf Shores 2025</h2>
+              </div>
+              <p className="collection-count">17 photographs</p>
               <span className="collection-link">View collection&nbsp; →</span>
             </div>
           </a>

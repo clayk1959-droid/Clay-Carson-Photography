@@ -3,96 +3,144 @@ import { Gallery } from "../Gallery";
 
 const photographData = [
   {
+    "filename": "Christian at door GOOD LIGHT_1.tif",
+    "date": "2025-08-24",
+    "description": "Sunshine is his friend.",
     "caption": "August 24, 2025 — Sunshine is his friend.",
     "altText": "Sunshine is his friend.",
     "width": 1469,
     "height": 2200
   },
   {
-    "caption": "January 29, 2026 — Messy but enthusiastic.",
-    "altText": "Messy but enthusiastic.",
+    "filename": "Christian eating with spoon_10.tif",
+    "date": "2026-01-29",
+    "description": "Messy but enthusiastic eater",
+    "caption": "January 29, 2026 — Messy but enthusiastic eater",
+    "altText": "Messy but enthusiastic eater",
     "width": 2200,
     "height": 1786
   },
   {
+    "filename": "Christian haircut_4.tif",
+    "date": "2025-08-20",
+    "description": "Waits with Grandma for first haircut.",
     "caption": "August 20, 2025 — Waits with Grandma for first haircut.",
     "altText": "Waits with Grandma for first haircut.",
     "width": 2200,
     "height": 1563
   },
   {
+    "filename": "Christian in book stacks.jpg",
+    "date": "2026-06-27",
+    "description": "Walking the stacks.",
     "caption": "June 27, 2026 — Walking the stacks.",
     "altText": "Walking the stacks.",
     "width": 2200,
     "height": 1320
   },
   {
+    "filename": "Christian laughs comking out of Box.jpg",
+    "date": "2026-04-26",
+    "description": "An empty box is an adventure.",
     "caption": "April 26, 2026 — An empty box is an adventure.",
     "altText": "An empty box is an adventure.",
     "width": 2200,
     "height": 1950
   },
   {
+    "filename": "Christian plays with kitchen.tif",
+    "date": "2026-03-22",
+    "description": "Serious about his cooking.",
     "caption": "March 22, 2026 — Serious about his cooking.",
     "altText": "Serious about his cooking.",
     "width": 2092,
     "height": 2200
   },
   {
+    "filename": "Christian rubs with cart.tif",
+    "date": "2026-03-23",
+    "description": "Practicing for Guy’s Grocery Games.",
     "caption": "March 23, 2026 — Practicing for Guy’s Grocery Games.",
     "altText": "Practicing for Guy’s Grocery Games.",
     "width": 2200,
     "height": 2142
   },
   {
+    "filename": "Christian runs front yard into sun.jpg",
+    "date": "2026-03-29",
+    "description": "So much to explore.",
     "caption": "March 29, 2026 — So much to explore.",
     "altText": "So much to explore.",
     "width": 2200,
     "height": 1627
   },
   {
+    "filename": "Christian smiles in Bounce house.jpg",
+    "date": "2026-04-04",
+    "description": "First bouncy house at church Easter egg hunt.",
     "caption": "April 4, 2026 — First bouncy house at church Easter egg hunt.",
     "altText": "First bouncy house at church Easter egg hunt.",
     "width": 2200,
     "height": 1737
   },
   {
+    "filename": "Grandma is home!.jpg",
+    "date": "2026-06-28",
+    "description": "Content and safe.",
     "caption": "June 28, 2026 — Content and safe.",
     "altText": "Content and safe.",
     "width": 2200,
     "height": 1464
   },
   {
-    "caption": "September 27, 2024 — I have no words as of this writing.",
-    "altText": "I have no words as of this writing.",
+    "filename": "Janet, Kyle, Christian.tif",
+    "date": "2024-09-27",
+    "description": "Happy Days",
+    "caption": "September 27, 2024 — Happy Days",
+    "altText": "Happy Days",
     "width": 2200,
     "height": 1850
   },
   {
+    "filename": "Katie & Christian on floor.tif",
+    "date": "2025-05-01",
+    "description": "Mama’s love.",
     "caption": "May 1, 2025 — Mama’s love.",
     "altText": "Mama’s love.",
     "width": 2200,
     "height": 2126
   },
   {
+    "filename": "Kyle and Christian-Good.jpeg",
+    "date": "2024-08-03",
+    "description": "Kyle so loved that boy.",
     "caption": "August 3, 2024 — Kyle so loved that boy.",
     "altText": "Kyle so loved that boy.",
     "width": 1517,
     "height": 2200
   },
   {
+    "filename": "Sits on floor looks behind smiles GOOD.jpg",
+    "date": "2026-06-13",
+    "description": "Playing on living room floor and ready to go on a new adventure.",
     "caption": "June 13, 2026 — Playing on living room floor and ready to go on a new adventure.",
     "altText": "Playing on living room floor and ready to go on a new adventure.",
     "width": 2200,
     "height": 1739
   },
   {
+    "filename": "hristian laughs and splashes.jpg",
+    "date": "2026-06-13",
+    "description": "First swimming lesson.",
     "caption": "June 13, 2026 — First swimming lesson.",
     "altText": "First swimming lesson.",
     "width": 2200,
     "height": 1380
   },
   {
+    "filename": "reading crying.jpg",
+    "date": "2025-09-17",
+    "description": "But sometimes he was not happy with Kyle.",
     "caption": "September 17, 2025 — But sometimes he was not happy with Kyle.",
     "altText": "But sometimes he was not happy with Kyle.",
     "width": 2200,
@@ -100,9 +148,11 @@ const photographData = [
   }
 ];
 
-const photographs = photographData.map((photograph, index) => ({
-  ...photograph,
-  src: `/galleries/christian/christian-${String(index + 1).padStart(2, "0")}.jpg`,
+const displayOrder = [3, 1, 4, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+const photographs = displayOrder.map((number) => ({
+  ...photographData[number - 1],
+  src: `/galleries/christian/christian-${String(number).padStart(2, "0")}.jpg`,
 }));
 
 export default function ChristianPage() {
@@ -114,7 +164,12 @@ export default function ChristianPage() {
         <h1>Christian</h1>
         <p>16 photographs</p>
       </header>
-      <Gallery name="Christian" photographs={photographs} />
+      <Gallery
+        name="Christian"
+        slug="christian"
+        photographs={photographs}
+        editable={process.env.NODE_ENV === "development"}
+      />
     </main>
   );
 }

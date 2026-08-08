@@ -23,6 +23,13 @@ into a full-view size and a thumbnail size, pulls captions from IPTC
 Accessibility Alt Text (falling back to the filename), regenerates each
 gallery page, and regenerates the Collections index page — all automatically.
 
+Resizing and metadata extraction are cached per photo (in `.cache/`, never
+committed) and skipped whenever a photo hasn't changed since the last sync —
+only new or edited photos actually get reprocessed. A sync where nothing
+changed finishes in a few seconds regardless of collection size; only
+touching/re-saving a source file (or adding/removing one) forces that photo
+to be reprocessed.
+
 **Adding photos to an existing collection** (e.g. more Norway photos):
 1. Drop the new photos into `Gallery Originals/Norway` (or whichever
    collection folder).
@@ -43,6 +50,26 @@ Note: the script currently checks a hardcoded path
 (`/Volumes/Samsung_T5/Website`) for higher-priority metadata before falling
 back to the `Gallery Originals` copy. If that drive isn't present, it just
 falls back automatically — no changes needed unless that path changes.
+
+## Editing captions, dates, and order locally
+
+While running `npm run dev`, a small pencil icon appears in the corner of
+each thumbnail (hover to see it) — click it to edit that photo's caption,
+date, or position within the collection. This icon only exists when the
+site is running locally; it never appears on the deployed site, since it's
+gated on the server side (not just hidden with CSS).
+
+Saving writes to `data/gallery-overrides.json` — it never touches
+`Gallery Originals` or a photo's embedded metadata. To actually apply saved
+edits to the site, click the **Sync Gallery** button in the bottom-right
+corner (also local-only) once you're done editing — it runs
+`gallery:sync` for you, so there's no need to switch to a terminal. It's
+worth batching several edits before clicking it, since a sync reprocesses
+every photo's images and can take a couple of minutes. You can still run
+`npm run gallery:sync` by hand instead if you prefer. Either way, check the
+result locally, then commit and redeploy as usual — the overrides file is
+tracked in git, so edits survive future syncs and deploy along with
+everything else via `npm run save`.
 
 ## Deploying to Vercel
 

@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Thursday, August 6, 2026
+Last updated: Friday, August 7, 2026
 
 ## Current status
 
@@ -14,6 +14,10 @@ Last updated: Thursday, August 6, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 52 — Friday, August 7, 2026
+
+- Added ability to modify captions and dates from a locally viewed page but not publicly
 
 ### Version 51 — Thursday, August 6, 2026
 

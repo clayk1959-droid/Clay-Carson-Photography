@@ -2,3 +2,5 @@ node_modules/
 .next/
 Gallery Originals/
 .DS_Store
+.claude/settings.local.json
+.cache/
