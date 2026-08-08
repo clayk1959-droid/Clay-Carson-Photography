@@ -3,7 +3,6 @@ import path from "node:path";
 import { promisify } from "node:util";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 600;
 
 const run = promisify(execFile);
 const root = process.cwd();

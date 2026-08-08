@@ -1,16 +1,9 @@
 import { SiteHeader } from "../../SiteHeader";
 import { Gallery } from "../Gallery";
 
-const photographData = [
-  {
-    "filename": "BEACH- Battleship Big Guns_2.tif",
-    "date": "2025-09-14",
-    "description": "Battleship Big Guns 2",
-    "caption": "September 14, 2025 — Battleship Big Guns 2",
-    "altText": "Battleship Big Guns 2",
-    "width": 2200,
-    "height": 687
-  },
+type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; width: number; height: number };
+
+const photographData: PhotographDataEntry[] = [
   {
     "filename": "BEACH- Ben and Christian in sand_1.tif",
     "date": "2025-09-14",
@@ -31,9 +24,9 @@ const photographData = [
   },
   {
     "filename": "BEACH- Boardwalk_1.tif",
-    "date": "2025-09-14",
+    "date": "2025-09-15",
     "description": "Boardwalk 1",
-    "caption": "September 14, 2025 — Boardwalk 1",
+    "caption": "September 15, 2025 — Boardwalk 1",
     "altText": "Boardwalk 1",
     "width": 2200,
     "height": 1489
@@ -157,12 +150,27 @@ const photographData = [
   }
 ];
 
-const displayOrder = [4, 9, 6, 3, 2, 7, 8, 10, 11, 12, 13, 5, 14, 15, 16, 17, 1];
+const displayOrder: number[] = [3, 8, 5, 2, 1, 6, 7, 9, 10, 11, 12, 4, 13, 14, 15, 16];
 
 const photographs = displayOrder.map((number) => ({
   ...photographData[number - 1],
   src: `/galleries/gulf-shores-2025/gulf-shores-2025-${String(number).padStart(2, "0")}.jpg`,
 }));
+
+const otherCollections = [
+  {
+    "slug": "christian",
+    "title": "Christian"
+  },
+  {
+    "slug": "norway",
+    "title": "Norway"
+  },
+  {
+    "slug": "trip-to-nova-scotia",
+    "title": "Trip to Nova Scotia"
+  }
+];
 
 export default function GulfShoresPage() {
   return (
@@ -171,12 +179,13 @@ export default function GulfShoresPage() {
       <header className="collection-heading">
         <a href="/collections">← Collections</a>
         <h1>Gulf Shores 2025</h1>
-        <p>September 2025&nbsp; · &nbsp;17 photographs</p>
+        <p>September 2025&nbsp; · &nbsp;16 photographs</p>
       </header>
       <Gallery
         name="Gulf Shores 2025"
         slug="gulf-shores-2025"
         photographs={photographs}
+        otherCollections={otherCollections}
         editable={process.env.NODE_ENV === "development"}
       />
     </main>

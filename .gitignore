@@ -4,3 +4,4 @@ Gallery Originals/
 .DS_Store
 .claude/settings.local.json
 .cache/
+tsconfig.tsbuildinfo

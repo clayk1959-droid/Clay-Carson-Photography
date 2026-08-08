@@ -48,7 +48,10 @@ try {
 //   slug:       URL-safe id, e.g. "norway" -> /collections/norway
 //   title:      heading shown on the gallery page and index card
 //   component:  a unique PascalCase React component name
-//   category:   short label shown on the Collections index card (e.g. "Travel", "Personal")
+//   person:     who the photos are of/from — zero or more, used as a
+//               Collections page filter (e.g. ["Christian", "Katie"])
+//   event:      occasion these photos are from — zero or more, used as a
+//               Collections page filter (e.g. ["Reunion", "Christmas"])
 //   subtitle:   optional extra text on the gallery page itself (e.g. a date)
 //   coverPhoto: optional 1-based photo number to use as the index card thumbnail (defaults to 1)
 // Per-photo caption/date/order corrections live in data/gallery-overrides.json
@@ -56,18 +59,37 @@ try {
 // or by hand) — they're applied on top of the auto-detected data below and
 // survive future syncs.
 const collections = [
-  { folder: "Christian", slug: "christian", title: "Christian", component: "ChristianPage", category: "Personal", subtitle: null },
+  { folder: "Christian", slug: "christian", title: "Christian", component: "ChristianPage", person: ["Christian"], event: [], subtitle: null },
   {
     folder: "Gulf Shores 2025",
     slug: "gulf-shores-2025",
     title: "Gulf Shores 2025",
     component: "GulfShoresPage",
-    category: "September 2025",
+    person: [],
+    event: ["Gulf Shores 2025"],
     subtitle: "September 2025",
     coverPhoto: 14,
   },
-  { folder: "Norway", slug: "norway", title: "Norway", component: "NorwayPage", category: "Travel", subtitle: null, coverPhoto: 13 },
+  { folder: "Norway", slug: "norway", title: "Norway", component: "NorwayPage", person: [], event: ["Norway"], subtitle: null, coverPhoto: 13 },
+  { folder: "Trip to Nova Scotia", slug: "trip-to-nova-scotia", title: "Trip to Nova Scotia", component: "TripToNovaScotiaPage", person: ["Clay Carson"], event: ["Trip with friends"], subtitle: null },
 ];
+
+// Lets the local-only "Move to…" editor action (app/api/gallery-move)
+// resolve a collection slug back to its "Gallery Originals" folder name
+// without needing to import this whole script.
+await mkdir(cacheRoot, { recursive: true });
+await writeFile(
+  path.join(cacheRoot, "collections.json"),
+  JSON.stringify(
+    collections.map((collection) => ({
+      slug: collection.slug,
+      folder: collection.folder,
+      title: collection.title,
+    })),
+    null,
+    2,
+  ),
+);
 
 function quoted(value) {
   return JSON.stringify(value);
@@ -147,9 +169,29 @@ for (const collection of collections) {
   const expectedBasenames = new Set();
   let reusedCount = 0;
   let processedCount = 0;
+  let hiddenCount = 0;
 
   for (const [index, filename] of filenames.entries()) {
     const number = String(index + 1).padStart(2, "0");
+
+    if (collectionOverrides[filename]?.hidden === true) {
+      // Deleted from the site via the local editor. The original file in
+      // Gallery Originals is never touched — this only skips generating
+      // output for it, so "Reset to auto-detected" (or removing the
+      // override by hand) brings it right back.
+      photographData.push({
+        filename,
+        date: null,
+        description: "",
+        caption: "",
+        altText: "",
+        width: 0,
+        height: 0,
+      });
+      hiddenCount += 1;
+      continue;
+    }
+
     const source = path.join(sourceDirectory, filename);
     const protectedMetadataSource = path.join(
       protectedMetadataRoot,
@@ -253,11 +295,13 @@ for (const collection of collections) {
   }
   await writeFile(metadataCachePath, JSON.stringify(metadataCache, null, 2));
 
-  const ranked = photographData.map((photograph, index) => {
-    const naturalRank = index + 1;
-    const overrideOrder = collectionOverrides[photograph.filename]?.order;
-    return { naturalRank, sortRank: overrideOrder ?? naturalRank, hasOverride: overrideOrder !== undefined };
-  });
+  const ranked = photographData
+    .map((photograph, index) => {
+      const naturalRank = index + 1;
+      const overrideOrder = collectionOverrides[photograph.filename]?.order;
+      return { naturalRank, sortRank: overrideOrder ?? naturalRank, hasOverride: overrideOrder !== undefined };
+    })
+    .filter((entry) => !collectionOverrides[filenames[entry.naturalRank - 1]]?.hidden);
   ranked.sort((a, b) => {
     if (a.sortRank !== b.sortRank) return a.sortRank - b.sortRank;
     // A photo explicitly moved to this position wins a tie against a photo
@@ -266,29 +310,42 @@ for (const collection of collections) {
     return a.naturalRank - b.naturalRank;
   });
   const displayOrder = ranked.map((entry) => entry.naturalRank);
+  const visibleCount = displayOrder.length;
 
   const subtitle = collection.subtitle
-    ? `${collection.subtitle}&nbsp; · &nbsp;${filenames.length} photographs`
-    : `${filenames.length} photographs`;
-  const photoMapping = `const displayOrder = [${displayOrder.join(", ")}];\n\nconst photographs = displayOrder.map((number) => ({\n  ...photographData[number - 1],\n  src: \`/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,\n}));`;
-  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { Gallery } from "../Gallery";\n\nconst photographData = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Collections</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        editable={process.env.NODE_ENV === "development"}\n      />\n    </main>\n  );\n}\n`;
+    ? `${collection.subtitle}&nbsp; · &nbsp;${visibleCount} photographs`
+    : `${visibleCount} photographs`;
+  const photoMapping = `const displayOrder: number[] = [${displayOrder.join(", ")}];\n\nconst photographs = displayOrder.map((number) => ({\n  ...photographData[number - 1],\n  src: \`/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,\n}));`;
+  const otherCollections = collections
+    .filter((other) => other.slug !== collection.slug)
+    .map((other) => ({ slug: other.slug, title: other.title }));
+  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { Gallery } from "../Gallery";\n\ntype PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; width: number; height: number };\n\nconst photographData: PhotographDataEntry[] = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nconst otherCollections = ${JSON.stringify(otherCollections, null, 2)};\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Collections</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={otherCollections}\n        editable={process.env.NODE_ENV === "development"}\n      />\n    </main>\n  );\n}\n`;
   const collectionPageDirectory = path.join(root, "app", "collections", collection.slug);
   await mkdir(collectionPageDirectory, { recursive: true });
   await writeFile(path.join(collectionPageDirectory, "page.tsx"), page);
   console.log(
-    `${collection.title}: ${filenames.length} photographs (${reusedCount} unchanged, ${processedCount} processed)`,
+    `${collection.title}: ${visibleCount} photographs (${reusedCount} unchanged, ${processedCount} processed${hiddenCount ? `, ${hiddenCount} hidden` : ""})`,
   );
+
+  const requestedCoverNumber = collection.coverPhoto ?? 1;
+  const coverNumber = collectionOverrides[filenames[requestedCoverNumber - 1]]?.hidden
+    ? (displayOrder[0] ?? requestedCoverNumber)
+    : requestedCoverNumber;
 
   indexCards.push({
     slug: collection.slug,
     title: collection.title,
-    category: collection.category ?? "",
-    count: filenames.length,
-    coverBasename: `${collection.slug}-${String(collection.coverPhoto ?? 1).padStart(2, "0")}.jpg`,
+    person: collection.person ?? [],
+    event: collection.event ?? [],
+    count: visibleCount,
+    coverBasename: `${collection.slug}-${String(coverNumber).padStart(2, "0")}.jpg`,
   });
 }
 
 const indexPage = `import { SiteHeader } from "../SiteHeader";
+import { CollectionsIndex } from "./CollectionsIndex";
+
+const cards = ${JSON.stringify(indexCards, null, 2)};
 
 export default function CollectionsPage() {
   return (
@@ -296,29 +353,7 @@ export default function CollectionsPage() {
       <SiteHeader showHome />
       <section className="collections-layout">
         <h1 className="page-title">Collections</h1>
-
-        <div className="collection-index">
-${indexCards
-  .map(
-    (card) => `          <a className="collection-card" href="/collections/${card.slug}">
-            <div className="collection-cover">
-              <img
-                src="/gallery-thumbnails/${card.slug}/${card.coverBasename}"
-                alt=${quoted(`${card.title} collection`)}
-              />
-            </div>
-            <div className="collection-details">
-              <div>
-                <p className="collection-date">${card.category}</p>
-                <h2>${card.title}</h2>
-              </div>
-              <p className="collection-count">${card.count} photographs</p>
-              <span className="collection-link">View collection&nbsp; →</span>
-            </div>
-          </a>`,
-  )
-  .join("\n\n")}
-        </div>
+        <CollectionsIndex cards={cards} />
       </section>
     </main>
   );

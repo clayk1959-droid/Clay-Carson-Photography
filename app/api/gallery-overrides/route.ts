@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 const overridesPath = path.join(process.cwd(), "data", "gallery-overrides.json");
 
-type PhotoOverride = { caption?: string; date?: string; order?: number };
+type PhotoOverride = { caption?: string; date?: string; order?: number; hidden?: boolean };
 type Overrides = Record<string, Record<string, PhotoOverride>>;
 
 async function readOverrides(): Promise<Overrides> {
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     return new Response("Invalid request body", { status: 400 });
   }
 
-  const { slug, filename, caption, date, order, reset } = body as Record<string, unknown>;
+  const { slug, filename, caption, date, order, reset, hidden } = body as Record<string, unknown>;
 
   if (typeof slug !== "string" || !/^[a-z0-9-]+$/.test(slug)) {
     return new Response("Invalid slug", { status: 400 });
@@ -61,6 +61,12 @@ export async function POST(request: Request) {
     if (overrides[slug] && Object.keys(overrides[slug]).length === 0) {
       delete overrides[slug];
     }
+  } else if (hidden === true) {
+    // Hide the photo from the site without touching any caption/date/order
+    // overrides already set for it — "Reset to auto-detected" is what
+    // un-hides (and clears everything else too).
+    const existing = overrides[slug]?.[filename] ?? {};
+    overrides[slug] = sortedEntries({ ...overrides[slug], [filename]: { ...existing, hidden: true } });
   } else {
     const entry: PhotoOverride = {};
 

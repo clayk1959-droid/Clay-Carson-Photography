@@ -13,9 +13,9 @@ a { color: inherit; text-decoration: none; }
 .site-nav a:hover { color: #171a17; background: #f5f2eb; border-color: #f5f2eb; }
 .inquire { justify-self: end; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; border-bottom: 1px solid #6e726c; padding-bottom: 5px; }
 .inquire span { margin-left: 8px; }
-.hero { position: relative; height: calc(100vh - 96px); min-height: 620px; overflow: hidden; color: white; }
-.hero-image { position: absolute; inset: 0; background: url('/lead-photo.jpg') center 48% / cover; animation: settle 1.4s ease-out both; }
-.hero-wash { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,14,12,.7) 0%, rgba(12,14,12,.2) 49%, rgba(12,14,12,.04) 78%), linear-gradient(0deg, rgba(10,12,10,.28), transparent 48%); }
+.hero { position: relative; height: calc(100vh - 96px); min-height: 620px; overflow: hidden; color: white; background: #0c0d0c; }
+.hero-image { position: absolute; inset: 3vw; background: url('/lead-photo.jpg') center 48% / cover; animation: settle 1.4s ease-out both; }
+.hero-wash { position: absolute; inset: 3vw; background: linear-gradient(90deg, rgba(12,14,12,.7) 0%, rgba(12,14,12,.2) 49%, rgba(12,14,12,.04) 78%), linear-gradient(0deg, rgba(10,12,10,.28), transparent 48%); }
 .hero-copy { position: absolute; left: 7.5vw; top: 26%; transform: translateY(-47%); max-width: 850px; }
 .eyebrow, .section-label { margin: 0 0 28px; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
 h1, h2, h3, .statement-copy, .feature-quote { font-family: 'Instrument Serif', serif; font-weight: 400; }
@@ -47,7 +47,17 @@ h1 em, h2 em { font-weight: 400; }
 .contact-arrow { font-size: 25px; }
 .sentence-gap { display: inline-block; width: .65em; font-size: inherit; overflow: hidden; }
 .collections-layout { max-width: 1440px; margin: 0 auto; padding: 0 5vw 120px; }
-.collections-layout .page-title { padding: 46px 0 18px; border-bottom: 1px solid #454843; font-size: clamp(17px, 2.1vw, 32px); }
+.collections-layout .page-title { padding: 46px 0 18px; border-bottom: 1px solid #454843; font-size: clamp(14px, 1.6vw, 22px); font-family: Helvetica, Arial, sans-serif; }
+.collections-filters { display: flex; flex-wrap: wrap; gap: 24px 40px; margin: 30px 0 6px; }
+.collections-filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.collections-filter-toggle { cursor: pointer; font: inherit; border: 1px solid #3a3d39; background: transparent; color: #f5f2eb; padding: 7px 13px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.collections-filter-toggle:hover { border-color: #6e726c; }
+.collections-filter-toggle.is-open { border-color: #f5f2eb; background: #f5f2eb; color: #171a17; }
+.filter-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-chip { cursor: pointer; font: inherit; border: 1px solid #3a3d39; background: transparent; color: #f5f2eb; padding: 7px 13px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.filter-chip:hover { border-color: #6e726c; }
+.filter-chip.is-active { border-color: #f5f2eb; background: #f5f2eb; color: #171a17; }
+.collections-empty { margin: 40px 0; color: #8f938c; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 15px; }
 .collection-index { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 30px); margin-top: 26px; }
 .collection-card { min-width: 0; display: block; }
 .collection-cover { width: 100%; height: auto; aspect-ratio: 4 / 5; overflow: hidden; background: #171917; }
@@ -55,17 +65,17 @@ h1 em, h2 em { font-weight: 400; }
 .collection-card:hover .collection-cover img { transform: scale(1.018); }
 .collection-placeholder { border: 1px solid #343733; display: grid; place-items: center; color: #737770; font-size: 9px; letter-spacing: .17em; text-transform: uppercase; }
 .collection-details { min-height: 185px; padding: 17px 0 3px; border-top: 1px solid #555953; display: flex; flex-direction: column; }
-.collection-date, .collection-count { margin: 0; color: #969a93; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
-.collection-details h2 { margin: 10px 0 0; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(17px, 1.75vw, 25px); font-style: normal; font-weight: 400; line-height: 1.05; }
+.collection-count { margin: 0; color: #969a93; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+.collection-details h2 { margin: 10px 0 0; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; line-height: 1.3; }
 .collection-count { margin-top: 17px; }
 .collection-link { margin-top: auto; padding-top: 13px; border-top: 1px solid #343733; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
 .collection-heading { max-width: 1440px; margin: 0 auto; padding: 50px 5vw 48px; display: grid; grid-template-columns: 1fr auto; align-items: end; border-bottom: 1px solid #343733; }
 .collection-heading > a { grid-column: 1 / -1; margin-bottom: 44px; color: #9a9d97; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
-.collection-heading h1 { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(23px, 2.7vw, 40px); font-style: normal; line-height: 1; }
+.collection-heading h1 { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(15px, 1.8vw, 27px); font-style: normal; line-height: 1; }
 .collection-heading p { margin: 0 0 8px; color: #969a93; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
 .photo-gallery { max-width: 1440px; margin: 0 auto; padding: 56px 5vw 130px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
-.gallery-thumb { position: relative; width: 100%; margin: 0; padding: 0; border: 0; overflow: hidden; background: #171917; color: inherit; cursor: zoom-in; display: block; transition: transform .2s ease, box-shadow .2s ease; }
-.gallery-thumb img { width: 100%; height: auto; display: block; transition: opacity .25s ease, transform .5s cubic-bezier(.2,.65,.3,1); }
+.gallery-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; margin: 0; padding: 0; border: 0; overflow: hidden; background: #cccccc; color: inherit; cursor: zoom-in; display: block; transition: transform .2s ease, box-shadow .2s ease; }
+.gallery-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; transition: opacity .25s ease, transform .5s cubic-bezier(.2,.65,.3,1); }
 .gallery-thumb:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .24); transform: translateY(-2px); }
 .gallery-thumb:hover img { opacity: .92; transform: scale(1.018); }
 .gallery-thumb:active { transform: scale(.985); }
@@ -81,7 +91,7 @@ h1 em, h2 em { font-weight: 400; }
 .gallery-lightbox figure { height: calc(100svh - 60px); margin: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: 12px; touch-action: pan-y; }
 .gallery-lightbox figure img { max-width: 100%; width: auto; height: 100%; min-height: 0; object-fit: contain; }
 .gallery-lightbox figcaption { max-width: 100%; color: #d7d9d3; display: grid; grid-template-columns: minmax(0, 66%) 1fr; align-items: start; gap: 30px; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 13.5px; letter-spacing: .02em; }
-.lightbox-caption { max-width: 100%; line-height: 1.2; text-align: left; overflow-wrap: anywhere; font-size: 23px; }
+.lightbox-caption { max-width: 100%; line-height: 1.2; text-align: left; overflow-wrap: anywhere; font-size: 20px; font-family: Helvetica, Arial, sans-serif; }
 .lightbox-count { justify-self: end; color: #8f938c; font-family: 'DM Sans', sans-serif; font-size: 13.5px; letter-spacing: .18em; text-align: right; }
 .lightbox-close, .lightbox-edit { position: absolute; top: 22px; z-index: 2; padding: 8px 0; border: 0; border-bottom: 1px solid #70736e; background: transparent; color: #f5f2eb; font: inherit; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
 .lightbox-close { right: 28px; }
@@ -94,14 +104,21 @@ h1 em, h2 em { font-weight: 400; }
 .edit-photo-form { width: min(360px, 100%); padding: 28px 26px; border: 1px solid #343733; background: #0c0d0c; color: #f5f2eb; display: grid; gap: 16px; }
 .edit-photo-form h2 { margin: 0; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 18px; font-weight: 400; }
 .edit-photo-form label { display: grid; gap: 6px; font-size: 9px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #969a93; }
-.edit-photo-form input { padding: 9px 10px; border: 1px solid #3f423e; background: #131513; color: #f5f2eb; font: inherit; font-size: 13px; letter-spacing: normal; text-transform: none; }
-.edit-photo-form input:focus-visible { outline: 2px solid #f5f2eb; outline-offset: 1px; }
+.edit-photo-form input, .edit-photo-form select { padding: 9px 10px; border: 1px solid #3f423e; background: #131513; color: #f5f2eb; font: inherit; font-size: 13px; letter-spacing: normal; text-transform: none; }
+.edit-photo-form input:focus-visible, .edit-photo-form select:focus-visible { outline: 2px solid #f5f2eb; outline-offset: 1px; }
+.edit-photo-move { display: flex; align-items: end; gap: 10px; }
+.edit-photo-move label { flex: 1; min-width: 0; }
+.edit-photo-move select { width: 100%; }
+.edit-photo-move button { flex-shrink: 0; padding: 9px 14px; border: 1px solid #3f423e; background: transparent; color: #f5f2eb; font: inherit; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.edit-photo-move button:hover { background: #171917; }
+.edit-photo-move button:disabled { opacity: .5; cursor: default; }
 .edit-photo-status { margin: 0; font-size: 11px; letter-spacing: .04em; color: #b7bab2; }
 .edit-photo-status.is-error { color: #e08a7d; }
 .edit-photo-status code { font-family: inherit; background: #171917; padding: 1px 5px; }
 .edit-photo-actions { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
 .edit-photo-actions button { padding: 8px 0; border: 0; border-bottom: 1px solid #70736e; background: transparent; color: #f5f2eb; font: inherit; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
 .edit-photo-actions button:disabled { opacity: .5; cursor: default; }
+.edit-photo-delete { color: #e08a7d; }
 .edit-photo-reset { color: #b7bab2; margin-right: auto; }
 .edit-photo-actions button[type="submit"] { color: #0c0d0c; background: #f5f2eb; border-bottom-color: #f5f2eb; padding: 8px 16px; }
 
@@ -109,8 +126,11 @@ h1 em, h2 em { font-weight: 400; }
 .sync-gallery-button { padding: 11px 18px; border: 1px solid #3f423e; background: #0c0d0c; color: #f5f2eb; font: inherit; font-size: 9px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
 .sync-gallery-button:hover { background: #171917; }
 .sync-gallery-button:disabled { opacity: .6; cursor: default; }
-.sync-gallery-status { max-width: 320px; margin: 0; padding: 10px 12px; border: 1px solid #3f423e; background: #0c0d0c; color: #b7bab2; font-family: inherit; font-size: 11px; line-height: 1.5; white-space: pre-wrap; }
+.sync-gallery-status { position: relative; max-width: 320px; max-height: 200px; overflow-y: auto; margin: 0; padding: 10px 34px 10px 12px; border: 1px solid #3f423e; background: #0c0d0c; color: #b7bab2; font-family: inherit; font-size: 11px; line-height: 1.5; }
+.sync-gallery-status pre { margin: 0; font-family: inherit; white-space: pre-wrap; }
 .sync-gallery-status.is-error { color: #e08a7d; }
+.sync-gallery-status-close { position: absolute; top: 6px; right: 6px; width: 22px; height: 22px; border: 0; background: transparent; color: inherit; font-size: 16px; line-height: 1; cursor: pointer; }
+.sync-gallery-status-close:hover { color: #f5f2eb; }
 .statement { padding: 140px 9vw 155px; display: grid; grid-template-columns: 1fr 2.7fr 1fr; gap: 6vw; border-bottom: 1px solid #c9c6bd; }
 .statement-copy { margin: 0; font-size: clamp(42px, 4.6vw, 72px); line-height: 1.05; letter-spacing: -.018em; }
 .statement-note { align-self: end; margin: 0; font-size: 13px; line-height: 1.75; color: #666b63; }
@@ -160,20 +180,20 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .contact-value { font-size: 17px; overflow-wrap: anywhere; }
   .contact-arrow { font-size: 20px; }
   .collections-layout { padding: 0 7vw 90px; }
-  .collections-layout .page-title { padding-top: 36px; font-size: 22px; }
+  .collections-layout .page-title { padding-top: 36px; font-size: 14px; }
   .collection-index { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 10px; margin-top: 18px; }
   .collection-cover { height: auto; max-height: none; }
   .collection-details { min-height: 170px; }
-  .collection-details h2 { font-size: 15px; }
+  .collection-details h2 { font-size: 12px; }
   .collection-heading { padding: 42px 7vw 34px; display: block; }
   .collection-heading > a { display: inline-block; margin-bottom: 35px; }
-  .collection-heading h1 { font-size: 22px; }
+  .collection-heading h1 { font-size: 15px; }
   .collection-heading p { margin-top: 15px; }
   .photo-gallery { padding: 28px 3vw 90px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .gallery-lightbox { padding: 62px 14px 22px; grid-template-columns: 44px minmax(0, 1fr) 44px; }
   .gallery-lightbox figure { height: calc(100svh - 92px); }
   .gallery-lightbox figcaption { font-size: 13.5px; }
-  .lightbox-caption { font-size: 15px; }
+  .lightbox-caption { font-size: 12px; }
   .lightbox-arrow { width: 38px; height: 38px; font-size: 25px; }
   .lightbox-close, .lightbox-edit { top: 17px; }
   .lightbox-close { right: 18px; }

@@ -46,26 +46,39 @@ async function main() {
     return;
   }
 
-  const category = (
-    await rl.question('\nShort label for the Collections page (e.g. "Travel", "Personal", or a date like "Summer 2026"). Leave blank to skip.\n> ')
+  const personInput = (
+    await rl.question('\nWho is this collection of/from? Comma-separated names, e.g. "Christian, Katie". Leave blank to skip.\n> ')
   ).trim();
+  const eventInput = (
+    await rl.question('\nWhat event or occasion is this from? Comma-separated, e.g. "Reunion, Christmas". Leave blank to skip.\n> ')
+  ).trim();
+  const toList = (value) =>
+    value
+      .split(",")
+      .map((entry) => entry.trim())
+      .filter(Boolean);
+  const person = toList(personInput);
+  const event = toList(eventInput);
 
   const script = await readFile(syncScriptPath, "utf8");
   const slug = toSlug(title);
   const component = toComponentName(title, script);
   const folder = title; // Folder name inside "Gallery Originals" matches the title exactly.
 
+  // Find the collections array's own closing "];" (on its own line) rather
+  // than anchoring to whatever code happens to follow it — that adjacency
+  // has broken before when other code got added right after the array.
   const marker = "const collections = [";
-  const closeMarker = "];\n\nfunction quoted";
-  const insertPoint = script.indexOf(closeMarker);
-  if (!script.includes(marker) || insertPoint === -1) {
+  const markerIndex = script.indexOf(marker);
+  const bracketIndex = markerIndex === -1 ? -1 : script.indexOf("\n];", markerIndex);
+  const insertPoint = bracketIndex === -1 ? -1 : bracketIndex + 1;
+  if (markerIndex === -1 || insertPoint === -1) {
     console.error("Couldn't find the expected spot in scripts/sync-gallery.mjs — it may have been edited. Ask Claude to add the collection manually instead.");
     rl.close();
     return;
   }
 
-  const categoryField = category ? `"${category.replace(/"/g, '\\"')}"` : `""`;
-  const newEntry = `  { folder: ${JSON.stringify(folder)}, slug: ${JSON.stringify(slug)}, title: ${JSON.stringify(title)}, component: ${JSON.stringify(component)}, category: ${categoryField}, subtitle: null },\n`;
+  const newEntry = `  { folder: ${JSON.stringify(folder)}, slug: ${JSON.stringify(slug)}, title: ${JSON.stringify(title)}, component: ${JSON.stringify(component)}, person: ${JSON.stringify(person)}, event: ${JSON.stringify(event)}, subtitle: null },\n`;
 
   const updatedScript = script.slice(0, insertPoint) + newEntry + script.slice(insertPoint);
   await writeFile(syncScriptPath, updatedScript);

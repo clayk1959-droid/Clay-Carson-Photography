@@ -1,7 +1,9 @@
 import { SiteHeader } from "../../SiteHeader";
 import { Gallery } from "../Gallery";
 
-const photographData = [
+type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; width: number; height: number };
+
+const photographData: PhotographDataEntry[] = [
   {
     "filename": "Christian at door GOOD LIGHT_1.tif",
     "date": "2025-08-24",
@@ -148,12 +150,27 @@ const photographData = [
   }
 ];
 
-const displayOrder = [3, 1, 4, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const displayOrder: number[] = [3, 1, 4, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
 const photographs = displayOrder.map((number) => ({
   ...photographData[number - 1],
   src: `/galleries/christian/christian-${String(number).padStart(2, "0")}.jpg`,
 }));
+
+const otherCollections = [
+  {
+    "slug": "gulf-shores-2025",
+    "title": "Gulf Shores 2025"
+  },
+  {
+    "slug": "norway",
+    "title": "Norway"
+  },
+  {
+    "slug": "trip-to-nova-scotia",
+    "title": "Trip to Nova Scotia"
+  }
+];
 
 export default function ChristianPage() {
   return (
@@ -168,6 +185,7 @@ export default function ChristianPage() {
         name="Christian"
         slug="christian"
         photographs={photographs}
+        otherCollections={otherCollections}
         editable={process.env.NODE_ENV === "development"}
       />
     </main>

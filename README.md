@@ -1,9 +1,21 @@
-# Clay Carson Photography
+# Carson & Muller Family Photos
 
-A photo portfolio site: three galleries (Christian, Gulf Shores 2025, Norway),
-click-to-enlarge lightbox with keyboard/swipe navigation, and captions pulled
-from IPTC metadata. This is a plain, standard Next.js app — no proprietary
-hosting platform required.
+A private family photo-sharing site: collections browsable by person and by
+event, click-to-enlarge lightbox with keyboard/swipe navigation, and
+captions pulled from IPTC metadata. No accounts or logins — Clay handles all
+uploads. This is a plain, standard Next.js app — no proprietary hosting
+platform required.
+
+## Command reference
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Starts the site locally at http://localhost:3000, with the caption/date/order/delete/move editor and Sync Gallery button enabled |
+| `npm run gallery:sync` | Reads `Gallery Originals`, resizes new/changed photos, regenerates every gallery page and the Collections index |
+| `npm run collection:add` | Guided prompts to create a brand-new collection (name, who it's of/from, what event) |
+| `npm run hero:set -- "/path/to/photo.tif"` | Replaces the homepage hero photo |
+| `npm run save` | Records what changed in `Change Log.md`, commits, and offers to push live |
+| `npm run build` / `npm run lint` | Production build check / code-quality check — mainly for troubleshooting |
 
 ## Local development
 
@@ -38,9 +50,11 @@ to be reprocessed.
 
 **Adding a brand-new collection** — no code editing required:
 1. Run `npm run collection:add`
-2. Answer the two questions it asks (the collection's name, and a short label
-   for the Collections page). It creates the matching folder inside
-   `Gallery Originals` and sets everything up for you.
+2. Answer the questions it asks (the collection's name, who it's of/from,
+   and what event or occasion it's from — the last two are optional and
+   power the Person/Event filters on the Collections page). It creates the
+   matching folder inside `Gallery Originals` and sets everything up for
+   you.
 3. Copy your photos into that folder.
 4. Run `npm run gallery:sync`. This creates the new gallery page AND adds its
    card to the Collections index page automatically.
@@ -70,6 +84,16 @@ every photo's images and can take a couple of minutes. You can still run
 result locally, then commit and redeploy as usual — the overrides file is
 tracked in git, so edits survive future syncs and deploy along with
 everything else via `npm run save`.
+
+## Changing the homepage photo
+
+```bash
+npm run hero:set -- "/path/to/photo.tif"
+```
+
+Resizes the given photo (TIFF or JPEG) and installs it as the homepage hero
+image, replacing whatever was there. Check it with `npm run dev`, then
+commit and redeploy as usual.
 
 ## Deploying to Vercel
 

@@ -13,12 +13,12 @@ export default function Home() {
         />
         <div className="hero-wash" />
         <div className="hero-copy">
-          <p className="eyebrow">Stories in natural light · Since 1979</p>
-          <h1 className="hero-title">Light is our only tool</h1>
+          <p className="eyebrow">Family photos, all in one place</p>
+          <h1 className="hero-title">Every memory, together</h1>
           <p className="intro">
-            Family, travel and random
+            People, Events and everyday life
             <br />
-            stuff, taken close to the heart
+            — browse it all right here
           </p>
         </div>
       </section>

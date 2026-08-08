@@ -8,7 +8,7 @@ export default function ContactPage() {
         <p className="contact-eyebrow">Get in touch</p>
         <div className="contact-intro">
           <h1>Clay Carson</h1>
-          <p>Questions, stories, or just want to say hello?</p>
+          <p>Questions, or have photos to add? Get in touch.</p>
         </div>
         <div className="contact-actions">
           <a href="mailto:clayk1959@gmail.com">

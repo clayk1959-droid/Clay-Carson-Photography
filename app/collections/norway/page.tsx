@@ -1,7 +1,18 @@
 import { SiteHeader } from "../../SiteHeader";
 import { Gallery } from "../Gallery";
 
-const photographData = [
+type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; width: number; height: number };
+
+const photographData: PhotographDataEntry[] = [
+  {
+    "filename": "BEACH- Battleship Big Guns_2.tif",
+    "date": "2025-09-14",
+    "description": "Battleship Big Guns 2",
+    "caption": "September 14, 2025 — Battleship Big Guns 2",
+    "altText": "Battleship Big Guns 2",
+    "width": 2200,
+    "height": 687
+  },
   {
     "filename": "NORWAY- Copenhagen Day one_2.tif",
     "date": "2025-08-10",
@@ -382,12 +393,27 @@ const photographData = [
   }
 ];
 
-const displayOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42];
+const displayOrder: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 1, 43];
 
 const photographs = displayOrder.map((number) => ({
   ...photographData[number - 1],
   src: `/galleries/norway/norway-${String(number).padStart(2, "0")}.jpg`,
 }));
+
+const otherCollections = [
+  {
+    "slug": "christian",
+    "title": "Christian"
+  },
+  {
+    "slug": "gulf-shores-2025",
+    "title": "Gulf Shores 2025"
+  },
+  {
+    "slug": "trip-to-nova-scotia",
+    "title": "Trip to Nova Scotia"
+  }
+];
 
 export default function NorwayPage() {
   return (
@@ -396,12 +422,13 @@ export default function NorwayPage() {
       <header className="collection-heading">
         <a href="/collections">← Collections</a>
         <h1>Norway</h1>
-        <p>42 photographs</p>
+        <p>43 photographs</p>
       </header>
       <Gallery
         name="Norway"
         slug="norway"
         photographs={photographs}
+        otherCollections={otherCollections}
         editable={process.env.NODE_ENV === "development"}
       />
     </main>

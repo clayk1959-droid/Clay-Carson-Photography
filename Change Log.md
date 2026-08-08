@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Friday, August 7, 2026
+Last updated: Saturday, August 8, 2026
 
 ## Current status
 
@@ -14,6 +14,12 @@ Last updated: Friday, August 7, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 53 — Saturday, August 8, 2026
+
+- Made a lot of font and text changes
+- working on shadig to make contact sheet look better
+- mapped Event, People and Alt text from Photo Mechanic metadata
 
 ### Version 52 — Friday, August 7, 2026
 

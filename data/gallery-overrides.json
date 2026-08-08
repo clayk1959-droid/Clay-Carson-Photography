@@ -17,9 +17,6 @@
     }
   },
   "gulf-shores-2025": {
-    "BEACH- Battleship Big Guns_2.tif": {
-      "order": 17
-    },
     "BEACH- Ben and Christian in sand_1.tif": {
       "order": 5
     },
@@ -27,6 +24,8 @@
       "order": 4
     },
     "BEACH- Boardwalk_1.tif": {
+      "caption": "Boardwalk 1",
+      "date": "2025-09-15",
       "order": 1
     },
     "BEACH- Christian Katie Ben looks out at oil rig_1.tif": {
@@ -67,6 +66,13 @@
     },
     "Pool Overhead all 4.tif": {
       "order": 16
+    }
+  },
+  "norway": {
+    "BEACH- Battleship Big Guns_2.tif": {
+      "caption": "Battleship Big Guns 2",
+      "date": "2025-09-14",
+      "order": 43
     }
   }
 }

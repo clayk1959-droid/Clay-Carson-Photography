@@ -1,8 +1,8 @@
 export function SiteHeader({ showHome = false }: { showHome?: boolean }) {
   return (
     <header className="site-header">
-      <a className="brand" href="/" aria-label="Clay Carson Photography, home">
-        Clay Carson <small>PHOTOGRAPHY</small>
+      <a className="brand" href="/" aria-label="Carson & Muller Family, home">
+        Carson &amp; Muller <small>FAMILY</small>
       </a>
       <nav className="site-nav" aria-label="Main navigation">
         {showHome && <a href="/">Home</a>}

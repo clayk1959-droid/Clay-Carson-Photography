@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 
 type GalleryPhoto = {
   src: string;
@@ -13,15 +13,19 @@ type GalleryPhoto = {
   description: string;
 };
 
+type CollectionOption = { slug: string; title: string };
+
 export function Gallery({
   name,
   slug,
   photographs,
+  otherCollections = [],
   editable = false,
 }: {
   name: string;
   slug: string;
   photographs: GalleryPhoto[];
+  otherCollections?: CollectionOption[];
   editable?: boolean;
 }) {
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
@@ -280,6 +284,7 @@ export function Gallery({
           photograph={photographs[editingPhoto]}
           position={editingPhoto + 1}
           total={photographs.length}
+          otherCollections={otherCollections}
           onClose={() => setEditingPhoto(null)}
         />
       )}
@@ -292,6 +297,12 @@ export function Gallery({
 function SyncButton() {
   const [status, setStatus] = useState<"idle" | "syncing" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (status !== "done" && status !== "error") return;
+    const timeout = setTimeout(() => setStatus("idle"), 20000);
+    return () => clearTimeout(timeout);
+  }, [status]);
 
   async function handleSync() {
     setStatus("syncing");
@@ -318,11 +329,18 @@ function SyncButton() {
       >
         {status === "syncing" ? "Syncing…" : "Sync Gallery"}
       </button>
-      {status === "done" && (
-        <pre className="sync-gallery-status">{message}</pre>
-      )}
-      {status === "error" && (
-        <pre className="sync-gallery-status is-error">{message}</pre>
+      {(status === "done" || status === "error") && (
+        <div className={status === "error" ? "sync-gallery-status is-error" : "sync-gallery-status"}>
+          <button
+            type="button"
+            className="sync-gallery-status-close"
+            onClick={() => setStatus("idle")}
+            aria-label="Close sync results"
+          >
+            ×
+          </button>
+          <pre>{message}</pre>
+        </div>
       )}
     </div>
   );
@@ -333,19 +351,30 @@ function EditPhotoForm({
   photograph,
   position,
   total,
+  otherCollections,
   onClose,
 }: {
   slug: string;
   photograph: GalleryPhoto;
   position: number;
   total: number;
+  otherCollections: CollectionOption[];
   onClose: () => void;
 }) {
   const [caption, setCaption] = useState(photograph.description);
   const [date, setDate] = useState(photograph.date ?? "");
   const [order, setOrder] = useState(String(position));
+  const [moveTarget, setMoveTarget] = useState(otherCollections[0]?.slug ?? "");
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [savedMessage, setSavedMessage] = useState<ReactNode>(null);
+  const [confirming, setConfirming] = useState<"delete" | "move" | null>(null);
+
+  useEffect(() => {
+    if (!confirming) return;
+    const timeout = setTimeout(() => setConfirming(null), 8000);
+    return () => clearTimeout(timeout);
+  }, [confirming]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -362,7 +391,7 @@ function EditPhotoForm({
     };
   }, [onClose]);
 
-  async function submitChange(body: Record<string, unknown>) {
+  async function submitChange(body: Record<string, unknown>, message: ReactNode) {
     setStatus("saving");
     setErrorMessage("");
     try {
@@ -372,6 +401,7 @@ function EditPhotoForm({
         body: JSON.stringify({ slug, filename: photograph.filename, ...body }),
       });
       if (!response.ok) throw new Error(await response.text());
+      setSavedMessage(message);
       setStatus("saved");
     } catch (error) {
       setStatus("error");
@@ -381,7 +411,52 @@ function EditPhotoForm({
 
   function handleSave(event: FormEvent) {
     event.preventDefault();
-    submitChange({ caption: caption.trim(), date: date || null, order: Number(order) });
+    submitChange(
+      { caption: caption.trim(), date: date || null, order: Number(order) },
+      <>Saved — click <strong>Sync Gallery</strong> (bottom right) to apply.</>,
+    );
+  }
+
+  function handleDelete() {
+    if (confirming !== "delete") {
+      setConfirming("delete");
+      return;
+    }
+    setConfirming(null);
+    submitChange(
+      { hidden: true },
+      <>Deleted — click <strong>Sync Gallery</strong> (bottom right) to apply.</>,
+    );
+  }
+
+  async function handleMove() {
+    if (!moveTarget) return;
+    if (confirming !== "move") {
+      setConfirming("move");
+      return;
+    }
+    setConfirming(null);
+    const targetTitle = otherCollections.find((option) => option.slug === moveTarget)?.title ?? moveTarget;
+    setStatus("saving");
+    setErrorMessage("");
+    try {
+      const response = await fetch("/api/gallery-move", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fromSlug: slug, toSlug: moveTarget, filename: photograph.filename }),
+      });
+      if (!response.ok) throw new Error(await response.text());
+      setSavedMessage(
+        <>
+          Moved to <strong>{targetTitle}</strong> — click <strong>Sync Gallery</strong> (bottom
+          right) to apply.
+        </>,
+      );
+      setStatus("saved");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
+    }
   }
 
   return (
@@ -426,19 +501,49 @@ function EditPhotoForm({
           />
         </label>
 
-        {status === "error" && <p className="edit-photo-status is-error">{errorMessage}</p>}
-        {status === "saved" && (
-          <p className="edit-photo-status">
-            Saved — click <strong>Sync Gallery</strong> (bottom right) to apply.
-          </p>
+        {otherCollections.length > 0 && (
+          <div className="edit-photo-move">
+            <label>
+              Move to
+              <select
+                value={moveTarget}
+                onChange={(event) => {
+                  setMoveTarget(event.target.value);
+                  setConfirming(null);
+                }}
+              >
+                {otherCollections.map((option) => (
+                  <option key={option.slug} value={option.slug}>
+                    {option.title}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <button type="button" disabled={status === "saving"} onClick={handleMove}>
+              {confirming === "move" ? "Confirm?" : "Move"}
+            </button>
+          </div>
         )}
+
+        {status === "error" && <p className="edit-photo-status is-error">{errorMessage}</p>}
+        {status === "saved" && <p className="edit-photo-status">{savedMessage}</p>}
 
         <div className="edit-photo-actions">
           <button
             type="button"
+            className="edit-photo-delete"
+            disabled={status === "saving"}
+            onClick={handleDelete}
+          >
+            {confirming === "delete" ? "Confirm delete?" : "Delete photo"}
+          </button>
+          <button
+            type="button"
             className="edit-photo-reset"
             disabled={status === "saving"}
-            onClick={() => submitChange({ reset: true })}
+            onClick={() =>
+              submitChange({ reset: true }, "Restored to auto-detected caption, date, and order.")
+            }
           >
             Reset to auto-detected
           </button>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carson &amp; Muller Family Photos — Site Guide</title>
+<style>
+  :root {
+    --ink: #1d211d;
+    --paper: #faf9f5;
+    --panel: #ffffff;
+    --muted: #6b6f68;
+    --border: #e3e1d8;
+    --accent: #707866;
+    --code-bg: #f1efe6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 100px; }
+  header.page-head {
+    margin-bottom: 40px;
+  }
+  header.page-head h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 40px;
+    margin: 0 0 8px;
+    font-weight: 400;
+  }
+  header.page-head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 16px;
+  }
+  nav.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin: 24px 0 0;
+    padding: 16px 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .02em;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+  section { margin: 56px 0; }
+  h2 {
+    font-size: 22px;
+    margin: 0 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 17px; margin: 26px 0 8px; }
+  p { margin: 0 0 14px; }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    margin: 0 0 14px;
+  }
+  pre code { background: none; padding: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th { background: var(--code-bg); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  tr:last-child td { border-bottom: none; }
+  ol, ul { padding-left: 22px; margin: 0 0 14px; }
+  li { margin-bottom: 6px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 18px;
+  }
+  .version-entry {
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+  }
+  .version-entry:last-child { border-bottom: none; }
+  .version-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .version-num { font-weight: 700; font-size: 15px; }
+  .version-date { color: var(--muted); font-size: 13px; }
+  .badge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--code-bg);
+    color: var(--muted);
+  }
+  details > summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 10px 0;
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::before { content: "▸ "; }
+  details[open] > summary::before { content: "▾ "; }
+  .note {
+    background: #fbf6e9;
+    border: 1px solid #ecdfb3;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin: 0 0 14px;
+  }
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <h1>Carson &amp; Muller Family Photos</h1>
+    <p>Site guide — how to run it, maintain it, and what's changed over time.</p>
+    <nav class="toc">
+      <a href="#commands">Command reference</a>
+      <a href="#dev">Local development</a>
+      <a href="#galleries">Adding &amp; updating galleries</a>
+      <a href="#editing">Editing locally</a>
+      <a href="#hero">Homepage photo</a>
+      <a href="#deploy">Deploying</a>
+      <a href="#save">Saving &amp; publishing</a>
+      <a href="#history">Version history</a>
+      <a href="#previous-agents">Previous versions</a>
+    </nav>
+  </header>
+
+  <section id="commands">
+    <h2>Command reference</h2>
+    <table>
+      <tr><th>Command</th><th>What it does</th></tr>
+      <tr><td><code>npm run dev</code></td><td>Starts the site locally at <code>http://localhost:3000</code>, with the caption/date/order/delete/move editor and Sync Gallery button enabled.</td></tr>
+      <tr><td><code>npm run gallery:sync</code></td><td>Reads <code>Gallery Originals</code>, resizes new/changed photos, regenerates every gallery page and the Collections index.</td></tr>
+      <tr><td><code>npm run collection:add</code></td><td>Guided prompts to create a brand-new collection (name, who it's of/from, what event).</td></tr>
+      <tr><td><code>npm run hero:set -- "/path/to/photo.tif"</code></td><td>Replaces the homepage hero photo.</td></tr>
+      <tr><td><code>npm run save</code></td><td>Records what changed in the changelog, commits, and offers to push live.</td></tr>
+      <tr><td><code>npm run build</code> / <code>npm run lint</code></td><td>Production build check / code-quality check — mainly for troubleshooting.</td></tr>
+    </table>
+  </section>
+
+  <section id="dev">
+    <h2>Local development</h2>
+    <p>Requires Node.js 20 or newer.</p>
+    <pre><code>npm install
+npm run dev</code></pre>
+    <p>Then open <code>http://localhost:3000</code>.</p>
+  </section>
+
+  <section id="galleries">
+    <h2>Adding or updating galleries</h2>
+    <p>
+      The <code>gallery:sync</code> script reads full-resolution originals, resamples them into
+      a full-view size and a thumbnail size, pulls captions from IPTC Accessibility Alt Text
+      (falling back to the filename), regenerates each gallery page, and regenerates the
+      Collections index page — all automatically.
+    </p>
+    <p>
+      Resizing and metadata extraction are cached per photo (never committed to git) and skipped
+      whenever a photo hasn't changed since the last sync — only new or edited photos actually
+      get reprocessed. A sync where nothing changed finishes in a few seconds regardless of
+      collection size; only touching/re-saving a source file (or adding/removing one) forces
+      that photo to be reprocessed.
+    </p>
+
+    <h3>Adding photos to an existing collection</h3>
+    <p>(e.g. more Norway photos):</p>
+    <ol>
+      <li>Drop the new photos into <code>Gallery Originals/Norway</code> (or whichever collection folder).</li>
+      <li>Run <code>npm run gallery:sync</code>.</li>
+      <li>Check it locally (<code>npm run dev</code>), then commit and redeploy.</li>
+    </ol>
+
+    <h3>Adding a brand-new collection</h3>
+    <p>No code editing required:</p>
+    <ol>
+      <li>Run <code>npm run collection:add</code>.</li>
+      <li>Answer the questions it asks (the collection's name, who it's of/from, and what event
+        or occasion it's from — the last two are optional and power the Person/Event filters on
+        the Collections page). It creates the matching folder inside <code>Gallery Originals</code>
+        and sets everything up for you.</li>
+      <li>Copy your photos into that folder.</li>
+      <li>Run <code>npm run gallery:sync</code>. This creates the new gallery page AND adds its
+        card to the Collections index page automatically.</li>
+      <li>Check it locally, then commit and redeploy.</li>
+    </ol>
+
+    <div class="note">
+      Note: the sync script currently checks a hardcoded path
+      (<code>/Volumes/Samsung_T5/Website</code>) for higher-priority metadata before falling
+      back to the <code>Gallery Originals</code> copy. If that drive isn't present, it just
+      falls back automatically — no changes needed unless that path changes.
+    </div>
+  </section>
+
+  <section id="editing">
+    <h2>Editing captions, dates, order, and photos locally</h2>
+    <p>
+      While running <code>npm run dev</code>, a small pencil icon appears in the corner of each
+      thumbnail (hover to see it) and in the full-size lightbox view — click it to edit that
+      photo's caption, date, or position within the collection, move it to a different
+      collection, or delete it from the site entirely. This icon only exists when the site is
+      running locally; it never appears on the deployed site, since it's gated on the server
+      side (not just hidden with CSS).
+    </p>
+    <p>
+      Saving writes to a local overrides file — it never touches <code>Gallery Originals</code>
+      or a photo's embedded metadata, and "Delete" only hides a photo from the site rather than
+      removing the original file. To actually apply saved edits to the site, click the
+      <strong>Sync Gallery</strong> button in the bottom-right corner (also local-only) once
+      you're done editing — it runs <code>gallery:sync</code> for you, so there's no need to
+      switch to a terminal. It's worth batching several edits before clicking it, since a sync
+      reprocesses every changed photo's images. Either way, check the result locally, then
+      commit and redeploy as usual — the overrides file is tracked in git, so edits survive
+      future syncs and deploy along with everything else.
+    </p>
+  </section>
+
+  <section id="hero">
+    <h2>Changing the homepage photo</h2>
+    <pre><code>npm run hero:set -- "/path/to/photo.tif"</code></pre>
+    <p>
+      Resizes the given photo (TIFF or JPEG) and installs it as the homepage hero image,
+      replacing whatever was there. Check it with <code>npm run dev</code>, then commit and
+      redeploy as usual.
+    </p>
+  </section>
+
+  <section id="deploy">
+    <h2>Deploying to Vercel</h2>
+    <p>The easiest path, since this is a standard Next.js app:</p>
+
+    <h3>Option A — Vercel dashboard (no command line needed)</h3>
+    <ol>
+      <li>Push this project to a GitHub repository (or upload it directly in the Vercel dashboard).</li>
+      <li>Go to vercel.com, sign in, click "Add New Project," and import the repo.</li>
+      <li>Vercel auto-detects Next.js — click Deploy. No configuration needed.</li>
+      <li>Every future push to the repo auto-deploys.</li>
+    </ol>
+
+    <h3>Option B — Vercel CLI</h3>
+    <pre><code>npm install -g vercel
+vercel login
+vercel        # deploys a preview
+vercel --prod # promotes to production</code></pre>
+
+    <h3>Custom domain</h3>
+    <p>
+      Once deployed, add your domain under the project's Settings → Domains in the Vercel
+      dashboard, and update your domain registrar's DNS records as Vercel instructs (usually a
+      single CNAME or A record). Propagation is typically minutes to a few hours.
+    </p>
+  </section>
+
+  <section id="save">
+    <h2>Saving and publishing changes</h2>
+    <p>Once the site is on GitHub and Vercel, use this any time you've made a change — whether it's new photos, a text edit, or anything else:</p>
+    <pre><code>npm run save</code></pre>
+    <p>It will:</p>
+    <ol>
+      <li>Ask what changed (type one line per change, then leave a blank line to finish)</li>
+      <li>Add a new numbered entry to the changelog with today's date</li>
+      <li>Commit everything with that description</li>
+      <li>Ask if you want to push to GitHub now — if yes, Vercel picks it up and deploys automatically within a minute or two</li>
+    </ol>
+    <p>
+      If you're not ready to go live yet, answer "n" when it asks about pushing — your changes
+      are still saved locally, and you can push later with <code>git push</code>.
+    </p>
+    <p>
+      If you ever need to roll back to an earlier version, the Vercel dashboard shows every past
+      deployment with a one-click "Promote to Production" (i.e. rollback) button — no manual
+      bookkeeping required.
+    </p>
+  </section>
+
+  <section id="history">
+    <h2>Version history</h2>
+    <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
+
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 52</span><span class="version-date">Friday, August 7, 2026</span></div>
+      <ul><li>Added ability to modify captions and dates from a locally viewed page but not publicly</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 51</span><span class="version-date">Thursday, August 6, 2026</span></div>
+      <ul><li>Updated hero for to higher resolution</li></ul>
+    </div>
+
+    <p class="note">
+      Entries below Version 50 predate the move off ChatGPT Sites onto the current
+      Claude Code + git + Vercel workflow, and are kept for reference.
+    </p>
+
+    <details>
+      <summary>Show earlier saved versions (1–50)</summary>
+
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 50</span><span class="badge">Saved, not live</span></div>
+        <ul>
+          <li>Corrected spelling, capitalization, stray punctuation, and missing terminal punctuation in all 16 embedded Christian Accessibility Alt Text fields.</li>
+          <li>Wrote the corrected metadata to both Gallery Originals and the protected website originals after creating reversible backups.</li>
+          <li>Verified that the photograph pixel data remained unchanged after every metadata update.</li>
+          <li>Resynchronized all galleries so the corrected Alt Text appears in captions and image descriptions.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 49</span><span class="badge">Currently live</span></div>
+        <ul>
+          <li>Increased About-page text to 16 pixels on phones.</li>
+          <li>Refined the homepage "Stories in natural light · Since 1979" line to stay readable on narrow screens.</li>
+          <li>Added image dimensions to reserve gallery space before thumbnails load and reduce layout shifting.</li>
+          <li>Improved full-photo keyboard accessibility by moving focus into the viewer, keeping focus within it, and returning focus to the opened thumbnail when closed.</li>
+          <li>Replaced generic gallery image descriptions with Photo Mechanic Accessibility Alt Text where present and cleaned filename-based descriptions where it is not yet available.</li>
+          <li>Added a subtle thumbnail lift, zoom, shadow, tap, and keyboard-focus response while respecting reduced-motion preferences.</li>
+          <li>Removed the obsolete internal homepage version marker.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 48</span></div>
+        <ul>
+          <li>Redesigned the Contact page with stronger visual hierarchy and restrained spacing.</li>
+          <li>Added a "Get in touch" label, prominent name, short invitation, and divided email/text action rows.</li>
+          <li>Preserved the existing email and text links while making their purpose clearer.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 47</span></div>
+        <ul>
+          <li>Added Clay Carson's email address and text-message number to the Contact page.</li>
+          <li>Made the email address and phone number directly actionable on supported devices.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 46</span></div>
+        <ul>
+          <li>Removed the time of day from every generated gallery caption.</li>
+          <li>Spelled out all caption month names completely.</li>
+          <li>Reduced caption text to match the photo counter size.</li>
+          <li>Applied Accessibility Alt Text caption sourcing and date-only formatting to all collections for future resyncs, with filenames as the fallback when Alt Text is absent.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 45</span><span class="badge">Saved, not live</span></div>
+        <ul>
+          <li>Corrected the Christian caption importer to read Photo Mechanic's IPTC Accessibility Alt Text field from the protected originals.</li>
+          <li>Verified all 16 intended captions, including "Sunshine is his friend."</li>
+          <li>Kept capture date and time at the beginning of every caption and retained the 66% caption-width layout.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 44</span><span class="badge">Saved, not live</span></div>
+        <ul>
+          <li>Resynchronized the Christian collection from Gallery Originals after adding the caption layout changes.</li>
+          <li>Replaced Christian lightbox filenames with the Description/Caption field; superseded by Version 45 after the intended Alt Text field was identified.</li>
+          <li>Added each photograph's capture date and time to the beginning of its caption.</li>
+          <li>Limited captions to the left 66% of the displayed photograph while keeping the image count flush right.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 43</span></div>
+        <ul>
+          <li>Moved the homepage copy higher to reduce the empty space above it by roughly half.</li>
+          <li>Increased the homepage eyebrow and family/travel introduction text by 50%.</li>
+          <li>Reduced collection-page titles by 50%.</li>
+          <li>Reduced full-photo captions and image counts by 50%.</li>
+          <li>Aligned full-photo captions flush left and image counts flush right with each displayed photograph.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 42</span><span class="badge">Saved, not live</span></div>
+        <ul>
+          <li>Removed the lower-right "Based in the Midwest / Available worldwide" homepage text.</li>
+          <li>Added subtle letter spacing to "Light is our only tool."</li>
+          <li>Tightened the spacing among the homepage introduction lines and moved the group higher on the photograph.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 41</span></div>
+        <ul>
+          <li>Resynchronized all 75 website photographs from the current files in Gallery Originals.</li>
+          <li>Regenerated separate optimized full-view and thumbnail image sets.</li>
+          <li>Refreshed lightbox captions from the current original filenames.</li>
+          <li>Preserved the existing collection structure, gallery order, design, navigation, lightbox controls, and mobile swipe behavior.</li>
+          <li>Added a repeatable gallery synchronization command for future updates.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 40</span></div>
+        <ul>
+          <li>Replaced the lightbox captions on all 75 photographs with their exact original filenames.</li>
+          <li>Matched every optimized website photograph to its corresponding file in Gallery Originals.</li>
+          <li>Changed site access from owner-only to public on August 5, 2026.</li>
+        </ul>
+      </div>
+      <div class="version-entry">
+        <div class="version-head"><span class="version-num">Version 39</span><span class="badge">Saved, not live</span></div>
+        <ul>
+          <li>Created separate optimized thumbnail and full-view image sets.</li>
+          <li>Added 75 gallery thumbnails with a maximum long edge of 1,200 pixels.</li>
+          <li>Optimized 75 full-view photographs while retaining higher display quality.</li>
+          <li>Updated gallery grids and collection covers to use thumbnails.</li>
+          <li>Full-size files now load only when a photograph is opened.</li>
+          <li>Reduced the saved deployment package from approximately 88.6 MB to 56 MB.</li>
+          <li>Left the high-resolution originals in /Volumes/Samsung_T5/Website unchanged.</li>
+        </ul>
+      </div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 38</span></div><ul><li>Corrected gallery reading order. Desktop galleries now read 01, 02, 03 across each row; phone galleries read 01, 02.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 37</span></div><ul><li>Added left and right swipe gestures to the full-size photo viewer on iOS devices, kept the existing arrows, and increased the lightbox caption/counter sizes to 300%.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 36</span></div><ul><li>Corrected the homepage copy order — placed "Light is our only tool" above the "Family, travel…" paragraph.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 35</span></div><ul><li>Changed the homepage date to "Since 1979," added a line break after "random," removed the "Get in touch" text/link, and rearranged the homepage hero text.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 34</span></div><ul><li>Changed the homepage introduction to "Family, travel and random stuff, taken close to the heart."</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 33</span></div><ul><li>Changed the homepage headline to "Light is our only tool."</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 32</span></div><ul><li>Replaced the earlier memory-themed homepage headline with "light is my only tool" and reduced its type size by 50%.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 31</span></div><ul><li>Synchronized the Norway collection and reduced gallery labels.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 30</span></div><ul><li>Compacted the Collections page grid.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 29</span></div><ul><li>Synchronized the Christian photo collection.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 28</span></div><ul><li>Added the Christian and Norway collection pages.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 27</span></div><ul><li>Rebuilt the galleries from the website master folder.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 26</span></div><ul><li>Added visible numbering labels to Beach gallery thumbnails.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 25</span></div><ul><li>Added IPTC captions to the Beach gallery.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 24</span></div><ul><li>Added the Beach photo collection.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 23</span></div><ul><li>Reduced paragraph indentation on the About page.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 22</span></div><ul><li>Increased the readability of the About text.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 21</span></div><ul><li>Replaced the About biography text.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 20</span></div><ul><li>Refined the About page's body typography.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 19</span></div><ul><li>Corrected spacing in the About text.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 18</span></div><ul><li>Balanced spacing on the About page.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 17</span></div><ul><li>Tightened spacing on the About page.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 16</span></div><ul><li>Updated the opening About paragraphs.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 15</span></div><ul><li>Tightened the About page typography.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 14</span></div><ul><li>Refined the About page layout.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 13</span></div><ul><li>Simplified the About page typography.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 12</span></div><ul><li>Added a polished About biography.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 11</span></div><ul><li>Added Home navigation to the interior pages.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 10</span></div><ul><li>Added the Collections, About, and Contact pages.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 9</span></div><ul><li>Refreshed the published header build.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 8</span></div><ul><li>Enlarged the brand name and removed the Inquire button.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 7</span></div><ul><li>Changed the Photography label to uppercase.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 6</span></div><ul><li>Added a smaller Photography label after the brand name.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 5</span></div><ul><li>Shortened the visible brand name to Clay Carson.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 4</span></div><ul><li>Set the brand name in upright Bookman type.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 3</span></div><ul><li>Removed content below the lead photograph.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 2</span></div><ul><li>Added Photography to the displayed title.</li></ul></div>
+      <div class="version-entry"><div class="version-head"><span class="version-num">Version 1</span></div><ul><li>Built the initial Clay Carson photography portfolio.</li></ul></div>
+    </details>
+  </section>
+
+  <section id="previous-agents">
+    <h2>Previous versions (may not be accurate)</h2>
+    <p>
+      This project used to carry an <code>AGENTS.md</code> file with instructions for the old
+      ChatGPT Sites / Codex workflow. It's been removed from the project since it no longer
+      matches how the site actually works (wrong project path, a manual "Sites version" changelog
+      process replaced by <code>npm run save</code> + Vercel, and handoff steps referencing the
+      Codex interface) — kept here only as a historical record of that earlier workflow.
+    </p>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Authoritative locations</h3>
+      <ul>
+        <li>Treat <code>/Volumes/Samsung_T5/Chatgpt workspace/Clay Carson Photography</code> as the authoritative website project.</li>
+        <li>Treat <code>/Volumes/Samsung_T5/Chatgpt workspace/Clay Carson Photography/Gallery Originals</code> as Clay's user-managed working source for new and updated gallery photographs.</li>
+        <li>Never optimize, overwrite, rename, move, or delete photographs inside <code>Gallery Originals</code>. Read or copy from it to generate the website's optimized files in <code>public/galleries</code> and <code>public/gallery-thumbnails</code>.</li>
+        <li>Treat <code>/Volumes/Samsung_T5/Website</code> as the protected source of gallery originals.</li>
+        <li>Never alter, overwrite, rename, move, or delete the gallery originals during website synchronization or optimization.</li>
+        <li>Write project-generated working, staging, archive, and temporary files to the Samsung drive, never to the startup drive.</li>
+      </ul>
+
+      <h3>Changelog workflow</h3>
+      <ul>
+        <li>Maintain <code>Change Log.md</code> in the project root as part of every Sites version workflow.</li>
+        <li>When a Sites version is saved, add its exact version number, date, and a concise description of the changes. Obtain the version number from the Sites response; never guess it.</li>
+        <li>Mark a saved version as <strong>Saved, not live</strong> until its production deployment succeeds.</li>
+        <li>After a successful deployment, mark that version as <strong>Currently live</strong> and change the previously live version to a normal saved version.</li>
+        <li>Record meaningful performance, gallery, content, navigation, or storage changes when relevant.</li>
+        <li>Update the changelog before the final handoff to the user.</li>
+        <li>Do not report a version as live until Sites confirms that deployment succeeded.</li>
+      </ul>
+
+      <h3>Live deployment handoff</h3>
+      <ul>
+        <li>After every successful live Sites deployment, show <code>Change Log.md</code> in the existing Codex right-side preview pane.</li>
+        <li>Load the confirmed live site URL into the current tab of Clay's existing Safari window.</li>
+        <li>Do not open a new Safari window for the live-version handoff.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Generated from README.md and Change Log.md — regenerate this page any time by asking to
+    refresh the Site Guide after those files change.
+  </footer>
+
+</div>
+</body>
+</html>
