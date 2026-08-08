@@ -15,6 +15,20 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 56 — Saturday, August 8, 2026
+
+- Added robots.txt, noindex/nofollow meta tags, and an X-Robots-Tag header so search engines and crawlers stay out — this is a private family site, not meant to be indexed or discovered
+
+### Version 55 — Saturday, August 8, 2026
+
+- Darkened the contact sheet thumbnail mat color to 80% black so it blends into the page instead of standing out as a light gray box
+
+### Version 54 — Saturday, August 8, 2026
+
+- Dropping a new, non-empty folder into Gallery Originals now auto-registers it as a collection — no manual collection:add step needed. Empty folders are ignored until they have photos.
+- Person/Event tags and captions are now read from each photo's real Photo Mechanic IPTC data (Person, Event, Alt Text) instead of placeholder config, and power the Collections page's People/Events filters
+- Added the real "Janet Buys a car" collection and removed the empty "Trip to Nova Scotia" placeholder
+
 ### Version 53 — Saturday, August 8, 2026
 
 - Made a lot of font and text changes
