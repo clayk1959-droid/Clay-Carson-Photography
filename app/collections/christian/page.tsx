@@ -1,7 +1,7 @@
 import { SiteHeader } from "../../SiteHeader";
 import { Gallery } from "../Gallery";
 
-type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; width: number; height: number };
+type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };
 
 const photographData: PhotographDataEntry[] = [
   {
@@ -10,6 +10,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Sunshine is his friend.",
     "caption": "August 24, 2025 — Sunshine is his friend.",
     "altText": "Sunshine is his friend.",
+    "person": [],
+    "event": [],
     "width": 1469,
     "height": 2200
   },
@@ -19,6 +21,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Messy but enthusiastic eater",
     "caption": "January 29, 2026 — Messy but enthusiastic eater",
     "altText": "Messy but enthusiastic eater",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1786
   },
@@ -28,6 +32,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Waits with Grandma for first haircut.",
     "caption": "August 20, 2025 — Waits with Grandma for first haircut.",
     "altText": "Waits with Grandma for first haircut.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1563
   },
@@ -37,6 +43,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Walking the stacks.",
     "caption": "June 27, 2026 — Walking the stacks.",
     "altText": "Walking the stacks.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1320
   },
@@ -46,6 +54,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "An empty box is an adventure.",
     "caption": "April 26, 2026 — An empty box is an adventure.",
     "altText": "An empty box is an adventure.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1950
   },
@@ -55,6 +65,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Serious about his cooking.",
     "caption": "March 22, 2026 — Serious about his cooking.",
     "altText": "Serious about his cooking.",
+    "person": [],
+    "event": [],
     "width": 2092,
     "height": 2200
   },
@@ -64,6 +76,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Practicing for Guy’s Grocery Games.",
     "caption": "March 23, 2026 — Practicing for Guy’s Grocery Games.",
     "altText": "Practicing for Guy’s Grocery Games.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 2142
   },
@@ -73,6 +87,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "So much to explore.",
     "caption": "March 29, 2026 — So much to explore.",
     "altText": "So much to explore.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1627
   },
@@ -82,6 +98,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "First bouncy house at church Easter egg hunt.",
     "caption": "April 4, 2026 — First bouncy house at church Easter egg hunt.",
     "altText": "First bouncy house at church Easter egg hunt.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1737
   },
@@ -91,6 +109,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Content and safe.",
     "caption": "June 28, 2026 — Content and safe.",
     "altText": "Content and safe.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1464
   },
@@ -100,6 +120,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Happy Days",
     "caption": "September 27, 2024 — Happy Days",
     "altText": "Happy Days",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1850
   },
@@ -109,6 +131,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Mama’s love.",
     "caption": "May 1, 2025 — Mama’s love.",
     "altText": "Mama’s love.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 2126
   },
@@ -118,6 +142,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Kyle so loved that boy.",
     "caption": "August 3, 2024 — Kyle so loved that boy.",
     "altText": "Kyle so loved that boy.",
+    "person": [],
+    "event": [],
     "width": 1517,
     "height": 2200
   },
@@ -127,6 +153,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Playing on living room floor and ready to go on a new adventure.",
     "caption": "June 13, 2026 — Playing on living room floor and ready to go on a new adventure.",
     "altText": "Playing on living room floor and ready to go on a new adventure.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1739
   },
@@ -136,6 +164,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "First swimming lesson.",
     "caption": "June 13, 2026 — First swimming lesson.",
     "altText": "First swimming lesson.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1380
   },
@@ -145,6 +175,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "But sometimes he was not happy with Kyle.",
     "caption": "September 17, 2025 — But sometimes he was not happy with Kyle.",
     "altText": "But sometimes he was not happy with Kyle.",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1700
   }
@@ -169,6 +201,10 @@ const otherCollections = [
   {
     "slug": "trip-to-nova-scotia",
     "title": "Trip to Nova Scotia"
+  },
+  {
+    "slug": "janet-buys-a-car",
+    "title": "Janet Buys a car"
   }
 ];
 

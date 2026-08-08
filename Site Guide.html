@@ -182,7 +182,7 @@
       <tr><th>Command</th><th>What it does</th></tr>
       <tr><td><code>npm run dev</code></td><td>Starts the site locally at <code>http://localhost:3000</code>, with the caption/date/order/delete/move editor and Sync Gallery button enabled.</td></tr>
       <tr><td><code>npm run gallery:sync</code></td><td>Reads <code>Gallery Originals</code>, resizes new/changed photos, regenerates every gallery page and the Collections index.</td></tr>
-      <tr><td><code>npm run collection:add</code></td><td>Guided prompts to create a brand-new collection (name, who it's of/from, what event).</td></tr>
+      <tr><td><code>npm run collection:add</code></td><td>Optional shortcut: creates an empty, named <code>Gallery Originals</code> folder ready for photos (usually not needed — see below).</td></tr>
       <tr><td><code>npm run hero:set -- "/path/to/photo.tif"</code></td><td>Replaces the homepage hero photo.</td></tr>
       <tr><td><code>npm run save</code></td><td>Records what changed in the changelog, commits, and offers to push live.</td></tr>
       <tr><td><code>npm run build</code> / <code>npm run lint</code></td><td>Production build check / code-quality check — mainly for troubleshooting.</td></tr>
@@ -201,9 +201,10 @@ npm run dev</code></pre>
     <h2>Adding or updating galleries</h2>
     <p>
       The <code>gallery:sync</code> script reads full-resolution originals, resamples them into
-      a full-view size and a thumbnail size, pulls captions from IPTC Accessibility Alt Text
-      (falling back to the filename), regenerates each gallery page, and regenerates the
-      Collections index page — all automatically.
+      a full-view size and a thumbnail size, pulls each photo's caption, person tags, and event
+      tag from IPTC metadata (falling back to the creation date and filename when a photo isn't
+      tagged), regenerates each gallery page, and regenerates the Collections index page — all
+      automatically.
     </p>
     <p>
       Resizing and metadata extraction are cached per photo (never committed to git) and skipped
@@ -222,18 +223,28 @@ npm run dev</code></pre>
     </ol>
 
     <h3>Adding a brand-new collection</h3>
-    <p>No code editing required:</p>
+    <p>Just drop a folder in — no code editing or extra commands required:</p>
     <ol>
-      <li>Run <code>npm run collection:add</code>.</li>
-      <li>Answer the questions it asks (the collection's name, who it's of/from, and what event
-        or occasion it's from — the last two are optional and power the Person/Event filters on
-        the Collections page). It creates the matching folder inside <code>Gallery Originals</code>
-        and sets everything up for you.</li>
-      <li>Copy your photos into that folder.</li>
-      <li>Run <code>npm run gallery:sync</code>. This creates the new gallery page AND adds its
-        card to the Collections index page automatically.</li>
+      <li>Create a new folder inside <code>Gallery Originals</code> and name it whatever you want
+        the collection to be called (e.g. <code>Gallery Originals/Beach 2026</code>).</li>
+      <li>Copy your photos into it. An empty folder is ignored — it won't show up as a collection
+        until it actually has photos in it.</li>
+      <li>Run <code>npm run gallery:sync</code>. It notices the new, non-empty folder, registers
+        it as a collection (using the folder name as the title), creates its gallery page, and
+        adds its card to the Collections index — all automatically.</li>
       <li>Check it locally, then commit and redeploy.</li>
     </ol>
+    <p>
+      If a folder's photos are tagged in Photo Mechanic (Person, Event, Alt Text), that data
+      powers the caption and the Person/Event filters on the Collections page. Untagged photos
+      still work fine — they just fall back to the photo's creation date and a cleaned-up version
+      of the filename as the caption, and don't contribute a Person/Event tag.
+    </p>
+    <p>
+      <code>npm run collection:add</code> is still there as an optional shortcut if you'd rather
+      create the empty folder (with a name you type at a prompt) before you've copied any photos
+      in — it does step 1 for you. It's never required.
+    </p>
 
     <div class="note">
       Note: the sync script currently checks a hardcoded path

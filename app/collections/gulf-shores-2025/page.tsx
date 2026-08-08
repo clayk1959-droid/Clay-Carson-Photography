@@ -1,7 +1,7 @@
 import { SiteHeader } from "../../SiteHeader";
 import { Gallery } from "../Gallery";
 
-type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; width: number; height: number };
+type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };
 
 const photographData: PhotographDataEntry[] = [
   {
@@ -10,6 +10,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Ben and Christian in sand 1",
     "caption": "September 14, 2025 — Ben and Christian in sand 1",
     "altText": "Ben and Christian in sand 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1571
   },
@@ -19,6 +21,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Ben, Christian, Katie 2",
     "caption": "September 23, 2025 — Ben, Christian, Katie 2",
     "altText": "Ben, Christian, Katie 2",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1875
   },
@@ -28,6 +32,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Boardwalk 1",
     "caption": "September 15, 2025 — Boardwalk 1",
     "altText": "Boardwalk 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1489
   },
@@ -37,6 +43,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Christian Katie Ben looks out at oil rig 1",
     "caption": "September 14, 2025 — Christian Katie Ben looks out at oil rig 1",
     "altText": "Christian Katie Ben looks out at oil rig 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1308
   },
@@ -46,6 +54,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Christian Katie Janet 1",
     "caption": "September 14, 2025 — Christian Katie Janet 1",
     "altText": "Christian Katie Janet 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1388
   },
@@ -55,6 +65,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Christian pllays in sand 3",
     "caption": "September 14, 2025 — Christian pllays in sand 3",
     "altText": "Christian pllays in sand 3",
+    "person": [],
+    "event": [],
     "width": 1427,
     "height": 2200
   },
@@ -64,6 +76,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Christian starts tpo fall 1",
     "caption": "September 18, 2025 — Christian starts tpo fall 1",
     "altText": "Christian starts tpo fall 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1628
   },
@@ -73,6 +87,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Gate and fence 1",
     "caption": "September 14, 2025 — Gate and fence 1",
     "altText": "Gate and fence 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1487
   },
@@ -82,6 +98,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Kaqtie runs in waves 1",
     "caption": "September 18, 2025 — Kaqtie runs in waves 1",
     "altText": "Kaqtie runs in waves 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1549
   },
@@ -91,6 +109,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Katie, Ben, Christian in waves 1",
     "caption": "September 14, 2025 — Katie, Ben, Christian in waves 1",
     "altText": "Katie, Ben, Christian in waves 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1660
   },
@@ -100,6 +120,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Katie, Janet, Christian in wavess 1",
     "caption": "September 18, 2025 — Katie, Janet, Christian in wavess 1",
     "altText": "Katie, Janet, Christian in wavess 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1549
   },
@@ -109,6 +131,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Katie, Janet, Christian in wavess 3",
     "caption": "September 18, 2025 — Katie, Janet, Christian in wavess 3",
     "altText": "Katie, Janet, Christian in wavess 3",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1628
   },
@@ -118,6 +142,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Sunset-2p 1",
     "caption": "September 14, 2025 — Sunset-2p 1",
     "altText": "Sunset-2p 1",
+    "person": [],
+    "event": [],
     "width": 1909,
     "height": 2200
   },
@@ -127,6 +153,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "in pool 1",
     "caption": "September 18, 2025 — in pool 1",
     "altText": "in pool 1",
+    "person": [],
+    "event": [],
     "width": 1466,
     "height": 2200
   },
@@ -136,6 +164,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "all in pool overhead",
     "caption": "September 23, 2025 — all in pool overhead",
     "altText": "all in pool overhead",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1817
   },
@@ -145,6 +175,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Pool Overhead all 4",
     "caption": "September 18, 2025 — Pool Overhead all 4",
     "altText": "Pool Overhead all 4",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 2082
   }
@@ -169,6 +201,10 @@ const otherCollections = [
   {
     "slug": "trip-to-nova-scotia",
     "title": "Trip to Nova Scotia"
+  },
+  {
+    "slug": "janet-buys-a-car",
+    "title": "Janet Buys a car"
   }
 ];
 

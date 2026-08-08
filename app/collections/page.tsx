@@ -5,9 +5,7 @@ const cards = [
   {
     "slug": "christian",
     "title": "Christian",
-    "person": [
-      "Christian"
-    ],
+    "person": [],
     "event": [],
     "count": 16,
     "coverBasename": "christian-01.jpg"
@@ -16,9 +14,7 @@ const cards = [
     "slug": "gulf-shores-2025",
     "title": "Gulf Shores 2025",
     "person": [],
-    "event": [
-      "Gulf Shores 2025"
-    ],
+    "event": [],
     "count": 16,
     "coverBasename": "gulf-shores-2025-14.jpg"
   },
@@ -26,23 +22,21 @@ const cards = [
     "slug": "norway",
     "title": "Norway",
     "person": [],
-    "event": [
-      "Norway"
-    ],
+    "event": [],
     "count": 43,
     "coverBasename": "norway-13.jpg"
   },
   {
-    "slug": "trip-to-nova-scotia",
-    "title": "Trip to Nova Scotia",
+    "slug": "janet-buys-a-car",
+    "title": "Janet Buys a car",
     "person": [
-      "Clay Carson"
+      "Janet Carson"
     ],
     "event": [
-      "Trip with friends"
+      "Janet buys a car"
     ],
-    "count": 0,
-    "coverBasename": "trip-to-nova-scotia-01.jpg"
+    "count": 13,
+    "coverBasename": "janet-buys-a-car-01.jpg"
   }
 ];
 

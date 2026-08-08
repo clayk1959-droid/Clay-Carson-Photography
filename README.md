@@ -12,7 +12,7 @@ platform required.
 | --- | --- |
 | `npm run dev` | Starts the site locally at http://localhost:3000, with the caption/date/order/delete/move editor and Sync Gallery button enabled |
 | `npm run gallery:sync` | Reads `Gallery Originals`, resizes new/changed photos, regenerates every gallery page and the Collections index |
-| `npm run collection:add` | Guided prompts to create a brand-new collection (name, who it's of/from, what event) |
+| `npm run collection:add` | Optional shortcut: creates an empty, named `Gallery Originals` folder ready for photos (see below — usually you don't need this) |
 | `npm run hero:set -- "/path/to/photo.tif"` | Replaces the homepage hero photo |
 | `npm run save` | Records what changed in `Change Log.md`, commits, and offers to push live |
 | `npm run build` / `npm run lint` | Production build check / code-quality check — mainly for troubleshooting |
@@ -31,9 +31,10 @@ Then open http://localhost:3000.
 ## Adding or updating galleries
 
 The `gallery:sync` script reads full-resolution originals, resamples them
-into a full-view size and a thumbnail size, pulls captions from IPTC
-Accessibility Alt Text (falling back to the filename), regenerates each
-gallery page, and regenerates the Collections index page — all automatically.
+into a full-view size and a thumbnail size, pulls each photo's caption,
+person tags, and event tag from IPTC metadata (falling back to the creation
+date and filename when a photo isn't tagged), regenerates each gallery page,
+and regenerates the Collections index page — all automatically.
 
 Resizing and metadata extraction are cached per photo (in `.cache/`, never
 committed) and skipped whenever a photo hasn't changed since the last sync —
@@ -48,17 +49,27 @@ to be reprocessed.
 2. Run `npm run gallery:sync`.
 3. Check it locally (`npm run dev`), then commit and redeploy (see below).
 
-**Adding a brand-new collection** — no code editing required:
-1. Run `npm run collection:add`
-2. Answer the questions it asks (the collection's name, who it's of/from,
-   and what event or occasion it's from — the last two are optional and
-   power the Person/Event filters on the Collections page). It creates the
-   matching folder inside `Gallery Originals` and sets everything up for
-   you.
-3. Copy your photos into that folder.
-4. Run `npm run gallery:sync`. This creates the new gallery page AND adds its
-   card to the Collections index page automatically.
-5. Check it locally, then commit and redeploy.
+**Adding a brand-new collection** — just drop a folder in, no code editing
+or extra commands required:
+1. Create a new folder inside `Gallery Originals` and name it whatever you
+   want the collection to be called (e.g. `Gallery Originals/Beach 2026`).
+2. Copy your photos into it. An empty folder is ignored — it won't show up
+   as a collection until it actually has photos in it.
+3. Run `npm run gallery:sync`. It notices the new, non-empty folder,
+   registers it as a collection (using the folder name as the title),
+   creates its gallery page, and adds its card to the Collections index —
+   all automatically.
+4. Check it locally, then commit and redeploy.
+
+If a folder's photos are tagged in Photo Mechanic (Person, Event, Alt Text),
+that data powers the caption and the Person/Event filters on the Collections
+page. Untagged photos still work fine — they just fall back to the photo's
+creation date and a cleaned-up version of the filename as the caption, and
+don't contribute a Person/Event tag.
+
+`npm run collection:add` is still there as an optional shortcut if you'd
+rather create the empty folder (with a name you type at a prompt) before
+you've copied any photos in — it does step 1 for you. It's never required.
 
 Note: the script currently checks a hardcoded path
 (`/Volumes/Samsung_T5/Website`) for higher-priority metadata before falling

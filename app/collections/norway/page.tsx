@@ -1,7 +1,7 @@
 import { SiteHeader } from "../../SiteHeader";
 import { Gallery } from "../Gallery";
 
-type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; width: number; height: number };
+type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };
 
 const photographData: PhotographDataEntry[] = [
   {
@@ -10,6 +10,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Battleship Big Guns 2",
     "caption": "September 14, 2025 — Battleship Big Guns 2",
     "altText": "Battleship Big Guns 2",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 687
   },
@@ -19,6 +21,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen Day one 2",
     "caption": "August 10, 2025 — Copenhagen Day one 2",
     "altText": "Copenhagen Day one 2",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1388
   },
@@ -28,6 +32,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen Day one 6",
     "caption": "August 10, 2025 — Copenhagen Day one 6",
     "altText": "Copenhagen Day one 6",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1897
   },
@@ -37,6 +43,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen Day one 8",
     "caption": "August 10, 2025 — Copenhagen Day one 8",
     "altText": "Copenhagen Day one 8",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1464
   },
@@ -46,6 +54,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen 1",
     "caption": "August 15, 2025 — Copenhagen 1",
     "altText": "Copenhagen 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1174
   },
@@ -55,6 +65,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen 3",
     "caption": "August 15, 2025 — Copenhagen 3",
     "altText": "Copenhagen 3",
+    "person": [],
+    "event": [],
     "width": 1810,
     "height": 2200
   },
@@ -64,6 +76,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen 4",
     "caption": "August 15, 2025 — Copenhagen 4",
     "altText": "Copenhagen 4",
+    "person": [],
+    "event": [],
     "width": 1488,
     "height": 2200
   },
@@ -73,6 +87,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Costal Walk-On Boat 4",
     "caption": "August 11, 2025 — Costal Walk-On Boat 4",
     "altText": "Costal Walk-On Boat 4",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 2076
   },
@@ -82,6 +98,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Costal Walk-On Boat 5",
     "caption": "August 11, 2025 — Costal Walk-On Boat 5",
     "altText": "Costal Walk-On Boat 5",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1357
   },
@@ -91,6 +109,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Costal Walki 1",
     "caption": "August 11, 2025 — Costal Walki 1",
     "altText": "Costal Walki 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1129
   },
@@ -100,6 +120,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Fram",
     "caption": "August 10, 2025 — Fram",
     "altText": "Fram",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 2135
   },
@@ -109,6 +131,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Garden 1 (2)",
     "caption": "August 15, 2025 — Garden 1 (2)",
     "altText": "Garden 1 (2)",
+    "person": [],
+    "event": [],
     "width": 1754,
     "height": 2200
   },
@@ -118,6 +142,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Garden 2",
     "caption": "August 15, 2025 — Garden 2",
     "altText": "Garden 2",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1741
   },
@@ -127,6 +153,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "North Point 1 (2)",
     "caption": "August 11, 2025 — North Point 1 (2)",
     "altText": "North Point 1 (2)",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1483
   },
@@ -136,6 +164,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "North Point 3 (2)",
     "caption": "August 12, 2025 — North Point 3 (2)",
     "altText": "North Point 3 (2)",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1402
   },
@@ -145,6 +175,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "On Boat 1",
     "caption": "August 10, 2025 — On Boat 1",
     "altText": "On Boat 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1604
   },
@@ -154,6 +186,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "On Boat 3",
     "caption": "August 10, 2025 — On Boat 3",
     "altText": "On Boat 3",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1766
   },
@@ -163,6 +197,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "On Boat 4",
     "caption": "August 10, 2025 — On Boat 4",
     "altText": "On Boat 4",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1298
   },
@@ -172,6 +208,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Oslo walk Scooters",
     "caption": "August 10, 2025 — Oslo walk Scooters",
     "altText": "Oslo walk Scooters",
+    "person": [],
+    "event": [],
     "width": 2107,
     "height": 2200
   },
@@ -181,6 +219,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Sod House 2",
     "caption": "August 12, 2025 — Sod House 2",
     "altText": "Sod House 2",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1211
   },
@@ -190,6 +230,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Statue Garden 1 (2)",
     "caption": "August 11, 2025 — Statue Garden 1 (2)",
     "altText": "Statue Garden 1 (2)",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1493
   },
@@ -199,6 +241,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Statue Garden 3 (2)",
     "caption": "August 11, 2025 — Statue Garden 3 (2)",
     "altText": "Statue Garden 3 (2)",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1606
   },
@@ -208,6 +252,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Statue Garden 3",
     "caption": "August 10, 2025 — Statue Garden 3",
     "altText": "Statue Garden 3",
+    "person": [],
+    "event": [],
     "width": 1630,
     "height": 2017
   },
@@ -217,6 +263,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Statue Garden 5",
     "caption": "August 10, 2025 — Statue Garden 5",
     "altText": "Statue Garden 5",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1318
   },
@@ -226,6 +274,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Statue Garden 7",
     "caption": "August 10, 2025 — Statue Garden 7",
     "altText": "Statue Garden 7",
+    "person": [],
+    "event": [],
     "width": 2020,
     "height": 2200
   },
@@ -235,6 +285,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Accordian 1",
     "caption": "August 10, 2025 — Accordian 1",
     "altText": "Accordian 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1487
   },
@@ -244,6 +296,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Bdoor",
     "caption": "August 12, 2025 — Bdoor",
     "altText": "Bdoor",
+    "person": [],
+    "event": [],
     "width": 269,
     "height": 403
   },
@@ -253,6 +307,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Boat Name 1",
     "caption": "August 12, 2025 — Boat Name 1",
     "altText": "Boat Name 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1563
   },
@@ -262,6 +318,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Boat ride 1",
     "caption": "August 12, 2025 — Boat ride 1",
     "altText": "Boat ride 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1555
   },
@@ -271,6 +329,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Boat ride 5",
     "caption": "August 12, 2025 — Boat ride 5",
     "altText": "Boat ride 5",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1497
   },
@@ -280,6 +340,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen 1",
     "caption": "August 12, 2025 — Copenhagen 1",
     "altText": "Copenhagen 1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1407
   },
@@ -289,6 +351,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen 5",
     "caption": "August 12, 2025 — Copenhagen 5",
     "altText": "Copenhagen 5",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1286
   },
@@ -298,6 +362,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen 7",
     "caption": "August 12, 2025 — Copenhagen 7",
     "altText": "Copenhagen 7",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1246
   },
@@ -307,6 +373,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Copenhagen 9",
     "caption": "August 12, 2025 — Copenhagen 9",
     "altText": "Copenhagen 9",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1336
   },
@@ -316,6 +384,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Costal walk 2",
     "caption": "August 13, 2025 — Costal walk 2",
     "altText": "Costal walk 2",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1320
   },
@@ -325,6 +395,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "Costal walk 4",
     "caption": "August 13, 2025 — Costal walk 4",
     "altText": "Costal walk 4",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1665
   },
@@ -334,6 +406,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "boat 12",
     "caption": "August 14, 2025 — boat 12",
     "altText": "boat 12",
+    "person": [],
+    "event": [],
     "width": 1528,
     "height": 2200
   },
@@ -343,6 +417,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "boat 13",
     "caption": "August 14, 2025 — boat 13",
     "altText": "boat 13",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1676
   },
@@ -352,6 +428,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "boat 3",
     "caption": "August 13, 2025 — boat 3",
     "altText": "boat 3",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1558
   },
@@ -361,6 +439,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "boat 4",
     "caption": "August 13, 2025 — boat 4",
     "altText": "boat 4",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1430
   },
@@ -370,6 +450,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "boat 5",
     "caption": "August 13, 2025 — boat 5",
     "altText": "boat 5",
+    "person": [],
+    "event": [],
     "width": 1840,
     "height": 2200
   },
@@ -379,6 +461,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "1",
     "caption": "August 16, 2025 — 1",
     "altText": "1",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1438
   },
@@ -388,6 +472,8 @@ const photographData: PhotographDataEntry[] = [
     "description": "7",
     "caption": "August 16, 2025 — 7",
     "altText": "7",
+    "person": [],
+    "event": [],
     "width": 2200,
     "height": 1557
   }
@@ -412,6 +498,10 @@ const otherCollections = [
   {
     "slug": "trip-to-nova-scotia",
     "title": "Trip to Nova Scotia"
+  },
+  {
+    "slug": "janet-buys-a-car",
+    "title": "Janet Buys a car"
   }
 ];
 

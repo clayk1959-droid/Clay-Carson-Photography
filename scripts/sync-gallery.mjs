@@ -1,8 +1,10 @@
 import { access, copyFile, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import sharp from "sharp";
+import { toSlug, toComponentName } from "./lib/naming.mjs";
 
 const run = promisify(execFile);
 
@@ -40,39 +42,85 @@ try {
   overrides = {};
 }
 
-// To add a brand-new collection: drop a folder of photos into
-// "Gallery Originals" (name it whatever you like), then add one entry below.
-// Everything else — the gallery page, the Collections index card, thumbnails,
-// and full-size images — is generated automatically on the next sync.
+// You don't need to edit this array by hand for a new collection — drop a
+// non-empty folder into "Gallery Originals" and the next `gallery:sync` run
+// registers it automatically below, using the folder name as the title.
+// Empty folders are ignored until they actually have photos in them. Once
+// auto-added, you can still hand-edit an entry's title/subtitle/coverPhoto
+// here any time.
 //   folder:     exact folder name inside "Gallery Originals"
 //   slug:       URL-safe id, e.g. "norway" -> /collections/norway
 //   title:      heading shown on the gallery page and index card
 //   component:  a unique PascalCase React component name
-//   person:     who the photos are of/from — zero or more, used as a
-//               Collections page filter (e.g. ["Christian", "Katie"])
-//   event:      occasion these photos are from — zero or more, used as a
-//               Collections page filter (e.g. ["Reunion", "Christmas"])
 //   subtitle:   optional extra text on the gallery page itself (e.g. a date)
 //   coverPhoto: optional 1-based photo number to use as the index card thumbnail (defaults to 1)
-// Per-photo caption/date/order corrections live in data/gallery-overrides.json
-// (edit via the pencil icon shown on each photo when running `npm run dev`,
-// or by hand) — they're applied on top of the auto-detected data below and
-// survive future syncs.
+// Person/Event tags shown on the Collections page are read per photo from
+// Photo Mechanic's IPTC "Persons Shown" and "Event" fields — untagged photos
+// just don't contribute a tag, they still get a caption (from IPTC
+// Accessibility Alt Text, or the creation date + filename if that's not set
+// either). Per-photo caption/date/order corrections live in
+// data/gallery-overrides.json (edit via the pencil icon shown on each photo
+// when running `npm run dev`, or by hand) — they're applied on top of the
+// auto-detected data below and survive future syncs.
 const collections = [
-  { folder: "Christian", slug: "christian", title: "Christian", component: "ChristianPage", person: ["Christian"], event: [], subtitle: null },
+  { folder: "Christian", slug: "christian", title: "Christian", component: "ChristianPage", subtitle: null },
   {
     folder: "Gulf Shores 2025",
     slug: "gulf-shores-2025",
     title: "Gulf Shores 2025",
     component: "GulfShoresPage",
-    person: [],
-    event: ["Gulf Shores 2025"],
     subtitle: "September 2025",
     coverPhoto: 14,
   },
-  { folder: "Norway", slug: "norway", title: "Norway", component: "NorwayPage", person: [], event: ["Norway"], subtitle: null, coverPhoto: 13 },
-  { folder: "Trip to Nova Scotia", slug: "trip-to-nova-scotia", title: "Trip to Nova Scotia", component: "TripToNovaScotiaPage", person: ["Clay Carson"], event: ["Trip with friends"], subtitle: null },
+  { folder: "Norway", slug: "norway", title: "Norway", component: "NorwayPage", subtitle: null, coverPhoto: 13 },
+  { folder: "Trip to Nova Scotia", slug: "trip-to-nova-scotia", title: "Trip to Nova Scotia", component: "TripToNovaScotiaPage", subtitle: null },
+  { folder: "Janet Buys a car", slug: "janet-buys-a-car", title: "Janet Buys a car", component: "JanetBuysACarPage", subtitle: null },
 ];
+
+// Auto-discover any "Gallery Originals" folder not already listed above.
+// Folders with no photos yet are skipped entirely (not registered, no page)
+// until they actually have something in them.
+{
+  const knownFolders = new Set(collections.map((c) => c.folder));
+  const originalsEntries = await readdir(sourceRoot, { withFileTypes: true });
+  const candidateFolders = originalsEntries
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
+    .map((entry) => entry.name)
+    .filter((folder) => !knownFolders.has(folder));
+
+  let discoveredAny = false;
+  for (const folder of candidateFolders) {
+    const files = (await readdir(path.join(sourceRoot, folder))).filter((f) => !f.startsWith("."));
+    if (files.length === 0) continue; // ignore empty folders until they have photos
+
+    const title = folder;
+    const slug = toSlug(title);
+    const component = toComponentName(title, (candidate) => collections.some((c) => c.component === candidate));
+    collections.push({ folder, slug, title, component, subtitle: null });
+    discoveredAny = true;
+    console.log(`Discovered new collection: "${folder}" → /collections/${slug}`);
+  }
+
+  if (discoveredAny) {
+    const thisScriptPath = fileURLToPath(import.meta.url);
+    const scriptText = await readFile(thisScriptPath, "utf8");
+    const marker = "const collections = [";
+    const markerIndex = scriptText.indexOf(marker);
+    const bracketIndex = markerIndex === -1 ? -1 : scriptText.indexOf("\n];", markerIndex);
+    if (markerIndex !== -1 && bracketIndex !== -1) {
+      const insertPoint = bracketIndex + 1;
+      const newEntries = candidateFolders
+        .filter((folder) => collections.some((c) => c.folder === folder))
+        .map((folder) => {
+          const entry = collections.find((c) => c.folder === folder);
+          return `  { folder: ${JSON.stringify(entry.folder)}, slug: ${JSON.stringify(entry.slug)}, title: ${JSON.stringify(entry.title)}, component: ${JSON.stringify(entry.component)}, subtitle: null },\n`;
+        })
+        .join("");
+      const updatedScript = scriptText.slice(0, insertPoint) + newEntries + scriptText.slice(insertPoint);
+      await writeFile(thisScriptPath, updatedScript);
+    }
+  }
+}
 
 // Lets the local-only "Move to…" editor action (app/api/gallery-move)
 // resolve a collection slug back to its "Gallery Originals" folder name
@@ -122,6 +170,18 @@ function formatDate(isoDate) {
   });
 }
 
+// Pulls every <rdf:li> text out of a given Iptc4xmpExt tag block — works for
+// both "PersonInImage" (an rdf:Bag, possibly several people) and "Event" (an
+// rdf:Alt, one value in practice) since only the <rdf:li> contents matter,
+// not which kind of list wraps them. Untagged photos just return [].
+function parseIptcExtList(xml, tag) {
+  const block = xml.match(new RegExp(`<Iptc4xmpExt:${tag}>[\\s\\S]*?</Iptc4xmpExt:${tag}>`))?.[0];
+  if (!block) return [];
+  return [...block.matchAll(/<rdf:li[^>]*>([\s\S]*?)<\/rdf:li>/g)]
+    .map((m) => decodeXml(m[1].trim()))
+    .filter(Boolean);
+}
+
 async function readMetadata(source, fallback) {
   const { stdout } = await run("sips", ["-g", "creation", "-g", "description", source]);
   const creation = stdout.match(/^\s*creation:\s*(.+)$/m)?.[1]?.trim();
@@ -132,7 +192,9 @@ async function readMetadata(source, fallback) {
   const description = altText ? decodeXml(altText) : humanizeFilename(fallback);
   const match = creation?.match(/^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
   const date = match ? `${match[1]}-${match[2]}-${match[3]}` : null;
-  return { date, description };
+  const person = parseIptcExtList(contents, "PersonInImage");
+  const event = parseIptcExtList(contents, "Event");
+  return { date, description, person, event };
 }
 
 const indexCards = [];
@@ -142,6 +204,16 @@ for (const collection of collections) {
   const filenames = (await readdir(sourceDirectory))
     .filter((filename) => !filename.startsWith("."))
     .sort();
+
+  if (filenames.length === 0) {
+    // Ignore empty folders until they actually have photos — clean up any
+    // page and images generated from a previous run when it still had some.
+    await rm(path.join(root, "app", "collections", collection.slug), { recursive: true, force: true });
+    await rm(path.join(root, "public", "galleries", collection.slug), { recursive: true, force: true });
+    await rm(path.join(root, "public", "gallery-thumbnails", collection.slug), { recursive: true, force: true });
+    console.log(`${collection.title}: 0 photographs — skipped (folder is empty)`);
+    continue;
+  }
 
   const fullDirectory = path.join(root, "public", "galleries", collection.slug);
   const thumbnailDirectory = path.join(root, "public", "gallery-thumbnails", collection.slug);
@@ -185,6 +257,8 @@ for (const collection of collections) {
         description: "",
         caption: "",
         altText: "",
+        person: [],
+        event: [],
         width: 0,
         height: 0,
       });
@@ -250,7 +324,13 @@ for (const collection of collections) {
       cachedMetadata && cachedMetadata.mtimeMs === metadataSourceMtimeMs
         ? cachedMetadata
         : await readMetadata(metadataSource, filename);
-    metadataCache[filename] = { mtimeMs: metadataSourceMtimeMs, date: auto.date, description: auto.description };
+    metadataCache[filename] = {
+      mtimeMs: metadataSourceMtimeMs,
+      date: auto.date,
+      description: auto.description,
+      person: auto.person ?? [],
+      event: auto.event ?? [],
+    };
 
     const override = collectionOverrides[filename] ?? {};
     const date = override.date ?? auto.date;
@@ -263,6 +343,8 @@ for (const collection of collections) {
       description,
       caption,
       altText: description,
+      person: auto.person ?? [],
+      event: auto.event ?? [],
       width: outputMetadata.width,
       height: outputMetadata.height,
     });
@@ -319,7 +401,7 @@ for (const collection of collections) {
   const otherCollections = collections
     .filter((other) => other.slug !== collection.slug)
     .map((other) => ({ slug: other.slug, title: other.title }));
-  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { Gallery } from "../Gallery";\n\ntype PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; width: number; height: number };\n\nconst photographData: PhotographDataEntry[] = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nconst otherCollections = ${JSON.stringify(otherCollections, null, 2)};\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Collections</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={otherCollections}\n        editable={process.env.NODE_ENV === "development"}\n      />\n    </main>\n  );\n}\n`;
+  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { Gallery } from "../Gallery";\n\ntype PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };\n\nconst photographData: PhotographDataEntry[] = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nconst otherCollections = ${JSON.stringify(otherCollections, null, 2)};\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Collections</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={otherCollections}\n        editable={process.env.NODE_ENV === "development"}\n      />\n    </main>\n  );\n}\n`;
   const collectionPageDirectory = path.join(root, "app", "collections", collection.slug);
   await mkdir(collectionPageDirectory, { recursive: true });
   await writeFile(path.join(collectionPageDirectory, "page.tsx"), page);
@@ -332,11 +414,19 @@ for (const collection of collections) {
     ? (displayOrder[0] ?? requestedCoverNumber)
     : requestedCoverNumber;
 
+  const collectionPeople = new Set();
+  const collectionEvents = new Set();
+  for (const naturalRank of displayOrder) {
+    const photo = photographData[naturalRank - 1];
+    for (const p of photo.person ?? []) collectionPeople.add(p);
+    for (const e of photo.event ?? []) collectionEvents.add(e);
+  }
+
   indexCards.push({
     slug: collection.slug,
     title: collection.title,
-    person: collection.person ?? [],
-    event: collection.event ?? [],
+    person: [...collectionPeople].sort(),
+    event: [...collectionEvents].sort(),
     count: visibleCount,
     coverBasename: `${collection.slug}-${String(coverNumber).padStart(2, "0")}.jpg`,
   });
