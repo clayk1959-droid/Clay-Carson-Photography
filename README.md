@@ -6,6 +6,11 @@ captions pulled from IPTC metadata. No accounts or logins — Clay handles all
 uploads. This is a plain, standard Next.js app — no proprietary hosting
 platform required.
 
+The site blocks search engines and well-behaved crawlers (`robots.txt`,
+`noindex` meta tags, and an `X-Robots-Tag` header on every response) so it
+won't show up in search results or get indexed. It's still reachable by
+anyone with the direct link — this isn't password-protected.
+
 ## Command reference
 
 | Command | What it does |
