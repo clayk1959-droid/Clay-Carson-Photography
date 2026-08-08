@@ -19,8 +19,9 @@ anyone with the direct link — this isn't password-protected.
 | `npm run gallery:sync` | Reads `Gallery Originals`, resizes new/changed photos, regenerates every gallery page and the Collections index |
 | `npm run collection:add` | Optional shortcut: creates an empty, named `Gallery Originals` folder ready for photos (see below — usually you don't need this) |
 | `npm run hero:set -- "/path/to/photo.tif"` | Replaces the homepage hero photo |
+| `npm run trim-filenames -- "Gallery Originals/Some Folder" "word"` | Strips a given word (and everything after it) from every filename in a folder, keeping the extension — walks through each rename one at a time so you can accept, edit, or skip it |
 | `npm run save` | Records what changed in `Change Log.md`, commits, and offers to push live |
-| `npm run build` / `npm run lint` | Production build check / code-quality check — mainly for troubleshooting |
+| `npm run build` / `npm run lint` / `npm start` | Production build check / code-quality check / runs a production build locally — mainly for troubleshooting |
 
 ## Local development
 

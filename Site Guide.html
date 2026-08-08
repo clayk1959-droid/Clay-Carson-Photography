@@ -163,6 +163,10 @@
   <header class="page-head">
     <h1>Carson &amp; Muller Family Photos</h1>
     <p>Site guide — how to run it, maintain it, and what's changed over time.</p>
+    <p>The site blocks search engines and well-behaved crawlers (<code>robots.txt</code>,
+      <code>noindex</code> meta tags, and an <code>X-Robots-Tag</code> header on every response)
+      so it won't show up in search results or get indexed. It's still reachable by anyone with
+      the direct link — this isn't password-protected.</p>
     <nav class="toc">
       <a href="#commands">Command reference</a>
       <a href="#dev">Local development</a>
@@ -184,8 +188,9 @@
       <tr><td><code>npm run gallery:sync</code></td><td>Reads <code>Gallery Originals</code>, resizes new/changed photos, regenerates every gallery page and the Collections index.</td></tr>
       <tr><td><code>npm run collection:add</code></td><td>Optional shortcut: creates an empty, named <code>Gallery Originals</code> folder ready for photos (usually not needed — see below).</td></tr>
       <tr><td><code>npm run hero:set -- "/path/to/photo.tif"</code></td><td>Replaces the homepage hero photo.</td></tr>
+      <tr><td><code>npm run trim-filenames -- "Gallery Originals/Some Folder" "word"</code></td><td>Strips a given word (and everything after it) from every filename in a folder, keeping the extension. Walks through each rename one at a time so you can accept, edit, or skip it.</td></tr>
       <tr><td><code>npm run save</code></td><td>Records what changed in the changelog, commits, and offers to push live.</td></tr>
-      <tr><td><code>npm run build</code> / <code>npm run lint</code></td><td>Production build check / code-quality check — mainly for troubleshooting.</td></tr>
+      <tr><td><code>npm run build</code> / <code>npm run lint</code> / <code>npm start</code></td><td>Production build check / code-quality check / runs a production build locally — mainly for troubleshooting.</td></tr>
     </table>
   </section>
 
