@@ -15,6 +15,12 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 57 — Saturday, August 8, 2026
+
+- Hero photo now displays uncropped instead of cropped-and-scaled, and the fade-in animation no longer has a scale effect that made it look like a white border was fading in
+- Collections page People/Events filters are now dropdowns instead of expandable chip rows
+- Fixed the "jump"/resize look when a photo first loads in the full-size lightbox view
+
 ### Version 56 — Saturday, August 8, 2026
 
 - Added robots.txt, noindex/nofollow meta tags, and an X-Robots-Tag header so search engines and crawlers stay out — this is a private family site, not meant to be indexed or discovered
