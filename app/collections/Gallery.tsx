@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 
 type GalleryPhoto = {
   src: string;
@@ -89,7 +89,7 @@ export function Gallery({
     }
   }, [activePhoto]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (activePhoto === null || !activeImage.current) return;
 
     const image = activeImage.current;
@@ -249,9 +249,8 @@ export function Gallery({
               ref={activeImage}
               src={photographs[activePhoto].src}
               alt={photographs[activePhoto].altText}
-              onLoad={(event) =>
-                setActivePhotoWidth(event.currentTarget.getBoundingClientRect().width)
-              }
+              width={photographs[activePhoto].width}
+              height={photographs[activePhoto].height}
             />
             <figcaption
               style={activePhotoWidth ? { width: activePhotoWidth } : undefined}

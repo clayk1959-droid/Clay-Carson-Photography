@@ -14,7 +14,7 @@ a { color: inherit; text-decoration: none; }
 .inquire { justify-self: end; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; border-bottom: 1px solid #6e726c; padding-bottom: 5px; }
 .inquire span { margin-left: 8px; }
 .hero { position: relative; height: calc(100vh - 96px); min-height: 620px; overflow: hidden; color: white; background: #0c0d0c; }
-.hero-image { position: absolute; inset: 3vw; background: url('/lead-photo.jpg') center 48% / cover; animation: settle 1.4s ease-out both; }
+.hero-image { position: absolute; inset: 3vw; background: url('/lead-photo.jpg') center 48% / contain no-repeat; animation: settle 1.4s ease-out both; }
 .hero-wash { position: absolute; inset: 3vw; background: linear-gradient(90deg, rgba(12,14,12,.7) 0%, rgba(12,14,12,.2) 49%, rgba(12,14,12,.04) 78%), linear-gradient(0deg, rgba(10,12,10,.28), transparent 48%); }
 .hero-copy { position: absolute; left: 7.5vw; top: 26%; transform: translateY(-47%); max-width: 850px; }
 .eyebrow, .section-label { margin: 0 0 28px; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
@@ -48,15 +48,13 @@ h1 em, h2 em { font-weight: 400; }
 .sentence-gap { display: inline-block; width: .65em; font-size: inherit; overflow: hidden; }
 .collections-layout { max-width: 1440px; margin: 0 auto; padding: 0 5vw 120px; }
 .collections-layout .page-title { padding: 46px 0 18px; border-bottom: 1px solid #454843; font-size: clamp(14px, 1.6vw, 22px); font-family: Helvetica, Arial, sans-serif; }
-.collections-filters { display: flex; flex-wrap: wrap; gap: 24px 40px; margin: 30px 0 6px; }
-.collections-filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-.collections-filter-toggle { cursor: pointer; font: inherit; border: 1px solid #3a3d39; background: transparent; color: #f5f2eb; padding: 7px 13px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
-.collections-filter-toggle:hover { border-color: #6e726c; }
-.collections-filter-toggle.is-open { border-color: #f5f2eb; background: #f5f2eb; color: #171a17; }
-.filter-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.filter-chip { cursor: pointer; font: inherit; border: 1px solid #3a3d39; background: transparent; color: #f5f2eb; padding: 7px 13px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
-.filter-chip:hover { border-color: #6e726c; }
-.filter-chip.is-active { border-color: #f5f2eb; background: #f5f2eb; color: #171a17; }
+.collections-filters { display: flex; flex-wrap: wrap; gap: 20px 40px; margin: 30px 0 6px; }
+.collections-filter-group { display: flex; flex-direction: column; gap: 6px; }
+.collections-filter-label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #969a93; }
+.collections-filter-select { cursor: pointer; font: inherit; border: 1px solid #3a3d39; background: transparent; color: #f5f2eb; padding: 8px 32px 8px 13px; font-size: 12px; min-width: 180px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23f5f2eb' stroke-width='1.4' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
+.collections-filter-select:hover { border-color: #6e726c; }
+.collections-filter-select:focus-visible { outline: 2px solid #f5f2eb; outline-offset: 2px; }
+.collections-filter-select option { background: #171a17; color: #f5f2eb; }
 .collections-empty { margin: 40px 0; color: #8f938c; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 15px; }
 .collection-index { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 30px); margin-top: 26px; }
 .collection-card { min-width: 0; display: block; }
@@ -160,7 +158,7 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
 .contact-link { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 3vw, 46px); border-bottom: 1px solid #5b5d58; padding: 25px 0 10px; display: flex; justify-content: space-between; }
 .footer-links { margin-top: auto; display: flex; gap: 30px; font-size: 10px; text-transform: uppercase; letter-spacing: .15em; }
 .copyright { grid-column: 1 / -1; margin: 80px 0 0; padding-top: 22px; border-top: 1px solid #3f423e; font-size: 9px; text-transform: uppercase; letter-spacing: .15em; color: #8a8d87; }
-@keyframes settle { from { transform: scale(1.035); opacity: .78; } to { transform: scale(1); opacity: 1; } }
+@keyframes settle { from { opacity: .78; } to { opacity: 1; } }
 @media (max-width: 800px) {
   .site-header { height: 128px; padding: 18px 5vw; grid-template-columns: 1fr; align-content: center; gap: 14px; }
   .brand { font-size: 29px; }

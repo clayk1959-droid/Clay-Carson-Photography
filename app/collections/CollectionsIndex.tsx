@@ -16,7 +16,6 @@ const ALL = "All";
 export function CollectionsIndex({ cards }: { cards: CollectionCard[] }) {
   const [selectedPerson, setSelectedPerson] = useState(ALL);
   const [selectedEvent, setSelectedEvent] = useState(ALL);
-  const [openGroup, setOpenGroup] = useState<"person" | "event" | null>(null);
 
   const people = useMemo(
     () => Array.from(new Set(cards.flatMap((card) => card.person))).sort(),
@@ -38,72 +37,20 @@ export function CollectionsIndex({ cards }: { cards: CollectionCard[] }) {
       {(people.length > 0 || events.length > 0) && (
         <div className="collections-filters">
           {people.length > 0 && (
-            <div className="collections-filter-group">
-              <button
-                type="button"
-                className={openGroup === "person" ? "collections-filter-toggle is-open" : "collections-filter-toggle"}
-                onClick={() => setOpenGroup(openGroup === "person" ? null : "person")}
-              >
-                People{selectedPerson !== ALL ? `: ${selectedPerson}` : ""}
-              </button>
-              {openGroup === "person" && (
-                <div className="filter-chip-row">
-                  <FilterChip
-                    label={ALL}
-                    active={selectedPerson === ALL}
-                    onClick={() => {
-                      setSelectedPerson(ALL);
-                      setOpenGroup(null);
-                    }}
-                  />
-                  {people.map((person) => (
-                    <FilterChip
-                      key={person}
-                      label={person}
-                      active={selectedPerson === person}
-                      onClick={() => {
-                        setSelectedPerson(person);
-                        setOpenGroup(null);
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
+            <FilterSelect
+              label="People"
+              value={selectedPerson}
+              options={people}
+              onChange={setSelectedPerson}
+            />
           )}
           {events.length > 0 && (
-            <div className="collections-filter-group">
-              <button
-                type="button"
-                className={openGroup === "event" ? "collections-filter-toggle is-open" : "collections-filter-toggle"}
-                onClick={() => setOpenGroup(openGroup === "event" ? null : "event")}
-              >
-                Events{selectedEvent !== ALL ? `: ${selectedEvent}` : ""}
-              </button>
-              {openGroup === "event" && (
-                <div className="filter-chip-row">
-                  <FilterChip
-                    label={ALL}
-                    active={selectedEvent === ALL}
-                    onClick={() => {
-                      setSelectedEvent(ALL);
-                      setOpenGroup(null);
-                    }}
-                  />
-                  {events.map((event) => (
-                    <FilterChip
-                      key={event}
-                      label={event}
-                      active={selectedEvent === event}
-                      onClick={() => {
-                        setSelectedEvent(event);
-                        setOpenGroup(null);
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
+            <FilterSelect
+              label="Events"
+              value={selectedEvent}
+              options={events}
+              onChange={setSelectedEvent}
+            />
           )}
         </div>
       )}
@@ -135,22 +82,32 @@ export function CollectionsIndex({ cards }: { cards: CollectionCard[] }) {
   );
 }
 
-function FilterChip({
+function FilterSelect({
   label,
-  active,
-  onClick,
+  value,
+  options,
+  onChange,
 }: {
   label: string;
-  active: boolean;
-  onClick: () => void;
+  value: string;
+  options: string[];
+  onChange: (value: string) => void;
 }) {
   return (
-    <button
-      type="button"
-      className={active ? "filter-chip is-active" : "filter-chip"}
-      onClick={onClick}
-    >
-      {label}
-    </button>
+    <label className="collections-filter-group">
+      <span className="collections-filter-label">{label}</span>
+      <select
+        className="collections-filter-select"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      >
+        <option value={ALL}>{ALL}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }
