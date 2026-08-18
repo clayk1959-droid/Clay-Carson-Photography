@@ -15,6 +15,16 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 69 — Tuesday, August 18, 2026
+
+- Hero eyebrow line ("Family photos and Events") moved off the photo into its own bar under the header — it can never overlap the photo now, and sits tight against the header
+- Lightbox caption text reduced 25%
+- Untagged photos (no Alt Text) now caption with the gallery's own name instead of a raw camera filename
+- Nova Scotia's folder rename, new event tag ("Nova Scotia Trip"), and the "Phyllis" spelling fix are synced in
+- Tightened more header spacing on the Galleries index and individual gallery pages, and the gap before the thumbnail grid
+- Tightened the line spacing when "Carson & Muller FAMILY" wraps to two lines on narrow screens
+- Lightbox arrows are back on touch devices — floating over the photo instead of taking their own column, so they don't shrink it
+
 ### Version 68 — Tuesday, August 18, 2026
 
 Functionality:
