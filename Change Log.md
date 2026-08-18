@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 67 — Tuesday, August 18, 2026
+
+- Fixed the full-size photo appearing smaller instead of bigger when rotating the phone to landscape — the fixed padding/buttons around it were eating a big share of the little height landscape has to work with; they now shrink out of the way when height is scarce, so the photo fills the screen properly
+
 ### Version 66 — Monday, August 17, 2026
 
 - Fixed the full-size photo border not fitting the photo on narrow/mobile screens (and not adjusting correctly on rotation) — it now always hugs the true photo edges regardless of screen shape
