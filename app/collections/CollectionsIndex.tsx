@@ -229,16 +229,22 @@ function MultiFilterSelect({
           onMouseDown={(event) => event.stopPropagation()}
         >
           <label className="collections-filter-option">
-            <input type="checkbox" checked={value.length === 0} onChange={() => onChange([])} />
+            <span className="checkbox-wrap">
+              <input type="checkbox" checked={value.length === 0} onChange={() => onChange([])} />
+              <span className="checkbox-box" aria-hidden="true" />
+            </span>
             All
           </label>
           {options.map((option) => (
             <label key={option} className="collections-filter-option">
-              <input
-                type="checkbox"
-                checked={value.includes(option)}
-                onChange={() => toggle(option)}
-              />
+              <span className="checkbox-wrap">
+                <input
+                  type="checkbox"
+                  checked={value.includes(option)}
+                  onChange={() => toggle(option)}
+                />
+                <span className="checkbox-box" aria-hidden="true" />
+              </span>
               {option}
             </label>
           ))}

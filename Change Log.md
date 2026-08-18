@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 74 — Tuesday, August 18, 2026
+
+- Fixed People/Events checkboxes being invisible on iPhone — the checkmark was drawn in a way Safari doesn't support, so the box showed but never the check; it's built differently now so it shows on every browser
+
 ### Version 73 — Tuesday, August 18, 2026
 
 - Homepage tagline ("Family photos and Events") now sits tucked directly under the brand wordmark in the header, instead of on its own bar
