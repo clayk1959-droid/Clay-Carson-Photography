@@ -48,12 +48,16 @@ h1 em, h2 em { font-weight: 400; }
 .collections-layout { max-width: 1440px; margin: 0 auto; padding: 0 5vw 120px; }
 .collections-layout .page-title { padding: 6px 0 9px; border-bottom: 1px solid #454843; font-size: clamp(14px, 1.6vw, 22px); font-family: Helvetica, Arial, sans-serif; }
 .collections-filters { display: flex; flex-wrap: wrap; gap: 20px 40px; margin: 15px 0 3px; }
-.collections-filter-group { display: flex; flex-direction: column; gap: 6px; }
+.collections-filter-group { position: relative; display: flex; flex-direction: column; gap: 6px; }
 .collections-filter-label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #f5f2eb; }
-.collections-filter-select { cursor: pointer; font: inherit; border: 1px solid #3a3d39; background: transparent; color: #f5f2eb; padding: 8px 32px 8px 13px; font-size: 12px; min-width: 180px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23f5f2eb' stroke-width='1.4' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
-.collections-filter-select:hover { border-color: #6e726c; }
+.collections-filter-select { cursor: pointer; font: inherit; text-align: left; border: 1px solid #3a3d39; background: transparent; color: #f5f2eb; padding: 8px 32px 8px 13px; font-size: 12px; min-width: 180px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23f5f2eb' stroke-width='1.4' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
+.collections-filter-select:hover, .collections-filter-select.is-open { border-color: #6e726c; }
 .collections-filter-select:focus-visible { outline: 2px solid #f5f2eb; outline-offset: 2px; }
 .collections-filter-select option { background: #171a17; color: #f5f2eb; }
+.collections-filter-menu { position: absolute; top: 100%; left: 0; z-index: 20; margin-top: 4px; min-width: 220px; max-height: 260px; overflow-y: auto; padding: 6px; border: 1px solid #3a3d39; background: #171a17; box-shadow: 0 10px 28px rgba(0, 0, 0, .35); display: grid; gap: 1px; }
+.collections-filter-option { display: flex; align-items: center; gap: 9px; padding: 7px 8px; font-size: 12px; color: #f5f2eb; cursor: pointer; }
+.collections-filter-option:hover { background: #21241f; }
+.collections-filter-option input { accent-color: #f5f2eb; cursor: pointer; }
 .collections-empty { margin: 40px 0; color: #8f938c; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 15px; }
 .search-clear { align-self: flex-end; cursor: pointer; font: inherit; border: 1px solid #3a3d39; background: transparent; color: #f5f2eb; padding: 8px 13px; font-size: 12px; }
 .search-clear:hover { border-color: #6e726c; }

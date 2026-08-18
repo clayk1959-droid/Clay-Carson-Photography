@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type CollectionCard = {
   slug: string;
@@ -25,11 +25,10 @@ type IndexPhoto = {
   src: string;
 };
 
-const ALL = "All";
-
+// An empty selection means "All" — no separate All state to keep in sync.
 export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; photos: IndexPhoto[] }) {
-  const [selectedPerson, setSelectedPerson] = useState(ALL);
-  const [selectedEvent, setSelectedEvent] = useState(ALL);
+  const [selectedPeople, setSelectedPeople] = useState<string[]>([]);
+  const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
 
   const people = useMemo(
@@ -41,21 +40,21 @@ export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; p
     [cards],
   );
 
-  const isSearching = selectedPerson !== ALL || selectedEvent !== ALL;
+  const isSearching = selectedPeople.length > 0 || selectedEvents.length > 0;
 
   const matchingPhotos = useMemo(
     () =>
       photos.filter(
         (photo) =>
-          (selectedPerson === ALL || photo.person.includes(selectedPerson)) &&
-          (selectedEvent === ALL || photo.event.includes(selectedEvent)),
+          (selectedPeople.length === 0 || photo.person.some((p) => selectedPeople.includes(p))) &&
+          (selectedEvents.length === 0 || photo.event.some((e) => selectedEvents.includes(e))),
       ),
-    [photos, selectedPerson, selectedEvent],
+    [photos, selectedPeople, selectedEvents],
   );
 
   function clearSearch() {
-    setSelectedPerson(ALL);
-    setSelectedEvent(ALL);
+    setSelectedPeople([]);
+    setSelectedEvents([]);
     setActivePhoto(null);
   }
 
@@ -74,23 +73,23 @@ export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; p
       {(people.length > 0 || events.length > 0) && (
         <div className="collections-filters">
           {people.length > 0 && (
-            <FilterSelect
+            <MultiFilterSelect
               label="People"
-              value={selectedPerson}
+              value={selectedPeople}
               options={people}
               onChange={(value) => {
-                setSelectedPerson(value);
+                setSelectedPeople(value);
                 setActivePhoto(null);
               }}
             />
           )}
           {events.length > 0 && (
-            <FilterSelect
+            <MultiFilterSelect
               label="Events"
-              value={selectedEvent}
+              value={selectedEvents}
               options={events}
               onChange={(value) => {
-                setSelectedEvent(value);
+                setSelectedEvents(value);
                 setActivePhoto(null);
               }}
             />
@@ -169,33 +168,78 @@ export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; p
   );
 }
 
-function FilterSelect({
+function MultiFilterSelect({
   label,
   value,
   options,
   onChange,
 }: {
   label: string;
-  value: string;
+  value: string[];
   options: string[];
-  onChange: (value: string) => void;
+  onChange: (value: string[]) => void;
 }) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function handlePointerDown(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
+  const summary =
+    value.length === 0 ? "All" : value.length === 1 ? value[0] : `${value.length} selected`;
+
+  function toggle(option: string) {
+    onChange(value.includes(option) ? value.filter((v) => v !== option) : [...value, option]);
+  }
+
   return (
-    <label className="collections-filter-group">
+    <div className="collections-filter-group" ref={containerRef}>
       <span className="collections-filter-label">{label}</span>
-      <select
-        className="collections-filter-select"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
+      <button
+        type="button"
+        className={open ? "collections-filter-select is-open" : "collections-filter-select"}
+        onClick={() => setOpen((current) => !current)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
       >
-        <option value={ALL}>{ALL}</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    </label>
+        {summary}
+      </button>
+      {open && (
+        <div className="collections-filter-menu" role="listbox" aria-label={label}>
+          <label className="collections-filter-option">
+            <input type="checkbox" checked={value.length === 0} onChange={() => onChange([])} />
+            All
+          </label>
+          {options.map((option) => (
+            <label key={option} className="collections-filter-option">
+              <input
+                type="checkbox"
+                checked={value.includes(option)}
+                onChange={() => toggle(option)}
+              />
+              {option}
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
