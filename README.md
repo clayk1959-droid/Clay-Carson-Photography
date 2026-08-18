@@ -67,6 +67,12 @@ or extra commands required:
    all automatically.
 4. Check it locally, then commit and redeploy.
 
+**Removing a collection** — delete its folder from `Gallery Originals`
+entirely (not just its photos), then run `npm run gallery:sync`. It notices
+the folder is gone, takes down that collection's page and images, and drops
+it from the Collections index — all automatically, the same way adding a
+folder registers one.
+
 If a folder's photos are tagged in Photo Mechanic (Person, Event, Alt Text),
 that data powers the caption and the Person/Event filters on the Collections
 page. Untagged photos still work fine — they just fall back to the photo's

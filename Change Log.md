@@ -15,6 +15,11 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 58 — Monday, August 17, 2026
+
+- Deleting a collection's folder from Gallery Originals no longer crashes the sync — it now tears down that collection's page/images and removes it from the site automatically, the same way a new folder gets added automatically
+- Added the Nova Scotia collection (73 photos)
+
 ### Version 57 — Saturday, August 8, 2026
 
 - Hero photo now displays uncropped instead of cropped-and-scaled, and the fade-in animation no longer has a scale effect that made it look like a white border was fading in
