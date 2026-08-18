@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 76 — Tuesday, August 18, 2026
+
+- Homepage header and photo edges now stay aligned on very wide desktop monitors instead of drifting apart — the whole header/photo band stops growing past ~1700px and centers itself, so extra room on huge screens becomes an even margin instead of a mismatch
+
 ### Version 75 — Tuesday, August 18, 2026
 
 - Galleries page cards: tucked the title/photo-count text up close to the photo, cutting that gap roughly in half
