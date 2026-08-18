@@ -15,6 +15,11 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 62 — Monday, August 17, 2026
+
+- Added a "Cover photo" picker to the pencil-icon editor — click a direction (e.g. left, center, top) on any photo to make it the collection's cover, cropped from that side. `npm run collection:cover` (Terminal) got the same upgrade — picks by filename now instead of a photo number, and lets you choose the crop direction too.
+- Fixed the Janet Buys a Car collection's cover photo, which was cropping Janet almost entirely out of frame — now framed from the left
+
 ### Version 61 — Monday, August 17, 2026
 
 - Extended the white photo border to the full-size lightbox view and the cover image on each Collections-page card, matching the contact sheet thumbnails

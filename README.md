@@ -24,8 +24,8 @@ browser — none of it needs Claude. The loop is always the same:
    currently in `Gallery Originals`.
 3. **Run `npm run dev`** and check it at http://localhost:3000 — this also
    turns on the pencil-icon editor (fix a caption/date/order, hide a photo,
-   move it to another collection) and a "Choose cover photo" step if you
-   want one (`npm run collection:cover`).
+   move it to another collection, or set it as the collection's cover
+   photo).
 4. **Run `npm run save`** — it asks what changed, records it, commits, and
    offers to push live.
 
@@ -39,7 +39,7 @@ design/layout changes, or new features.
 | `npm run dev` | Starts the site locally at http://localhost:3000, with the caption/date/order/delete/move editor and Sync Gallery button enabled |
 | `npm run gallery:sync` | Reads `Gallery Originals`, resizes new/changed photos, regenerates every gallery page and the Collections index |
 | `npm run collection:add` | Optional shortcut: creates an empty, named `Gallery Originals` folder ready for photos (see below — usually you don't need this) |
-| `npm run collection:cover` | Asks which collection and which photo number, then sets that as the cover photo shown on its Collections-page card |
+| `npm run collection:cover` | Terminal alternative to the pencil icon's cover-photo picker — asks which collection and which photo filename, then how to crop it |
 | `npm run hero:set -- "/path/to/photo.tif"` | Replaces the homepage hero photo |
 | `npm run trim-filenames -- "Gallery Originals/Some Folder" "word"` | Strips a given word (and everything after it) from every filename in a folder, keeping the extension — walks through each rename one at a time so you can accept, edit, or skip it |
 | `npm run save` | Records what changed in `Change Log.md`, commits, and offers to push live |
@@ -106,12 +106,17 @@ rather create the empty folder (with a name you type at a prompt) before
 you've copied any photos in — it does step 1 for you. It's never required.
 
 **Choosing a collection's cover photo** — the photo shown on its card on the
-Collections page defaults to photo #1 unless you set one. Run
-`npm run collection:cover`, pick the collection, then type the photo number
-you want (it opens that collection's photos in Finder so you can look
-through them first — the number in each filename, e.g.
-`nova-scotia-07.jpg`, is the one to type). Then run `npm run gallery:sync`
-to apply it.
+Collections page defaults to the first visible photo, centered, unless you
+set one. Two ways to do it:
+- **In the browser** (easiest): while running `npm run dev`, open the pencil
+  icon on any photo and use the "Use this photo as the collection's cover"
+  grid — click a direction to also choose how it's cropped to fit the
+  card's box (e.g. "left" if the subject sits on the left of the photo).
+- **In Terminal**: run `npm run collection:cover`, pick the collection,
+  type the photo's filename (it opens that collection's photos in Finder so
+  you can find it), then pick a crop direction.
+
+Either way, run `npm run gallery:sync` afterward to apply it.
 
 Note: the script currently checks a hardcoded path
 (`/Volumes/Samsung_T5/Website`) for higher-priority metadata before falling

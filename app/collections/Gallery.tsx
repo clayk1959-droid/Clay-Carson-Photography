@@ -458,6 +458,26 @@ function EditPhotoForm({
     }
   }
 
+  async function handleSetCover(cropPosition: string) {
+    setStatus("saving");
+    setErrorMessage("");
+    try {
+      const response = await fetch("/api/gallery-cover", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, filename: photograph.filename, position: cropPosition }),
+      });
+      if (!response.ok) throw new Error(await response.text());
+      setSavedMessage(
+        <>Set as the collection cover — click <strong>Sync Gallery</strong> (bottom right) to apply.</>,
+      );
+      setStatus("saved");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
+    }
+  }
+
   return (
     <div className="edit-photo-overlay" onClick={onClose}>
       <form
@@ -523,6 +543,33 @@ function EditPhotoForm({
             </button>
           </div>
         )}
+
+        <div className="edit-photo-cover">
+          <p>Use this photo as the collection&rsquo;s cover, cropped from:</p>
+          <div className="edit-photo-cover-grid">
+            {[
+              ["left top", "↖"],
+              ["center top", "↑"],
+              ["right top", "↗"],
+              ["left center", "←"],
+              ["center center", "•"],
+              ["right center", "→"],
+              ["left bottom", "↙"],
+              ["center bottom", "↓"],
+              ["right bottom", "↘"],
+            ].map(([value, symbol]) => (
+              <button
+                key={value}
+                type="button"
+                disabled={status === "saving"}
+                aria-label={`Set as cover photo, cropped from ${value}`}
+                onClick={() => handleSetCover(value)}
+              >
+                {symbol}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {status === "error" && <p className="edit-photo-status is-error">{errorMessage}</p>}
         {status === "saved" && <p className="edit-photo-status">{savedMessage}</p>}

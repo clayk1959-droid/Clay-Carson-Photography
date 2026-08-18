@@ -9,6 +9,7 @@ type CollectionCard = {
   event: string[];
   count: number;
   coverBasename: string;
+  coverPosition: string;
 };
 
 const ALL = "All";
@@ -65,6 +66,7 @@ export function CollectionsIndex({ cards }: { cards: CollectionCard[] }) {
                 <img
                   src={`/gallery-thumbnails/${card.slug}/${card.coverBasename}`}
                   alt={`${card.title} collection`}
+                  style={{ objectPosition: card.coverPosition }}
                 />
               </div>
               <div className="collection-details">

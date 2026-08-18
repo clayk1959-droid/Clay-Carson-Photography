@@ -110,6 +110,11 @@ h1 em, h2 em { font-weight: 400; }
 .edit-photo-move button { flex-shrink: 0; padding: 9px 14px; border: 1px solid #3f423e; background: transparent; color: #f5f2eb; font: inherit; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
 .edit-photo-move button:hover { background: #171917; }
 .edit-photo-move button:disabled { opacity: .5; cursor: default; }
+.edit-photo-cover p { margin: 0 0 8px; font-size: 9px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #969a93; }
+.edit-photo-cover-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; max-width: 132px; }
+.edit-photo-cover-grid button { aspect-ratio: 1; padding: 0; border: 1px solid #3f423e; background: transparent; color: #f5f2eb; font-size: 15px; line-height: 1; cursor: pointer; }
+.edit-photo-cover-grid button:hover { background: #171917; }
+.edit-photo-cover-grid button:disabled { opacity: .5; cursor: default; }
 .edit-photo-status { margin: 0; font-size: 11px; letter-spacing: .04em; color: #b7bab2; }
 .edit-photo-status.is-error { color: #e08a7d; }
 .edit-photo-status code { font-family: inherit; background: #171917; padding: 1px 5px; }

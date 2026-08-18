@@ -1,9 +1,11 @@
 // Interactive helper: sets which photo is used as a collection's cover art
-// on the Collections page — no code editing required.
+// on the Collections page, and how it's cropped — no code editing required.
+// (You can also do this from the pencil-icon editor on any photo, in
+// `npm run dev` — this is the terminal alternative.)
 //
 // Run with: npm run collection:cover
 
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import readline from "node:readline/promises";
 import { stdin, stdout } from "node:process";
@@ -12,8 +14,21 @@ import { promisify } from "node:util";
 
 const run = promisify(execFile);
 const root = process.cwd();
-const syncScriptPath = path.join(root, "scripts", "sync-gallery.mjs");
 const manifestPath = path.join(root, ".cache", "gallery-sync", "collections.json");
+const overridesPath = path.join(root, "data", "collection-overrides.json");
+const galleryOriginalsRoot = path.join(root, "Gallery Originals");
+
+const POSITIONS = [
+  ["1", "left top"],
+  ["2", "center top"],
+  ["3", "right top"],
+  ["4", "left center"],
+  ["5", "center center (default)"],
+  ["6", "right center"],
+  ["7", "left bottom"],
+  ["8", "center bottom"],
+  ["9", "right bottom"],
+];
 
 async function main() {
   let manifest;
@@ -41,54 +56,47 @@ async function main() {
     return;
   }
 
-  const thumbDir = path.join(root, "public", "gallery-thumbnails", collection.slug);
-  console.log(`\nOpening "${collection.title}"'s photos in Finder so you can find the one you want...`);
-  await run("open", [thumbDir]).catch(() => {});
-  console.log(
-    `Each photo is named "${collection.slug}-01.jpg", "${collection.slug}-02.jpg", and so on — the\nnumber in the name is the one to use. (These also match the numbered badges\nshown at localhost:3000/collections/${collection.slug}.)`,
-  );
+  const originalsDir = path.join(galleryOriginalsRoot, collection.folder);
+  const filenames = (await readdir(originalsDir)).filter((f) => !f.startsWith("."));
 
-  const numberAnswer = await rl.question("\nWhich photo number should be the cover? (e.g. 7)\n> ");
+  if (filenames.length === 0) {
+    console.log(`Couldn't find any photos in "${collection.folder}" — cancelled.`);
+    rl.close();
+    return;
+  }
+
+  console.log(`\nOpening "${collection.title}"'s photos in Finder so you can find the one you want...`);
+  await run("open", [originalsDir]).catch(() => {});
+
+  console.log("\nWhich photo? Type its filename exactly as shown in Finder (e.g. IMG_1234.jpg):");
+  const filenameAnswer = (await rl.question("> ")).trim();
+  const filename = filenames.find((f) => f.toLowerCase() === filenameAnswer.toLowerCase());
+  if (!filename) {
+    console.log(`Couldn't find "${filenameAnswer}" in that folder — cancelled.`);
+    rl.close();
+    return;
+  }
+
+  console.log("\nHow should it be cropped to fit the cover box? Type a number:\n");
+  POSITIONS.forEach(([key, label]) => console.log(`  ${key}. ${label}`));
+  const positionAnswer = await rl.question("\n> ");
   rl.close();
 
-  const number = Number(numberAnswer);
-  if (!Number.isInteger(number) || number < 1) {
-    console.log("That doesn't look like a valid photo number — cancelled.");
-    return;
+  const chosen = POSITIONS.find(([key]) => key === positionAnswer.trim());
+  const position = chosen ? chosen[1].replace(" (default)", "") : "center center";
+
+  let overrides = {};
+  try {
+    overrides = JSON.parse(await readFile(overridesPath, "utf8"));
+  } catch {
+    overrides = {};
   }
+  overrides[collection.slug] = { coverPhoto: filename, coverPosition: position };
 
-  const scriptText = await readFile(syncScriptPath, "utf8");
-  const needle = `folder: ${JSON.stringify(collection.folder)}`;
-  const needleIndex = scriptText.indexOf(needle);
+  await mkdir(path.dirname(overridesPath), { recursive: true });
+  await writeFile(overridesPath, `${JSON.stringify(overrides, null, 2)}\n`, "utf8");
 
-  // Find this collection's entry the same way sync-gallery.mjs finds
-  // entries to add/remove: search backward/forward for the surrounding
-  // "  {" / "},\n" rather than assuming single-line or multi-line
-  // formatting, so this works no matter how the entry was written.
-  const entryStartMarker = needleIndex === -1 ? -1 : scriptText.lastIndexOf("\n  {", needleIndex);
-  const closeIndex = needleIndex === -1 ? -1 : scriptText.indexOf("},\n", needleIndex);
-  if (needleIndex === -1 || entryStartMarker === -1 || closeIndex === -1) {
-    console.error(
-      `Couldn't find "${collection.title}" in scripts/sync-gallery.mjs — it may have been edited. Ask Claude to set this manually instead.`,
-    );
-    return;
-  }
-  const entryStart = entryStartMarker + 1;
-  const entryEnd = closeIndex + "},\n".length;
-  const entryText = scriptText.slice(entryStart, entryEnd);
-
-  const field = (name) => entryText.match(new RegExp(`${name}:\\s*("(?:[^"\\\\]|\\\\.)*"|null)`))?.[1];
-  const folder = field("folder");
-  const slug = field("slug");
-  const title = field("title");
-  const component = field("component");
-  const subtitle = field("subtitle") ?? "null";
-
-  const newEntry = `  { folder: ${folder}, slug: ${slug}, title: ${title}, component: ${component}, subtitle: ${subtitle}, coverPhoto: ${number} },\n`;
-  const updatedScript = scriptText.slice(0, entryStart) + newEntry + scriptText.slice(entryEnd);
-  await writeFile(syncScriptPath, updatedScript);
-
-  console.log(`\nDone. "${collection.title}"'s cover photo is now set to #${String(number).padStart(2, "0")}.`);
+  console.log(`\nDone. "${collection.title}"'s cover photo is now "${filename}", cropped from ${position}.`);
   console.log("Next steps:");
   console.log("  1. Run: npm run gallery:sync");
   console.log(`  2. Check it locally, then run: npm run save`);

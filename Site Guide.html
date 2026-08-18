@@ -195,8 +195,8 @@
         whatever's currently in <code>Gallery Originals</code>.</li>
       <li><strong>Run <code>npm run dev</code></strong> and check it at
         <code>http://localhost:3000</code> — this also turns on the pencil-icon editor (fix a
-        caption/date/order, hide a photo, move it to another collection) and lets you set a
-        cover photo (<code>npm run collection:cover</code>).</li>
+        caption/date/order, hide a photo, move it to another collection, or set it as the
+        collection's cover photo).</li>
       <li><strong>Run <code>npm run save</code></strong> — it asks what changed, records it,
         commits, and offers to push live.</li>
     </ol>
@@ -211,7 +211,7 @@
       <tr><td><code>npm run dev</code></td><td>Starts the site locally at <code>http://localhost:3000</code>, with the caption/date/order/delete/move editor and Sync Gallery button enabled.</td></tr>
       <tr><td><code>npm run gallery:sync</code></td><td>Reads <code>Gallery Originals</code>, resizes new/changed photos, regenerates every gallery page and the Collections index.</td></tr>
       <tr><td><code>npm run collection:add</code></td><td>Optional shortcut: creates an empty, named <code>Gallery Originals</code> folder ready for photos (usually not needed — see below).</td></tr>
-      <tr><td><code>npm run collection:cover</code></td><td>Asks which collection and which photo number, then sets that as the cover photo shown on its Collections-page card.</td></tr>
+      <tr><td><code>npm run collection:cover</code></td><td>Terminal alternative to the pencil icon's cover-photo picker — asks which collection and which photo filename, then how to crop it.</td></tr>
       <tr><td><code>npm run hero:set -- "/path/to/photo.tif"</code></td><td>Replaces the homepage hero photo.</td></tr>
       <tr><td><code>npm run trim-filenames -- "Gallery Originals/Some Folder" "word"</code></td><td>Strips a given word (and everything after it) from every filename in a folder, keeping the extension. Walks through each rename one at a time so you can accept, edit, or skip it.</td></tr>
       <tr><td><code>npm run save</code></td><td>Records what changed in the changelog, commits, and offers to push live.</td></tr>
@@ -284,12 +284,19 @@ npm run dev</code></pre>
     </p>
     <h3>Choosing a collection's cover photo</h3>
     <p>
-      The photo shown on a collection's card on the Collections page defaults to photo #1 unless
-      you set one. Run <code>npm run collection:cover</code>, pick the collection, then type the
-      photo number you want (it opens that collection's photos in Finder so you can look through
-      them first — the number in each filename, e.g. <code>nova-scotia-07.jpg</code>, is the one
-      to type). Then run <code>npm run gallery:sync</code> to apply it.
+      The photo shown on a collection's card on the Collections page defaults to the first
+      visible photo, centered, unless you set one. Two ways to do it:
     </p>
+    <ul>
+      <li><strong>In the browser</strong> (easiest): while running <code>npm run dev</code>, open
+        the pencil icon on any photo and use the "Use this photo as the collection's cover" grid
+        — click a direction to also choose how it's cropped to fit the card's box (e.g. "left" if
+        the subject sits on the left of the photo).</li>
+      <li><strong>In Terminal</strong>: run <code>npm run collection:cover</code>, pick the
+        collection, type the photo's filename (it opens that collection's photos in Finder so you
+        can find it), then pick a crop direction.</li>
+    </ul>
+    <p>Either way, run <code>npm run gallery:sync</code> afterward to apply it.</p>
 
     <div class="note">
       Note: the sync script currently checks a hardcoded path
@@ -384,6 +391,11 @@ vercel --prod # promotes to production</code></pre>
     <h2>Version history</h2>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 62</span><span class="version-date">Monday, August 17, 2026</span></div>
+      <ul><li>Added a "Cover photo" picker to the pencil-icon editor — click a direction (e.g. left, center, top) on any photo to make it the collection's cover, cropped from that side. <code>npm run collection:cover</code> (Terminal) got the same upgrade — picks by filename now instead of a photo number, and lets you choose the crop direction too.</li>
+      <li>Fixed the Janet Buys a Car collection's cover photo, which was cropping Janet almost entirely out of frame — now framed from the left</li></ul>
+    </div>
     <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 61</span><span class="version-date">Monday, August 17, 2026</span></div>
       <ul><li>Extended the white photo border to the full-size lightbox view and the cover image on each Collections-page card, matching the contact sheet thumbnails</li></ul>

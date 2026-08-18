@@ -42,18 +42,35 @@ try {
   overrides = {};
 }
 
+// Which photo (by original filename) represents a collection on its
+// Collections-page card, and how it's cropped — set via the pencil-icon
+// editor's "Cover photo" picker (or `npm run collection:cover`). Falls
+// back to the first visible photo, centered, when a collection has no
+// entry here yet.
+const collectionCoverOverridesPath = path.join(root, "data", "collection-overrides.json");
+let collectionCoverOverrides = {};
+try {
+  collectionCoverOverrides = JSON.parse(await readFile(collectionCoverOverridesPath, "utf8"));
+} catch {
+  collectionCoverOverrides = {};
+}
+
 // You don't need to edit this array by hand for a new collection — drop a
 // non-empty folder into "Gallery Originals" and the next `gallery:sync` run
 // registers it automatically below, using the folder name as the title.
 // Empty folders are ignored until they actually have photos in them. Once
-// auto-added, you can still hand-edit an entry's title/subtitle/coverPhoto
-// here any time.
+// auto-added, you can still hand-edit an entry's title/subtitle here any
+// time.
 //   folder:     exact folder name inside "Gallery Originals"
 //   slug:       URL-safe id, e.g. "norway" -> /collections/norway
 //   title:      heading shown on the gallery page and index card
 //   component:  a unique PascalCase React component name
 //   subtitle:   optional extra text on the gallery page itself (e.g. a date)
-//   coverPhoto: optional 1-based photo number to use as the index card thumbnail (defaults to 1)
+// A collection's cover photo (which photo represents it on the Collections
+// page, and how it's cropped) isn't set here — it lives in
+// data/collection-overrides.json, set via the pencil-icon editor's "Cover
+// photo" picker (or `npm run collection:cover`). Defaults to the first
+// visible photo, centered, when unset.
 // Person/Event tags shown on the Collections page are read per photo from
 // Photo Mechanic's IPTC "Persons Shown" and "Event" fields — untagged photos
 // just don't contribute a tag, they still get a caption (from IPTC
@@ -64,7 +81,7 @@ try {
 // auto-detected data below and survive future syncs.
 const collections = [
   { folder: "Janet Buys a car", slug: "janet-buys-a-car", title: "Janet Buys a car", component: "JanetBuysACarPage", subtitle: null },
-  { folder: "Nova Scotia", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null, coverPhoto: 40 },
+  { folder: "Nova Scotia", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.
@@ -444,10 +461,13 @@ for (const collection of collections) {
     `${collection.title}: ${visibleCount} photographs (${reusedCount} unchanged, ${processedCount} processed${hiddenCount ? `, ${hiddenCount} hidden` : ""})`,
   );
 
-  const requestedCoverNumber = collection.coverPhoto ?? 1;
-  const coverNumber = collectionOverrides[filenames[requestedCoverNumber - 1]]?.hidden
-    ? (displayOrder[0] ?? requestedCoverNumber)
-    : requestedCoverNumber;
+  const cover = collectionCoverOverrides[collection.slug] ?? {};
+  const requestedCoverNumber = cover.coverPhoto ? filenames.indexOf(cover.coverPhoto) + 1 : 1;
+  const coverNumber =
+    requestedCoverNumber < 1 || collectionOverrides[filenames[requestedCoverNumber - 1]]?.hidden
+      ? (displayOrder[0] ?? 1)
+      : requestedCoverNumber;
+  const coverPosition = cover.coverPosition ?? "center center";
 
   const collectionPeople = new Set();
   const collectionEvents = new Set();
@@ -464,6 +484,7 @@ for (const collection of collections) {
     event: [...collectionEvents].sort(),
     count: visibleCount,
     coverBasename: `${collection.slug}-${String(coverNumber).padStart(2, "0")}.jpg`,
+    coverPosition,
   });
 }
 
