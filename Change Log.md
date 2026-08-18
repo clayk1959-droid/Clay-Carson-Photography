@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 80 — Tuesday, August 18, 2026
+
+- Galleries page and individual gallery (thumbnail) pages: same left/right alignment treatment as the homepage — the banner and nav now line up exactly with the top row of photos on wide monitors. About and Contact are unaffected.
+
 ### Version 79 — Tuesday, August 18, 2026
 
 - Homepage header and photo now share one exact computed width instead of two separate formulas that happened to often match — the brand name's left edge and the nav's right edge always line up exactly with the photo's edges on wide monitors, whatever the window's proportions, and the photo always grows as large as possible without ever cropping or scrolling. Subpages (Galleries, About, Contact) are unaffected — their headers stay on the plain layout they've always had.

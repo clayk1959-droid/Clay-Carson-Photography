@@ -31,11 +31,22 @@ a { color: inherit; text-decoration: none; }
     --hero-frame-width: min(min(calc(100vw - 6vw), var(--content-cap)), calc((100vh - 136px) * var(--hero-ratio)));
   }
   .site-header-inner { max-width: var(--hero-frame-width); margin: 0 auto; padding: 0; }
-  /* Subpages have their own, separate 1440px content cap on the page body
-     (.collections-layout, .about-simple, etc.) -- keep their header on its
-     plain, uncapped padding rather than aligning it to a hero photo they
-     don't show, which would just create a different mismatch. */
+  /* Subpages have their own, separate content cap on the page body -- keep
+     their header on its plain, uncapped padding rather than aligning it to
+     a hero photo they don't show, which would just create a different
+     mismatch. */
   .subpage .site-header-inner { max-width: none; margin: 0; padding: 0 4.5vw; }
+  /* The Galleries index and individual gallery pages both cap their body
+     content (.collections-layout, .collection-heading, .photo-gallery) at
+     1440px with 5vw side padding -- match that exactly here so the banner's
+     left edge and the nav's right edge line up with the top row of photos,
+     the same way the homepage aligns to its hero photo. */
+  .collections-page .site-header-inner,
+  .collection-page .site-header-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 5vw;
+  }
   .hero { display: flex; align-items: center; justify-content: center; padding: 20px 0; }
   .hero-frame { display: block; position: relative; width: var(--hero-frame-width); aspect-ratio: var(--hero-aspect); }
   .hero-image, .hero-wash { position: absolute; inset: 0; }
