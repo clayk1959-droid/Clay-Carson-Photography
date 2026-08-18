@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 64 — Monday, August 17, 2026
+
+- Added drag-to-reorder: a "Reorder Photos" button opens every visible photo in a collection as small thumbnails, all on screen at once — drag one anywhere and the rest reflow live, like arranging slides on a light table. Click "Save order" to write the new order for all of them at once.
+
 ### Version 63 — Monday, August 17, 2026
 
 - The cover-photo crop picker now shows a live preview (a real 4:5 box, same shape as the actual card) as you click each direction, instead of saving blind — a separate "Set as collection cover" button commits it once it looks right

@@ -328,6 +328,13 @@ npm run dev</code></pre>
       commit and redeploy as usual — the overrides file is tracked in git, so edits survive
       future syncs and deploy along with everything else.
     </p>
+    <p>
+      To reorder a bunch of photos at once instead of one at a time, click
+      <strong>Reorder Photos</strong> next to Sync Gallery — it opens every visible photo in the
+      collection as small thumbnails, all on screen together. Drag one anywhere and the rest
+      reflow live, like arranging slides on a light table. Click <strong>Save order</strong> when
+      it looks right, then Sync Gallery to apply it.
+    </p>
   </section>
 
   <section id="hero">
@@ -392,6 +399,10 @@ vercel --prod # promotes to production</code></pre>
     <h2>Version history</h2>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 64</span><span class="version-date">Monday, August 17, 2026</span></div>
+      <ul><li>Added drag-to-reorder: a "Reorder Photos" button opens every visible photo in a collection as small thumbnails, all on screen at once — drag one anywhere and the rest reflow live, like arranging slides on a light table. Click "Save order" to write the new order for all of them at once.</li></ul>
+    </div>
     <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 63</span><span class="version-date">Monday, August 17, 2026</span></div>
       <ul><li>The cover-photo crop picker now shows a live preview (a real 4:5 box, same shape as the actual card) as you click each direction, instead of saving blind — a separate "Set as collection cover" button commits it once it looks right</li></ul>

@@ -145,6 +145,12 @@ result locally, then commit and redeploy as usual — the overrides file is
 tracked in git, so edits survive future syncs and deploy along with
 everything else via `npm run save`.
 
+To reorder a bunch of photos at once instead of one at a time, click
+**Reorder Photos** next to Sync Gallery — it opens every visible photo in
+the collection as small thumbnails, all on screen together. Drag one
+anywhere and the rest reflow live, like arranging slides on a light table.
+Click **Save order** when it looks right, then Sync Gallery to apply it.
+
 ## Changing the homepage photo
 
 ```bash
