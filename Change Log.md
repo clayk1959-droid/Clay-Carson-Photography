@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 70 — Tuesday, August 18, 2026
+
+- People and Events filters on the Galleries page are now checkbox dropdowns instead of single-select — pick any combination of names and see photos matching any of them, with an "All" option to reset
+
 ### Version 69 — Tuesday, August 18, 2026
 
 - Hero eyebrow line ("Family photos and Events") moved off the photo into its own bar under the header — it can never overlap the photo now, and sits tight against the header

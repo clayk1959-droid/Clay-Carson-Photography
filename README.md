@@ -97,9 +97,10 @@ folder registers one.
 
 If a folder's photos are tagged in Photo Mechanic (Person, Event, Alt Text),
 that data powers the caption and the Person/Event search on the Galleries
-page — picking a name or event there shows every matching photo across
-every gallery (not just which gallery cards to show), with a Clear button
-to get back to the normal grid. Untagged photos still work fine — they
+page — the People and Events filters are checkbox dropdowns, so picking
+one or several names shows every photo matching any of them across every
+gallery (not just which gallery cards to show), with a Clear button to get
+back to the normal grid. Untagged photos still work fine — they
 just fall back to the photo's creation date and a cleaned-up version of
 the filename as the caption, and won't turn up in that search.
 
