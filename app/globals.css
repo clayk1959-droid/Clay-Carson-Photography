@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap');
 
-:root { --ink: #1d211d; --paper: #f1eee7; --moss: #707866; --cream: #e8e3d8; --content-cap: 1700px; }
+:root { --ink: #1d211d; --paper: #f1eee7; --moss: #707866; --cream: #e8e3d8; --content-cap: 1400px; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; }

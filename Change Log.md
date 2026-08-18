@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 77 — Tuesday, August 18, 2026
+
+- Lowered the width where the homepage header/photo alignment cap kicks in (Version 76 didn't actually engage until past ~1850px, wider than most stretched windows ever get) — now aligned starting around 1400px
+
 ### Version 76 — Tuesday, August 18, 2026
 
 - Homepage header and photo edges now stay aligned on very wide desktop monitors instead of drifting apart — the whole header/photo band stops growing past ~1700px and centers itself, so extra room on huge screens becomes an even margin instead of a mismatch
