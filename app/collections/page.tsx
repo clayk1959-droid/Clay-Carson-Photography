@@ -1,4 +1,5 @@
 import { SiteHeader } from "../SiteHeader";
+import { SiteFooter } from "../SiteFooter";
 import { CollectionsIndex } from "./CollectionsIndex";
 
 const cards = [
@@ -1176,6 +1177,8 @@ export default function CollectionsPage() {
         <h1 className="page-title">Galleries</h1>
         <CollectionsIndex cards={cards} photos={photos} />
       </section>
+
+      <SiteFooter />
     </main>
   );
 }

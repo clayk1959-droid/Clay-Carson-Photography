@@ -1,4 +1,5 @@
 import { SiteHeader } from "../SiteHeader";
+import { SiteFooter } from "../SiteFooter";
 
 function SentenceSpace() {
   return <span className="sentence-gap">{"\u00A0"}</span>;
@@ -27,6 +28,8 @@ export default function AboutPage() {
           <p>Enjoy!</p>
         </article>
       </div>
+
+      <SiteFooter />
     </main>
   );
 }

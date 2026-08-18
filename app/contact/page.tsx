@@ -1,4 +1,5 @@
 import { SiteHeader } from "../SiteHeader";
+import { SiteFooter } from "../SiteFooter";
 
 export default function ContactPage() {
   return (
@@ -23,6 +24,8 @@ export default function ContactPage() {
           </a>
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }

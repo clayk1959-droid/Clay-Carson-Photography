@@ -1,4 +1,5 @@
 import { SiteHeader } from "./SiteHeader";
+import { SiteFooter } from "./SiteFooter";
 
 export default function Home() {
   return (
@@ -15,6 +16,8 @@ export default function Home() {
           <div className="hero-wash" />
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }

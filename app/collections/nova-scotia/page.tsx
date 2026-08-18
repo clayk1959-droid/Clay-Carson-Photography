@@ -1,4 +1,5 @@
 import { SiteHeader } from "../../SiteHeader";
+import { SiteFooter } from "../../SiteFooter";
 import { Gallery } from "../Gallery";
 
 type PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };
@@ -1029,6 +1030,8 @@ export default function NovaScotiaPage() {
         otherCollections={otherCollections}
         editable={process.env.NODE_ENV === "development"}
       />
+
+      <SiteFooter />
     </main>
   );
 }

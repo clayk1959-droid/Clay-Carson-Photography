@@ -451,7 +451,7 @@ for (const collection of collections) {
   const otherCollections = collections
     .filter((other) => other.slug !== collection.slug)
     .map((other) => ({ slug: other.slug, title: other.title }));
-  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { Gallery } from "../Gallery";\n\ntype PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };\n\nconst photographData: PhotographDataEntry[] = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nconst otherCollections = ${JSON.stringify(otherCollections, null, 2)};\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={otherCollections}\n        editable={process.env.NODE_ENV === "development"}\n      />\n    </main>\n  );\n}\n`;
+  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { SiteFooter } from "../../SiteFooter";\nimport { Gallery } from "../Gallery";\n\ntype PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };\n\nconst photographData: PhotographDataEntry[] = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nconst otherCollections = ${JSON.stringify(otherCollections, null, 2)};\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={otherCollections}\n        editable={process.env.NODE_ENV === "development"}\n      />\n\n      <SiteFooter />\n    </main>\n  );\n}\n`;
   const collectionPageDirectory = path.join(root, "app", "collections", collection.slug);
   await mkdir(collectionPageDirectory, { recursive: true });
   await writeFile(path.join(collectionPageDirectory, "page.tsx"), page);
@@ -501,6 +501,7 @@ for (const collection of collections) {
 }
 
 const indexPage = `import { SiteHeader } from "../SiteHeader";
+import { SiteFooter } from "../SiteFooter";
 import { CollectionsIndex } from "./CollectionsIndex";
 
 const cards = ${JSON.stringify(indexCards, null, 2)};
@@ -514,6 +515,8 @@ export default function CollectionsPage() {
         <h1 className="page-title">Galleries</h1>
         <CollectionsIndex cards={cards} photos={photos} />
       </section>
+
+      <SiteFooter />
     </main>
   );
 }

@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 81 — Tuesday, August 18, 2026
+
+- Added a simple copyright/usage notice to the bottom of every page — sets expectations that the photos are for family/friends, not for public reposting. Plain-English, not a legal document.
+
 ### Version 80 — Tuesday, August 18, 2026
 
 - Galleries page and individual gallery (thumbnail) pages: same left/right alignment treatment as the homepage — the banner and nav now line up exactly with the top row of photos on wide monitors. About and Contact are unaffected.
