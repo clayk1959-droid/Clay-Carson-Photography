@@ -290,8 +290,9 @@ npm run dev</code></pre>
     <ul>
       <li><strong>In the browser</strong> (easiest): while running <code>npm run dev</code>, open
         the pencil icon on any photo and use the "Use this photo as the collection's cover" grid
-        — click a direction to also choose how it's cropped to fit the card's box (e.g. "left" if
-        the subject sits on the left of the photo).</li>
+        — clicking a direction updates a live preview so you can see how it's cropped to fit the
+        card's box before committing (e.g. "left" if the subject sits on the left of the photo),
+        then click "Set as collection cover".</li>
       <li><strong>In Terminal</strong>: run <code>npm run collection:cover</code>, pick the
         collection, type the photo's filename (it opens that collection's photos in Finder so you
         can find it), then pick a crop direction.</li>
@@ -391,6 +392,10 @@ vercel --prod # promotes to production</code></pre>
     <h2>Version history</h2>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 63</span><span class="version-date">Monday, August 17, 2026</span></div>
+      <ul><li>The cover-photo crop picker now shows a live preview (a real 4:5 box, same shape as the actual card) as you click each direction, instead of saving blind — a separate "Set as collection cover" button commits it once it looks right</li></ul>
+    </div>
     <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 62</span><span class="version-date">Monday, August 17, 2026</span></div>
       <ul><li>Added a "Cover photo" picker to the pencil-icon editor — click a direction (e.g. left, center, top) on any photo to make it the collection's cover, cropped from that side. <code>npm run collection:cover</code> (Terminal) got the same upgrade — picks by filename now instead of a photo number, and lets you choose the crop direction too.</li>

@@ -110,8 +110,10 @@ Collections page defaults to the first visible photo, centered, unless you
 set one. Two ways to do it:
 - **In the browser** (easiest): while running `npm run dev`, open the pencil
   icon on any photo and use the "Use this photo as the collection's cover"
-  grid — click a direction to also choose how it's cropped to fit the
-  card's box (e.g. "left" if the subject sits on the left of the photo).
+  grid — clicking a direction updates a live preview so you can see how it's
+  cropped to fit the card's box before committing (e.g. "left" if the
+  subject sits on the left of the photo), then click "Set as collection
+  cover".
 - **In Terminal**: run `npm run collection:cover`, pick the collection,
   type the photo's filename (it opens that collection's photos in Finder so
   you can find it), then pick a crop direction.

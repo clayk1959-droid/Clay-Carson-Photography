@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 63 — Monday, August 17, 2026
+
+- The cover-photo crop picker now shows a live preview (a real 4:5 box, same shape as the actual card) as you click each direction, instead of saving blind — a separate "Set as collection cover" button commits it once it looks right
+
 ### Version 62 — Monday, August 17, 2026
 
 - Added a "Cover photo" picker to the pencil-icon editor — click a direction (e.g. left, center, top) on any photo to make it the collection's cover, cropped from that side. `npm run collection:cover` (Terminal) got the same upgrade — picks by filename now instead of a photo number, and lets you choose the crop direction too.
