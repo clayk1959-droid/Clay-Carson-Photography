@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 73 — Tuesday, August 18, 2026
+
+- Homepage tagline ("Family photos and Events") now sits tucked directly under the brand wordmark in the header, instead of on its own bar
+
 ### Version 72 — Tuesday, August 18, 2026
 
 - People/Events checkbox checkmarks are now solid black instead of the hard-to-see browser default

@@ -13,10 +13,11 @@ a { color: inherit; text-decoration: none; }
 .site-nav a:hover { color: #171a17; background: #f5f2eb; border-color: #f5f2eb; }
 .inquire { justify-self: end; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; border-bottom: 1px solid #6e726c; padding-bottom: 5px; }
 .inquire span { margin-left: 8px; }
-.hero { position: relative; height: calc(100vh - 96px - 36px); min-height: 620px; overflow: hidden; color: white; background: #0c0d0c; }
+.hero { position: relative; height: calc(100vh - 96px); min-height: 620px; overflow: hidden; color: white; background: #0c0d0c; }
 .hero-image { position: absolute; inset: 1.2vw 3vw 3vw 3vw; background: url('/lead-photo.jpg') center 48% / contain no-repeat; animation: settle 1.4s ease-out both; }
 .hero-wash { position: absolute; inset: 1.2vw 3vw 3vw 3vw; background: linear-gradient(90deg, rgba(12,14,12,.7) 0%, rgba(12,14,12,.2) 49%, rgba(12,14,12,.04) 78%), linear-gradient(0deg, rgba(10,12,10,.28), transparent 48%); }
-.hero-eyebrow { margin: 0; height: 36px; display: flex; align-items: center; padding: 0 4.5vw; background: #171a17; color: #f5f2eb; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.brand-block { display: flex; flex-direction: column; gap: 2px; }
+.site-tagline { margin: 0; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #f5f2eb; }
 .eyebrow, .section-label { margin: 0 0 28px; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
 h1, h2, h3, .statement-copy, .feature-quote { font-family: 'Instrument Serif', serif; font-weight: 400; }
 h1 { margin: 0; font-size: clamp(65px, 8vw, 124px); line-height: .84; letter-spacing: -.025em; }
@@ -202,8 +203,8 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .brand { font-size: 29px; }
   .site-nav { gap: 7px; }
   .site-nav a { min-width: 0; flex: 1; padding: 9px 7px 8px; font-size: 8px; }
-  .hero { height: calc(100svh - 128px - 36px); }
-  .hero-eyebrow { padding: 0 5vw; font-size: 9px; }
+  .hero { height: calc(100svh - 128px); }
+  .site-tagline { font-size: 9px; }
   .about-simple { padding: 50px 7vw 90px; display: block; }
   .about-simple .page-title { font-size: 34px; }
   .about-copy { margin-top: 6px; }

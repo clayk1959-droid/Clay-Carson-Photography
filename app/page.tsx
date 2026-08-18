@@ -3,9 +3,7 @@ import { SiteHeader } from "./SiteHeader";
 export default function Home() {
   return (
     <main>
-      <SiteHeader />
-
-      <p className="hero-eyebrow">Family photos and Events</p>
+      <SiteHeader tagline="Family photos and Events" />
 
       <section className="hero" id="top">
         <div
