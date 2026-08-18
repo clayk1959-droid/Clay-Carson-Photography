@@ -38,7 +38,7 @@ const cards = [
     ],
     "event": [],
     "count": 73,
-    "coverBasename": "nova-scotia-01.jpg"
+    "coverBasename": "nova-scotia-40.jpg"
   }
 ];
 

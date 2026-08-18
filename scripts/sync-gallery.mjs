@@ -64,7 +64,7 @@ try {
 // auto-detected data below and survive future syncs.
 const collections = [
   { folder: "Janet Buys a car", slug: "janet-buys-a-car", title: "Janet Buys a car", component: "JanetBuysACarPage", subtitle: null },
-  { folder: "Nova Scotia", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null },
+  { folder: "Nova Scotia", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null, coverPhoto: 40 },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.
