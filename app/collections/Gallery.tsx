@@ -31,6 +31,7 @@ export function Gallery({
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
   const [activePhotoWidth, setActivePhotoWidth] = useState<number | null>(null);
   const [editingPhoto, setEditingPhoto] = useState<number | null>(null);
+  const [reordering, setReordering] = useState(false);
   const activeImage = useRef<HTMLImageElement | null>(null);
   const dialog = useRef<HTMLDivElement | null>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
@@ -288,8 +289,144 @@ export function Gallery({
         />
       )}
 
-      {editable && <SyncButton />}
+      {reordering && (
+        <ReorderPanel
+          slug={slug}
+          photographs={photographs}
+          onClose={() => setReordering(false)}
+        />
+      )}
+
+      {editable && (
+        <div className="editor-toolbar">
+          <button type="button" className="reorder-button" onClick={() => setReordering(true)}>
+            Reorder Photos
+          </button>
+          <SyncButton />
+        </div>
+      )}
     </>
+  );
+}
+
+function ReorderPanel({
+  slug,
+  photographs,
+  onClose,
+}: {
+  slug: string;
+  photographs: GalleryPhoto[];
+  onClose: () => void;
+}) {
+  const [order, setOrder] = useState(photographs.map((photograph) => photograph.filename));
+  const [dirty, setDirty] = useState(false);
+  const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const dragIndex = useRef<number | null>(null);
+  const dragOverIndex = useRef<number | null>(null);
+
+  const byFilename = new Map(photographs.map((photograph) => [photograph.filename, photograph]));
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  function moveTo(targetIndex: number) {
+    const fromIndex = dragIndex.current;
+    if (fromIndex === null || fromIndex === targetIndex) return;
+    setOrder((current) => {
+      const next = [...current];
+      const [moved] = next.splice(fromIndex, 1);
+      next.splice(targetIndex, 0, moved);
+      return next;
+    });
+    dragIndex.current = targetIndex;
+    setDirty(true);
+  }
+
+  async function handleSave() {
+    setStatus("saving");
+    setErrorMessage("");
+    try {
+      const response = await fetch("/api/gallery-reorder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, filenames: order }),
+      });
+      if (!response.ok) throw new Error(await response.text());
+      setStatus("saved");
+      setDirty(false);
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
+    }
+  }
+
+  return (
+    <div className="reorder-overlay" onClick={onClose}>
+      <div className="reorder-panel" onClick={(event) => event.stopPropagation()}>
+        <div className="reorder-header">
+          <h2>Drag photos to reorder</h2>
+          <div className="reorder-header-actions">
+            {status === "error" && <span className="edit-photo-status is-error">{errorMessage}</span>}
+            {status === "saved" && !dirty && (
+              <span className="edit-photo-status">
+                Saved — click <strong>Sync Gallery</strong> to apply.
+              </span>
+            )}
+            <button
+              type="button"
+              className="reorder-save"
+              disabled={!dirty || status === "saving"}
+              onClick={handleSave}
+            >
+              {status === "saving" ? "Saving…" : "Save order"}
+            </button>
+            <button type="button" onClick={onClose}>
+              Close
+            </button>
+          </div>
+        </div>
+        <div className="reorder-grid">
+          {order.map((filename, index) => {
+            const photograph = byFilename.get(filename);
+            if (!photograph) return null;
+            return (
+              <div
+                key={filename}
+                className="reorder-thumb"
+                draggable
+                onDragStart={() => {
+                  dragIndex.current = index;
+                }}
+                onDragEnter={() => {
+                  if (dragOverIndex.current !== index) {
+                    dragOverIndex.current = index;
+                    moveTo(index);
+                  }
+                }}
+                onDragOver={(event) => event.preventDefault()}
+                onDragEnd={() => {
+                  dragIndex.current = null;
+                  dragOverIndex.current = null;
+                }}
+              >
+                <img
+                  src={photograph.src.replace("/galleries/", "/gallery-thumbnails/")}
+                  alt={photograph.altText}
+                  draggable={false}
+                />
+                <span className="reorder-thumb-number">{String(index + 1).padStart(2, "0")}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 }
 
