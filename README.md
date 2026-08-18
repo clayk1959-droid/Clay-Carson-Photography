@@ -11,6 +11,27 @@ The site blocks search engines and well-behaved crawlers (`robots.txt`,
 won't show up in search results or get indexed. It's still reachable by
 anyone with the direct link — this isn't password-protected.
 
+## Your regular workflow (no coding required)
+
+Everything below is a normal Terminal command or something you do in the
+browser — none of it needs Claude. The loop is always the same:
+
+1. **Add or remove photos in `Gallery Originals`** — drop a new folder in
+   for a new collection, drop photos into an existing folder, or delete a
+   folder entirely to take that collection down. (See "Adding or updating
+   galleries" below for the full rules.)
+2. **Run `npm run gallery:sync`** to rebuild the site from whatever's
+   currently in `Gallery Originals`.
+3. **Run `npm run dev`** and check it at http://localhost:3000 — this also
+   turns on the pencil-icon editor (fix a caption/date/order, hide a photo,
+   move it to another collection) and a "Choose cover photo" step if you
+   want one (`npm run collection:cover`).
+4. **Run `npm run save`** — it asks what changed, records it, commits, and
+   offers to push live.
+
+That's the whole cycle. Reach for Claude for anything outside it: bugs,
+design/layout changes, or new features.
+
 ## Command reference
 
 | Command | What it does |
@@ -18,6 +39,7 @@ anyone with the direct link — this isn't password-protected.
 | `npm run dev` | Starts the site locally at http://localhost:3000, with the caption/date/order/delete/move editor and Sync Gallery button enabled |
 | `npm run gallery:sync` | Reads `Gallery Originals`, resizes new/changed photos, regenerates every gallery page and the Collections index |
 | `npm run collection:add` | Optional shortcut: creates an empty, named `Gallery Originals` folder ready for photos (see below — usually you don't need this) |
+| `npm run collection:cover` | Asks which collection and which photo number, then sets that as the cover photo shown on its Collections-page card |
 | `npm run hero:set -- "/path/to/photo.tif"` | Replaces the homepage hero photo |
 | `npm run trim-filenames -- "Gallery Originals/Some Folder" "word"` | Strips a given word (and everything after it) from every filename in a folder, keeping the extension — walks through each rename one at a time so you can accept, edit, or skip it |
 | `npm run save` | Records what changed in `Change Log.md`, commits, and offers to push live |
@@ -82,6 +104,14 @@ don't contribute a Person/Event tag.
 `npm run collection:add` is still there as an optional shortcut if you'd
 rather create the empty folder (with a name you type at a prompt) before
 you've copied any photos in — it does step 1 for you. It's never required.
+
+**Choosing a collection's cover photo** — the photo shown on its card on the
+Collections page defaults to photo #1 unless you set one. Run
+`npm run collection:cover`, pick the collection, then type the photo number
+you want (it opens that collection's photos in Finder so you can look
+through them first — the number in each filename, e.g.
+`nova-scotia-07.jpg`, is the one to type). Then run `npm run gallery:sync`
+to apply it.
 
 Note: the script currently checks a hardcoded path
 (`/Volumes/Samsung_T5/Website`) for higher-priority metadata before falling

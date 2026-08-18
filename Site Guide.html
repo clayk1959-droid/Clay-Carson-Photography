@@ -168,6 +168,7 @@
       so it won't show up in search results or get indexed. It's still reachable by anyone with
       the direct link — this isn't password-protected.</p>
     <nav class="toc">
+      <a href="#workflow">Your regular workflow</a>
       <a href="#commands">Command reference</a>
       <a href="#dev">Local development</a>
       <a href="#galleries">Adding &amp; updating galleries</a>
@@ -180,6 +181,29 @@
     </nav>
   </header>
 
+  <section id="workflow">
+    <h2>Your regular workflow (no coding required)</h2>
+    <p>
+      Everything here is a normal Terminal command or something you do in the browser — none of
+      it needs Claude. The loop is always the same:
+    </p>
+    <ol>
+      <li><strong>Add or remove photos in <code>Gallery Originals</code></strong> — drop a new
+        folder in for a new collection, drop photos into an existing folder, or delete a folder
+        entirely to take that collection down.</li>
+      <li><strong>Run <code>npm run gallery:sync</code></strong> to rebuild the site from
+        whatever's currently in <code>Gallery Originals</code>.</li>
+      <li><strong>Run <code>npm run dev</code></strong> and check it at
+        <code>http://localhost:3000</code> — this also turns on the pencil-icon editor (fix a
+        caption/date/order, hide a photo, move it to another collection) and lets you set a
+        cover photo (<code>npm run collection:cover</code>).</li>
+      <li><strong>Run <code>npm run save</code></strong> — it asks what changed, records it,
+        commits, and offers to push live.</li>
+    </ol>
+    <p>That's the whole cycle. Reach for Claude for anything outside it: bugs, design/layout
+      changes, or new features.</p>
+  </section>
+
   <section id="commands">
     <h2>Command reference</h2>
     <table>
@@ -187,6 +211,7 @@
       <tr><td><code>npm run dev</code></td><td>Starts the site locally at <code>http://localhost:3000</code>, with the caption/date/order/delete/move editor and Sync Gallery button enabled.</td></tr>
       <tr><td><code>npm run gallery:sync</code></td><td>Reads <code>Gallery Originals</code>, resizes new/changed photos, regenerates every gallery page and the Collections index.</td></tr>
       <tr><td><code>npm run collection:add</code></td><td>Optional shortcut: creates an empty, named <code>Gallery Originals</code> folder ready for photos (usually not needed — see below).</td></tr>
+      <tr><td><code>npm run collection:cover</code></td><td>Asks which collection and which photo number, then sets that as the cover photo shown on its Collections-page card.</td></tr>
       <tr><td><code>npm run hero:set -- "/path/to/photo.tif"</code></td><td>Replaces the homepage hero photo.</td></tr>
       <tr><td><code>npm run trim-filenames -- "Gallery Originals/Some Folder" "word"</code></td><td>Strips a given word (and everything after it) from every filename in a folder, keeping the extension. Walks through each rename one at a time so you can accept, edit, or skip it.</td></tr>
       <tr><td><code>npm run save</code></td><td>Records what changed in the changelog, commits, and offers to push live.</td></tr>
@@ -256,6 +281,14 @@ npm run dev</code></pre>
       <code>npm run collection:add</code> is still there as an optional shortcut if you'd rather
       create the empty folder (with a name you type at a prompt) before you've copied any photos
       in — it does step 1 for you. It's never required.
+    </p>
+    <h3>Choosing a collection's cover photo</h3>
+    <p>
+      The photo shown on a collection's card on the Collections page defaults to photo #1 unless
+      you set one. Run <code>npm run collection:cover</code>, pick the collection, then type the
+      photo number you want (it opens that collection's photos in Finder so you can look through
+      them first — the number in each filename, e.g. <code>nova-scotia-07.jpg</code>, is the one
+      to type). Then run <code>npm run gallery:sync</code> to apply it.
     </p>
 
     <div class="note">
@@ -351,6 +384,11 @@ vercel --prod # promotes to production</code></pre>
     <h2>Version history</h2>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 59</span><span class="version-date">Monday, August 17, 2026</span></div>
+      <ul><li>Set the Nova Scotia collection's cover photo to the lighthouse shot</li>
+      <li>Added <code>npm run collection:cover</code> — an interactive command to set a collection's cover photo without editing any code, closing the last gap in doing routine site maintenance without help</li></ul>
+    </div>
     <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 58</span><span class="version-date">Monday, August 17, 2026</span></div>
       <ul><li>Deleting a collection's folder from Gallery Originals no longer crashes the sync — it now tears down that collection's page/images and removes it from the site automatically, the same way a new folder gets added automatically</li>

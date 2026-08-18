@@ -15,6 +15,11 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 59 — Monday, August 17, 2026
+
+- Set the Nova Scotia collection's cover photo to the lighthouse shot
+- Added `npm run collection:cover` — an interactive command to set a collection's cover photo without editing any code, closing the last gap in doing routine site maintenance without help
+
 ### Version 58 — Monday, August 17, 2026
 
 - Deleting a collection's folder from Gallery Originals no longer crashes the sync — it now tears down that collection's page/images and removes it from the site automatically, the same way a new folder gets added automatically
