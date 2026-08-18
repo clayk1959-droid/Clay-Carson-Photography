@@ -364,6 +364,7 @@ function EditPhotoForm({
   const [date, setDate] = useState(photograph.date ?? "");
   const [order, setOrder] = useState(String(position));
   const [moveTarget, setMoveTarget] = useState(otherCollections[0]?.slug ?? "");
+  const [coverPosition, setCoverPosition] = useState("center center");
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [savedMessage, setSavedMessage] = useState<ReactNode>(null);
@@ -545,30 +546,44 @@ function EditPhotoForm({
         )}
 
         <div className="edit-photo-cover">
-          <p>Use this photo as the collection&rsquo;s cover, cropped from:</p>
-          <div className="edit-photo-cover-grid">
-            {[
-              ["left top", "↖"],
-              ["center top", "↑"],
-              ["right top", "↗"],
-              ["left center", "←"],
-              ["center center", "•"],
-              ["right center", "→"],
-              ["left bottom", "↙"],
-              ["center bottom", "↓"],
-              ["right bottom", "↘"],
-            ].map(([value, symbol]) => (
-              <button
-                key={value}
-                type="button"
-                disabled={status === "saving"}
-                aria-label={`Set as cover photo, cropped from ${value}`}
-                onClick={() => handleSetCover(value)}
-              >
-                {symbol}
-              </button>
-            ))}
+          <p>Use this photo as the collection&rsquo;s cover — preview and pick a crop:</p>
+          <div className="edit-photo-cover-row">
+            <div className="edit-photo-cover-preview">
+              <img src={photograph.src} alt="" style={{ objectPosition: coverPosition }} />
+            </div>
+            <div className="edit-photo-cover-grid">
+              {[
+                ["left top", "↖"],
+                ["center top", "↑"],
+                ["right top", "↗"],
+                ["left center", "←"],
+                ["center center", "•"],
+                ["right center", "→"],
+                ["left bottom", "↙"],
+                ["center bottom", "↓"],
+                ["right bottom", "↘"],
+              ].map(([value, symbol]) => (
+                <button
+                  key={value}
+                  type="button"
+                  className={coverPosition === value ? "is-selected" : undefined}
+                  disabled={status === "saving"}
+                  aria-label={`Preview crop from ${value}`}
+                  onClick={() => setCoverPosition(value)}
+                >
+                  {symbol}
+                </button>
+              ))}
+            </div>
           </div>
+          <button
+            type="button"
+            className="edit-photo-cover-confirm"
+            disabled={status === "saving"}
+            onClick={() => handleSetCover(coverPosition)}
+          >
+            Set as collection cover
+          </button>
         </div>
 
         {status === "error" && <p className="edit-photo-status is-error">{errorMessage}</p>}

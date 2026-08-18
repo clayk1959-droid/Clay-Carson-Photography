@@ -12,8 +12,8 @@ const cards = [
       "Janet buys a car"
     ],
     "count": 13,
-    "coverBasename": "janet-buys-a-car-01.jpg",
-    "coverPosition": "left center"
+    "coverBasename": "janet-buys-a-car-12.jpg",
+    "coverPosition": "center center"
   },
   {
     "slug": "nova-scotia",
