@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap');
 
-:root { --ink: #1d211d; --paper: #f1eee7; --moss: #707866; --cream: #e8e3d8; --content-cap: 1400px; }
+:root { --ink: #1d211d; --paper: #f1eee7; --moss: #707866; --cream: #e8e3d8; --content-cap: 1400px; --hero-aspect: 2600 / 1759; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; }
@@ -14,8 +14,19 @@ a { color: inherit; text-decoration: none; }
 .inquire { justify-self: end; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; border-bottom: 1px solid #6e726c; padding-bottom: 5px; }
 .inquire span { margin-left: 8px; }
 .hero { position: relative; height: calc(100vh - 96px); min-height: 620px; overflow: hidden; color: white; background: #0c0d0c; }
+.hero-frame { display: contents; }
 .hero-image { position: absolute; inset: 1.2vw max(3vw, calc((100vw - var(--content-cap)) / 2)) 3vw max(3vw, calc((100vw - var(--content-cap)) / 2)); background: url('/lead-photo.jpg') center 48% / contain no-repeat; animation: settle 1.4s ease-out both; }
 .hero-wash { position: absolute; inset: 1.2vw max(3vw, calc((100vw - var(--content-cap)) / 2)) 3vw max(3vw, calc((100vw - var(--content-cap)) / 2)); background: linear-gradient(90deg, rgba(12,14,12,.7) 0%, rgba(12,14,12,.2) 49%, rgba(12,14,12,.04) 78%), linear-gradient(0deg, rgba(10,12,10,.28), transparent 48%); }
+@media (min-width: 1400px) {
+  /* Past this width, let the photo grow to fill whichever dimension --
+     width or height -- hits its limit first, same as object-fit: contain,
+     so it's always as big as possible without ever cropping or exceeding
+     the viewport. The frame is a real box here (not display: contents)
+     sized by its own aspect ratio; hero-image/hero-wash just fill it. */
+  .hero { display: flex; align-items: center; justify-content: center; padding: 20px max(3vw, calc((100vw - var(--content-cap)) / 2)); }
+  .hero-frame { display: block; position: relative; width: auto; height: 100%; max-width: 100%; aspect-ratio: var(--hero-aspect); }
+  .hero-image, .hero-wash { position: absolute; inset: 0; }
+}
 .brand-block { display: flex; flex-direction: column; gap: 2px; }
 .site-tagline { margin: 0; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #f5f2eb; }
 .eyebrow, .section-label { margin: 0 0 28px; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }

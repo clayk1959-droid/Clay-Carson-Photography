@@ -6,12 +6,14 @@ export default function Home() {
       <SiteHeader tagline="Family photos and Events" />
 
       <section className="hero" id="top">
-        <div
-          className="hero-image"
-          role="img"
-          aria-label="Family walking down a wooden boardwalk toward the ocean"
-        />
-        <div className="hero-wash" />
+        <div className="hero-frame">
+          <div
+            className="hero-image"
+            role="img"
+            aria-label="Family walking down a wooden boardwalk toward the ocean"
+          />
+          <div className="hero-wash" />
+        </div>
       </section>
     </main>
   );

@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 78 — Tuesday, August 18, 2026
+
+- Homepage photo now actually grows to fill the header-aligned width on wide monitors (Versions 76-77 aligned an invisible container box but the photo itself was still shrinking inside it) — it expands to fill whichever dimension, width or height, runs out first, same idea as before but now genuinely matching the header edges whenever there's room
+
 ### Version 77 — Tuesday, August 18, 2026
 
 - Lowered the width where the homepage header/photo alignment cap kicks in (Version 76 didn't actually engage until past ~1850px, wider than most stretched windows ever get) — now aligned starting around 1400px
