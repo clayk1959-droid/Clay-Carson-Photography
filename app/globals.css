@@ -245,4 +245,21 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .footer-right { min-height: 330px; }
   .copyright { margin-top: 60px; }
 }
+/* A phone rotated to landscape has very little height to work with — the
+   fixed padding/buttons above cost almost nothing when there's 800px of
+   height to spare in portrait, but eat a huge share of it here, leaving
+   the photo smaller than portrait instead of bigger. Trim the chrome down
+   so the photo gets that height back. Keyed on height, not orientation,
+   so it also helps a short desktop browser window. */
+@media (max-height: 500px) {
+  .gallery-lightbox { padding: 10px 40px 6px; grid-template-columns: 30px minmax(0, 1fr) 30px; }
+  .gallery-lightbox figure { height: calc(100svh - 16px); gap: 4px; }
+  .gallery-lightbox figcaption { font-size: 10px; }
+  .lightbox-caption { font-size: 9px; -webkit-line-clamp: 1; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+  .lightbox-count { font-size: 9px; }
+  .lightbox-close, .lightbox-edit { top: 6px; font-size: 8px; }
+  .lightbox-close { right: 10px; }
+  .lightbox-edit { right: 54px; }
+  .lightbox-arrow { width: 28px; height: 28px; font-size: 18px; }
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero-image { animation: none; } .gallery-image, .gallery-thumb, .gallery-thumb img { transition: none; } }
