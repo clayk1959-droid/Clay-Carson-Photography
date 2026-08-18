@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 66 — Monday, August 17, 2026
+
+- Fixed the full-size photo border not fitting the photo on narrow/mobile screens (and not adjusting correctly on rotation) — it now always hugs the true photo edges regardless of screen shape
+
 ### Version 65 — Monday, August 17, 2026
 
 - Light-table reorder thumbnails are 50% bigger, easier to see at a glance
