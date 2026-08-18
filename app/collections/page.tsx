@@ -3,40 +3,42 @@ import { CollectionsIndex } from "./CollectionsIndex";
 
 const cards = [
   {
-    "slug": "christian",
-    "title": "Christian",
-    "person": [],
-    "event": [],
-    "count": 16,
-    "coverBasename": "christian-01.jpg"
-  },
-  {
-    "slug": "gulf-shores-2025",
-    "title": "Gulf Shores 2025",
-    "person": [],
-    "event": [],
-    "count": 16,
-    "coverBasename": "gulf-shores-2025-14.jpg"
-  },
-  {
-    "slug": "norway",
-    "title": "Norway",
-    "person": [],
-    "event": [],
-    "count": 43,
-    "coverBasename": "norway-13.jpg"
-  },
-  {
     "slug": "janet-buys-a-car",
     "title": "Janet Buys a car",
     "person": [
-      "Janet Carson"
+      "Albert Everett",
+      "Alex Brandon",
+      "Clay Carson",
+      "DSandy Covem Church Point",
+      "Digby",
+      "Janet Carson",
+      "Mark Cobard",
+      "Phylis Conard"
     ],
     "event": [
       "Janet buys a car"
     ],
-    "count": 13,
+    "count": 14,
     "coverBasename": "janet-buys-a-car-01.jpg"
+  },
+  {
+    "slug": "nova-scotia",
+    "title": "Nova Scotia",
+    "person": [
+      "Albert Everett",
+      "Alex Brandon",
+      "Carol Mendal",
+      "Carol Mendal. Janet Carson",
+      "Janet Carson",
+      "Karen",
+      "Mark Conard",
+      "Phylis Conard",
+      "Phyllis Conard",
+      "y"
+    ],
+    "event": [],
+    "count": 73,
+    "coverBasename": "nova-scotia-01.jpg"
   }
 ];
 

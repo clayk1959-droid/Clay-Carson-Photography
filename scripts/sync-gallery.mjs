@@ -63,18 +63,8 @@ try {
 // when running `npm run dev`, or by hand) — they're applied on top of the
 // auto-detected data below and survive future syncs.
 const collections = [
-  { folder: "Christian", slug: "christian", title: "Christian", component: "ChristianPage", subtitle: null },
-  {
-    folder: "Gulf Shores 2025",
-    slug: "gulf-shores-2025",
-    title: "Gulf Shores 2025",
-    component: "GulfShoresPage",
-    subtitle: "September 2025",
-    coverPhoto: 14,
-  },
-  { folder: "Norway", slug: "norway", title: "Norway", component: "NorwayPage", subtitle: null, coverPhoto: 13 },
-  { folder: "Trip to Nova Scotia", slug: "trip-to-nova-scotia", title: "Trip to Nova Scotia", component: "TripToNovaScotiaPage", subtitle: null },
   { folder: "Janet Buys a car", slug: "janet-buys-a-car", title: "Janet Buys a car", component: "JanetBuysACarPage", subtitle: null },
+  { folder: "Nova Scotia", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.
@@ -119,6 +109,51 @@ const collections = [
       const updatedScript = scriptText.slice(0, insertPoint) + newEntries + scriptText.slice(insertPoint);
       await writeFile(thisScriptPath, updatedScript);
     }
+  }
+}
+
+// Auto-remove any registered collection whose source folder has been
+// deleted entirely from "Gallery Originals" (as opposed to merely being
+// empty, which is handled separately below) — lets a deleted folder
+// disappear from the site on the next sync instead of crashing, without
+// needing this file hand-edited afterward.
+{
+  const missingFolders = [];
+  for (const collection of collections) {
+    const exists = await access(path.join(sourceRoot, collection.folder))
+      .then(() => true)
+      .catch(() => false);
+    if (!exists) missingFolders.push(collection.folder);
+  }
+
+  if (missingFolders.length > 0) {
+    for (const folder of missingFolders) {
+      const collection = collections.find((c) => c.folder === folder);
+      await rm(path.join(root, "app", "collections", collection.slug), { recursive: true, force: true });
+      await rm(path.join(root, "public", "galleries", collection.slug), { recursive: true, force: true });
+      await rm(path.join(root, "public", "gallery-thumbnails", collection.slug), { recursive: true, force: true });
+      await rm(path.join(cacheRoot, collection.slug), { recursive: true, force: true });
+      console.log(`Removed collection "${collection.title}" — its folder no longer exists in Gallery Originals`);
+    }
+
+    const kept = collections.filter((c) => !missingFolders.includes(c.folder));
+    collections.length = 0;
+    collections.push(...kept);
+
+    const thisScriptPath = fileURLToPath(import.meta.url);
+    let scriptText = await readFile(thisScriptPath, "utf8");
+    for (const folder of missingFolders) {
+      const needle = `folder: ${JSON.stringify(folder)}`;
+      const needleIndex = scriptText.indexOf(needle);
+      if (needleIndex === -1) continue;
+      const entryStartMarker = scriptText.lastIndexOf("\n  {", needleIndex);
+      const closeIndex = scriptText.indexOf("},\n", needleIndex);
+      if (entryStartMarker === -1 || closeIndex === -1) continue;
+      const entryStart = entryStartMarker + 1;
+      const entryEnd = closeIndex + "},\n".length;
+      scriptText = scriptText.slice(0, entryStart) + scriptText.slice(entryEnd);
+    }
+    await writeFile(thisScriptPath, scriptText);
   }
 }
 
