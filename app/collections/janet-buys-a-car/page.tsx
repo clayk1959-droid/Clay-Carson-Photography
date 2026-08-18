@@ -231,7 +231,7 @@ export default function JanetBuysACarPage() {
     <main className="subpage collection-page">
       <SiteHeader showHome />
       <header className="collection-heading">
-        <a href="/collections">← Collections</a>
+        <a href="/collections">← Galleries</a>
         <h1>Janet Buys a car</h1>
         <p>13 photographs</p>
       </header>

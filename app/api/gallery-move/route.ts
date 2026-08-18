@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     return new Response("Invalid request", { status: 400 });
   }
   if (fromSlug === toSlug) {
-    return new Response("Photo is already in that collection", { status: 400 });
+    return new Response("Photo is already in that gallery", { status: 400 });
   }
   if (filename.length === 0 || filename.length > 255) {
     return new Response("Invalid filename", { status: 400 });
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
   const from = collections.find((collection) => collection.slug === fromSlug);
   const to = collections.find((collection) => collection.slug === toSlug);
   if (!from || !to) {
-    return new Response("Unknown collection", { status: 400 });
+    return new Response("Unknown gallery", { status: 400 });
   }
 
   const sourcePath = path.join(galleryOriginalsRoot, from.folder, filename);

@@ -250,6 +250,11 @@ async function readMetadata(source, fallback) {
 }
 
 const indexCards = [];
+// Flat list of every visible photo across every collection, for the
+// person/event search on the Galleries page — searching needs to find a
+// photo no matter which collection it's filed under, not just filter
+// which collection cards show.
+const indexPhotos = [];
 
 for (const collection of collections) {
   const sourceDirectory = path.join(sourceRoot, collection.folder);
@@ -453,7 +458,7 @@ for (const collection of collections) {
   const otherCollections = collections
     .filter((other) => other.slug !== collection.slug)
     .map((other) => ({ slug: other.slug, title: other.title }));
-  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { Gallery } from "../Gallery";\n\ntype PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };\n\nconst photographData: PhotographDataEntry[] = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nconst otherCollections = ${JSON.stringify(otherCollections, null, 2)};\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Collections</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={otherCollections}\n        editable={process.env.NODE_ENV === "development"}\n      />\n    </main>\n  );\n}\n`;
+  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { Gallery } from "../Gallery";\n\ntype PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };\n\nconst photographData: PhotographDataEntry[] = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nconst otherCollections = ${JSON.stringify(otherCollections, null, 2)};\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={otherCollections}\n        editable={process.env.NODE_ENV === "development"}\n      />\n    </main>\n  );\n}\n`;
   const collectionPageDirectory = path.join(root, "app", "collections", collection.slug);
   await mkdir(collectionPageDirectory, { recursive: true });
   await writeFile(path.join(collectionPageDirectory, "page.tsx"), page);
@@ -475,6 +480,20 @@ for (const collection of collections) {
     const photo = photographData[naturalRank - 1];
     for (const p of photo.person ?? []) collectionPeople.add(p);
     for (const e of photo.event ?? []) collectionEvents.add(e);
+    if ((photo.person?.length ?? 0) > 0 || (photo.event?.length ?? 0) > 0) {
+      indexPhotos.push({
+        collectionSlug: collection.slug,
+        collectionTitle: collection.title,
+        filename: photo.filename,
+        caption: photo.caption,
+        altText: photo.altText,
+        person: photo.person ?? [],
+        event: photo.event ?? [],
+        width: photo.width,
+        height: photo.height,
+        src: `/galleries/${collection.slug}/${collection.slug}-${String(naturalRank).padStart(2, "0")}.jpg`,
+      });
+    }
   }
 
   indexCards.push({
@@ -492,14 +511,15 @@ const indexPage = `import { SiteHeader } from "../SiteHeader";
 import { CollectionsIndex } from "./CollectionsIndex";
 
 const cards = ${JSON.stringify(indexCards, null, 2)};
+const photos = ${JSON.stringify(indexPhotos, null, 2)};
 
 export default function CollectionsPage() {
   return (
     <main className="subpage collections-page">
       <SiteHeader showHome />
       <section className="collections-layout">
-        <h1 className="page-title">Collections</h1>
-        <CollectionsIndex cards={cards} />
+        <h1 className="page-title">Galleries</h1>
+        <CollectionsIndex cards={cards} photos={photos} />
       </section>
     </main>
   );

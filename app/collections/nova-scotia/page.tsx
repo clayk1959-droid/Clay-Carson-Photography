@@ -417,9 +417,7 @@ const photographData: PhotographDataEntry[] = [
     "description": "Ferryto whale watching",
     "caption": "August 17, 2026 — Ferryto whale watching",
     "altText": "Ferryto whale watching",
-    "person": [
-      "y"
-    ],
+    "person": [],
     "event": [],
     "width": 2200,
     "height": 1464
@@ -455,7 +453,8 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Lighthouse",
     "altText": "Lighthouse",
     "person": [
-      "Carol Mendal. Janet Carson"
+      "Carol Mendal",
+      "Janet Carson"
     ],
     "event": [],
     "width": 2200,
@@ -479,7 +478,8 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Lighthouse",
     "altText": "Lighthouse",
     "person": [
-      "Carol Mendal. Janet Carson"
+      "Carol Mendal",
+      "Janet Carson"
     ],
     "event": [],
     "width": 2200,
@@ -492,7 +492,8 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Lighthouse",
     "altText": "Lighthouse",
     "person": [
-      "Carol Mendal. Janet Carson"
+      "Carol Mendal",
+      "Janet Carson"
     ],
     "event": [],
     "width": 2200,
@@ -895,7 +896,7 @@ export default function NovaScotiaPage() {
     <main className="subpage collection-page">
       <SiteHeader showHome />
       <header className="collection-heading">
-        <a href="/collections">← Collections</a>
+        <a href="/collections">← Galleries</a>
         <h1>Nova Scotia</h1>
         <p>61 photographs</p>
       </header>

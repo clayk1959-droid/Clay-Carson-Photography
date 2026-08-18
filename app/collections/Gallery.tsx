@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 
 type GalleryPhoto = {
   src: string;
@@ -37,6 +37,18 @@ export function Gallery({
   const previousFocus = useRef<HTMLElement | null>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
+  const showPrevious = useCallback(() => {
+    setActivePhoto((current) =>
+      current === null || current === 0 ? current : current - 1,
+    );
+  }, []);
+
+  const showNext = useCallback(() => {
+    setActivePhoto((current) =>
+      current === null || current === photographs.length - 1 ? current : current + 1,
+    );
+  }, [photographs.length]);
+
   useEffect(() => {
     if (activePhoto === null) return;
 
@@ -48,18 +60,8 @@ export function Gallery({
       // let the lightbox also react while it's open on top.
       if (editingPhoto !== null) return;
       if (event.key === "Escape") closePhoto();
-      if (event.key === "ArrowLeft") {
-        setActivePhoto((current) =>
-          current === null
-            ? null
-            : (current - 1 + photographs.length) % photographs.length,
-        );
-      }
-      if (event.key === "ArrowRight") {
-        setActivePhoto((current) =>
-          current === null ? null : (current + 1) % photographs.length,
-        );
-      }
+      if (event.key === "ArrowLeft") showPrevious();
+      if (event.key === "ArrowRight") showNext();
       if (event.key === "Tab") {
         const controls = dialog.current?.querySelectorAll<HTMLElement>(
           'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
@@ -82,7 +84,7 @@ export function Gallery({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [activePhoto, photographs.length, editingPhoto]);
+  }, [activePhoto, photographs.length, editingPhoto, showPrevious, showNext]);
 
   useEffect(() => {
     if (activePhoto !== null) {
@@ -101,20 +103,6 @@ export function Gallery({
     observer.observe(image);
     return () => observer.disconnect();
   }, [activePhoto]);
-
-  function showPrevious() {
-    setActivePhoto((current) =>
-      current === null
-        ? null
-        : (current - 1 + photographs.length) % photographs.length,
-    );
-  }
-
-  function showNext() {
-    setActivePhoto((current) =>
-      current === null ? null : (current + 1) % photographs.length,
-    );
-  }
 
   function openPhoto(index: number) {
     previousFocus.current = document.activeElement as HTMLElement | null;
@@ -206,6 +194,7 @@ export function Gallery({
           <button
             className="lightbox-arrow lightbox-previous"
             type="button"
+            disabled={activePhoto === 0}
             onClick={(event) => {
               event.stopPropagation();
               showPrevious();
@@ -267,6 +256,7 @@ export function Gallery({
           <button
             className="lightbox-arrow lightbox-next"
             type="button"
+            disabled={activePhoto === photographs.length - 1}
             onClick={(event) => {
               event.stopPropagation();
               showNext();
@@ -607,7 +597,7 @@ function EditPhotoForm({
       });
       if (!response.ok) throw new Error(await response.text());
       setSavedMessage(
-        <>Set as the collection cover — click <strong>Sync Gallery</strong> (bottom right) to apply.</>,
+        <>Set as the gallery cover — click <strong>Sync Gallery</strong> (bottom right) to apply.</>,
       );
       setStatus("saved");
     } catch (error) {
@@ -683,7 +673,7 @@ function EditPhotoForm({
         )}
 
         <div className="edit-photo-cover">
-          <p>Use this photo as the collection&rsquo;s cover — preview and pick a crop:</p>
+          <p>Use this photo as the gallery&rsquo;s cover — preview and pick a crop:</p>
           <div className="edit-photo-cover-row">
             <div className="edit-photo-cover-preview">
               <img src={photograph.src} alt="" style={{ objectPosition: coverPosition }} />
@@ -719,7 +709,7 @@ function EditPhotoForm({
             disabled={status === "saving"}
             onClick={() => handleSetCover(coverPosition)}
           >
-            Set as collection cover
+            Set as gallery cover
           </button>
         </div>
 

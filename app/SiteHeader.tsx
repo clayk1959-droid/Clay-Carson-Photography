@@ -6,7 +6,7 @@ export function SiteHeader({ showHome = false }: { showHome?: boolean }) {
       </a>
       <nav className="site-nav" aria-label="Main navigation">
         {showHome && <a href="/">Home</a>}
-        <a href="/collections">Collections</a>
+        <a href="/collections">Galleries</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
       </nav>

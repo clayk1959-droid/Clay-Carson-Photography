@@ -14,12 +14,6 @@ export default function Home() {
         <div className="hero-wash" />
         <div className="hero-copy">
           <p className="eyebrow">Family photos, all in one place</p>
-          <h1 className="hero-title">Every memory, together</h1>
-          <p className="intro">
-            People, Events and everyday life
-            <br />
-            — browse it all right here
-          </p>
         </div>
       </section>
     </main>
