@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 79 — Tuesday, August 18, 2026
+
+- Homepage header and photo now share one exact computed width instead of two separate formulas that happened to often match — the brand name's left edge and the nav's right edge always line up exactly with the photo's edges on wide monitors, whatever the window's proportions, and the photo always grows as large as possible without ever cropping or scrolling. Subpages (Galleries, About, Contact) are unaffected — their headers stay on the plain layout they've always had.
+
 ### Version 78 — Tuesday, August 18, 2026
 
 - Homepage photo now actually grows to fill the header-aligned width on wide monitors (Versions 76-77 aligned an invisible container box but the photo itself was still shrinking inside it) — it expands to fill whichever dimension, width or height, runs out first, same idea as before but now genuinely matching the header edges whenever there's room

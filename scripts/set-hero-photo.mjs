@@ -47,20 +47,29 @@ async function main() {
   const resultMetadata = await result.metadata();
   console.log(`Saved to public/lead-photo.jpg at ${resultMetadata.width}x${resultMetadata.height}`);
 
-  // On wide screens the homepage sizes the photo to its own aspect ratio
-  // (see the "min-width: 1400px" block in globals.css) instead of cropping
-  // or letterboxing it, so that value has to track whatever photo is
-  // actually installed here.
+  // On wide screens the header and the photo both size themselves off the
+  // photo's own aspect ratio (see the "min-width: 1400px" block in
+  // globals.css) so their edges always line up, instead of cropping or
+  // letterboxing -- so both of these have to track whatever photo is
+  // actually installed here. --hero-aspect feeds the CSS aspect-ratio
+  // property directly; --hero-ratio is the same ratio as a plain number,
+  // needed for the width/height calc() math CSS can't do with a ratio value.
+  const ratio = resultMetadata.width / resultMetadata.height;
   const css = await readFile(cssPath, "utf8");
-  const updatedCss = css.replace(
-    /--hero-aspect:\s*[\d.]+\s*\/\s*[\d.]+;/,
-    `--hero-aspect: ${resultMetadata.width} / ${resultMetadata.height};`,
-  );
-  if (updatedCss === css) {
-    console.warn("\nCouldn't find --hero-aspect in app/globals.css to update -- update it by hand.");
+  const aspectRe = /--hero-aspect:\s*[\d.]+\s*\/\s*[\d.]+;/;
+  const ratioRe = /--hero-ratio:\s*[\d.]+;/;
+  if (!aspectRe.test(css) || !ratioRe.test(css)) {
+    console.warn(
+      "\nCouldn't find --hero-aspect and/or --hero-ratio in app/globals.css to update -- update them by hand.",
+    );
   } else {
+    const updatedCss = css
+      .replace(aspectRe, `--hero-aspect: ${resultMetadata.width} / ${resultMetadata.height};`)
+      .replace(ratioRe, `--hero-ratio: ${ratio.toFixed(4)};`);
     await writeFile(cssPath, updatedCss);
-    console.log(`Updated --hero-aspect to ${resultMetadata.width} / ${resultMetadata.height} in app/globals.css`);
+    console.log(
+      `Updated --hero-aspect to ${resultMetadata.width} / ${resultMetadata.height} and --hero-ratio to ${ratio.toFixed(4)} in app/globals.css`,
+    );
   }
 
   console.log("\nRun `npm run dev` and check the homepage. If it looks right, run `npm run save` to publish it.");

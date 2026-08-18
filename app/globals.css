@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap');
 
-:root { --ink: #1d211d; --paper: #f1eee7; --moss: #707866; --cream: #e8e3d8; --content-cap: 1400px; --hero-aspect: 2600 / 1759; }
+:root { --ink: #1d211d; --paper: #f1eee7; --moss: #707866; --cream: #e8e3d8; --content-cap: 1700px; --hero-aspect: 2600 / 1759; --hero-ratio: 1.478; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; }
 a { color: inherit; text-decoration: none; }
-.site-header { height: 96px; padding: 0 max(4.5vw, calc((100vw - var(--content-cap)) / 2)); display: grid; grid-template-columns: 1fr auto; align-items: center; background: #171a17; color: #f5f2eb; }
+.site-header { height: 96px; background: #171a17; color: #f5f2eb; }
+.site-header-inner { height: 100%; padding: 0 4.5vw; display: grid; grid-template-columns: 1fr auto; align-items: center; }
 .brand { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 35px; font-style: normal; font-weight: 400; letter-spacing: .015em; line-height: 1.05; }
 .brand small { margin-left: 6px; font: inherit; font-size: .53em; font-style: normal; letter-spacing: .11em; vertical-align: baseline; }
 .site-nav { display: flex; gap: 10px; font-size: 10px; text-transform: uppercase; letter-spacing: .16em; }
@@ -18,13 +19,25 @@ a { color: inherit; text-decoration: none; }
 .hero-image { position: absolute; inset: 1.2vw max(3vw, calc((100vw - var(--content-cap)) / 2)) 3vw max(3vw, calc((100vw - var(--content-cap)) / 2)); background: url('/lead-photo.jpg') center 48% / contain no-repeat; animation: settle 1.4s ease-out both; }
 .hero-wash { position: absolute; inset: 1.2vw max(3vw, calc((100vw - var(--content-cap)) / 2)) 3vw max(3vw, calc((100vw - var(--content-cap)) / 2)); background: linear-gradient(90deg, rgba(12,14,12,.7) 0%, rgba(12,14,12,.2) 49%, rgba(12,14,12,.04) 78%), linear-gradient(0deg, rgba(10,12,10,.28), transparent 48%); }
 @media (min-width: 1400px) {
-  /* Past this width, let the photo grow to fill whichever dimension --
-     width or height -- hits its limit first, same as object-fit: contain,
-     so it's always as big as possible without ever cropping or exceeding
-     the viewport. The frame is a real box here (not display: contents)
-     sized by its own aspect ratio; hero-image/hero-wash just fill it. */
-  .hero { display: flex; align-items: center; justify-content: center; padding: 20px max(3vw, calc((100vw - var(--content-cap)) / 2)); }
-  .hero-frame { display: block; position: relative; width: auto; height: 100%; max-width: 100%; aspect-ratio: var(--hero-aspect); }
+  /* Past this width, the header's content and the hero photo both size to
+     the exact same computed width, so their edges always line up -- rather
+     than aligning to independent formulas that happen to often match. That
+     shared width is whichever is smaller: the available viewport width
+     (up to --content-cap), or the widest the photo can get without
+     exceeding the available viewport height. This also means the photo
+     always grows to fill whichever dimension runs out first, same as
+     object-fit: contain, instead of ever cropping or forcing a scrollbar. */
+  :root {
+    --hero-frame-width: min(min(calc(100vw - 6vw), var(--content-cap)), calc((100vh - 136px) * var(--hero-ratio)));
+  }
+  .site-header-inner { max-width: var(--hero-frame-width); margin: 0 auto; padding: 0; }
+  /* Subpages have their own, separate 1440px content cap on the page body
+     (.collections-layout, .about-simple, etc.) -- keep their header on its
+     plain, uncapped padding rather than aligning it to a hero photo they
+     don't show, which would just create a different mismatch. */
+  .subpage .site-header-inner { max-width: none; margin: 0; padding: 0 4.5vw; }
+  .hero { display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+  .hero-frame { display: block; position: relative; width: var(--hero-frame-width); aspect-ratio: var(--hero-aspect); }
   .hero-image, .hero-wash { position: absolute; inset: 0; }
 }
 .brand-block { display: flex; flex-direction: column; gap: 2px; }
@@ -213,7 +226,8 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
 .copyright { grid-column: 1 / -1; margin: 80px 0 0; padding-top: 22px; border-top: 1px solid #3f423e; font-size: 9px; text-transform: uppercase; letter-spacing: .15em; color: #8a8d87; }
 @keyframes settle { from { opacity: .78; } to { opacity: 1; } }
 @media (max-width: 800px) {
-  .site-header { height: 128px; padding: 18px 5vw; grid-template-columns: 1fr; align-content: center; gap: 14px; }
+  .site-header { height: 128px; }
+  .site-header-inner { padding: 18px 5vw; grid-template-columns: 1fr; align-content: center; gap: 14px; }
   .brand { font-size: 29px; }
   .site-nav { gap: 7px; }
   .site-nav a { min-width: 0; flex: 1; padding: 9px 7px 8px; font-size: 8px; }
