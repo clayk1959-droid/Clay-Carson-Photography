@@ -5,6 +5,8 @@ export default function Home() {
     <main>
       <SiteHeader />
 
+      <p className="hero-eyebrow">Family photos and Events</p>
+
       <section className="hero" id="top">
         <div
           className="hero-image"
@@ -12,9 +14,6 @@ export default function Home() {
           aria-label="Family walking down a wooden boardwalk toward the ocean"
         />
         <div className="hero-wash" />
-        <div className="hero-copy">
-          <p className="eyebrow">Family photos, all in one place</p>
-        </div>
       </section>
     </main>
   );

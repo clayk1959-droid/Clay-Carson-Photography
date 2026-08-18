@@ -81,7 +81,7 @@ try {
 // auto-detected data below and survive future syncs.
 const collections = [
   { folder: "Janet Buys a car", slug: "janet-buys-a-car", title: "Janet Buys a car", component: "JanetBuysACarPage", subtitle: null },
-  { folder: "Nova Scotia", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null },
+  { folder: "Nova Scotia Trip", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.
@@ -204,15 +204,6 @@ function decodeXml(value) {
     .replaceAll("&apos;", "'");
 }
 
-function humanizeFilename(filename) {
-  return filename
-    .replace(/\.[^.]+$/, "")
-    .replace(/^(BEACH|NORWAY)\s*[-_]\s*/i, "")
-    .replaceAll("_", " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
 function formatDate(isoDate) {
   const [year, month, day] = isoDate.split("-").map(Number);
   return new Date(year, month - 1, day).toLocaleDateString("en-US", {
@@ -241,7 +232,9 @@ async function readMetadata(source, fallback) {
   const altText = contents.match(
     /<Iptc4xmpCore:AltTextAccessibility>[\s\S]*?<rdf:li[^>]*>([\s\S]*?)<\/rdf:li>[\s\S]*?<\/Iptc4xmpCore:AltTextAccessibility>/,
   )?.[1]?.trim();
-  const description = altText ? decodeXml(altText) : humanizeFilename(fallback);
+  // No Alt Text set — a bare camera filename like "L1020539" makes for a
+  // useless caption, so fall back to the gallery's own name instead.
+  const description = altText ? decodeXml(altText) : fallback;
   const match = creation?.match(/^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
   const date = match ? `${match[1]}-${match[2]}-${match[3]}` : null;
   const person = parseIptcExtList(contents, "PersonInImage");
@@ -380,7 +373,7 @@ for (const collection of collections) {
     const auto =
       cachedMetadata && cachedMetadata.mtimeMs === metadataSourceMtimeMs
         ? cachedMetadata
-        : await readMetadata(metadataSource, filename);
+        : await readMetadata(metadataSource, collection.title);
     metadataCache[filename] = {
       mtimeMs: metadataSourceMtimeMs,
       date: auto.date,

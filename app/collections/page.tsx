@@ -25,10 +25,11 @@ const cards = [
       "Janet Carson",
       "Karen",
       "Mark Conard",
-      "Phylis Conard",
       "Phyllis Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "count": 61,
     "coverBasename": "nova-scotia-11.jpg",
     "coverPosition": "center center"
@@ -253,7 +254,9 @@ const photos = [
       "Janet Carson",
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-01.jpg"
@@ -262,12 +265,14 @@ const photos = [
     "collectionSlug": "nova-scotia",
     "collectionTitle": "Nova Scotia",
     "filename": "L1019992.jpg",
-    "caption": "August 17, 2026 — L1019992",
-    "altText": "L1019992",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-02.jpg"
@@ -282,7 +287,9 @@ const photos = [
       "Albert Everett",
       "Janet Carson"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-03.jpg"
@@ -296,7 +303,9 @@ const photos = [
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-04.jpg"
@@ -310,7 +319,9 @@ const photos = [
     "person": [
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1579,
     "src": "/galleries/nova-scotia/nova-scotia-05.jpg"
@@ -318,14 +329,30 @@ const photos = [
   {
     "collectionSlug": "nova-scotia",
     "collectionTitle": "Nova Scotia",
+    "filename": "L1020055.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1465,
+    "src": "/galleries/nova-scotia/nova-scotia-06.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
     "filename": "L1020063.jpg",
-    "caption": "August 17, 2026 — L1020063",
-    "altText": "L1020063",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Mark Conard",
       "Albert Everett"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1463,
     "src": "/galleries/nova-scotia/nova-scotia-07.jpg"
@@ -340,10 +367,40 @@ const photos = [
       "Albert Everett",
       "Karen"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-08.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020121.jpg",
+    "caption": "August 17, 2026 — Sandy Cove family home",
+    "altText": "Sandy Cove family home",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1950,
+    "src": "/galleries/nova-scotia/nova-scotia-11.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020102.jpg",
+    "caption": "August 17, 2026 — Sandy Cove family home",
+    "altText": "Sandy Cove family home",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1464,
+    "src": "/galleries/nova-scotia/nova-scotia-10.jpg"
   },
   {
     "collectionSlug": "nova-scotia",
@@ -355,7 +412,9 @@ const photos = [
       "Albert Everett",
       "Karen"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1463,
     "src": "/galleries/nova-scotia/nova-scotia-12.jpg"
@@ -370,10 +429,40 @@ const photos = [
       "Albert Everett",
       "Karen"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 1257,
     "height": 1385,
     "src": "/galleries/nova-scotia/nova-scotia-14.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020165.jpg",
+    "caption": "August 17, 2026 — Grandpa’s home",
+    "altText": "Grandpa’s home",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1464,
+    "src": "/galleries/nova-scotia/nova-scotia-15.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020174.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1327,
+    "src": "/galleries/nova-scotia/nova-scotia-16.jpg"
   },
   {
     "collectionSlug": "nova-scotia",
@@ -386,7 +475,9 @@ const photos = [
       "Alex Brandon",
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-17.jpg"
@@ -400,10 +491,54 @@ const photos = [
     "person": [
       "Albert Everett"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1653,
     "src": "/galleries/nova-scotia/nova-scotia-18.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020242.jpg",
+    "caption": "August 17, 2026 — Sandy Cove cemetary",
+    "altText": "Sandy Cove cemetary",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1616,
+    "src": "/galleries/nova-scotia/nova-scotia-19.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020254.jpg",
+    "caption": "August 17, 2026 — Sandy Cove cemetary",
+    "altText": "Sandy Cove cemetary",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1464,
+    "src": "/galleries/nova-scotia/nova-scotia-20.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020277.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1463,
+    "src": "/galleries/nova-scotia/nova-scotia-21.jpg"
   },
   {
     "collectionSlug": "nova-scotia",
@@ -414,10 +549,26 @@ const photos = [
     "person": [
       "Carol Mendal"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-22.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020338.jpg",
+    "caption": "August 17, 2026 — Deck view",
+    "altText": "Deck view",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1464,
+    "src": "/galleries/nova-scotia/nova-scotia-24.jpg"
   },
   {
     "collectionSlug": "nova-scotia",
@@ -427,10 +578,12 @@ const photos = [
     "altText": "Home base Church Point",
     "person": [
       "Janet Carson",
-      "Phylis Conard",
+      "Phyllis Conard",
       "Carol Mendal"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-25.jpg"
@@ -439,12 +592,14 @@ const photos = [
     "collectionSlug": "nova-scotia",
     "collectionTitle": "Nova Scotia",
     "filename": "L1020365.jpg",
-    "caption": "August 17, 2026 — L1020365",
-    "altText": "L1020365",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1479,
     "src": "/galleries/nova-scotia/nova-scotia-26.jpg"
@@ -452,13 +607,29 @@ const photos = [
   {
     "collectionSlug": "nova-scotia",
     "collectionTitle": "Nova Scotia",
+    "filename": "L1020370.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1512,
+    "src": "/galleries/nova-scotia/nova-scotia-27.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
     "filename": "L1020376.jpg",
-    "caption": "August 17, 2026 — L1020376",
-    "altText": "L1020376",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-28.jpg"
@@ -467,12 +638,14 @@ const photos = [
     "collectionSlug": "nova-scotia",
     "collectionTitle": "Nova Scotia",
     "filename": "L1020380.jpg",
-    "caption": "August 17, 2026 — L1020380",
-    "altText": "L1020380",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-29.jpg"
@@ -480,13 +653,29 @@ const photos = [
   {
     "collectionSlug": "nova-scotia",
     "collectionTitle": "Nova Scotia",
+    "filename": "L1020386.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1854,
+    "src": "/galleries/nova-scotia/nova-scotia-30.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
     "filename": "L1020395.jpg",
-    "caption": "August 17, 2026 — L1020395",
-    "altText": "L1020395",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-31.jpg"
@@ -494,13 +683,57 @@ const photos = [
   {
     "collectionSlug": "nova-scotia",
     "collectionTitle": "Nova Scotia",
+    "filename": "L1020416.jpg",
+    "caption": "August 17, 2026 — An excuse to rest while climbing lighthouse",
+    "altText": "An excuse to rest while climbing lighthouse",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 1306,
+    "height": 2200,
+    "src": "/galleries/nova-scotia/nova-scotia-32.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020449.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1464,
+    "src": "/galleries/nova-scotia/nova-scotia-33.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020461.jpg",
+    "caption": "August 17, 2026 — Ferryto whale watching",
+    "altText": "Ferryto whale watching",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1464,
+    "src": "/galleries/nova-scotia/nova-scotia-34.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
     "filename": "L1020496.jpg",
-    "caption": "August 17, 2026 — L1020496",
-    "altText": "L1020496",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1467,
     "src": "/galleries/nova-scotia/nova-scotia-36.jpg"
@@ -515,7 +748,9 @@ const photos = [
       "Carol Mendal",
       "Janet Carson"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-37.jpg"
@@ -530,7 +765,9 @@ const photos = [
       "Carol Mendal",
       "Janet Carson"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1442,
     "src": "/galleries/nova-scotia/nova-scotia-39.jpg"
@@ -545,10 +782,68 @@ const photos = [
       "Carol Mendal",
       "Janet Carson"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1675,
     "src": "/galleries/nova-scotia/nova-scotia-40.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020541.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1530,
+    "src": "/galleries/nova-scotia/nova-scotia-41.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020550.jpg",
+    "caption": "August 17, 2026 — L1020550",
+    "altText": "L1020550",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 1091,
+    "height": 680,
+    "src": "/galleries/nova-scotia/nova-scotia-42.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020560.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1464,
+    "src": "/galleries/nova-scotia/nova-scotia-43.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020586.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2155,
+    "height": 2200,
+    "src": "/galleries/nova-scotia/nova-scotia-44.jpg"
   },
   {
     "collectionSlug": "nova-scotia",
@@ -562,10 +857,54 @@ const photos = [
       "Janet Carson",
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464,
     "src": "/galleries/nova-scotia/nova-scotia-45.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020615.jpg",
+    "caption": "August 17, 2026 — Crazy kids",
+    "altText": "Crazy kids",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1423,
+    "src": "/galleries/nova-scotia/nova-scotia-46.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020651.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1252,
+    "src": "/galleries/nova-scotia/nova-scotia-47.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020855.jpg",
+    "caption": "August 17, 2026 — Whale watching",
+    "altText": "Whale watching",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2122,
+    "height": 1443,
+    "src": "/galleries/nova-scotia/nova-scotia-49.jpg"
   },
   {
     "collectionSlug": "nova-scotia",
@@ -576,7 +915,9 @@ const photos = [
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1388,
     "src": "/galleries/nova-scotia/nova-scotia-51.jpg"
@@ -584,14 +925,100 @@ const photos = [
   {
     "collectionSlug": "nova-scotia",
     "collectionTitle": "Nova Scotia",
+    "filename": "L1020991.jpg",
+    "caption": "August 17, 2026 — Whale watching.  Right underneath us",
+    "altText": "Whale watching.  Right underneath us",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1441,
+    "src": "/galleries/nova-scotia/nova-scotia-52.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1020995.jpg",
+    "caption": "August 17, 2026 — Whale watching",
+    "altText": "Whale watching",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 1774,
+    "height": 2200,
+    "src": "/galleries/nova-scotia/nova-scotia-53.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021067.jpg",
+    "caption": "August 17, 2026 — Whale watching",
+    "altText": "Whale watching",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 663,
+    "height": 414,
+    "src": "/galleries/nova-scotia/nova-scotia-56.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021088.jpg",
+    "caption": "August 17, 2026 — Whale watching",
+    "altText": "Whale watching",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 484,
+    "height": 267,
+    "src": "/galleries/nova-scotia/nova-scotia-58.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021113.jpg",
+    "caption": "August 17, 2026 — Whale watching",
+    "altText": "Whale watching",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1807,
+    "src": "/galleries/nova-scotia/nova-scotia-60.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021146.jpg",
+    "caption": "August 17, 2026 — Light house",
+    "altText": "Light house",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1185,
+    "src": "/galleries/nova-scotia/nova-scotia-61.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
     "filename": "L1021174.jpg",
-    "caption": "August 17, 2026 — L1021174",
-    "altText": "L1021174",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Janet Carson",
       "Phyllis Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1472,
     "src": "/galleries/nova-scotia/nova-scotia-62.jpg"
@@ -606,10 +1033,138 @@ const photos = [
       "Albert Everett",
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1568,
     "src": "/galleries/nova-scotia/nova-scotia-63.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021182.jpg",
+    "caption": "August 17, 2026 — He made the bread",
+    "altText": "He made the bread",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1464,
+    "src": "/galleries/nova-scotia/nova-scotia-64.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021187.jpg",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 1156,
+    "height": 747,
+    "src": "/galleries/nova-scotia/nova-scotia-65.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021226.jpg",
+    "caption": "August 17, 2026 — Peggy’s cove lighthouse",
+    "altText": "Peggy’s cove lighthouse",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1445,
+    "src": "/galleries/nova-scotia/nova-scotia-66.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021249.jpg",
+    "caption": "August 17, 2026 — Peggy’s cove lighthouse",
+    "altText": "Peggy’s cove lighthouse",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 1318,
+    "height": 2200,
+    "src": "/galleries/nova-scotia/nova-scotia-67.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021253.jpg",
+    "caption": "August 17, 2026 — Peggy’s cove",
+    "altText": "Peggy’s cove",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1653,
+    "src": "/galleries/nova-scotia/nova-scotia-68.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021261.jpg",
+    "caption": "August 17, 2026 — Peggy’s cove",
+    "altText": "Peggy’s cove",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1383,
+    "src": "/galleries/nova-scotia/nova-scotia-69.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021263.jpg",
+    "caption": "August 17, 2026 — Peggy’s cove",
+    "altText": "Peggy’s cove",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1595,
+    "src": "/galleries/nova-scotia/nova-scotia-70.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021276.jpg",
+    "caption": "August 17, 2026 — Peggy’s cove",
+    "altText": "Peggy’s cove",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1411,
+    "src": "/galleries/nova-scotia/nova-scotia-71.jpg"
+  },
+  {
+    "collectionSlug": "nova-scotia",
+    "collectionTitle": "Nova Scotia",
+    "filename": "L1021297.jpg",
+    "caption": "August 17, 2026 — Peggy’s cove",
+    "altText": "Peggy’s cove",
+    "person": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
+    "width": 2200,
+    "height": 1013,
+    "src": "/galleries/nova-scotia/nova-scotia-72.jpg"
   }
 ];
 

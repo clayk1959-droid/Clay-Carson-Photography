@@ -14,20 +14,24 @@ const photographData: PhotographDataEntry[] = [
       "Janet Carson",
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
   {
     "filename": "L1019992.jpg",
     "date": "2026-08-17",
-    "description": "L1019992",
-    "caption": "August 17, 2026 — L1019992",
-    "altText": "L1019992",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -41,7 +45,9 @@ const photographData: PhotographDataEntry[] = [
       "Albert Everett",
       "Janet Carson"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -54,7 +60,9 @@ const photographData: PhotographDataEntry[] = [
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -67,32 +75,38 @@ const photographData: PhotographDataEntry[] = [
     "person": [
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1579
   },
   {
     "filename": "L1020055.jpg",
     "date": "2026-08-17",
-    "description": "L1020055",
-    "caption": "August 17, 2026 — L1020055",
-    "altText": "L1020055",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1465
   },
   {
     "filename": "L1020063.jpg",
     "date": "2026-08-17",
-    "description": "L1020063",
-    "caption": "August 17, 2026 — L1020063",
-    "altText": "L1020063",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Mark Conard",
       "Albert Everett"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1463
   },
@@ -106,7 +120,9 @@ const photographData: PhotographDataEntry[] = [
       "Albert Everett",
       "Karen"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -128,7 +144,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Sandy Cove family home",
     "altText": "Sandy Cove family home",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -139,7 +157,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Sandy Cove family home",
     "altText": "Sandy Cove family home",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1950
   },
@@ -153,7 +173,9 @@ const photographData: PhotographDataEntry[] = [
       "Albert Everett",
       "Karen"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1463
   },
@@ -178,7 +200,9 @@ const photographData: PhotographDataEntry[] = [
       "Albert Everett",
       "Karen"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 1257,
     "height": 1385
   },
@@ -189,18 +213,22 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Grandpa’s home",
     "altText": "Grandpa’s home",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
   {
     "filename": "L1020174.jpg",
     "date": "2026-08-17",
-    "description": "L1020174",
-    "caption": "August 17, 2026 — L1020174",
-    "altText": "L1020174",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1327
   },
@@ -215,7 +243,9 @@ const photographData: PhotographDataEntry[] = [
       "Alex Brandon",
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -228,7 +258,9 @@ const photographData: PhotographDataEntry[] = [
     "person": [
       "Albert Everett"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1653
   },
@@ -239,7 +271,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Sandy Cove cemetary",
     "altText": "Sandy Cove cemetary",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1616
   },
@@ -250,18 +284,22 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Sandy Cove cemetary",
     "altText": "Sandy Cove cemetary",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
   {
     "filename": "L1020277.jpg",
     "date": "2026-08-17",
-    "description": "L1020277",
-    "caption": "August 17, 2026 — L1020277",
-    "altText": "L1020277",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1463
   },
@@ -274,7 +312,9 @@ const photographData: PhotographDataEntry[] = [
     "person": [
       "Carol Mendal"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -296,7 +336,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Deck view",
     "altText": "Deck view",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -308,84 +350,98 @@ const photographData: PhotographDataEntry[] = [
     "altText": "Home base Church Point",
     "person": [
       "Janet Carson",
-      "Phylis Conard",
+      "Phyllis Conard",
       "Carol Mendal"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
   {
     "filename": "L1020365.jpg",
     "date": "2026-08-17",
-    "description": "L1020365",
-    "caption": "August 17, 2026 — L1020365",
-    "altText": "L1020365",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1479
   },
   {
     "filename": "L1020370.jpg",
     "date": "2026-08-17",
-    "description": "L1020370",
-    "caption": "August 17, 2026 — L1020370",
-    "altText": "L1020370",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1512
   },
   {
     "filename": "L1020376.jpg",
     "date": "2026-08-17",
-    "description": "L1020376",
-    "caption": "August 17, 2026 — L1020376",
-    "altText": "L1020376",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Mark Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
   {
     "filename": "L1020380.jpg",
     "date": "2026-08-17",
-    "description": "L1020380",
-    "caption": "August 17, 2026 — L1020380",
-    "altText": "L1020380",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
   {
     "filename": "L1020386.jpg",
     "date": "2026-08-17",
-    "description": "L1020386",
-    "caption": "August 17, 2026 — L1020386",
-    "altText": "L1020386",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1854
   },
   {
     "filename": "L1020395.jpg",
     "date": "2026-08-17",
-    "description": "L1020395",
-    "caption": "August 17, 2026 — L1020395",
-    "altText": "L1020395",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -396,18 +452,22 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — An excuse to rest while climbing lighthouse",
     "altText": "An excuse to rest while climbing lighthouse",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 1306,
     "height": 2200
   },
   {
     "filename": "L1020449.jpg",
     "date": "2026-08-17",
-    "description": "L1020449",
-    "caption": "August 17, 2026 — L1020449",
-    "altText": "L1020449",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -418,7 +478,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Ferryto whale watching",
     "altText": "Ferryto whale watching",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -436,13 +498,15 @@ const photographData: PhotographDataEntry[] = [
   {
     "filename": "L1020496.jpg",
     "date": "2026-08-17",
-    "description": "L1020496",
-    "caption": "August 17, 2026 — L1020496",
-    "altText": "L1020496",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1467
   },
@@ -456,7 +520,9 @@ const photographData: PhotographDataEntry[] = [
       "Carol Mendal",
       "Janet Carson"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -481,7 +547,9 @@ const photographData: PhotographDataEntry[] = [
       "Carol Mendal",
       "Janet Carson"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1442
   },
@@ -495,18 +563,22 @@ const photographData: PhotographDataEntry[] = [
       "Carol Mendal",
       "Janet Carson"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1675
   },
   {
     "filename": "L1020541.jpg",
     "date": "2026-08-17",
-    "description": "L1020541",
-    "caption": "August 17, 2026 — L1020541",
-    "altText": "L1020541",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1530
   },
@@ -517,29 +589,35 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — L1020550",
     "altText": "L1020550",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 1091,
     "height": 680
   },
   {
     "filename": "L1020560.jpg",
     "date": "2026-08-17",
-    "description": "L1020560",
-    "caption": "August 17, 2026 — L1020560",
-    "altText": "L1020560",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
   {
     "filename": "L1020586.jpg",
     "date": "2026-08-17",
-    "description": "L1020586",
-    "caption": "August 17, 2026 — L1020586",
-    "altText": "L1020586",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2155,
     "height": 2200
   },
@@ -555,7 +633,9 @@ const photographData: PhotographDataEntry[] = [
       "Janet Carson",
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
@@ -566,18 +646,22 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Crazy kids",
     "altText": "Crazy kids",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1423
   },
   {
     "filename": "L1020651.jpg",
     "date": "2026-08-17",
-    "description": "L1020651",
-    "caption": "August 17, 2026 — L1020651",
-    "altText": "L1020651",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1252
   },
@@ -599,7 +683,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Whale watching",
     "altText": "Whale watching",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2122,
     "height": 1443
   },
@@ -623,7 +709,9 @@ const photographData: PhotographDataEntry[] = [
     "person": [
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1388
   },
@@ -634,7 +722,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Whale watching.  Right underneath us",
     "altText": "Whale watching.  Right underneath us",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1441
   },
@@ -645,7 +735,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Whale watching",
     "altText": "Whale watching",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 1774,
     "height": 2200
   },
@@ -678,7 +770,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Whale watching",
     "altText": "Whale watching",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 663,
     "height": 414
   },
@@ -700,7 +794,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Whale watching",
     "altText": "Whale watching",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 484,
     "height": 267
   },
@@ -722,7 +818,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Whale watching",
     "altText": "Whale watching",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1807
   },
@@ -733,21 +831,25 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Light house",
     "altText": "Light house",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1185
   },
   {
     "filename": "L1021174.jpg",
     "date": "2026-08-17",
-    "description": "L1021174",
-    "caption": "August 17, 2026 — L1021174",
-    "altText": "L1021174",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [
       "Janet Carson",
       "Phyllis Conard"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1472
   },
@@ -761,7 +863,9 @@ const photographData: PhotographDataEntry[] = [
       "Albert Everett",
       "Alex Brandon"
     ],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1568
   },
@@ -772,18 +876,22 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — He made the bread",
     "altText": "He made the bread",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1464
   },
   {
     "filename": "L1021187.jpg",
     "date": "2026-08-17",
-    "description": "L1021187",
-    "caption": "August 17, 2026 — L1021187",
-    "altText": "L1021187",
+    "description": "Nova Scotia",
+    "caption": "August 17, 2026 — Nova Scotia",
+    "altText": "Nova Scotia",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 1156,
     "height": 747
   },
@@ -794,7 +902,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Peggy’s cove lighthouse",
     "altText": "Peggy’s cove lighthouse",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1445
   },
@@ -805,7 +915,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Peggy’s cove lighthouse",
     "altText": "Peggy’s cove lighthouse",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 1318,
     "height": 2200
   },
@@ -816,7 +928,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Peggy’s cove",
     "altText": "Peggy’s cove",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1653
   },
@@ -827,7 +941,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Peggy’s cove",
     "altText": "Peggy’s cove",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1383
   },
@@ -838,7 +954,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Peggy’s cove",
     "altText": "Peggy’s cove",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1595
   },
@@ -849,7 +967,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Peggy’s cove",
     "altText": "Peggy’s cove",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1411
   },
@@ -860,7 +980,9 @@ const photographData: PhotographDataEntry[] = [
     "caption": "August 17, 2026 — Peggy’s cove",
     "altText": "Peggy’s cove",
     "person": [],
-    "event": [],
+    "event": [
+      "Nova Scotia Trip"
+    ],
     "width": 2200,
     "height": 1013
   },
