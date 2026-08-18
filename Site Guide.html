@@ -400,6 +400,19 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 68</span><span class="version-date">Tuesday, August 18, 2026</span></div>
+      <p><strong>Functionality</strong></p>
+      <ul><li>Full-size photo viewer no longer loops past the first/last photo — arrows dim and disable at each end instead</li>
+      <li>Arrows are hidden on phones/tablets (swipe already works there), which also lets the photo use the space they used to take up</li>
+      <li>Renamed "Collection(s)" to "Gallery/Galleries" throughout the site's wording (nav, headings, buttons, etc.) — web addresses are unchanged</li>
+      <li>Fixed the caption sitting apart from the photo instead of hugging it in the full-size viewer — this was also why the Janet Buys a Car and Nova Scotia galleries looked inconsistent with each other</li>
+      <li>New: picking a person or event now shows an actual search — every matching photo across every gallery, not just which gallery cards to show — with a Clear button to get back to the normal Galleries page</li></ul>
+      <p><strong>Typography</strong></p>
+      <ul><li>Tightened several gaps (hero-to-header, header-to-title, title-to-grid) and removed the two homepage subtitle lines</li>
+      <li>Gallery card names and photo counts are bigger and closer together; the rule line and "View collection" link are gone</li>
+      <li>People/Events labels, photo counts, and the gallery back-link are now white instead of gray, with tighter spacing to match</li></ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 67</span><span class="version-date">Tuesday, August 18, 2026</span></div>
       <ul><li>Fixed the full-size photo appearing smaller instead of bigger when rotating the phone to landscape — the fixed padding/buttons around it were eating a big share of the little height landscape has to work with; they now shrink out of the way when height is scarce, so the photo fills the screen properly</li></ul>
     </div>

@@ -15,6 +15,20 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 68 — Tuesday, August 18, 2026
+
+Functionality:
+- Full-size photo viewer no longer loops past the first/last photo — arrows dim and disable at each end instead
+- Arrows are hidden on phones/tablets (swipe already works there), which also lets the photo use the space they used to take up
+- Renamed "Collection(s)" to "Gallery/Galleries" throughout the site's wording (nav, headings, buttons, etc.) — web addresses are unchanged
+- Fixed the caption sitting apart from the photo instead of hugging it in the full-size viewer — this was also why the Janet Buys a Car and Nova Scotia galleries looked inconsistent with each other
+- New: picking a person or event now shows an actual search — every matching photo across every gallery, not just which gallery cards to show — with a Clear button to get back to the normal Galleries page
+
+Typography:
+- Tightened several gaps (hero-to-header, header-to-title, title-to-grid) and removed the two homepage subtitle lines
+- Gallery card names and photo counts are bigger and closer together; the rule line and "View collection" link are gone
+- People/Events labels, photo counts, and the gallery back-link are now white instead of gray, with tighter spacing to match
+
 ### Version 67 — Tuesday, August 18, 2026
 
 - Fixed the full-size photo appearing smaller instead of bigger when rotating the phone to landscape — the fixed padding/buttons around it were eating a big share of the little height landscape has to work with; they now shrink out of the way when height is scarce, so the photo fills the screen properly

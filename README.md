@@ -96,10 +96,12 @@ it from the Collections index — all automatically, the same way adding a
 folder registers one.
 
 If a folder's photos are tagged in Photo Mechanic (Person, Event, Alt Text),
-that data powers the caption and the Person/Event filters on the Collections
-page. Untagged photos still work fine — they just fall back to the photo's
-creation date and a cleaned-up version of the filename as the caption, and
-don't contribute a Person/Event tag.
+that data powers the caption and the Person/Event search on the Galleries
+page — picking a name or event there shows every matching photo across
+every gallery (not just which gallery cards to show), with a Clear button
+to get back to the normal grid. Untagged photos still work fine — they
+just fall back to the photo's creation date and a cleaned-up version of
+the filename as the caption, and won't turn up in that search.
 
 `npm run collection:add` is still there as an optional shortcut if you'd
 rather create the empty folder (with a name you type at a prompt) before
