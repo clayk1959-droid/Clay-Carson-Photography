@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 60 — Monday, August 17, 2026
+
+- Contact sheet thumbnails now have a white border hugging each photo's actual edges, plus even breathing room on all sides instead of touching the box edge on the long side
+
 ### Version 59 — Monday, August 17, 2026
 
 - Set the Nova Scotia collection's cover photo to the lighthouse shot
