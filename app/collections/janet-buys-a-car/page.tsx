@@ -201,27 +201,18 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1019979 copy.jpg",
-    "date": "2026-08-17",
-    "description": "L1019979 copy",
-    "caption": "August 17, 2026 — L1019979 copy",
-    "altText": "L1019979 copy",
-    "person": [
-      "Albert Everett",
-      "Clay Carson",
-      "Janet Carson",
-      "Mark Cobard",
-      "Phylis Conard",
-      "Alex Brandon",
-      "DSandy Covem Church Point",
-      "Digby"
-    ],
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
+    "person": [],
     "event": [],
-    "width": 720,
-    "height": 446
+    "width": 0,
+    "height": 0
   }
 ];
 
-const displayOrder: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+const displayOrder: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 const photographs = displayOrder.map((number) => ({
   ...photographData[number - 1],
@@ -242,7 +233,7 @@ export default function JanetBuysACarPage() {
       <header className="collection-heading">
         <a href="/collections">← Collections</a>
         <h1>Janet Buys a car</h1>
-        <p>14 photographs</p>
+        <p>13 photographs</p>
       </header>
       <Gallery
         name="Janet Buys a car"

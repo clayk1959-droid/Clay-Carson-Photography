@@ -68,11 +68,77 @@
       "order": 16
     }
   },
+  "janet-buys-a-car": {
+    "L1019979 copy.jpg": {
+      "hidden": true
+    }
+  },
   "norway": {
     "BEACH- Battleship Big Guns_2.tif": {
       "caption": "Battleship Big Guns 2",
       "date": "2025-09-14",
       "order": 43
+    }
+  },
+  "nova-scotia": {
+    "L1020089.jpg": {
+      "hidden": true
+    },
+    "L1020157.jpg": {
+      "caption": "L1020157",
+      "date": "2026-08-17",
+      "order": 13,
+      "hidden": true
+    },
+    "L1020332.jpg": {
+      "caption": "L1020332",
+      "date": "2026-08-17",
+      "order": 23,
+      "hidden": true
+    },
+    "L1020473.jpg": {
+      "hidden": true
+    },
+    "L1020514.jpg": {
+      "caption": "Lighthouse",
+      "date": "2026-08-17",
+      "order": 38,
+      "hidden": true
+    },
+    "L1020550.jpg": {
+      "caption": "L1020550",
+      "date": "2026-08-17",
+      "order": 42
+    },
+    "L1020772.jpg": {
+      "hidden": true
+    },
+    "L1020908.jpg": {
+      "caption": "Whale watching",
+      "date": "2026-08-17",
+      "order": 50,
+      "hidden": true
+    },
+    "L1021003.jpg": {
+      "hidden": true
+    },
+    "L1021059.jpg": {
+      "caption": "Whale watching",
+      "date": "2026-08-17",
+      "order": 55,
+      "hidden": true
+    },
+    "L1021082.jpg": {
+      "hidden": true
+    },
+    "L1021098.jpg": {
+      "hidden": true
+    },
+    "Sunset.jpg": {
+      "caption": "Sunset",
+      "date": "2026-08-17",
+      "order": 73,
+      "hidden": true
     }
   }
 }

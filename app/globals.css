@@ -72,8 +72,8 @@ h1 em, h2 em { font-weight: 400; }
 .collection-heading h1 { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(15px, 1.8vw, 27px); font-style: normal; line-height: 1; }
 .collection-heading p { margin: 0 0 8px; color: #969a93; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
 .photo-gallery { max-width: 1440px; margin: 0 auto; padding: 56px 5vw 130px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
-.gallery-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; margin: 0; padding: 0; border: 0; overflow: hidden; background: #333333; color: inherit; cursor: zoom-in; display: block; transition: transform .2s ease, box-shadow .2s ease; }
-.gallery-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; transition: opacity .25s ease, transform .5s cubic-bezier(.2,.65,.3,1); }
+.gallery-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; margin: 0; padding: 10px; border: 0; overflow: hidden; background: #333333; color: inherit; cursor: zoom-in; display: flex; align-items: center; justify-content: center; transition: transform .2s ease, box-shadow .2s ease; }
+.gallery-thumb img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; border: 3px solid #f5f2eb; transition: opacity .25s ease, transform .5s cubic-bezier(.2,.65,.3,1); }
 .gallery-thumb:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .24); transform: translateY(-2px); }
 .gallery-thumb:hover img { opacity: .92; transform: scale(1.018); }
 .gallery-thumb:active { transform: scale(.985); }

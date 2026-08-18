@@ -112,17 +112,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1020089.jpg",
-    "date": "2026-08-17",
-    "description": "Albert and Karen in front ot ftheir family home",
-    "caption": "August 17, 2026 — Albert and Karen in front ot ftheir family home",
-    "altText": "Albert and Karen in front ot ftheir family home",
-    "person": [
-      "Albert Everett",
-      "Karen"
-    ],
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
+    "person": [],
     "event": [],
-    "width": 2200,
-    "height": 1464
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1020102.jpg",
@@ -162,17 +159,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1020157.jpg",
-    "date": "2026-08-17",
-    "description": "L1020157",
-    "caption": "August 17, 2026 — L1020157",
-    "altText": "L1020157",
-    "person": [
-      "Albert Everett",
-      "Karen"
-    ],
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
+    "person": [],
     "event": [],
-    "width": 1835,
-    "height": 1862
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1020158.jpg",
@@ -286,14 +280,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1020332.jpg",
-    "date": "2026-08-17",
-    "description": "L1020332",
-    "caption": "August 17, 2026 — L1020332",
-    "altText": "L1020332",
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
     "person": [],
     "event": [],
-    "width": 2200,
-    "height": 1465
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1020338.jpg",
@@ -432,14 +426,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1020473.jpg",
-    "date": "2026-08-17",
-    "description": "More bouys",
-    "caption": "August 17, 2026 — More bouys",
-    "altText": "More bouys",
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
     "person": [],
     "event": [],
-    "width": 2200,
-    "height": 1467
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1020496.jpg",
@@ -469,16 +463,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1020514.jpg",
-    "date": "2026-08-17",
-    "description": "Lighthouse",
-    "caption": "August 17, 2026 — Lighthouse",
-    "altText": "Lighthouse",
-    "person": [
-      "Carol Mendal. Janet Carson"
-    ],
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
+    "person": [],
     "event": [],
-    "width": 2200,
-    "height": 1942
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1020525.jpg",
@@ -590,14 +582,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1020772.jpg",
-    "date": "2026-08-17",
-    "description": "Whale watching",
-    "caption": "August 17, 2026 — Whale watching",
-    "altText": "Whale watching",
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
     "person": [],
     "event": [],
-    "width": 908,
-    "height": 563
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1020855.jpg",
@@ -612,14 +604,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1020908.jpg",
-    "date": "2026-08-17",
-    "description": "Whale watching",
-    "caption": "August 17, 2026 — Whale watching",
-    "altText": "Whale watching",
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
     "person": [],
     "event": [],
-    "width": 2200,
-    "height": 1490
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1020971.jpg",
@@ -658,25 +650,25 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1021003.jpg",
-    "date": "2026-08-17",
-    "description": "Whale watching",
-    "caption": "August 17, 2026 — Whale watching",
-    "altText": "Whale watching",
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
     "person": [],
     "event": [],
-    "width": 2200,
-    "height": 1666
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1021059.jpg",
-    "date": "2026-08-17",
-    "description": "Whale watching",
-    "caption": "August 17, 2026 — Whale watching",
-    "altText": "Whale watching",
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
     "person": [],
     "event": [],
-    "width": 494,
-    "height": 362
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1021067.jpg",
@@ -691,14 +683,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1021082.jpg",
-    "date": "2026-08-17",
-    "description": "Whale watching",
-    "caption": "August 17, 2026 — Whale watching",
-    "altText": "Whale watching",
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
     "person": [],
     "event": [],
-    "width": 1519,
-    "height": 768
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1021088.jpg",
@@ -713,14 +705,14 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "L1021098.jpg",
-    "date": "2026-08-17",
-    "description": "Whale watching",
-    "caption": "August 17, 2026 — Whale watching",
-    "altText": "Whale watching",
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
     "person": [],
     "event": [],
-    "width": 2200,
-    "height": 1392
+    "width": 0,
+    "height": 0
   },
   {
     "filename": "L1021113.jpg",
@@ -873,21 +865,18 @@ const photographData: PhotographDataEntry[] = [
   },
   {
     "filename": "Sunset.jpg",
-    "date": "2026-08-17",
-    "description": "Sunset",
-    "caption": "August 17, 2026 — Sunset",
-    "altText": "Sunset",
-    "person": [
-      "Mark Conard",
-      "Janet Carson"
-    ],
+    "date": null,
+    "description": "",
+    "caption": "",
+    "altText": "",
+    "person": [],
     "event": [],
-    "width": 2200,
-    "height": 1464
+    "width": 0,
+    "height": 0
   }
 ];
 
-const displayOrder: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73];
+const displayOrder: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 36, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 49, 51, 52, 53, 56, 58, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72];
 
 const photographs = displayOrder.map((number) => ({
   ...photographData[number - 1],
@@ -908,7 +897,7 @@ export default function NovaScotiaPage() {
       <header className="collection-heading">
         <a href="/collections">← Collections</a>
         <h1>Nova Scotia</h1>
-        <p>73 photographs</p>
+        <p>61 photographs</p>
       </header>
       <Gallery
         name="Nova Scotia"

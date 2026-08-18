@@ -6,19 +6,12 @@ const cards = [
     "slug": "janet-buys-a-car",
     "title": "Janet Buys a car",
     "person": [
-      "Albert Everett",
-      "Alex Brandon",
-      "Clay Carson",
-      "DSandy Covem Church Point",
-      "Digby",
-      "Janet Carson",
-      "Mark Cobard",
-      "Phylis Conard"
+      "Janet Carson"
     ],
     "event": [
       "Janet buys a car"
     ],
-    "count": 14,
+    "count": 13,
     "coverBasename": "janet-buys-a-car-01.jpg"
   },
   {
@@ -37,7 +30,7 @@ const cards = [
       "y"
     ],
     "event": [],
-    "count": 73,
+    "count": 61,
     "coverBasename": "nova-scotia-40.jpg"
   }
 ];
