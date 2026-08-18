@@ -222,7 +222,12 @@ function MultiFilterSelect({
         {summary}
       </button>
       {open && (
-        <div className="collections-filter-menu" role="listbox" aria-label={label}>
+        <div
+          className="collections-filter-menu"
+          role="listbox"
+          aria-label={label}
+          onMouseDown={(event) => event.stopPropagation()}
+        >
           <label className="collections-filter-option">
             <input type="checkbox" checked={value.length === 0} onChange={() => onChange([])} />
             All

@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 71 — Tuesday, August 18, 2026
+
+- Fixed the People/Events checkbox dropdown on the Galleries page closing itself after every tap on iPhone — picking several names in a row now works as intended
+
 ### Version 70 — Tuesday, August 18, 2026
 
 - People and Events filters on the Galleries page are now checkbox dropdowns instead of single-select — pick any combination of names and see photos matching any of them, with an "All" option to reset
