@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 72 — Tuesday, August 18, 2026
+
+- People/Events checkbox checkmarks are now solid black instead of the hard-to-see browser default
+
 ### Version 71 — Tuesday, August 18, 2026
 
 - Fixed the People/Events checkbox dropdown on the Galleries page closing itself after every tap on iPhone — picking several names in a row now works as intended
