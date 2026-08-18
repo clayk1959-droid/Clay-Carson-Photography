@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 75 — Tuesday, August 18, 2026
+
+- Galleries page cards: tucked the title/photo-count text up close to the photo, cutting that gap roughly in half
+
 ### Version 74 — Tuesday, August 18, 2026
 
 - Fixed People/Events checkboxes being invisible on iPhone — the checkmark was drawn in a way Safari doesn't support, so the box showed but never the check; it's built differently now so it shows on every browser
