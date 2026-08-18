@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 65 — Monday, August 17, 2026
+
+- Light-table reorder thumbnails are 50% bigger, easier to see at a glance
+
 ### Version 64 — Monday, August 17, 2026
 
 - Added drag-to-reorder: a "Reorder Photos" button opens every visible photo in a collection as small thumbnails, all on screen at once — drag one anywhere and the rest reflow live, like arranging slides on a light table. Click "Save order" to write the new order for all of them at once.
