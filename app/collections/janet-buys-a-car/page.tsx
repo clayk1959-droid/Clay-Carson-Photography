@@ -212,7 +212,7 @@ const photographData: PhotographDataEntry[] = [
   }
 ];
 
-const displayOrder: number[] = [2, 3, 4, 1, 5, 6, 7, 8, 9, 10, 12, 11, 13];
+const displayOrder: number[] = [2, 3, 1, 5, 6, 7, 8, 9, 10, 12, 11, 13, 4];
 
 const photographs = displayOrder.map((number) => ({
   ...photographData[number - 1],
