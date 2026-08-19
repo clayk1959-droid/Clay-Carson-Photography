@@ -21,12 +21,19 @@ export function Gallery({
   photographs,
   otherCollections = [],
   editable = false,
+  remoteMode = false,
 }: {
   name: string;
   slug: string;
   photographs: GalleryPhoto[];
   otherCollections?: CollectionOption[];
   editable?: boolean;
+  // True only on the password-protected remote editor deployment. Neither
+  // "Sync Gallery" (there's nothing to run remotely -- edits commit
+  // straight to GitHub instead) nor "Reset to auto-detected" (needs the
+  // full-resolution originals, which only exist on the owner's own Mac)
+  // apply there, so both are hidden rather than shown non-functional.
+  remoteMode?: boolean;
 }) {
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
   const [activePhotoWidth, setActivePhotoWidth] = useState<number | null>(null);
@@ -275,6 +282,7 @@ export function Gallery({
           position={editingPhoto + 1}
           total={photographs.length}
           otherCollections={otherCollections}
+          remoteMode={remoteMode}
           onClose={() => setEditingPhoto(null)}
         />
       )}
@@ -283,6 +291,7 @@ export function Gallery({
         <ReorderPanel
           slug={slug}
           photographs={photographs}
+          remoteMode={remoteMode}
           onClose={() => setReordering(false)}
         />
       )}
@@ -292,7 +301,7 @@ export function Gallery({
           <button type="button" className="reorder-button" onClick={() => setReordering(true)}>
             Reorder Photos
           </button>
-          <SyncButton />
+          {!remoteMode && <SyncButton />}
         </div>
       )}
     </>
@@ -302,10 +311,12 @@ export function Gallery({
 function ReorderPanel({
   slug,
   photographs,
+  remoteMode = false,
   onClose,
 }: {
   slug: string;
   photographs: GalleryPhoto[];
+  remoteMode?: boolean;
   onClose: () => void;
 }) {
   const [order, setOrder] = useState(photographs.map((photograph) => photograph.filename));
@@ -365,7 +376,11 @@ function ReorderPanel({
             {status === "error" && <span className="edit-photo-status is-error">{errorMessage}</span>}
             {status === "saved" && !dirty && (
               <span className="edit-photo-status">
-                Saved — click <strong>Sync Gallery</strong> to apply.
+                {remoteMode ? (
+                  "Saved — live on the site within a minute or two."
+                ) : (
+                  <>Saved — click <strong>Sync Gallery</strong> to apply.</>
+                )}
               </span>
             )}
             <button
@@ -478,6 +493,7 @@ function EditPhotoForm({
   position,
   total,
   otherCollections,
+  remoteMode = false,
   onClose,
 }: {
   slug: string;
@@ -485,6 +501,7 @@ function EditPhotoForm({
   position: number;
   total: number;
   otherCollections: CollectionOption[];
+  remoteMode?: boolean;
   onClose: () => void;
 }) {
   const [caption, setCaption] = useState(photograph.description);
@@ -536,11 +553,17 @@ function EditPhotoForm({
     }
   }
 
+  const applyMessage = remoteMode ? (
+    <>live on the site within a minute or two.</>
+  ) : (
+    <>click <strong>Sync Gallery</strong> (bottom right) to apply.</>
+  );
+
   function handleSave(event: FormEvent) {
     event.preventDefault();
     submitChange(
       { caption: caption.trim(), date: date || null, order: Number(order) },
-      <>Saved — click <strong>Sync Gallery</strong> (bottom right) to apply.</>,
+      <>Saved — {applyMessage}</>,
     );
   }
 
@@ -550,10 +573,7 @@ function EditPhotoForm({
       return;
     }
     setConfirming(null);
-    submitChange(
-      { hidden: true },
-      <>Deleted — click <strong>Sync Gallery</strong> (bottom right) to apply.</>,
-    );
+    submitChange({ hidden: true }, <>Deleted — {applyMessage}</>);
   }
 
   async function handleMove() {
@@ -596,9 +616,7 @@ function EditPhotoForm({
         body: JSON.stringify({ slug, filename: photograph.filename, position: cropPosition }),
       });
       if (!response.ok) throw new Error(await response.text());
-      setSavedMessage(
-        <>Set as the gallery cover — click <strong>Sync Gallery</strong> (bottom right) to apply.</>,
-      );
+      setSavedMessage(<>Set as the gallery cover — {applyMessage}</>);
       setStatus("saved");
     } catch (error) {
       setStatus("error");
@@ -725,16 +743,18 @@ function EditPhotoForm({
           >
             {confirming === "delete" ? "Confirm delete?" : "Delete photo"}
           </button>
-          <button
-            type="button"
-            className="edit-photo-reset"
-            disabled={status === "saving"}
-            onClick={() =>
-              submitChange({ reset: true }, "Restored to auto-detected caption, date, and order.")
-            }
-          >
-            Reset to auto-detected
-          </button>
+          {!remoteMode && (
+            <button
+              type="button"
+              className="edit-photo-reset"
+              disabled={status === "saving"}
+              onClick={() =>
+                submitChange({ reset: true }, "Restored to auto-detected caption, date, and order.")
+              }
+            >
+              Reset to auto-detected
+            </button>
+          )}
           <button type="button" onClick={onClose}>
             Close
           </button>

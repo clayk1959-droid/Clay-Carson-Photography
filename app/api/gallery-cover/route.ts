@@ -1,5 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { isRemoteEditorMode } from "../../../lib/editor-mode";
+import { applyRemoteEdit } from "../../../lib/remote-editor";
 
 export const dynamic = "force-dynamic";
 
@@ -28,9 +30,10 @@ async function readOverrides(): Promise<CollectionOverrides> {
 }
 
 export async function POST(request: Request) {
-  // Same gate as the other local-editor endpoints: writes to disk, so it
-  // must never run outside `next dev`.
-  if (process.env.NODE_ENV !== "development") {
+  // Same gate as the other editor endpoints: writes to disk locally, or
+  // commits to GitHub in remote mode — never plain production.
+  const remote = isRemoteEditorMode();
+  if (process.env.NODE_ENV !== "development" && !remote) {
     return new Response("Not found", { status: 404 });
   }
 
@@ -57,11 +60,25 @@ export async function POST(request: Request) {
     return new Response("Invalid position", { status: 400 });
   }
 
-  const overrides = await readOverrides();
-  overrides[slug] = { coverPhoto: filename, coverPosition: position };
+  try {
+    if (remote) {
+      await applyRemoteEdit(
+        slug,
+        ({ coverOverrides }) => {
+          coverOverrides[slug] = { coverPhoto: filename, coverPosition: position };
+        },
+        `Editor: set cover of ${slug} to ${filename}`,
+      );
+    } else {
+      const overrides = await readOverrides();
+      overrides[slug] = { coverPhoto: filename, coverPosition: position };
 
-  await mkdir(path.dirname(overridesPath), { recursive: true });
-  await writeFile(overridesPath, `${JSON.stringify(overrides, null, 2)}\n`, "utf8");
+      await mkdir(path.dirname(overridesPath), { recursive: true });
+      await writeFile(overridesPath, `${JSON.stringify(overrides, null, 2)}\n`, "utf8");
+    }
+  } catch (error) {
+    return new Response(error instanceof Error ? error.message : "Something went wrong", { status: 500 });
+  }
 
   return Response.json({ ok: true });
 }

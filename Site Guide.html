@@ -400,6 +400,10 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 82</span><span class="version-date">Tuesday, August 18, 2026</span></div>
+      <ul><li>Built the password-protected remote photo editor: a second Vercel deployment (same repo, <code>main</code> branch) where captions, dates, order, hidden status, and cover photos can be edited from anywhere, with saves committing straight to GitHub and going live the same way <code>npm run save</code> does today. Adding new photos, moving photos between collections, and full resyncs stay local-only. Production is unaffected unless the new <code>EDITOR_MODE</code> variable is deliberately set on that second project — see the README for one-time setup steps.</li></ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 81</span><span class="version-date">Tuesday, August 18, 2026</span></div>
       <ul><li>Added a simple copyright/usage notice to the bottom of every page — sets expectations that the photos are for family/friends, not for public reposting. Plain-English, not a legal document.</li></ul>
     </div>

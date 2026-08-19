@@ -133,8 +133,10 @@ falls back automatically — no changes needed unless that path changes.
 While running `npm run dev`, a small pencil icon appears in the corner of
 each thumbnail (hover to see it) — click it to edit that photo's caption,
 date, or position within the collection. This icon only exists when the
-site is running locally; it never appears on the deployed site, since it's
-gated on the server side (not just hidden with CSS).
+site is running locally, or on the separate password-protected remote
+editor deployment described below — it never appears on the real,
+public production site, since it's gated on the server side (not just
+hidden with CSS).
 
 Saving writes to `data/gallery-overrides.json` — it never touches
 `Gallery Originals` or a photo's embedded metadata. To actually apply saved
@@ -153,6 +155,52 @@ To reorder a bunch of photos at once instead of one at a time, click
 the collection as small thumbnails, all on screen together. Drag one
 anywhere and the rest reflow live, like arranging slides on a light table.
 Click **Save order** when it looks right, then Sync Gallery to apply it.
+
+## Editing remotely (password-protected)
+
+Besides `npm run dev` on your own Mac, the same pencil-icon editor can run
+on a second, password-protected deployment reachable from anywhere — your
+phone, another computer. It's a **separate Vercel project pointed at this
+same GitHub repository**, not a different codebase: whichever files you'd
+normally see change under `npm run dev` change there too, it's just that
+saving an edit commits it straight to GitHub instead of writing to a local
+file, so it goes live on the real site the same way a local edit does once
+you run `npm run save` and push — usually within a minute or two.
+
+**What you can do remotely:** edit a photo's caption, date, and position;
+hide a photo; set a collection's cover photo; drag-reorder a whole
+collection.
+
+**What you can't do remotely** (these stay `npm run dev`-only, since they
+need the full-resolution originals in `Gallery Originals`, which only
+exist on this Mac): adding new photos or collections, moving a photo
+between collections, "Reset to auto-detected," and running a full Sync.
+
+### One-time setup
+
+1. **Create a fine-grained GitHub personal access token** — on GitHub, under
+   Settings → Developer settings → Personal access tokens → Fine-grained
+   tokens, create one scoped to **only this repository**, with
+   **Contents: Read and write** permission and nothing else. Copy the
+   token (you won't be able to see it again).
+2. **Create a second Vercel project** — in the Vercel dashboard, "Add New
+   Project" and import this same GitHub repo again, on the `main` branch
+   (same as your existing production project — don't touch that one).
+3. **Set these environment variables** on the *new* project only (Vercel
+   dashboard → Project → Settings → Environment Variables) — leave the
+   original production project's settings untouched:
+   - `EDITOR_MODE` = `remote`
+   - `EDITOR_PASSWORD` = a password of your choosing
+   - `GITHUB_TOKEN` = the token from step 1
+   - `GITHUB_REPO` = `clayk1959-droid/Clay-Carson-Photography`
+   - `GITHUB_BRANCH` = `main`
+4. Deploy. The new project's URL will ask for the password before showing
+   anything (photos included — the whole site is gated there, not just the
+   editing controls). Once logged in, it stays logged in for 30 days.
+
+Everything you edit there is a real commit to the same repository your
+production site deploys from, so it appears on **both** the editor URL
+and your real production domain shortly after saving.
 
 ## Changing the homepage photo
 

@@ -1,5 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { isRemoteEditorMode } from "../../../lib/editor-mode";
+import { applyRemoteEdit } from "../../../lib/remote-editor";
 
 export const dynamic = "force-dynamic";
 
@@ -25,9 +27,10 @@ function sortedEntries<T>(object: Record<string, T>): Record<string, T> {
 }
 
 export async function POST(request: Request) {
-  // Same gate as the other local-editor endpoints: writes to disk, so it
-  // must never run outside `next dev`.
-  if (process.env.NODE_ENV !== "development") {
+  // Same gate as the other editor endpoints: writes to disk locally, or
+  // commits to GitHub in remote mode — never plain production.
+  const remote = isRemoteEditorMode();
+  if (process.env.NODE_ENV !== "development" && !remote) {
     return new Response("Not found", { status: 404 });
   }
 
@@ -55,22 +58,35 @@ export async function POST(request: Request) {
     return new Response("Invalid filenames", { status: 400 });
   }
 
-  const overrides = await readOverrides();
-  const collectionOverrides = { ...(overrides[slug] ?? {}) };
+  try {
+    if (remote) {
+      await applyRemoteEdit(
+        slug,
+        ({ collectionOverrides }) => {
+          (filenames as string[]).forEach((filename, index) => {
+            const existing = collectionOverrides[filename] ?? {};
+            collectionOverrides[filename] = { ...existing, order: index + 1 };
+          });
+        },
+        `Editor: reorder photos in ${slug}`,
+      );
+    } else {
+      const overrides = await readOverrides();
+      const collectionOverrides = { ...(overrides[slug] ?? {}) };
 
-  filenames.forEach((filename: string, index: number) => {
-    const existing = collectionOverrides[filename] ?? {};
-    collectionOverrides[filename] = { ...existing, order: index + 1 };
-  });
+      filenames.forEach((filename: string, index: number) => {
+        const existing = collectionOverrides[filename] ?? {};
+        collectionOverrides[filename] = { ...existing, order: index + 1 };
+      });
 
-  overrides[slug] = sortedEntries(collectionOverrides);
+      overrides[slug] = sortedEntries(collectionOverrides);
 
-  await mkdir(path.dirname(overridesPath), { recursive: true });
-  await writeFile(
-    overridesPath,
-    `${JSON.stringify(sortedEntries(overrides), null, 2)}\n`,
-    "utf8",
-  );
+      await mkdir(path.dirname(overridesPath), { recursive: true });
+      await writeFile(overridesPath, `${JSON.stringify(sortedEntries(overrides), null, 2)}\n`, "utf8");
+    }
+  } catch (error) {
+    return new Response(error instanceof Error ? error.message : "Something went wrong", { status: 500 });
+  }
 
   return Response.json({ ok: true });
 }

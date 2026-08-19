@@ -5,6 +5,8 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import sharp from "sharp";
 import { toSlug, toComponentName } from "./lib/naming.mjs";
+import { formatDate } from "./lib/format-date.mjs";
+import { computeDisplayOrder, computeIndexCard, computeIndexPhotos } from "./lib/photo-ranking.mjs";
 
 const run = promisify(execFile);
 
@@ -150,6 +152,7 @@ const collections = [
       await rm(path.join(root, "public", "galleries", collection.slug), { recursive: true, force: true });
       await rm(path.join(root, "public", "gallery-thumbnails", collection.slug), { recursive: true, force: true });
       await rm(path.join(cacheRoot, collection.slug), { recursive: true, force: true });
+      await rm(path.join(root, "data", "photo-data", `${collection.slug}.json`), { force: true });
       console.log(`Removed collection "${collection.title}" — its folder no longer exists in Gallery Originals`);
     }
 
@@ -191,6 +194,21 @@ await writeFile(
   ),
 );
 
+// A committed (not gitignored) copy of the same list, keyed only by slug —
+// the remote editor's API routes run where "Gallery Originals" doesn't
+// exist, so they use this as an allowlist of valid collection slugs instead
+// of the cache file above.
+const photoDataRoot = path.join(root, "data", "photo-data");
+await mkdir(photoDataRoot, { recursive: true });
+await writeFile(
+  path.join(photoDataRoot, "_collections.json"),
+  `${JSON.stringify(
+    collections.map((collection) => ({ slug: collection.slug, title: collection.title })),
+    null,
+    2,
+  )}\n`,
+);
+
 function quoted(value) {
   return JSON.stringify(value);
 }
@@ -202,15 +220,6 @@ function decodeXml(value) {
     .replaceAll("&gt;", ">")
     .replaceAll("&quot;", '"')
     .replaceAll("&apos;", "'");
-}
-
-function formatDate(isoDate) {
-  const [year, month, day] = isoDate.split("-").map(Number);
-  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 }
 
 // Pulls every <rdf:li> text out of a given Iptc4xmpExt tag block — works for
@@ -261,6 +270,7 @@ for (const collection of collections) {
     await rm(path.join(root, "app", "collections", collection.slug), { recursive: true, force: true });
     await rm(path.join(root, "public", "galleries", collection.slug), { recursive: true, force: true });
     await rm(path.join(root, "public", "gallery-thumbnails", collection.slug), { recursive: true, force: true });
+    await rm(path.join(photoDataRoot, `${collection.slug}.json`), { force: true });
     console.log(`${collection.title}: 0 photographs — skipped (folder is empty)`);
     continue;
   }
@@ -427,31 +437,26 @@ for (const collection of collections) {
   }
   await writeFile(metadataCachePath, JSON.stringify(metadataCache, null, 2));
 
-  const ranked = photographData
-    .map((photograph, index) => {
-      const naturalRank = index + 1;
-      const overrideOrder = collectionOverrides[photograph.filename]?.order;
-      return { naturalRank, sortRank: overrideOrder ?? naturalRank, hasOverride: overrideOrder !== undefined };
-    })
-    .filter((entry) => !collectionOverrides[filenames[entry.naturalRank - 1]]?.hidden);
-  ranked.sort((a, b) => {
-    if (a.sortRank !== b.sortRank) return a.sortRank - b.sortRank;
-    // A photo explicitly moved to this position wins a tie against a photo
-    // that merely landed here by natural (filename) order.
-    if (a.hasOverride !== b.hasOverride) return a.hasOverride ? -1 : 1;
-    return a.naturalRank - b.naturalRank;
-  });
-  const displayOrder = ranked.map((entry) => entry.naturalRank);
+  const displayOrder = computeDisplayOrder(photographData, collectionOverrides);
   const visibleCount = displayOrder.length;
+  const coverOverride = collectionCoverOverrides[collection.slug] ?? {};
 
-  const subtitle = collection.subtitle
-    ? `${collection.subtitle}&nbsp; · &nbsp;${visibleCount} photographs`
-    : `${visibleCount} photographs`;
-  const photoMapping = `const displayOrder: number[] = [${displayOrder.join(", ")}];\n\nconst photographs = displayOrder.map((number) => ({\n  ...photographData[number - 1],\n  src: \`/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,\n}));`;
-  const otherCollections = collections
-    .filter((other) => other.slug !== collection.slug)
-    .map((other) => ({ slug: other.slug, title: other.title }));
-  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { SiteFooter } from "../../SiteFooter";\nimport { Gallery } from "../Gallery";\n\ntype PhotographDataEntry = { filename: string; date: string | null; description: string; caption: string; altText: string; person: string[]; event: string[]; width: number; height: number };\n\nconst photographData: PhotographDataEntry[] = ${JSON.stringify(photographData, null, 2)};\n\n${photoMapping}\n\nconst otherCollections = ${JSON.stringify(otherCollections, null, 2)};\n\nexport default function ${collection.component}() {\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>${subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={otherCollections}\n        editable={process.env.NODE_ENV === "development"}\n      />\n\n      <SiteFooter />\n    </main>\n  );\n}\n`;
+  // Everything a page needs to render this collection, minus anything that
+  // requires "Gallery Originals" to (re)compute — committed to git so the
+  // remote editor can patch it directly (caption/date/order/hidden/cover)
+  // without needing the source photos at all.
+  await writeFile(
+    path.join(photoDataRoot, `${collection.slug}.json`),
+    `${JSON.stringify({ photographData, displayOrder }, null, 2)}\n`,
+  );
+
+  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { SiteFooter } from "../../SiteFooter";\nimport { Gallery } from "../Gallery";\nimport { isEditorEnabled, isRemoteEditorMode } from "../../../lib/editor-mode";\nimport data from "../../../data/photo-data/${collection.slug}.json";\n\nconst photographs = data.displayOrder.map((number) => ({\n  ...data.photographData[number - 1],\n  src: \`/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,\n}));\n\nconst otherCollections = ${JSON.stringify(
+    collections
+      .filter((other) => other.slug !== collection.slug)
+      .map((other) => ({ slug: other.slug, title: other.title })),
+    null,
+    2,
+  )};\n\nconst collectionSubtitle: string | null = ${quoted(collection.subtitle)};\n\nexport default function ${collection.component}() {\n  const remote = isRemoteEditorMode();\n  const photoCountText = data.displayOrder.length + \" photographs\";\n  const subtitle = collectionSubtitle ? collectionSubtitle + \" \u00b7 \" + photoCountText : photoCountText;\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>{subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={remote ? [] : otherCollections}\n        editable={isEditorEnabled()}\n        remoteMode={remote}\n      />\n\n      <SiteFooter />\n    </main>\n  );\n}\n`;
   const collectionPageDirectory = path.join(root, "app", "collections", collection.slug);
   await mkdir(collectionPageDirectory, { recursive: true });
   await writeFile(path.join(collectionPageDirectory, "page.tsx"), page);
@@ -459,53 +464,30 @@ for (const collection of collections) {
     `${collection.title}: ${visibleCount} photographs (${reusedCount} unchanged, ${processedCount} processed${hiddenCount ? `, ${hiddenCount} hidden` : ""})`,
   );
 
-  const cover = collectionCoverOverrides[collection.slug] ?? {};
-  const requestedCoverNumber = cover.coverPhoto ? filenames.indexOf(cover.coverPhoto) + 1 : 1;
-  const coverNumber =
-    requestedCoverNumber < 1 || collectionOverrides[filenames[requestedCoverNumber - 1]]?.hidden
-      ? (displayOrder[0] ?? 1)
-      : requestedCoverNumber;
-  const coverPosition = cover.coverPosition ?? "center center";
-
-  const collectionPeople = new Set();
-  const collectionEvents = new Set();
-  for (const naturalRank of displayOrder) {
-    const photo = photographData[naturalRank - 1];
-    for (const p of photo.person ?? []) collectionPeople.add(p);
-    for (const e of photo.event ?? []) collectionEvents.add(e);
-    if ((photo.person?.length ?? 0) > 0 || (photo.event?.length ?? 0) > 0) {
-      indexPhotos.push({
-        collectionSlug: collection.slug,
-        collectionTitle: collection.title,
-        filename: photo.filename,
-        caption: photo.caption,
-        altText: photo.altText,
-        person: photo.person ?? [],
-        event: photo.event ?? [],
-        width: photo.width,
-        height: photo.height,
-        src: `/galleries/${collection.slug}/${collection.slug}-${String(naturalRank).padStart(2, "0")}.jpg`,
-      });
-    }
-  }
-
-  indexCards.push({
-    slug: collection.slug,
-    title: collection.title,
-    person: [...collectionPeople].sort(),
-    event: [...collectionEvents].sort(),
-    count: visibleCount,
-    coverBasename: `${collection.slug}-${String(coverNumber).padStart(2, "0")}.jpg`,
-    coverPosition,
-  });
+  indexCards.push(
+    computeIndexCard({
+      slug: collection.slug,
+      title: collection.title,
+      photographData,
+      collectionOverrides,
+      displayOrder,
+      coverOverride,
+    }),
+  );
+  indexPhotos.push(
+    ...computeIndexPhotos({ slug: collection.slug, title: collection.title, photographData, displayOrder }),
+  );
 }
+
+await writeFile(
+  path.join(photoDataRoot, "_index.json"),
+  `${JSON.stringify({ cards: indexCards, photos: indexPhotos }, null, 2)}\n`,
+);
 
 const indexPage = `import { SiteHeader } from "../SiteHeader";
 import { SiteFooter } from "../SiteFooter";
 import { CollectionsIndex } from "./CollectionsIndex";
-
-const cards = ${JSON.stringify(indexCards, null, 2)};
-const photos = ${JSON.stringify(indexPhotos, null, 2)};
+import indexData from "../../data/photo-data/_index.json";
 
 export default function CollectionsPage() {
   return (
@@ -513,7 +495,7 @@ export default function CollectionsPage() {
       <SiteHeader showHome />
       <section className="collections-layout">
         <h1 className="page-title">Galleries</h1>
-        <CollectionsIndex cards={cards} photos={photos} />
+        <CollectionsIndex cards={indexData.cards} photos={indexData.photos} />
       </section>
 
       <SiteFooter />

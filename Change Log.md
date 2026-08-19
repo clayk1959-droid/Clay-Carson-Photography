@@ -15,6 +15,10 @@ Last updated: Saturday, August 8, 2026
 
 ## Version history
 
+### Version 82 — Tuesday, August 18, 2026
+
+- Built the password-protected remote photo editor: a second Vercel deployment (same repo, `main` branch) where captions, dates, order, hidden status, and cover photos can be edited from anywhere, with saves committing straight to GitHub and going live the same way `npm run save` does today. Adding new photos, moving photos between collections, and full resyncs stay local-only. Production is unaffected unless the new `EDITOR_MODE` variable is deliberately set on that second project — see the README for one-time setup steps.
+
 ### Version 81 — Tuesday, August 18, 2026
 
 - Added a simple copyright/usage notice to the bottom of every page — sets expectations that the photos are for family/friends, not for public reposting. Plain-English, not a legal document.
