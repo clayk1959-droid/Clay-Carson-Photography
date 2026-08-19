@@ -1,10 +1,10 @@
 {
+  "janet-buys-a-car": {
+    "coverPhoto": "Janet Buys a Car-9.jpg",
+    "coverPosition": "center center"
+  },
   "nova-scotia": {
     "coverPhoto": "L1020121.jpg",
     "coverPosition": "center center"
-  },
-  "janet-buys-a-car": {
-    "coverPhoto": "Janet Buys a Car-10.jpg",
-    "coverPosition": "left center"
   }
 }
