@@ -959,6 +959,22 @@
     {
       "collectionSlug": "janet-buys-a-car",
       "collectionTitle": "Janet Buys a car",
+      "filename": "Janet Buys a Car-7.jpg",
+      "caption": "August 8, 2026 — Janet Buys a Car - Done deal!",
+      "altText": "Janet Buys a Car - Done deal!",
+      "person": [
+        "Janet Carson"
+      ],
+      "event": [
+        "Janet buys a car"
+      ],
+      "width": 720,
+      "height": 482,
+      "src": "/galleries/janet-buys-a-car/janet-buys-a-car-10.jpg"
+    },
+    {
+      "collectionSlug": "janet-buys-a-car",
+      "collectionTitle": "Janet Buys a car",
       "filename": "Janet Buys a Car-4.jpg",
       "caption": "August 8, 2026 — Janet Buys a Car - Checking out window stickers",
       "altText": "Janet Buys a Car - Checking out window stickers",
@@ -1083,22 +1099,6 @@
       "width": 720,
       "height": 467,
       "src": "/galleries/janet-buys-a-car/janet-buys-a-car-11.jpg"
-    },
-    {
-      "collectionSlug": "janet-buys-a-car",
-      "collectionTitle": "Janet Buys a car",
-      "filename": "Janet Buys a Car-7.jpg",
-      "caption": "August 8, 2026 — Janet Buys a Car - Done deal!",
-      "altText": "Janet Buys a Car - Done deal!",
-      "person": [
-        "Janet Carson"
-      ],
-      "event": [
-        "Janet buys a car"
-      ],
-      "width": 720,
-      "height": 482,
-      "src": "/galleries/janet-buys-a-car/janet-buys-a-car-10.jpg"
     },
     {
       "collectionSlug": "janet-buys-a-car",
