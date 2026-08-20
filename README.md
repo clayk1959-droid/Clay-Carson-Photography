@@ -40,7 +40,6 @@ design/layout changes, or new features.
 | `npm run gallery:sync` | Reads `Gallery Originals`, resizes new/changed photos, regenerates every gallery page and the Collections index |
 | `npm run collection:add` | Optional shortcut: creates an empty, named `Gallery Originals` folder ready for photos (see below — usually you don't need this) |
 | `npm run collection:cover` | Terminal alternative to the pencil icon's cover-photo picker — asks which collection and which photo filename, then how to crop it |
-| `npm run hero:set -- "/path/to/photo.tif"` | Replaces the homepage hero photo |
 | `npm run trim-filenames -- "Gallery Originals/Some Folder" "word"` | Strips a given word (and everything after it) from every filename in a folder, keeping the extension — walks through each rename one at a time so you can accept, edit, or skip it |
 | `npm run save` | Records what changed in `Change Log.md`, commits, and offers to push live |
 | `npm run build` / `npm run lint` / `npm start` | Production build check / code-quality check / runs a production build locally — mainly for troubleshooting |
@@ -202,15 +201,21 @@ Everything you edit there is a real commit to the same repository your
 production site deploys from, so it appears on **both** the editor URL
 and your real production domain shortly after saving.
 
-## Changing the homepage photo
+## Changing the homepage photos
 
-```bash
-npm run hero:set -- "/path/to/photo.tif"
-```
+The homepage hero rotates through 4–5 photos, fading from one to the next.
+It uses two separate sets of photos — one crop for desktop/iPad, one for
+phones — so each looks properly framed on its own screen:
 
-Resizes the given photo (TIFF or JPEG) and installs it as the homepage hero
-image, replacing whatever was there. Check it with `npm run dev`, then
-commit and redeploy as usual.
+- `public/homepage/desktop/` — wide crop, shown on desktop and iPad
+- `public/homepage/mobile/` — portrait crop, shown on phones
+
+To add, remove, or replace a rotating photo: export it from Photoshop (see
+the README in each folder for the exact crop/size to use) straight into
+the matching folder, using whatever filename you like. No sync command
+needed — the site picks up whatever's in those two folders automatically.
+Check it with `npm run dev`, then commit and redeploy as usual (`npm run
+save`).
 
 ## Deploying to Vercel
 

@@ -173,7 +173,7 @@
       <a href="#dev">Local development</a>
       <a href="#galleries">Adding &amp; updating galleries</a>
       <a href="#editing">Editing locally</a>
-      <a href="#hero">Homepage photo</a>
+      <a href="#hero">Homepage hero photos</a>
       <a href="#deploy">Deploying</a>
       <a href="#save">Saving &amp; publishing</a>
       <a href="#history">Version history</a>
@@ -212,7 +212,6 @@
       <tr><td><code>npm run gallery:sync</code></td><td>Reads <code>Gallery Originals</code>, resizes new/changed photos, regenerates every gallery page and the Collections index.</td></tr>
       <tr><td><code>npm run collection:add</code></td><td>Optional shortcut: creates an empty, named <code>Gallery Originals</code> folder ready for photos (usually not needed — see below).</td></tr>
       <tr><td><code>npm run collection:cover</code></td><td>Terminal alternative to the pencil icon's cover-photo picker — asks which collection and which photo filename, then how to crop it.</td></tr>
-      <tr><td><code>npm run hero:set -- "/path/to/photo.tif"</code></td><td>Replaces the homepage hero photo.</td></tr>
       <tr><td><code>npm run trim-filenames -- "Gallery Originals/Some Folder" "word"</code></td><td>Strips a given word (and everything after it) from every filename in a folder, keeping the extension. Walks through each rename one at a time so you can accept, edit, or skip it.</td></tr>
       <tr><td><code>npm run save</code></td><td>Records what changed in the changelog, commits, and offers to push live.</td></tr>
       <tr><td><code>npm run build</code> / <code>npm run lint</code> / <code>npm start</code></td><td>Production build check / code-quality check / runs a production build locally — mainly for troubleshooting.</td></tr>
@@ -338,12 +337,22 @@ npm run dev</code></pre>
   </section>
 
   <section id="hero">
-    <h2>Changing the homepage photo</h2>
-    <pre><code>npm run hero:set -- "/path/to/photo.tif"</code></pre>
+    <h2>Changing the homepage hero photos</h2>
     <p>
-      Resizes the given photo (TIFF or JPEG) and installs it as the homepage hero image,
-      replacing whatever was there. Check it with <code>npm run dev</code>, then commit and
-      redeploy as usual.
+      The homepage hero rotates through 4–5 photos, fading from one to the next. It uses two
+      separate sets — one crop for desktop/iPad, one for phones — so each looks properly
+      framed on its own screen:
+    </p>
+    <ul>
+      <li><code>public/homepage/desktop/</code> — wide crop, shown on desktop and iPad</li>
+      <li><code>public/homepage/mobile/</code> — portrait crop, shown on phones</li>
+    </ul>
+    <p>
+      To add, remove, or replace a rotating photo: export it from Photoshop (see the README
+      file inside each folder for the exact crop and size to use) straight into the matching
+      folder, using whatever filename you like. No sync command needed — the site picks up
+      whatever's in those two folders automatically. Check it with <code>npm run dev</code>,
+      then commit and redeploy as usual (<code>npm run save</code>).
     </p>
   </section>
 
