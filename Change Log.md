@@ -15,6 +15,10 @@ Last updated: Thursday, August 20, 2026
 
 ## Version history
 
+### Version 84 — Thursday, August 20, 2026
+
+- Going live with rotating home page photos with separate folders to Mobile and Desktop
+
 ### Version 83 — Thursday, August 20, 2026
 
 - Redesigned the homepage hero for mobile: replaced the single static hero photo with a rotating, full-bleed set of 4-5 photos that fade into each other every ~7 seconds, plus a short tagline and a "Start Looking" button leading to the Galleries page. Uses two separate photo folders — `public/homepage/desktop` and `public/homepage/mobile` — with a crop and export size tuned to each screen, so phones only ever download the right-sized photo instead of a shrunk-down desktop one. Add, remove, or swap a photo by editing those two folders directly; see the README inside each, or the Site Guide's "Homepage hero photos" section. Removed `npm run hero:set` and the old single hero photo, both superseded by this.

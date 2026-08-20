@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const ROTATE_MS = 7000;
+const ROTATE_MS = 5500;
 // Matches the breakpoint globals.css uses to switch the hero layout.
 const MOBILE_QUERY = "(max-width: 800px)";
 
