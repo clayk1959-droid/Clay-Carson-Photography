@@ -15,6 +15,10 @@ Last updated: Thursday, August 20, 2026
 
 ## Version history
 
+### Version 85 — Thursday, August 20, 2026
+
+- Replaced the top-right nav buttons with a hamburger menu (left on desktop, right on mobile), tightened and enlarged the homepage "Start Looking" button, and fixed the copyright footer's background to match the rest of the site.
+
 ### Version 84 — Thursday, August 20, 2026
 
 - Going live with rotating home page photos with separate folders to Mobile and Desktop
