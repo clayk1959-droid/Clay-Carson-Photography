@@ -13,6 +13,14 @@ const otherCollections = [
   {
     "slug": "nova-scotia",
     "title": "Nova Scotia"
+  },
+  {
+    "slug": "norway-cruise",
+    "title": "Norway Cruise"
+  },
+  {
+    "slug": "rhine-river-cruise",
+    "title": "Rhine River Cruise"
   }
 ];
 

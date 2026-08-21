@@ -12,7 +12,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "gallery:sync": "node scripts/sync-gallery.mjs",
+    "gallery:sync": "node --max-old-space-size=4096 scripts/sync-gallery.mjs",
     "save": "node scripts/save.mjs",
     "collection:add": "node scripts/add-collection.mjs",
     "collection:cover": "node scripts/set-cover-photo.mjs",

@@ -15,6 +15,13 @@ Last updated: Thursday, August 20, 2026
 
 ## Version history
 
+### Version 86 — Thursday, August 20, 2026
+
+- Tightened the Galleries page for mobile: three collections per row, closer/bigger heading, filter dropdowns fit on one line, and everything holds up correctly when the phone is rotated to landscape instead of falling back to desktop sizing.
+- Fixed the header hamburger menu colliding with the site name at phone-landscape widths, and moved it back to the left on mobile.
+- The full-size photo viewer now uses the same light background as the rest of the site.
+- Added two new collections: Norway Cruise and Rhine River Cruise.
+
 ### Version 85 — Thursday, August 20, 2026
 
 - Replaced the top-right nav buttons with a hamburger menu (left on desktop, right on mobile), tightened and enlarged the homepage "Start Looking" button, and fixed the copyright footer's background to match the rest of the site.

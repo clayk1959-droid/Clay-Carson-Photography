@@ -28,8 +28,28 @@
       "event": [
         "Nova Scotia Trip"
       ],
-      "count": 61,
+      "count": 62,
       "coverBasename": "nova-scotia-11.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "norway-cruise",
+      "title": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "count": 93,
+      "coverBasename": "norway-cruise-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "rhine-river-cruise",
+      "title": "Rhine River Cruise",
+      "person": [],
+      "event": [],
+      "count": 21,
+      "coverBasename": "rhine-river-cruise-01.jpg",
       "coverPosition": "center center"
     }
   ],
@@ -1163,6 +1183,1308 @@
       "width": 2200,
       "height": 1013,
       "src": "/galleries/nova-scotia/nova-scotia-72.jpg"
+    },
+    {
+      "collectionSlug": "nova-scotia",
+      "collectionTitle": "Nova Scotia",
+      "filename": "resized.jpg",
+      "caption": "August 20, 2026 — An excuse to rest while climbing lighthouse",
+      "altText": "An excuse to rest while climbing lighthouse",
+      "person": [],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 1069,
+      "height": 1800,
+      "src": "/galleries/nova-scotia/nova-scotia-74.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "Christiam walks_8.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1766,
+      "src": "/galleries/norway-cruise/norway-cruise-01.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen Day one_1.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1428,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-02.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen Day one_2.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1388,
+      "src": "/galleries/norway-cruise/norway-cruise-03.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen Day one_3.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 950,
+      "src": "/galleries/norway-cruise/norway-cruise-04.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen Day one_4.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1916,
+      "src": "/galleries/norway-cruise/norway-cruise-05.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen Day one_5.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1969,
+      "src": "/galleries/norway-cruise/norway-cruise-06.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen Day one_6.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1897,
+      "src": "/galleries/norway-cruise/norway-cruise-07.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen Day one_7.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1485,
+      "src": "/galleries/norway-cruise/norway-cruise-08.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen Day one_8.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1464,
+      "src": "/galleries/norway-cruise/norway-cruise-09.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen_1.tif",
+      "caption": "August 15, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1174,
+      "src": "/galleries/norway-cruise/norway-cruise-10.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen_2.tif",
+      "caption": "August 15, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1273,
+      "src": "/galleries/norway-cruise/norway-cruise-11.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen_3.tif",
+      "caption": "August 15, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1810,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-12.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Copenhagen_4.tif",
+      "caption": "August 15, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1488,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-13.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Costal Walk-On Boat_1.tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 2160,
+      "src": "/galleries/norway-cruise/norway-cruise-14.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Costal Walk-On Boat_2.tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 2012,
+      "src": "/galleries/norway-cruise/norway-cruise-15.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Costal Walk-On Boat_3.tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1150,
+      "src": "/galleries/norway-cruise/norway-cruise-16.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Costal Walk-On Boat_4.tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 2076,
+      "src": "/galleries/norway-cruise/norway-cruise-17.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Costal Walk-On Boat_5.tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1357,
+      "src": "/galleries/norway-cruise/norway-cruise-18.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Costal Walki_1.tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1129,
+      "src": "/galleries/norway-cruise/norway-cruise-19.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Flowers_1.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1412,
+      "src": "/galleries/norway-cruise/norway-cruise-20.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Fram-2.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1339,
+      "src": "/galleries/norway-cruise/norway-cruise-21.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Fram.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 2135,
+      "src": "/galleries/norway-cruise/norway-cruise-22.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Garden_1 (2).tif",
+      "caption": "August 15, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1754,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-23.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Garden_1.tif",
+      "caption": "August 15, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1497,
+      "src": "/galleries/norway-cruise/norway-cruise-24.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Garden_2.tif",
+      "caption": "August 15, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1741,
+      "src": "/galleries/norway-cruise/norway-cruise-25.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Garden_3.tif",
+      "caption": "August 15, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1725,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-26.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_1 (2).tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1483,
+      "src": "/galleries/norway-cruise/norway-cruise-27.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_1 (3).tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1405,
+      "src": "/galleries/norway-cruise/norway-cruise-28.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_1.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1475,
+      "src": "/galleries/norway-cruise/norway-cruise-29.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_3 (2).tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1402,
+      "src": "/galleries/norway-cruise/norway-cruise-30.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_3.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1503,
+      "src": "/galleries/norway-cruise/norway-cruise-31.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_4 (2).tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1365,
+      "src": "/galleries/norway-cruise/norway-cruise-32.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_4.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1480,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-33.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_6.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1528,
+      "src": "/galleries/norway-cruise/norway-cruise-34.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- North Point_7.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1154,
+      "src": "/galleries/norway-cruise/norway-cruise-35.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- On Boat_1.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1604,
+      "src": "/galleries/norway-cruise/norway-cruise-36.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- On Boat_2.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1036,
+      "src": "/galleries/norway-cruise/norway-cruise-37.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- On Boat_3.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1766,
+      "src": "/galleries/norway-cruise/norway-cruise-38.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- On Boat_4.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1298,
+      "src": "/galleries/norway-cruise/norway-cruise-39.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- On Boat_5.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1115,
+      "src": "/galleries/norway-cruise/norway-cruise-40.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- On Boat_6.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1115,
+      "src": "/galleries/norway-cruise/norway-cruise-41.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Oslo walk_1.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1841,
+      "src": "/galleries/norway-cruise/norway-cruise-42.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Oslo walk_2.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1841,
+      "src": "/galleries/norway-cruise/norway-cruise-43.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Oslo walk_3.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1380,
+      "src": "/galleries/norway-cruise/norway-cruise-44.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Oslo walk_Scooters.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2107,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-45.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Sod House_2.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1211,
+      "src": "/galleries/norway-cruise/norway-cruise-46.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Statue Garden_1 (2).tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1493,
+      "src": "/galleries/norway-cruise/norway-cruise-47.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Statue Garden_1.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1686,
+      "src": "/galleries/norway-cruise/norway-cruise-48.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Statue Garden_3 (2).tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1606,
+      "src": "/galleries/norway-cruise/norway-cruise-49.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Statue Garden_3.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1630,
+      "height": 2017,
+      "src": "/galleries/norway-cruise/norway-cruise-50.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Statue Garden_4 (2).tif",
+      "caption": "August 11, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1341,
+      "src": "/galleries/norway-cruise/norway-cruise-51.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Statue Garden_4.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1359,
+      "src": "/galleries/norway-cruise/norway-cruise-52.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Statue Garden_5.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1318,
+      "src": "/galleries/norway-cruise/norway-cruise-53.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY- Statue Garden_7.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2020,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-54.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Accordian_1.tif",
+      "caption": "August 10, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1487,
+      "src": "/galleries/norway-cruise/norway-cruise-55.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Bdoor copy.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 269,
+      "height": 403,
+      "src": "/galleries/norway-cruise/norway-cruise-56.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Bdoor.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 269,
+      "height": 403,
+      "src": "/galleries/norway-cruise/norway-cruise-57.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Bird town_1.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1362,
+      "src": "/galleries/norway-cruise/norway-cruise-58.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Bird town_3.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1706,
+      "height": 2120,
+      "src": "/galleries/norway-cruise/norway-cruise-59.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Boat Name_1.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1563,
+      "src": "/galleries/norway-cruise/norway-cruise-60.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Boat ride_1.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1555,
+      "src": "/galleries/norway-cruise/norway-cruise-62.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Boat ride_5.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1497,
+      "src": "/galleries/norway-cruise/norway-cruise-63.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_1.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1407,
+      "src": "/galleries/norway-cruise/norway-cruise-64.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_2.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1644,
+      "src": "/galleries/norway-cruise/norway-cruise-65.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_3.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1592,
+      "src": "/galleries/norway-cruise/norway-cruise-66.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_4.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1349,
+      "src": "/galleries/norway-cruise/norway-cruise-67.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_5.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1286,
+      "src": "/galleries/norway-cruise/norway-cruise-68.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_6.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1616,
+      "src": "/galleries/norway-cruise/norway-cruise-69.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_7.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1246,
+      "src": "/galleries/norway-cruise/norway-cruise-70.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_8.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1640,
+      "src": "/galleries/norway-cruise/norway-cruise-71.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Copenhagen_9.tif",
+      "caption": "August 12, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1336,
+      "src": "/galleries/norway-cruise/norway-cruise-72.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Costal walk_2.tif",
+      "caption": "August 13, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1320,
+      "src": "/galleries/norway-cruise/norway-cruise-73.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Costal walk_3.tif",
+      "caption": "August 13, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1345,
+      "src": "/galleries/norway-cruise/norway-cruise-74.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-Costal walk_4.tif",
+      "caption": "August 13, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1665,
+      "src": "/galleries/norway-cruise/norway-cruise-75.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_11.tif",
+      "caption": "August 14, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1615,
+      "src": "/galleries/norway-cruise/norway-cruise-76.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_12.tif",
+      "caption": "August 14, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1528,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-77.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_13.tif",
+      "caption": "August 14, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1676,
+      "src": "/galleries/norway-cruise/norway-cruise-78.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_2.tif",
+      "caption": "August 13, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 968,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-79.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_3.tif",
+      "caption": "August 13, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1558,
+      "src": "/galleries/norway-cruise/norway-cruise-80.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_4.tif",
+      "caption": "August 13, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1430,
+      "src": "/galleries/norway-cruise/norway-cruise-81.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_5.tif",
+      "caption": "August 13, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1840,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-82.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_7.tif",
+      "caption": "August 14, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1679,
+      "src": "/galleries/norway-cruise/norway-cruise-83.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY-boat_8.tif",
+      "caption": "August 14, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1086,
+      "src": "/galleries/norway-cruise/norway-cruise-84.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_1.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1438,
+      "src": "/galleries/norway-cruise/norway-cruise-85.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_10.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1515,
+      "src": "/galleries/norway-cruise/norway-cruise-86.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_2.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 951,
+      "src": "/galleries/norway-cruise/norway-cruise-87.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_3.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 2138,
+      "src": "/galleries/norway-cruise/norway-cruise-88.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_4.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1500,
+      "src": "/galleries/norway-cruise/norway-cruise-89.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_6.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1109,
+      "src": "/galleries/norway-cruise/norway-cruise-90.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_7.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 2200,
+      "height": 1557,
+      "src": "/galleries/norway-cruise/norway-cruise-91.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_8.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1771,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-92.jpg"
+    },
+    {
+      "collectionSlug": "norway-cruise",
+      "collectionTitle": "Norway Cruise",
+      "filename": "NORWAY_9.tif",
+      "caption": "August 16, 2025 — Norway Cruise",
+      "altText": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "width": 1453,
+      "height": 2200,
+      "src": "/galleries/norway-cruise/norway-cruise-93.jpg"
     }
   ]
 }

@@ -8,7 +8,56 @@ import { toSlug, toComponentName } from "./lib/naming.mjs";
 import { formatDate } from "./lib/format-date.mjs";
 import { computeDisplayOrder, computeIndexCard, computeIndexPhotos } from "./lib/photo-ranking.mjs";
 
+// This Mac has 8GB of RAM, and originals can run 50+ megapixels -- sharp's
+// own operation cache and multi-threaded pipeline (both outside Node's JS
+// heap entirely) add up fast across a big batch and were enough to crash a
+// sync outright. Trade a bit of speed for staying inside memory.
+sharp.cache(false);
+sharp.concurrency(1);
+
 const run = promisify(execFile);
+
+// A live spinner so a big sync (lots of new/changed photos) doesn't look
+// frozen during the slow part -- resizing each original. Any console.log
+// that needs to print while the spinner is running should go through
+// logLine() instead, so it doesn't get smeared onto the spinner's line.
+const spinnerFrames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+let spinnerFrameIndex = 0;
+let spinnerStatusText = "";
+let spinnerTimer = null;
+
+function spinnerRender() {
+  process.stdout.clearLine(0);
+  process.stdout.cursorTo(0);
+  process.stdout.write(`${spinnerFrames[spinnerFrameIndex]} ${spinnerStatusText}`);
+  spinnerFrameIndex = (spinnerFrameIndex + 1) % spinnerFrames.length;
+}
+
+function startSpinner() {
+  if (!process.stdout.isTTY || spinnerTimer) return;
+  spinnerTimer = setInterval(spinnerRender, 100);
+}
+
+function setSpinnerStatus(text) {
+  spinnerStatusText = text;
+  if (!process.stdout.isTTY) console.log(text);
+}
+
+function stopSpinner() {
+  if (!spinnerTimer) return;
+  clearInterval(spinnerTimer);
+  spinnerTimer = null;
+  process.stdout.clearLine(0);
+  process.stdout.cursorTo(0);
+}
+
+function logLine(text) {
+  if (spinnerTimer) {
+    process.stdout.clearLine(0);
+    process.stdout.cursorTo(0);
+  }
+  console.log(text);
+}
 
 const root = process.cwd();
 const sourceRoot = path.join(root, "Gallery Originals");
@@ -84,6 +133,8 @@ try {
 const collections = [
   { folder: "Janet Buys a car", slug: "janet-buys-a-car", title: "Janet Buys a car", component: "JanetBuysACarPage", subtitle: null },
   { folder: "Nova Scotia Trip", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null },
+  { folder: "Norway Cruise", slug: "norway-cruise", title: "Norway Cruise", component: "NorwayCruisePage", subtitle: null },
+  { folder: "Rhine River Cruise", slug: "rhine-river-cruise", title: "Rhine River Cruise", component: "RhineRiverCruisePage", subtitle: null },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.
@@ -258,6 +309,7 @@ const indexCards = [];
 // which collection cards show.
 const indexPhotos = [];
 
+startSpinner();
 for (const collection of collections) {
   const sourceDirectory = path.join(sourceRoot, collection.folder);
   const filenames = (await readdir(sourceDirectory))
@@ -271,7 +323,7 @@ for (const collection of collections) {
     await rm(path.join(root, "public", "galleries", collection.slug), { recursive: true, force: true });
     await rm(path.join(root, "public", "gallery-thumbnails", collection.slug), { recursive: true, force: true });
     await rm(path.join(photoDataRoot, `${collection.slug}.json`), { force: true });
-    console.log(`${collection.title}: 0 photographs — skipped (folder is empty)`);
+    logLine(`${collection.title}: 0 photographs — skipped (folder is empty)`);
     continue;
   }
 
@@ -305,6 +357,7 @@ for (const collection of collections) {
 
   for (const [index, filename] of filenames.entries()) {
     const number = String(index + 1).padStart(2, "0");
+    setSpinnerStatus(`${collection.title}: ${index + 1}/${filenames.length} — ${filename}`);
 
     if (collectionOverrides[filename]?.hidden === true) {
       // Deleted from the site via the local editor. The original file in
@@ -460,7 +513,7 @@ for (const collection of collections) {
   const collectionPageDirectory = path.join(root, "app", "collections", collection.slug);
   await mkdir(collectionPageDirectory, { recursive: true });
   await writeFile(path.join(collectionPageDirectory, "page.tsx"), page);
-  console.log(
+  logLine(
     `${collection.title}: ${visibleCount} photographs (${reusedCount} unchanged, ${processedCount} processed${hiddenCount ? `, ${hiddenCount} hidden` : ""})`,
   );
 
@@ -504,6 +557,7 @@ export default function CollectionsPage() {
 }
 `;
 await writeFile(path.join(root, "app", "collections", "page.tsx"), indexPage);
+stopSpinner();
 console.log("Collections index page regenerated.");
 
 await rm(temporaryRoot, { recursive: true, force: true });
