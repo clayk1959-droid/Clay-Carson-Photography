@@ -241,7 +241,7 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
      would start underneath the hamburger. */
   .brand-block { margin-left: 36px; }
   .brand { font-size: 29px; }
-  .hero { height: calc(100svh - 96px); }
+  .hero { height: calc(100dvh - 96px); }
   .hero-photos-desktop { display: none; }
   .hero-photos-mobile { display: block; }
   .hero-copy { left: 6vw; right: 6vw; bottom: 6vh; max-width: none; text-align: center; }

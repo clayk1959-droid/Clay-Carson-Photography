@@ -15,6 +15,10 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 95 — Friday, August 21, 2026
+
+- Homepage: fixed the page feeling "touchy" — a slight scroll bounce would occasionally reveal a sliver of the footer for no reason as Safari's address bar showed/hid itself. The hero now tracks the actual visible screen size live instead of a fixed snapshot of it.
+
 ### Version 94 — Friday, August 21, 2026
 
 - Homepage: sped up the rotating hero photos from every 5.5 seconds to every 2.75 seconds.
