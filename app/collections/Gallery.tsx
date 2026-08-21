@@ -63,7 +63,7 @@ export function Gallery({
     );
   }, [photographs.length]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const photoParam = new URLSearchParams(window.location.search).get("photo");
     if (photoParam === null) return;
 

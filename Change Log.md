@@ -15,6 +15,10 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 91 — Friday, August 21, 2026
+
+- Reverted Version 90's reload-flash change — it made the flash worse, not better.
+
 ### Version 90 — Friday, August 21, 2026
 
 - Full-size photo viewer: tightened up the flash of the thumbnail grid that briefly showed when reloading or opening a link straight to a photo.
