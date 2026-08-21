@@ -311,6 +311,12 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
      rest of this block, so the lightbox drops it and gives that height
      back to the photo instead. */
   .gallery-lightbox .site-header { display: none; }
+  /* Same reasoning as above -- the 620px floor is sized for portrait,
+     where there's plenty of height to spare, but on a short landscape
+     viewport it forces the hero taller than the screen, so object-fit:
+     cover ends up showing a tightly zoomed-in slice of the photo instead
+     of the whole frame. */
+  .hero { min-height: 0; }
   .lightbox-body { padding: 10px 40px 6px; }
   .gallery-lightbox figure { gap: 4px; }
   .gallery-lightbox figcaption { font-size: 10px; }

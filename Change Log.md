@@ -15,6 +15,11 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 94 — Friday, August 21, 2026
+
+- Homepage: sped up the rotating hero photos from every 5.5 seconds to every 2.75 seconds.
+- Homepage: fixed the rotating photo showing huge/zoomed-in when rotating the phone to landscape — the hero box was being forced to a minimum height sized for portrait, taller than an actual landscape screen.
+
 ### Version 93 — Friday, August 21, 2026
 
 - Fixed the longstanding bug where certain thumbnails would bleed full-frame past their intended border on iPhone (a Safari-specific quirk, not something visible in ordinary testing) — thumbnails now get their exact display size calculated directly instead of relying on a percentage Safari sometimes gets wrong.
