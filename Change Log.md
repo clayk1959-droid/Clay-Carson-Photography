@@ -15,6 +15,10 @@ Last updated: Thursday, August 20, 2026
 
 ## Version history
 
+### Version 88 — Thursday, August 20, 2026
+
+- Contact-sheet pages: lightened the thumbnail mat back down, removed the photo-number badges from thumbnails, and made the "← Galleries" link, collection name, and photo count bigger, bold, and darker so they stand out against the new background.
+
 ### Version 87 — Thursday, August 20, 2026
 
 - Full-size photo viewer: bigger caption text, moved the previous/next arrows off the middle of the photo to a fixed spot near the top and made them bigger with no more circle behind them, and renamed "Close" to "Back" with the underline removed.

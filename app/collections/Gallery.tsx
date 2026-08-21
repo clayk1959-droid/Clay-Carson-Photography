@@ -142,9 +142,6 @@ export function Gallery({
                 height={photograph.height}
                 loading={index < 4 ? "eager" : "lazy"}
               />
-              <span className="gallery-thumb-number" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
             </button>
             {editable && (
               <button
