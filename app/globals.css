@@ -57,6 +57,7 @@ h1 em, h2 em { font-weight: 400; }
 .hero-place { position: absolute; right: 4.5vw; bottom: 4vh; margin: 0; font-size: 10px; line-height: 1.7; letter-spacing: .16em; text-transform: uppercase; text-align: right; }
 .subpage { min-height: 100svh; background: #c4c4c4 url('/textures/pattern.png') repeat; color: #1c1c1c; }
 .subpage .site-header { border-bottom: 1px solid #292c28; background: #0c0d0c; }
+.collection-page .site-header { position: sticky; top: 0; }
 .subpage .site-footer { background: transparent; }
 .subpage .site-footer p { color: #3a3a3a; }
 .page-title { margin: 0; padding: 58px 4.5vw 0; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(54px, 7vw, 108px); font-style: normal; font-weight: 400; letter-spacing: -.025em; }
@@ -65,29 +66,18 @@ h1 em, h2 em { font-weight: 400; }
 .about-copy { grid-column: 2; max-width: 900px; margin-top: 6px; display: flex; flex-direction: column; gap: 12px; }
 .about-copy p { margin: 0; color: #262626; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 12px; font-style: normal; font-weight: 400; font-kerning: normal; letter-spacing: -.02em; line-height: 1.5; text-indent: 1em; }
 .about-copy p:last-child { margin-bottom: 0; }
-.contact-simple { max-width: 1120px; margin: 0 auto; padding: 76px 6vw 130px; }
-.contact-eyebrow { margin: 0 0 34px; color: #454545; font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
-.contact-intro { padding-bottom: 58px; }
-.contact-intro h1 { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(54px, 7vw, 96px); font-style: normal; line-height: .95; letter-spacing: -.025em; }
-.contact-intro p { margin: 28px 0 0; color: #2e2e2e; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(17px, 1.6vw, 23px); line-height: 1.5; }
-.contact-actions { border-top: 1px solid rgba(255, 255, 255, .6); }
-.contact-actions a { min-height: 108px; border-bottom: 1px solid rgba(255, 255, 255, .6); display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; align-items: center; gap: 24px; transition: color .2s, background .2s; }
-.contact-actions a:hover { color: #fff; background: #171a17; }
-.contact-label { color: #454545; font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
-.contact-value { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(21px, 2.5vw, 36px); }
-.contact-arrow { font-size: 25px; }
 .sentence-gap { display: inline-block; width: .65em; font-size: inherit; overflow: hidden; }
 .collections-layout { max-width: 1440px; margin: 0 auto; padding: 0 5vw 120px; }
 .collections-layout .page-title { padding: 6px 0 9px; border-bottom: 1px solid rgba(255, 255, 255, .6); font-size: clamp(14px, 1.6vw, 22px); font-family: Helvetica, Arial, sans-serif; }
 .collections-filters { display: flex; flex-wrap: wrap; gap: 20px 40px; margin: 15px 0 3px; }
 .collections-filter-group { position: relative; display: flex; flex-direction: column; gap: 6px; }
-.collections-filter-label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #1c1c1c; }
-.collections-filter-select { cursor: pointer; font: inherit; text-align: left; border: 1px solid #7a7a7a; background: #ffffff; color: #1c1c1c; padding: 8px 32px 8px 13px; font-size: 12px; min-width: 180px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231c1c1c' stroke-width='1.4' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
+.collections-filter-label { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #1c1c1c; }
+.collections-filter-select { cursor: pointer; font: inherit; font-weight: 700; text-align: left; border: 1px solid #7a7a7a; background: #ffffff; color: #1c1c1c; padding: 8px 32px 8px 13px; font-size: 12px; min-width: 180px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231c1c1c' stroke-width='1.4' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
 .collections-filter-select:hover, .collections-filter-select.is-open { border-color: #454545; }
 .collections-filter-select:focus-visible { outline: 2px solid #1c1c1c; outline-offset: 2px; }
 .collections-filter-select option { background: #ffffff; color: #1c1c1c; }
 .collections-filter-menu { position: absolute; top: 100%; left: 0; z-index: 20; margin-top: 4px; min-width: 220px; max-height: 260px; overflow-y: auto; padding: 6px; border: 1px solid #7a7a7a; background: #ffffff; box-shadow: 0 10px 28px rgba(0, 0, 0, .25); display: grid; gap: 1px; }
-.collections-filter-option { display: flex; align-items: center; gap: 9px; padding: 7px 8px; font-size: 12px; color: #1c1c1c; cursor: pointer; }
+.collections-filter-option { display: flex; align-items: center; gap: 9px; padding: 7px 8px; font-size: 12px; font-weight: 700; color: #1c1c1c; cursor: pointer; }
 .collections-filter-option:hover { background: #ececec; }
 .checkbox-wrap { position: relative; width: 15px; height: 15px; flex-shrink: 0; display: inline-block; }
 .collections-filter-option input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
@@ -108,13 +98,13 @@ h1 em, h2 em { font-weight: 400; }
 .collection-card:hover .collection-cover img { transform: scale(1.018); }
 .collection-placeholder { border: 1px solid rgba(255, 255, 255, .6); display: grid; place-items: center; color: #454545; font-size: 9px; letter-spacing: .17em; text-transform: uppercase; }
 .collection-details { min-height: 185px; padding: 8px 0 3px; display: flex; flex-direction: column; }
-.collection-count { margin: 0; color: #1c1c1c; font-size: 16px; letter-spacing: .15em; text-transform: uppercase; }
-.collection-details h2 { margin: 5px 0 0; font-family: 'DM Sans', sans-serif; font-size: 23px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; line-height: 1.3; }
+.collection-count { margin: 0; color: #1c1c1c; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 16px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.collection-details h2 { margin: 5px 0 0; font-family: 'DM Sans', sans-serif; font-size: 23px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; line-height: 1.3; }
 .collection-count { margin-top: 9px; }
 .collection-heading { max-width: 1440px; margin: 0 auto; padding: 6px 5vw 16px; display: grid; grid-template-columns: 1fr auto; align-items: end; border-bottom: 1px solid rgba(255, 255, 255, .6); }
-.collection-heading > a { grid-column: 1 / -1; margin-bottom: 6px; color: #1c1c1c; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+.collection-heading > a { grid-column: 1 / -1; margin-bottom: 6px; color: #1c1c1c; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .collection-heading h1 { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(15px, 1.8vw, 27px); font-style: normal; line-height: 1; }
-.collection-heading p { margin: 0 0 8px; color: #1c1c1c; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+.collection-heading p { margin: 0 0 8px; color: #1c1c1c; font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
 .photo-gallery { max-width: 1440px; margin: 0 auto; padding: 16px 5vw 130px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
 .gallery-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; margin: 0; padding: 10px; border: 0; overflow: hidden; background: #cccccc; color: inherit; cursor: zoom-in; display: flex; align-items: center; justify-content: center; transition: transform .2s ease, box-shadow .2s ease; }
 .gallery-thumb img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; border: 3px solid #ffffff; transition: opacity .25s ease, transform .5s cubic-bezier(.2,.65,.3,1); }
@@ -128,20 +118,24 @@ h1 em, h2 em { font-weight: 400; }
 .gallery-edit-button:hover { background: #171917; }
 .empty-collection { max-width: 1440px; min-height: 48svh; margin: 0 auto; padding: 50px 5vw 110px; }
 .empty-collection p { margin: 0; color: #454545; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 15px; }
-.gallery-lightbox { position: fixed; inset: 0; z-index: 1000; padding: 34px 5vw 26px; background: #c4c4c4 url('/textures/pattern.png') repeat; display: grid; grid-template-columns: 70px minmax(0, 1fr) 70px; align-items: center; }
-.gallery-lightbox figure { height: calc(100svh - 60px); margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 0; gap: 12px; touch-action: pan-y; }
-.gallery-lightbox figure img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border: 3px solid #ffffff; }
+.gallery-lightbox { position: fixed; inset: 0; z-index: 1000; background: #c4c4c4 url('/textures/pattern.png') repeat; display: flex; flex-direction: column; }
+.lightbox-body { position: relative; flex: 1; min-height: 0; padding: 34px 5vw 26px; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; }
+.gallery-lightbox figure { position: relative; height: 100%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 0; gap: 12px; touch-action: pan-y pinch-zoom; }
+.gallery-lightbox figure img { max-width: 100%; max-height: calc(100% - 110px); width: auto; height: auto; object-fit: contain; border: 3px solid #ffffff; }
 .gallery-lightbox figcaption { max-width: 100%; color: #1c1c1c; display: grid; grid-template-columns: minmax(0, 66%) 1fr; align-items: start; gap: 30px; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 13.5px; letter-spacing: .02em; }
-.lightbox-caption { max-width: 100%; line-height: 1.2; text-align: left; overflow-wrap: anywhere; font-size: 15px; font-family: Helvetica, Arial, sans-serif; }
-.lightbox-count { justify-self: end; color: #454545; font-family: 'DM Sans', sans-serif; font-size: 13.5px; letter-spacing: .18em; text-align: right; }
-.lightbox-close, .lightbox-edit { position: absolute; top: 22px; z-index: 2; padding: 8px 0; border: 0; background: transparent; color: #1c1c1c; font: inherit; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
-.lightbox-edit { border-bottom: 1px solid rgba(0, 0, 0, .4); }
-.lightbox-close { right: 28px; }
-.lightbox-edit { right: 100px; }
-.lightbox-arrow { width: 54px; height: 54px; border: 0; background: transparent; color: #1c1c1c; font: inherit; font-size: 36px; line-height: 1; cursor: pointer; }
-.lightbox-arrow:disabled { opacity: .25; cursor: default; }
-.lightbox-previous { justify-self: start; }
-.lightbox-next { justify-self: end; }
+.lightbox-caption-group { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+.lightbox-caption { max-width: 100%; line-height: 1.2; text-align: left; overflow-wrap: anywhere; font-size: 15px; font-weight: 700; font-family: Helvetica, Arial, sans-serif; }
+.lightbox-date { color: #454545; font-size: 11px; font-weight: 400; font-family: Helvetica, Arial, sans-serif; letter-spacing: .02em; }
+.lightbox-count { justify-self: end; color: #454545; font-family: 'DM Sans', sans-serif; font-size: 13.5px; font-weight: 700; letter-spacing: .18em; text-align: right; white-space: nowrap; }
+.lightbox-toolbar { flex: 0 0 auto; display: flex; justify-content: flex-end; align-items: center; gap: 16px; padding: 12px 5vw 0; }
+.lightbox-close, .lightbox-edit { border: 0; font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
+.lightbox-edit { padding: 8px 0; background: transparent; color: #1c1c1c; border-bottom: 1px solid rgba(0, 0, 0, .4); }
+.lightbox-close { padding: 8px 16px; background: rgba(255, 255, 255, .35); border: 1.5px solid rgba(0, 0, 0, .3); border-radius: 20px; color: #000000; }
+.lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 72px; height: 72px; border: 1.5px solid rgba(0, 0, 0, .45); border-radius: 50%; background: rgba(255, 255, 255, .35); color: #000000; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.lightbox-arrow svg { width: 58%; height: 58%; }
+.lightbox-arrow:disabled { opacity: .3; cursor: default; }
+.lightbox-previous { left: 12px; }
+.lightbox-next { right: 12px; }
 
 .edit-photo-overlay { position: fixed; inset: 0; z-index: 1100; padding: 24px; display: grid; place-items: center; background: rgba(5, 6, 5, .82); }
 .edit-photo-form { width: min(360px, 100%); padding: 28px 26px; border: 1px solid #343733; background: #0c0d0c; color: #f5f2eb; display: grid; gap: 16px; }
@@ -237,7 +231,6 @@ h1 em, h2 em { font-weight: 400; }
 footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: grid; grid-template-columns: 1.2fr 1fr; column-gap: 12vw; min-height: 680px; }
 .footer-right { padding-top: 60px; display: flex; flex-direction: column; }
 .footer-right > p { max-width: 440px; font-size: 15px; line-height: 1.8; color: #b8b9b2; }
-.contact-link { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 3vw, 46px); border-bottom: 1px solid #5b5d58; padding: 25px 0 10px; display: flex; justify-content: space-between; }
 .footer-links { margin-top: auto; display: flex; gap: 30px; font-size: 10px; text-transform: uppercase; letter-spacing: .15em; }
 .copyright { grid-column: 1 / -1; margin: 80px 0 0; padding-top: 22px; border-top: 1px solid #3f423e; font-size: 9px; text-transform: uppercase; letter-spacing: .15em; color: #8a8d87; }
 .site-footer { padding: 40px 4.5vw 30px; text-align: center; background: #0c0d0c; }
@@ -261,14 +254,6 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .about-simple .page-title { font-size: 34px; }
   .about-copy { margin-top: 6px; }
   .about-copy p { font-size: 16px; line-height: 1.6; }
-  .contact-simple { padding: 58px 7vw 90px; }
-  .contact-eyebrow { margin-bottom: 25px; }
-  .contact-intro { padding-bottom: 42px; }
-  .contact-intro h1 { font-size: 48px; }
-  .contact-intro p { margin-top: 21px; font-size: 17px; }
-  .contact-actions a { min-height: 92px; grid-template-columns: 58px minmax(0, 1fr) auto; gap: 12px; }
-  .contact-value { font-size: 17px; overflow-wrap: anywhere; }
-  .contact-arrow { font-size: 20px; }
   .collections-layout { padding: 0 7vw 90px; }
   .collections-layout .page-title { padding-top: 2px; font-size: 18px; line-height: 1.1; }
   .collections-filters { gap: 10px; }
@@ -284,14 +269,14 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .collection-heading h1 { font-size: 19px; font-weight: 700; color: #000000; }
   .collection-heading p { margin-top: 6px; font-size: 12px; font-weight: 700; color: #000000; }
   .photo-gallery { padding: 10px 3vw 90px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .gallery-lightbox { padding: 62px 14px 22px; grid-template-columns: 44px minmax(0, 1fr) 44px; }
-  .gallery-lightbox figure { height: calc(100svh - 92px); }
+  .lightbox-body { padding: 20px 14px 22px; }
   .gallery-lightbox figcaption { font-size: 13.5px; }
   .lightbox-caption { font-size: 18px; }
-  .lightbox-arrow { width: 44px; height: 44px; font-size: 30px; }
-  .lightbox-close, .lightbox-edit { top: 17px; font-size: 12px; }
-  .lightbox-close { right: 18px; }
-  .lightbox-edit { right: 78px; }
+  .lightbox-date { font-size: 13px; }
+  .gallery-lightbox figure img { max-height: calc(100% - 130px); }
+  .lightbox-arrow { width: 52px; height: 52px; }
+  .lightbox-toolbar { padding: 10px 14px 0; gap: 12px; }
+  .lightbox-close, .lightbox-edit { font-size: 12px; }
   h1 { font-size: clamp(57px, 17vw, 88px); }
   .hero-place { display: none; }
   .statement { padding: 90px 7vw; display: block; }
@@ -323,15 +308,20 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
      through to desktop's wide 4.5vw brand inset -- which is too narrow a
      gutter for the hamburger at that width and the two collide. */
   .brand-block { margin-left: 36px; }
-  .gallery-lightbox { padding: 10px 40px 6px; grid-template-columns: 30px minmax(0, 1fr) 30px; }
-  .gallery-lightbox figure { height: calc(100svh - 16px); gap: 4px; }
+  /* No room to spare here for a 96px banner too -- same reasoning as the
+     rest of this block, so the lightbox drops it and gives that height
+     back to the photo instead. */
+  .gallery-lightbox .site-header { display: none; }
+  .lightbox-body { padding: 10px 40px 6px; }
+  .gallery-lightbox figure { gap: 4px; }
   .gallery-lightbox figcaption { font-size: 10px; }
-  .lightbox-caption { font-size: 7px; -webkit-line-clamp: 1; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
-  .lightbox-count { font-size: 9px; }
-  .lightbox-close, .lightbox-edit { top: 6px; font-size: 8px; }
-  .lightbox-close { right: 10px; }
-  .lightbox-edit { right: 54px; }
-  .lightbox-arrow { width: 28px; height: 28px; font-size: 18px; }
+  .lightbox-caption { font-size: 18px; -webkit-line-clamp: 1; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+  .lightbox-date { font-size: 9px; }
+  .gallery-lightbox figure img { max-height: calc(100% - 80px); }
+  .lightbox-toolbar { padding: 4px 10px 0; gap: 8px; }
+  .lightbox-close, .lightbox-edit { font-size: 8px; }
+  .lightbox-close { padding: 3px 10px; }
+  .lightbox-arrow { width: 44px; height: 44px; }
   /* Same reasoning as above, applied to the Galleries index: a phone
      rotated to landscape is wider than the max-width:800px breakpoint
      above (routinely 812-930px), so without this it would fall through to
@@ -348,20 +338,5 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .collection-heading > a { font-size: 14px; font-weight: 700; color: #000000; }
   .collection-heading h1 { font-size: 19px; font-weight: 700; color: #000000; }
   .collection-heading p { font-size: 12px; font-weight: 700; color: #000000; }
-}
-/* Touch devices already swipe to navigate, but a visible start/end
-   indicator still helps — float the arrows near the top of the photo
-   instead of giving them their own grid column, so they don't shrink the
-   image. Sitting at a fixed offset (rather than vertically centered) keeps
-   them off the middle of the photo where they'd otherwise sit right over
-   the subject; the glow (in place of a background circle) keeps them
-   legible against any photo underneath. Placed after the width/height
-   breakpoints above so it always wins the cascade on an actual phone,
-   which matches more than one of those at once. */
-@media (hover: none) and (pointer: coarse) {
-  .gallery-lightbox { grid-template-columns: minmax(0, 1fr); padding-left: 14px; padding-right: 14px; }
-  .lightbox-arrow { position: absolute; top: 70px; z-index: 3; width: 48px; height: 48px; font-size: 34px; text-shadow: 0 0 6px rgba(255, 255, 255, .9), 0 0 14px rgba(255, 255, 255, .7); }
-  .lightbox-previous { left: 8px; }
-  .lightbox-next { right: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero-photo { transition: none; } .gallery-image, .gallery-thumb, .gallery-thumb img { transition: none; } }

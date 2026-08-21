@@ -104,11 +104,11 @@ export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; p
 
       {isSearching ? (
         matchingPhotos.length === 0 ? (
-          <p className="collections-empty">No photographs match that filter.</p>
+          <p className="collections-empty">No photos match that filter.</p>
         ) : (
           <>
             <p className="search-summary">
-              {matchingPhotos.length} photograph{matchingPhotos.length === 1 ? "" : "s"}
+              {matchingPhotos.length} photo{matchingPhotos.length === 1 ? "" : "s"}
             </p>
             <div className="photo-gallery">
               {matchingPhotos.map((photo, index) => (
@@ -148,7 +148,7 @@ export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; p
                 <div>
                   <h2>{card.title}</h2>
                 </div>
-                <p className="collection-count">{card.count} photographs</p>
+                <p className="collection-count">{card.count} Photos</p>
               </div>
             </a>
           ))}

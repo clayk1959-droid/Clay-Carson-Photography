@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { SiteHeader } from "../SiteHeader";
+import { formatDate } from "../../scripts/lib/format-date.mjs";
 
 type GalleryPhoto = {
   src: string;
@@ -37,6 +39,11 @@ export function Gallery({
 }) {
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
   const [activePhotoWidth, setActivePhotoWidth] = useState<number | null>(null);
+  const [arrowMetrics, setArrowMetrics] = useState<{
+    top: number;
+    left: number;
+    right: number;
+  } | null>(null);
   const [editingPhoto, setEditingPhoto] = useState<number | null>(null);
   const [reordering, setReordering] = useState(false);
   const activeImage = useRef<HTMLImageElement | null>(null);
@@ -55,6 +62,31 @@ export function Gallery({
       current === null || current === photographs.length - 1 ? current : current + 1,
     );
   }, [photographs.length]);
+
+  useEffect(() => {
+    const photoParam = new URLSearchParams(window.location.search).get("photo");
+    if (photoParam === null) return;
+
+    const index = Number(photoParam) - 1;
+    if (Number.isInteger(index) && index >= 0 && index < photographs.length) {
+      setActivePhoto(index);
+    }
+  }, [photographs.length]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (activePhoto === null) {
+      params.delete("photo");
+    } else {
+      params.set("photo", String(activePhoto + 1));
+    }
+    const query = params.toString();
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${query ? `?${query}` : ""}`,
+    );
+  }, [activePhoto]);
 
   useEffect(() => {
     if (activePhoto === null) return;
@@ -103,12 +135,30 @@ export function Gallery({
     if (activePhoto === null || !activeImage.current) return;
 
     const image = activeImage.current;
-    const updateWidth = () => setActivePhotoWidth(image.getBoundingClientRect().width);
-    updateWidth();
+    const figureEl = image.closest("figure");
 
-    const observer = new ResizeObserver(updateWidth);
+    const updateMetrics = () => {
+      const imageRect = image.getBoundingClientRect();
+      setActivePhotoWidth(imageRect.width);
+
+      if (figureEl) {
+        const figureRect = figureEl.getBoundingClientRect();
+        setArrowMetrics({
+          top: imageRect.top - figureRect.top + imageRect.height / 2,
+          left: imageRect.left - figureRect.left,
+          right: figureRect.right - imageRect.right,
+        });
+      }
+    };
+    updateMetrics();
+
+    const observer = new ResizeObserver(updateMetrics);
     observer.observe(image);
-    return () => observer.disconnect();
+    window.addEventListener("resize", updateMetrics);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateMetrics);
+    };
   }, [activePhoto]);
 
   function openPhoto(index: number) {
@@ -174,39 +224,33 @@ export function Gallery({
           aria-label={`${name} photograph ${activePhoto + 1} of ${photographs.length}`}
           onClick={closePhoto}
         >
-          <button
-            className="lightbox-close"
-            type="button"
-            onClick={closePhoto}
-            aria-label="Back to gallery"
-          >
-            Back
-          </button>
-          {editable && (
+          <div onClick={(event) => event.stopPropagation()}>
+            <SiteHeader showHome />
+          </div>
+          <div className="lightbox-toolbar">
+            {editable && (
+              <button
+                className="lightbox-edit"
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setEditingPhoto(activePhoto);
+                }}
+                aria-label="Edit caption, date, and position for this photograph"
+              >
+                Edit
+              </button>
+            )}
             <button
-              className="lightbox-edit"
+              className="lightbox-close"
               type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                setEditingPhoto(activePhoto);
-              }}
-              aria-label="Edit caption, date, and position for this photograph"
+              onClick={closePhoto}
+              aria-label="Back to gallery"
             >
-              Edit
+              Back
             </button>
-          )}
-          <button
-            className="lightbox-arrow lightbox-previous"
-            type="button"
-            disabled={activePhoto === 0}
-            onClick={(event) => {
-              event.stopPropagation();
-              showPrevious();
-            }}
-            aria-label="Previous photograph"
-          >
-            ‹
-          </button>
+          </div>
+          <div className="lightbox-body">
           <figure
             onClick={(event) => event.stopPropagation()}
             onTouchStart={(event) => {
@@ -239,6 +283,25 @@ export function Gallery({
               else showPrevious();
             }}
           >
+            <button
+              className="lightbox-arrow lightbox-previous"
+              type="button"
+              style={
+                arrowMetrics
+                  ? { top: arrowMetrics.top, left: arrowMetrics.left + 12 }
+                  : undefined
+              }
+              disabled={activePhoto === 0}
+              onClick={(event) => {
+                event.stopPropagation();
+                showPrevious();
+              }}
+              aria-label="Previous photograph"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="15 6 9 12 15 18" />
+              </svg>
+            </button>
             <img
               ref={activeImage}
               src={photographs[activePhoto].src}
@@ -249,26 +312,41 @@ export function Gallery({
             <figcaption
               style={activePhotoWidth ? { width: activePhotoWidth } : undefined}
             >
-              <span className="lightbox-caption">
-                {photographs[activePhoto].caption}
-              </span>
+              <div className="lightbox-caption-group">
+                <span className="lightbox-caption">
+                  {photographs[activePhoto].description}
+                </span>
+                {photographs[activePhoto].date && (
+                  <span className="lightbox-date">
+                    {formatDate(photographs[activePhoto].date)}
+                  </span>
+                )}
+              </div>
               <span className="lightbox-count">
                 {String(activePhoto + 1).padStart(2, "0")} / {photographs.length}
               </span>
             </figcaption>
+            <button
+              className="lightbox-arrow lightbox-next"
+              type="button"
+              style={
+                arrowMetrics
+                  ? { top: arrowMetrics.top, right: arrowMetrics.right + 12 }
+                  : undefined
+              }
+              disabled={activePhoto === photographs.length - 1}
+              onClick={(event) => {
+                event.stopPropagation();
+                showNext();
+              }}
+              aria-label="Next photograph"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="9 6 15 12 9 18" />
+              </svg>
+            </button>
           </figure>
-          <button
-            className="lightbox-arrow lightbox-next"
-            type="button"
-            disabled={activePhoto === photographs.length - 1}
-            onClick={(event) => {
-              event.stopPropagation();
-              showNext();
-            }}
-            aria-label="Next photograph"
-          >
-            ›
-          </button>
+          </div>
         </div>
       )}
 

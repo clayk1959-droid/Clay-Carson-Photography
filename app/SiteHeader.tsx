@@ -43,7 +43,6 @@ export function SiteHeader({
               {showHome && <a href="/">Home</a>}
               <a href="/collections">Galleries</a>
               <a href="/about">About</a>
-              <a href="/contact">Contact</a>
             </nav>
           )}
         </div>

@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Thursday, August 20, 2026
+Last updated: Friday, August 21, 2026
 
 ## Current status
 
@@ -14,6 +14,22 @@ Last updated: Thursday, August 20, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 89 — Friday, August 21, 2026
+
+- Full-size photo viewer: brought the site banner (hamburger menu + logo) into the viewer so it no longer feels like a separate bannerless page, and the photo now sits top-aligned beneath it instead of centered in open space. The banner tucks away again on phone-landscape to keep the photo as large as possible there.
+- Nav arrows are now skinny, dark chevrons in a smaller, nearly-see-through white circle sized to fit them closely, overlaid right on the photo itself, and always precisely centered on the photo regardless of its shape or the screen size.
+- "Back" and "Edit" moved off the photo into their own row above it, and "Back" is now bold and darker so it doesn't get lost against the page.
+- Fixed pinch-to-zoom being blocked on the full-size photo (swipe-to-navigate had accidentally disabled it too).
+- Reloading, or opening a link straight to a photo, now reopens that same photo instead of dropping back to the thumbnail grid.
+- Bolded the thin labels and captions across the Galleries page, each gallery's thumbnail grid, and the full-size photo viewer (filter labels, photo counts, the "← Galleries" link, photo captions, "Edit") to match "Back" — the serif gallery/page titles were left as-is.
+- Fixed a bug where a tall (portrait) photo's caption could get pushed off the bottom of the screen — the photo now always leaves room for its caption.
+- Each gallery's page now keeps its banner pinned at the top while scrolling, so you don't have to scroll back up to navigate away.
+- The photo count line under each gallery on the Galleries page now uses the same serif font as the "Galleries" heading above it.
+- Full-size photo viewer: captions in phone-landscape now match the same size as portrait instead of being tiny.
+- Full-size photo viewer: the caption's date now sits on its own line below the description, in smaller type, instead of being crammed onto one line together.
+- Removed the Contact page and its hamburger-menu link.
+- Shortened "photographs" to "Photos" everywhere it appears on the Galleries page and each gallery's page, to save space — new galleries created from here on will match automatically.
 
 ### Version 88 — Thursday, August 20, 2026
 

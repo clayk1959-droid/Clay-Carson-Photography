@@ -28,7 +28,7 @@ const collectionSubtitle: string | null = null;
 
 export default function NovaScotiaPage() {
   const remote = isRemoteEditorMode();
-  const photoCountText = data.displayOrder.length + " photographs";
+  const photoCountText = data.displayOrder.length + " Photos";
   const subtitle = collectionSubtitle ? collectionSubtitle + " · " + photoCountText : photoCountText;
   return (
     <main className="subpage collection-page">
