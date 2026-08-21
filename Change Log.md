@@ -17,7 +17,7 @@ Last updated: Friday, August 21, 2026
 
 ### Version 93 — Friday, August 21, 2026
 
-- i forgot  A bunch of little design tweaks to tnp and spp
+- Fixed the longstanding bug where certain thumbnails would bleed full-frame past their intended border on iPhone (a Safari-specific quirk, not something visible in ordinary testing) — thumbnails now get their exact display size calculated directly instead of relying on a percentage Safari sometimes gets wrong.
 
 ### Version 92 — Friday, August 21, 2026
 

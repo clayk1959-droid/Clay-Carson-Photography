@@ -47,9 +47,33 @@ export function Gallery({
   const [editingPhoto, setEditingPhoto] = useState<number | null>(null);
   const [reordering, setReordering] = useState(false);
   const activeImage = useRef<HTMLImageElement | null>(null);
+  const photoGallery = useRef<HTMLDivElement | null>(null);
   const dialog = useRef<HTMLDivElement | null>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  useLayoutEffect(() => {
+    const galleryEl = photoGallery.current;
+    if (!galleryEl) return;
+
+    // WebKit sometimes ignores this image's max-height:100% when it's a
+    // percentage of an aspect-ratio-sized ancestor (a known Safari bug),
+    // letting the photo bleed past its intended letterboxed size. Every
+    // thumbnail box is the same size (uniform grid columns), so measuring
+    // just one and sharing that as an exact pixel value sidesteps the
+    // percentage-resolution bug for all of them at once.
+    const updateThumbSize = () => {
+      const thumb = galleryEl.querySelector<HTMLElement>(".gallery-thumb");
+      if (!thumb) return;
+      const inner = Math.max(0, thumb.getBoundingClientRect().width - 20);
+      galleryEl.style.setProperty("--thumb-inner", `${inner}px`);
+    };
+    updateThumbSize();
+
+    const observer = new ResizeObserver(updateThumbSize);
+    observer.observe(galleryEl);
+    return () => observer.disconnect();
+  }, [photographs.length]);
 
   const showPrevious = useCallback(() => {
     setActivePhoto((current) =>
@@ -173,7 +197,7 @@ export function Gallery({
 
   return (
     <>
-      <div className="photo-gallery">
+      <div className="photo-gallery" ref={photoGallery}>
         {photographs.map((photograph, index) => (
           <div className="gallery-thumb-wrap" key={photograph.src}>
             <button
