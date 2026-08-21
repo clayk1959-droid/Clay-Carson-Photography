@@ -15,6 +15,10 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 90 — Friday, August 21, 2026
+
+- Full-size photo viewer: tightened up the flash of the thumbnail grid that briefly showed when reloading or opening a link straight to a photo.
+
 ### Version 89 — Friday, August 21, 2026
 
 - Full-size photo viewer: brought the site banner (hamburger menu + logo) into the viewer so it no longer feels like a separate bannerless page, and the photo now sits top-aligned beneath it instead of centered in open space. The banner tucks away again on phone-landscape to keep the photo as large as possible there.
