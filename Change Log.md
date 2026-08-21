@@ -15,6 +15,10 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 93 — Friday, August 21, 2026
+
+- i forgot  A bunch of little design tweaks to tnp and spp
+
 ### Version 92 — Friday, August 21, 2026
 
 - Galleries page: the photo-count line under each gallery now matches the actual font "Galleries" uses on that page (it had been set to the wrong one), a touch smaller, tighter kerning, and tucked flush against the photo instead of floating below it.
