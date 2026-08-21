@@ -15,6 +15,10 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 96 — Friday, August 21, 2026
+
+- Homepage: Version 95 didn't fully fix it — a leftover minimum-height rule (sized for desktop) was still forcing the hero taller than the screen on some phones. Removed it for mobile, which should actually stop the scroll bounce this time.
+
 ### Version 95 — Friday, August 21, 2026
 
 - Homepage: fixed the page feeling "touchy" — a slight scroll bounce would occasionally reveal a sliver of the footer for no reason as Safari's address bar showed/hid itself. The hero now tracks the actual visible screen size live instead of a fixed snapshot of it.
