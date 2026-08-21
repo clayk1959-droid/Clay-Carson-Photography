@@ -15,6 +15,12 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 92 — Friday, August 21, 2026
+
+- Galleries page: the photo-count line under each gallery now matches the actual font "Galleries" uses on that page (it had been set to the wrong one), a touch smaller, tighter kerning, and tucked flush against the photo instead of floating below it.
+- Galleries page: tightened the line spacing on gallery titles that wrap to multiple lines, and pulled the photo-count line much closer up under the title.
+- Galleries page: switched gallery titles to a compact serif typeface (Zilla Slab) instead of the sans-serif font they'd been using.
+
 ### Version 91 — Friday, August 21, 2026
 
 - Reverted Version 90's reload-flash change — it made the flash worse, not better.
