@@ -181,9 +181,9 @@ export function Gallery({
             className="lightbox-close"
             type="button"
             onClick={closePhoto}
-            aria-label="Close photograph"
+            aria-label="Back to gallery"
           >
-            Close
+            Back
           </button>
           {editable && (
             <button

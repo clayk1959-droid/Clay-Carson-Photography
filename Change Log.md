@@ -15,6 +15,12 @@ Last updated: Thursday, August 20, 2026
 
 ## Version history
 
+### Version 87 — Thursday, August 20, 2026
+
+- Full-size photo viewer: bigger caption text, moved the previous/next arrows off the middle of the photo to a fixed spot near the top and made them bigger with no more circle behind them, and renamed "Close" to "Back" with the underline removed.
+- Contact-sheet pages (an individual gallery's thumbnail grid): darkened the mat each photo sits in, and enlarged the collection title and "← Galleries" link.
+- Galleries page and gallery-card titles bumped a bit larger again.
+
 ### Version 86 — Thursday, August 20, 2026
 
 - Tightened the Galleries page for mobile: three collections per row, closer/bigger heading, filter dropdowns fit on one line, and everything holds up correctly when the phone is rotated to landscape instead of falling back to desktop sizing.

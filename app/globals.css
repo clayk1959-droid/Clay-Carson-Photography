@@ -116,7 +116,7 @@ h1 em, h2 em { font-weight: 400; }
 .collection-heading h1 { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(15px, 1.8vw, 27px); font-style: normal; line-height: 1; }
 .collection-heading p { margin: 0 0 8px; color: #1c1c1c; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
 .photo-gallery { max-width: 1440px; margin: 0 auto; padding: 16px 5vw 130px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
-.gallery-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; margin: 0; padding: 10px; border: 0; overflow: hidden; background: #cccccc; color: inherit; cursor: zoom-in; display: flex; align-items: center; justify-content: center; transition: transform .2s ease, box-shadow .2s ease; }
+.gallery-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; margin: 0; padding: 10px; border: 0; overflow: hidden; background: #b3b3b3; color: inherit; cursor: zoom-in; display: flex; align-items: center; justify-content: center; transition: transform .2s ease, box-shadow .2s ease; }
 .gallery-thumb img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; border: 3px solid #ffffff; transition: opacity .25s ease, transform .5s cubic-bezier(.2,.65,.3,1); }
 .gallery-thumb:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .28); transform: translateY(-2px); }
 .gallery-thumb:hover img { opacity: .92; transform: scale(1.018); }
@@ -135,10 +135,11 @@ h1 em, h2 em { font-weight: 400; }
 .gallery-lightbox figcaption { max-width: 100%; color: #1c1c1c; display: grid; grid-template-columns: minmax(0, 66%) 1fr; align-items: start; gap: 30px; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 13.5px; letter-spacing: .02em; }
 .lightbox-caption { max-width: 100%; line-height: 1.2; text-align: left; overflow-wrap: anywhere; font-size: 15px; font-family: Helvetica, Arial, sans-serif; }
 .lightbox-count { justify-self: end; color: #454545; font-family: 'DM Sans', sans-serif; font-size: 13.5px; letter-spacing: .18em; text-align: right; }
-.lightbox-close, .lightbox-edit { position: absolute; top: 22px; z-index: 2; padding: 8px 0; border: 0; border-bottom: 1px solid rgba(0, 0, 0, .4); background: transparent; color: #1c1c1c; font: inherit; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
+.lightbox-close, .lightbox-edit { position: absolute; top: 22px; z-index: 2; padding: 8px 0; border: 0; background: transparent; color: #1c1c1c; font: inherit; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
+.lightbox-edit { border-bottom: 1px solid rgba(0, 0, 0, .4); }
 .lightbox-close { right: 28px; }
 .lightbox-edit { right: 100px; }
-.lightbox-arrow { width: 54px; height: 54px; border: 1px solid rgba(0, 0, 0, .4); border-radius: 50%; background: transparent; color: #1c1c1c; font: inherit; font-size: 32px; line-height: 1; cursor: pointer; }
+.lightbox-arrow { width: 54px; height: 54px; border: 0; background: transparent; color: #1c1c1c; font: inherit; font-size: 36px; line-height: 1; cursor: pointer; }
 .lightbox-arrow:disabled { opacity: .25; cursor: default; }
 .lightbox-previous { justify-self: start; }
 .lightbox-next { justify-self: end; }
@@ -270,28 +271,28 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .contact-value { font-size: 17px; overflow-wrap: anywhere; }
   .contact-arrow { font-size: 20px; }
   .collections-layout { padding: 0 7vw 90px; }
-  .collections-layout .page-title { padding-top: 2px; font-size: 16px; line-height: 1.1; }
+  .collections-layout .page-title { padding-top: 2px; font-size: 18px; line-height: 1.1; }
   .collections-filters { gap: 10px; }
   .collections-filter-group { flex: 1 1 0; min-width: 0; }
   .collections-filter-select { min-width: 0; width: 100%; }
   .collection-index { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 8px; margin-top: 9px; }
   .collection-cover { height: auto; max-height: none; }
   .collection-details { min-height: 110px; }
-  .collection-details h2 { font-size: 16px; }
-  .collection-count { font-size: 12px; }
+  .collection-details h2 { font-size: 18px; }
+  .collection-count { font-size: 14px; }
   .collection-heading { padding: 5px 7vw 12px; display: block; }
-  .collection-heading > a { display: inline-block; margin-bottom: 5px; }
-  .collection-heading h1 { font-size: 15px; }
+  .collection-heading > a { display: inline-block; margin-bottom: 5px; font-size: 12px; }
+  .collection-heading h1 { font-size: 17px; }
   .collection-heading p { margin-top: 6px; }
   .photo-gallery { padding: 10px 3vw 90px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .gallery-lightbox { padding: 62px 14px 22px; grid-template-columns: 44px minmax(0, 1fr) 44px; }
   .gallery-lightbox figure { height: calc(100svh - 92px); }
   .gallery-lightbox figcaption { font-size: 13.5px; }
-  .lightbox-caption { font-size: 9px; }
-  .lightbox-arrow { width: 38px; height: 38px; font-size: 25px; }
-  .lightbox-close, .lightbox-edit { top: 17px; }
+  .lightbox-caption { font-size: 18px; }
+  .lightbox-arrow { width: 44px; height: 44px; font-size: 30px; }
+  .lightbox-close, .lightbox-edit { top: 17px; font-size: 12px; }
   .lightbox-close { right: 18px; }
-  .lightbox-edit { right: 72px; }
+  .lightbox-edit { right: 78px; }
   h1 { font-size: clamp(57px, 17vw, 88px); }
   .hero-place { display: none; }
   .statement { padding: 90px 7vw; display: block; }
@@ -337,24 +338,27 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
      above (routinely 812-930px), so without this it would fall through to
      full desktop sizing mid-rotation -- keyed on height so it still lands
      here regardless of that width. */
-  .collections-layout .page-title { padding-top: 2px; font-size: 16px; line-height: 1.1; }
+  .collections-layout .page-title { padding-top: 2px; font-size: 18px; line-height: 1.1; }
   .collections-filters { gap: 10px; }
   .collections-filter-group { flex: 1 1 0; min-width: 0; }
   .collections-filter-select { min-width: 0; width: 100%; }
   .collection-index { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 8px; }
   .collection-details { min-height: 110px; }
-  .collection-details h2 { font-size: 16px; }
-  .collection-count { font-size: 12px; }
+  .collection-details h2 { font-size: 18px; }
+  .collection-count { font-size: 14px; }
 }
 /* Touch devices already swipe to navigate, but a visible start/end
-   indicator still helps — float the arrows on top of the photo instead
-   of giving them their own grid column, so they don't shrink the image.
-   Placed after the width/height breakpoints above so it always wins the
-   cascade on an actual phone, which matches more than one of those at
-   once. */
+   indicator still helps — float the arrows near the top of the photo
+   instead of giving them their own grid column, so they don't shrink the
+   image. Sitting at a fixed offset (rather than vertically centered) keeps
+   them off the middle of the photo where they'd otherwise sit right over
+   the subject; the glow (in place of a background circle) keeps them
+   legible against any photo underneath. Placed after the width/height
+   breakpoints above so it always wins the cascade on an actual phone,
+   which matches more than one of those at once. */
 @media (hover: none) and (pointer: coarse) {
   .gallery-lightbox { grid-template-columns: minmax(0, 1fr); padding-left: 14px; padding-right: 14px; }
-  .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; background: rgba(5, 6, 5, .6); }
+  .lightbox-arrow { position: absolute; top: 70px; z-index: 3; width: 48px; height: 48px; font-size: 34px; text-shadow: 0 0 6px rgba(255, 255, 255, .9), 0 0 14px rgba(255, 255, 255, .7); }
   .lightbox-previous { left: 8px; }
   .lightbox-next { right: 8px; }
 }
