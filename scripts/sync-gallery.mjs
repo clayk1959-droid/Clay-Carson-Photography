@@ -1,4 +1,4 @@
-import { access, copyFile, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
+import { access, copyFile, mkdir, open, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
@@ -285,18 +285,49 @@ function parseIptcExtList(xml, tag) {
     .filter(Boolean);
 }
 
+// The XMP/IPTC metadata block this function reads always lives near the
+// start of the file (confirmed a few KB in, even in 75MB+ uncompressed
+// scanner TIFFs), so only reading the first couple MB avoids pulling a
+// huge original entirely into memory just to find a small tag -- reading
+// dozens of 50-75MB TIFFs as full UTF-8 strings in one run is what
+// crashed Node with an out-of-memory error.
+async function readMetadataText(source) {
+  const MAX_BYTES = 2 * 1024 * 1024;
+  const handle = await open(source, "r");
+  try {
+    const { size } = await handle.stat();
+    const length = Math.min(MAX_BYTES, size);
+    const buffer = Buffer.alloc(length);
+    await handle.read(buffer, 0, length, 0);
+    return buffer.toString("utf8");
+  } finally {
+    await handle.close();
+  }
+}
+
 async function readMetadata(source, fallback) {
-  const { stdout } = await run("sips", ["-g", "creation", "-g", "description", source]);
-  const creation = stdout.match(/^\s*creation:\s*(.+)$/m)?.[1]?.trim();
-  const contents = (await readFile(source)).toString("utf8");
+  const contents = await readMetadataText(source);
   const altText = contents.match(
     /<Iptc4xmpCore:AltTextAccessibility>[\s\S]*?<rdf:li[^>]*>([\s\S]*?)<\/rdf:li>[\s\S]*?<\/Iptc4xmpCore:AltTextAccessibility>/,
   )?.[1]?.trim();
   // No Alt Text set — a bare camera filename like "L1020539" makes for a
   // useless caption, so fall back to the gallery's own name instead.
   const description = altText ? decodeXml(altText) : fallback;
-  const match = creation?.match(/^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
-  const date = match ? `${match[1]}-${match[2]}-${match[3]}` : null;
+
+  // photoshop:DateCreated / xmp:CreateDate is the photo's real original
+  // capture date, embedded by Photo Mechanic/Photoshop from the camera's
+  // own metadata. Prefer it over `sips -g creation`, which often just
+  // reflects whenever the file was last saved/converted/copied -- not
+  // when the photo was actually taken.
+  const xmpDate = contents.match(/(?:photoshop:DateCreated|xmp:CreateDate)="(\d{4}-\d{2}-\d{2})/)?.[1];
+  let date = xmpDate ?? null;
+  if (!date) {
+    const { stdout } = await run("sips", ["-g", "creation", source]);
+    const creation = stdout.match(/^\s*creation:\s*(.+)$/m)?.[1]?.trim();
+    const match = creation?.match(/^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
+    date = match ? `${match[1]}-${match[2]}-${match[3]}` : null;
+  }
+
   const person = parseIptcExtList(contents, "PersonInImage");
   const event = parseIptcExtList(contents, "Event");
   return { date, description, person, event };

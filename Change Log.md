@@ -15,6 +15,11 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 100 — Saturday, August 22, 2026
+
+- Homepage: slowed the rotating hero photos down by half a second (2.75s → 3.25s per photo).
+- Fixed photo dates being wrong on many photos — the sync script was reading a "last saved" timestamp instead of the photo's real capture date. Corrected 74 photos across Janet Buys a Car, Nova Scotia, and Rhine River Cruise (any date you've manually corrected yourself was left untouched). Also fixed a crash risk: reading very large scanned TIFFs for their date no longer loads the entire file into memory.
+
 ### Version 96 — Friday, August 21, 2026
 
 - Homepage: Version 95 didn't fully fix it — a leftover minimum-height rule (sized for desktop) was still forcing the hero taller than the screen on some phones. Removed it for mobile, which should actually stop the scroll bounce this time.

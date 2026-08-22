@@ -41,8 +41,7 @@ export async function getAccountForSession(rawToken: string | undefined | null) 
   const pool = getPool();
   const hash = hashToken(rawToken);
   const { rows } = await pool.query(
-    `select accounts.id as account_id, accounts.email, accounts.name,
-            sessions.id as session_id, sessions.notified_at
+    `select accounts.id as account_id, accounts.email, accounts.name
        from sessions
        join accounts on accounts.id = sessions.account_id
       where sessions.token_hash = $1
@@ -50,31 +49,5 @@ export async function getAccountForSession(rawToken: string | undefined | null) 
         and (sessions.expires_at is null or sessions.expires_at > now())`,
     [hash],
   );
-  return (
-    (rows[0] as
-      | { account_id: number; email: string; name: string; session_id: number; notified_at: string | null }
-      | undefined) ?? null
-  );
-}
-
-// Sends the owner an email the first time a given session successfully
-// reaches the protected test page -- guarded by notified_at so refreshing
-// the success page doesn't re-notify every time.
-export async function notifyOwnerOnce(sessionId: number, notifiedAt: string | null, name: string, email: string) {
-  if (notifiedAt) return;
-  const pool = getPool();
-  const { rowCount } = await pool.query(
-    `update sessions set notified_at = now() where id = $1 and notified_at is null`,
-    [sessionId],
-  );
-  if (rowCount === 0) return; // another request already claimed the notification
-
-  const { Resend } = await import("resend");
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  await resend.emails.send({
-    from: FROM_ADDRESS,
-    to: OWNER_EMAIL,
-    subject: `${name} got in!`,
-    text: `${name} (${email}) just successfully reached the protected test page.`,
-  });
+  return (rows[0] as { account_id: number; email: string; name: string } | undefined) ?? null;
 }
