@@ -235,7 +235,7 @@
     <div class="card">
       <p><strong>Admin view</strong> (every account, when they registered, how long their key lasts, a revoke button):<br>
       <a href="https://clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access/admin">clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access/admin</a></p>
-      <div class="warn">Not yet password-protected itself. Treat that link as sensitive until an owner-only login is added in front of it.</div>
+      <p>Password-protected with the same password as the pencil-icon editor.</p>
     </div>
     <p>Main site (carsonmullerfamily.com) is unaffected by any of this — confirmed by hitting <code>/test-access</code> there directly, which correctly 404s.</p>
   </section>
@@ -243,7 +243,7 @@
   <section id="todo">
     <h2>Still to do before this is real</h2>
     <ul>
-      <li>Password-protect the admin page — reuse the existing editor's <code>EDITOR_PASSWORD</code> login rather than inventing a new password.</li>
+      <li><s>Password-protect the admin page</s> — done, reuses the existing editor's <code>EDITOR_PASSWORD</code> login.</li>
       <li>Wire actual photos into it (Blob storage) instead of the placeholder "protected folder" test page.</li>
       <li>SMS notification to the owner, as an alternative/addition to email.</li>
       <li>A way to mark a real gallery as private, and to grant access to specific galleries rather than everything at once.</li>

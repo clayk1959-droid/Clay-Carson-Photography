@@ -87,15 +87,14 @@ variable" pattern.
 - **Admin view** (every account, when they registered, how long their key
   lasts, a revoke button):
   https://clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access/admin
-  — **not yet password-protected itself.** Treat that link as sensitive
-  until an owner-only login is added in front of it (see below).
+  — password-protected with the same password as the pencil-icon editor.
 - Main site (`carsonmullerfamily.com`) is unaffected by any of this —
   confirmed by hitting `/test-access` there directly, which correctly 404s.
 
 ## Still to do before this is real
 
-- [ ] Password-protect the admin page — reuse the existing editor's
-      `EDITOR_PASSWORD` login rather than inventing a new password.
+- [x] Password-protect the admin page — reuses the existing editor's
+      `EDITOR_PASSWORD` login rather than a new password.
 - [ ] Wire actual photos into it (Blob storage) instead of the placeholder
       "protected folder" test page.
 - [ ] SMS notification to the owner, as an alternative/addition to email.
