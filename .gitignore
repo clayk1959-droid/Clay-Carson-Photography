@@ -5,3 +5,5 @@ Gallery Originals/
 .claude/settings.local.json
 .cache/
 tsconfig.tsbuildinfo
+.vercel
+.env*
