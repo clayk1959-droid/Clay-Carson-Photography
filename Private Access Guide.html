@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private Access System — Guide</title>
+<style>
+  :root {
+    --ink: #1d211d;
+    --paper: #faf9f5;
+    --panel: #ffffff;
+    --muted: #6b6f68;
+    --border: #e3e1d8;
+    --accent: #707866;
+    --code-bg: #f1efe6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 100px; }
+  header.page-head {
+    margin-bottom: 40px;
+  }
+  header.page-head h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 40px;
+    margin: 0 0 8px;
+    font-weight: 400;
+  }
+  header.page-head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 16px;
+  }
+  nav.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin: 24px 0 0;
+    padding: 16px 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .02em;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+  section { margin: 56px 0; }
+  h2 {
+    font-size: 22px;
+    margin: 0 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 17px; margin: 26px 0 8px; }
+  p { margin: 0 0 14px; }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    margin: 0 0 14px;
+  }
+  pre code { background: none; padding: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th { background: var(--code-bg); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  tr:last-child td { border-bottom: none; }
+  ol, ul { padding-left: 22px; margin: 0 0 14px; }
+  li { margin-bottom: 6px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 18px;
+  }
+  .badge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--code-bg);
+    color: var(--muted);
+  }
+  .note {
+    background: #fbf6e9;
+    border: 1px solid #ecdfb3;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin: 0 0 14px;
+  }
+  .warn {
+    background: #fbeaea;
+    border: 1px solid #eec3c3;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin: 0 0 14px;
+  }
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <h1>Private Access System</h1>
+    <p><span class="badge">In testing</span> &nbsp;A separate, in-progress system for sharing sensitive photos with approved people only.</p>
+    <nav class="toc">
+      <a href="#concept">The concept</a>
+      <a href="#separate">Why it's kept separate</a>
+      <a href="#built">How it's built</a>
+      <a href="#flow">How the login flow works</a>
+      <a href="#testing">Testing it yourself</a>
+      <a href="#todo">Still to do</a>
+    </nav>
+  </header>
+
+  <section id="concept">
+    <h2>The concept</h2>
+    <p>
+      A way to share sensitive photos — starting with photos of a young grandchild — with
+      specific approved people only. Not the whole internet, not search engines, not anyone
+      who gets hold of a link.
+    </p>
+    <p>The requirements this was designed against:</p>
+    <ul>
+      <li>Serve reasonably sized images, never the original iPhone files</li>
+      <li>Strip GPS/EXIF metadata (already true site-wide — the sync script never calls <code>.withMetadata()</code>, so this was true before this project even started)</li>
+      <li>Don't expose original filenames or full-resolution images</li>
+      <li>Use unpredictable image URLs</li>
+      <li>Require a real login check on every single photo request, not just an obscure link</li>
+      <li>Keep the whole thing out of search engines</li>
+      <li>Log logins</li>
+      <li>Give the owner an easy way to kill any one person's access instantly</li>
+    </ul>
+  </section>
+
+  <section id="separate">
+    <h2>Why it's kept separate</h2>
+    <p>
+      So nothing about this system can ever affect or break the live public site at
+      carsonmullerfamily.com. It's built into the <em>same codebase</em> (so one person — or
+      one Claude session — can maintain everything in one place), but it only
+      <em>activates</em> on a second, separate Vercel project. The main site's build never
+      even compiles these pages into itself; hitting any of these URLs on the main site
+      returns a plain 404, same as a page that doesn't exist.
+    </p>
+    <p>
+      This mirrors the existing password-protected remote editor project, which uses the
+      same "same repo, second Vercel project, gated by an environment variable" pattern.
+    </p>
+  </section>
+
+  <section id="built">
+    <h2>How it's built</h2>
+    <div class="card">
+      <table>
+        <tr><th>Piece</th><th>What it does</th></tr>
+        <tr><td>Postgres (Neon, via Vercel)</td><td>Holds access requests, approved accounts, login sessions, and login history.</td></tr>
+        <tr><td>Vercel Blob</td><td>File storage for the actual private photos, later — not wired up to real photos yet.</td></tr>
+        <tr><td>Resend</td><td>Sends the owner-notification and magic-link emails.</td></tr>
+        <tr><td><code>PRIVATE_ACCESS_MODE=1</code></td><td>The on/off switch — an environment variable set only on the second Vercel project. Every private-access page and route checks this first and 404s if it's not set.</td></tr>
+      </table>
+    </div>
+    <h3>Where the code lives</h3>
+    <ul>
+      <li><code>app/test-access/</code> — the pages (landing, open, protected, admin)</li>
+      <li><code>app/api/test-access/</code> — the API routes (request, decide, verify, revoke)</li>
+      <li><code>lib/private-access.ts</code>, <code>lib/private-access-mode.ts</code>, <code>lib/db.ts</code> — shared helpers, alongside the site's other <code>lib/</code> files</li>
+      <li><code>db/schema.sql</code> — the database schema</li>
+      <li><code>scripts/db-migrate.mjs</code> — applies the schema (<code>npm run db:migrate</code>)</li>
+    </ul>
+  </section>
+
+  <section id="flow">
+    <h2>How the login flow works (no passwords, ever)</h2>
+    <ol>
+      <li>Someone visits the request page and submits their name + email.</li>
+      <li>The owner gets an email with three links: <strong>Approve — 3 months</strong>, <strong>Approve — forever</strong>, <strong>Deny</strong>. One click decides it — no separate admin login needed for this step.</li>
+      <li>If approved, the person gets a one-time "magic link" by email. Clicking it logs them in. No password to create, remember, or leak.</li>
+      <li>Their login session is a random token, stored <strong>hashed</strong> in the database — never the raw value. The account behind it can be revoked at any moment from the admin page.</li>
+      <li>Session length is chosen per person at approval time: 3 months, or forever (either one revocable anytime regardless).</li>
+    </ol>
+  </section>
+
+  <section id="testing">
+    <h2>Testing it yourself</h2>
+    <div class="card">
+      <p><strong>Start here:</strong><br>
+      <a href="https://clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access">clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access</a></p>
+      <p>Two folders: "Open Me First" (unprotected, just proves the page renders) and "Try Me Next" (protected — walks through the real request/approve/login flow end to end, and emails the owner the moment someone successfully gets in).</p>
+    </div>
+    <div class="card">
+      <p><strong>Admin view</strong> (every account, when they registered, how long their key lasts, a revoke button):<br>
+      <a href="https://clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access/admin">clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access/admin</a></p>
+      <div class="warn">Not yet password-protected itself. Treat that link as sensitive until an owner-only login is added in front of it.</div>
+    </div>
+    <p>Main site (carsonmullerfamily.com) is unaffected by any of this — confirmed by hitting <code>/test-access</code> there directly, which correctly 404s.</p>
+  </section>
+
+  <section id="todo">
+    <h2>Still to do before this is real</h2>
+    <ul>
+      <li>Password-protect the admin page — reuse the existing editor's <code>EDITOR_PASSWORD</code> login rather than inventing a new password.</li>
+      <li>Wire actual photos into it (Blob storage) instead of the placeholder "protected folder" test page.</li>
+      <li>SMS notification to the owner, as an alternative/addition to email.</li>
+      <li>A way to mark a real gallery as private, and to grant access to specific galleries rather than everything at once.</li>
+      <li>A shorter, easier-to-share URL for the private site (custom domain).</li>
+    </ul>
+  </section>
+
+  <footer>
+    Generated from <code>Private Access Guide.md</code> — regenerate this page any time by asking to refresh it after that file changes. Will fold into the main Site Guide once this system is finished.
+  </footer>
+
+</div>
+</body>
+</html>

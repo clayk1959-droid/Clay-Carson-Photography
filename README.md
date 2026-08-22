@@ -266,3 +266,11 @@ This replaces the old ChatGPT Sites version-tracking. If you ever need to
 roll back to an earlier version, the Vercel dashboard shows every past
 deployment with a one-click "Promote to Production" (i.e. rollback) button —
 no manual bookkeeping required.
+
+## Private access system (in testing)
+
+A separate, in-progress system for sharing sensitive photos with approved
+people only. See **`Private Access Guide.md`** for the full writeup — what
+it is, how it's built, the test URLs, and what's still left to do. Kept as
+its own document for now since it's still being built out; will fold into
+this README once it's finished.
