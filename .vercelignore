@@ -1,0 +1,6 @@
+# Local-only source photos used by `npm run gallery:sync` for metadata
+# lookups -- never read by the deployed app at runtime (it serves the
+# already-processed public/galleries, public/gallery-thumbnails, and
+# public/homepage folders instead). Excluding this cuts every deploy's
+# upload from ~3.4GB down to a fraction of that.
+Gallery Originals/
