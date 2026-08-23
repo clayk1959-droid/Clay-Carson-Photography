@@ -60,17 +60,20 @@ export async function POST(request: Request) {
   if (OWNER_SMS_ADDRESS) {
     // Best-effort text alert via the carrier's email-to-SMS gateway, so a
     // new request actually gets noticed instead of sitting unread in an
-    // inbox with no phone notification. Kept short for a single SMS segment,
-    // and a failure here shouldn't block the request -- the email above is
-    // still the real notification of record.
-    resend.emails
-      .send({
-        from: FROM_ADDRESS,
-        to: OWNER_SMS_ADDRESS,
-        subject: "Access request",
-        text: `${name} (${email}) requested access. Check email or the admin page to approve.`,
-      })
-      .catch(() => {});
+    // inbox with no phone notification. Awaited (not fire-and-forget) --
+    // a serverless function's runtime can freeze the instant the response
+    // is returned, which would silently kill an unawaited send before it
+    // actually went out. A failure here still doesn't block the request --
+    // the email above is the real notification of record.
+    const { error: smsError } = await resend.emails.send({
+      from: FROM_ADDRESS,
+      to: OWNER_SMS_ADDRESS,
+      subject: "Access request",
+      text: `${name} (${email}) requested access. Check email or the admin page to approve.`,
+    });
+    if (smsError) {
+      console.error("Text alert failed to send:", smsError.message);
+    }
   }
 
   // The request is already saved either way (so it'll still show up on the
