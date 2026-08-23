@@ -15,6 +15,10 @@ Last updated: Sunday, August 23, 2026
 
 ## Version history
 
+### Version 105 — Sunday, August 23, 2026
+
+- Homepage: added small dots centered under the rotating hero photos, one per photo in the current set, with the active one brighter — a passive indicator of where you are, especially useful once you've paused rotation by swiping or holding a finger on the photo. Not clickable, just a visual marker, and doesn't interfere with the swipe/hold touch handling.
+
 ### Version 104 — Sunday, August 23, 2026
 
 - Fixed private-access emails silently failing to send: the code was ignoring the error Resend returns when a send is rejected, so a request or approval could look successful while the person never got anything — this is what happened to the first real tester. The two email sends now check for that error and report it honestly instead of pretending it worked.
