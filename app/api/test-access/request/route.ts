@@ -2,8 +2,8 @@ import { Resend } from "resend";
 import { getPool } from "../../../../lib/db";
 import {
   FROM_ADDRESS,
+  NTFY_TOPIC,
   OWNER_EMAIL,
-  OWNER_SMS_ADDRESS,
   escapeHtml,
   randomToken,
 } from "../../../../lib/private-access";
@@ -57,22 +57,28 @@ export async function POST(request: Request) {
     `,
   });
 
-  if (OWNER_SMS_ADDRESS) {
-    // Best-effort text alert via the carrier's email-to-SMS gateway, so a
-    // new request actually gets noticed instead of sitting unread in an
-    // inbox with no phone notification. Awaited (not fire-and-forget) --
-    // a serverless function's runtime can freeze the instant the response
-    // is returned, which would silently kill an unawaited send before it
-    // actually went out. A failure here still doesn't block the request --
-    // the email above is the real notification of record.
-    const { error: smsError } = await resend.emails.send({
-      from: FROM_ADDRESS,
-      to: OWNER_SMS_ADDRESS,
-      subject: "Access request",
-      text: `${name} (${email}) requested access. Check email or the admin page to approve.`,
-    });
-    if (smsError) {
-      console.error("Text alert failed to send:", smsError.message);
+  if (NTFY_TOPIC) {
+    // Best-effort push alert via ntfy.sh, so a new request actually gets
+    // noticed instead of sitting unread in an inbox with no phone
+    // notification. Carrier email-to-SMS gateways turned out to silently
+    // drop messages from an unfamiliar sending domain -- this bypasses that
+    // by pushing directly, not routing through email at all. Awaited (not
+    // fire-and-forget), since a serverless function's runtime can freeze the
+    // instant the response is returned, silently killing an unawaited
+    // request before it actually went out. A failure here still doesn't
+    // block the request -- the email above is the real notification of
+    // record.
+    try {
+      const pushResponse = await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+        method: "POST",
+        headers: { Title: "Access request", Priority: "urgent", Tags: "lock" },
+        body: `${name} (${email}) requested access. Check email or the admin page to approve.`,
+      });
+      if (!pushResponse.ok) {
+        console.error("Push alert failed to send:", pushResponse.status, await pushResponse.text());
+      }
+    } catch (err) {
+      console.error("Push alert failed to send:", err instanceof Error ? err.message : err);
     }
   }
 

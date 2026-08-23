@@ -4,10 +4,11 @@ import { getPool } from "./db";
 export const SESSION_COOKIE_NAME = "private_session";
 export const OWNER_EMAIL = "clayk1959@gmail.com";
 export const FROM_ADDRESS = "noreply@mail.carsonmullerfamily.com";
-// Carrier email-to-text gateway address (e.g. "5015550100@txt.att.net") --
-// kept out of source since this repo is public. Optional: text alerts are
-// skipped if unset, since email notifications work fine on their own.
-export const OWNER_SMS_ADDRESS = process.env.OWNER_SMS_ADDRESS || null;
+// Private ntfy.sh topic used to push a phone alert for new access requests
+// (see https://ntfy.sh) -- kept out of source since this repo is public,
+// and anyone who knows the topic name can publish to it. Optional: push
+// alerts are skipped if unset, since email notifications work on their own.
+export const NTFY_TOPIC = process.env.NTFY_TOPIC || null;
 
 const MAGIC_LINK_TTL_MS = 60 * 60 * 1000; // 1 hour, single use
 const THREE_MONTHS_MS = 1000 * 60 * 60 * 24 * 90;
