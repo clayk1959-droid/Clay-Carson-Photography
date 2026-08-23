@@ -15,6 +15,18 @@ Last updated: Sunday, August 23, 2026
 
 ## Version history
 
+### Version 110 — Sunday, August 23, 2026
+
+- Reverted the text alert back to the carrier email-to-text gateway (see Version 108/109) after a push-notification alternative (ntfy) also failed to actually land on the phone, for reasons that weren't worth chasing further. Not guaranteed to arrive, but free, simple, and the email notification remains the real, reliable alert either way.
+
+### Version 109 — Sunday, August 23, 2026
+
+- Tried switching the access-request text alert to a push notification (via a free service called ntfy) after the carrier gateway appeared to silently drop the message. Confirmed the push itself sent successfully, but it didn't reach the phone reliably in practice — reverted in Version 110.
+
+### Version 108 — Sunday, August 23, 2026
+
+- Fixed the text alert added in Version 106 never actually sending: the code fired it off without waiting for it to finish, and the server can shut down the moment it responds — silently killing the send before it went out. Now waits for it properly.
+
 ### Version 107 — Sunday, August 23, 2026
 
 - Fixed the approve/deny confirmation page (what you land on after clicking a link in the access-request notification) showing text so small it was unreadable on a phone. That page is built by hand rather than as a normal site page, so it was missing the tag that tells mobile browsers not to render it at desktop width and shrink it to fit — added that, and bumped the text size a bit for good measure.
