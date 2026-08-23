@@ -13,8 +13,13 @@ import { isPrivateAccessEnabled } from "../../../../lib/private-access-mode";
 export const dynamic = "force-dynamic";
 
 function htmlResponse(message: string, status: number) {
+  // This is a raw Response built by hand, not a Next.js page, so it doesn't
+  // get the viewport meta tag the rest of the site has automatically --
+  // without it, mobile browsers render this at desktop width and shrink the
+  // whole page to fit, making the text look microscopic.
   return new Response(
-    `<!doctype html><body style="font-family: sans-serif; padding: 40px; max-width: 480px;"><p>${message}</p></body>`,
+    `<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>` +
+      `<body style="font-family: sans-serif; font-size: 19px; line-height: 1.5; padding: 40px 24px; max-width: 480px;"><p>${message}</p></body></html>`,
     { status, headers: { "content-type": "text/html" } },
   );
 }
