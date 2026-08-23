@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Friday, August 21, 2026
+Last updated: Sunday, August 23, 2026
 
 ## Current status
 
@@ -14,6 +14,11 @@ Last updated: Friday, August 21, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 104 — Sunday, August 23, 2026
+
+- Fixed private-access emails silently failing to send: the code was ignoring the error Resend returns when a send is rejected, so a request or approval could look successful while the person never got anything — this is what happened to the first real tester. The two email sends now check for that error and report it honestly instead of pretending it worked.
+- Verified a real sending domain (`mail.carsonmullerfamily.com`) with Resend and switched private-access emails to send from it. The previous sandbox address could only deliver to the site owner's own inbox — every other recipient was silently rejected, which was the actual root cause of the missing email above. Confirmed working end-to-end with a real delivery test.
 
 ### Version 103 — Sunday, August 23, 2026
 

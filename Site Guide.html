@@ -413,6 +413,13 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 104</span><span class="version-date">Sunday, August 23, 2026</span></div>
+      <ul>
+        <li>Fixed private-access emails silently failing to send: the code was ignoring the error Resend returns when a send is rejected, so a request or approval could look successful while the person never got anything — this is what happened to the first real tester. The two email sends now check for that error and report it honestly instead of pretending it worked.</li>
+        <li>Verified a real sending domain (<code>mail.carsonmullerfamily.com</code>) with Resend and switched private-access emails to send from it. The previous sandbox address could only deliver to the site owner's own inbox — every other recipient was silently rejected, which was the actual root cause of the missing email above. Confirmed working end-to-end with a real delivery test.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 103</span><span class="version-date">Sunday, August 23, 2026</span></div>
       <ul>
         <li>Added a <code>.vercelignore</code> file so deploys stop uploading the 3.2GB "Gallery Originals" folder — it's only used locally for syncing, never read by the live site, but was going out with every single deploy regardless. Speeds up every future deploy, main site and the private-access system alike.</li>
