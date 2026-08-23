@@ -409,6 +409,128 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 102</span><span class="version-date">Saturday, August 22, 2026</span></div>
+      <ul>
+        <li>Private-access test system: gave every page a real design (fonts, colors, layout matching the main site) instead of the bare, dev-only look it had — now presentable to invite real people to test. Doesn't touch or affect the public site in any way; the new styling lives entirely in its own file, only loaded on these pages.</li>
+        <li>Private-access test system: landing page now uses Clay's own instructions and large folder icons (with a small lock badge on the protected one) instead of plain bordered boxes, and the "success" pages match wording and a closing note to match.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 101</span><span class="version-date">Saturday, August 22, 2026</span></div>
+      <ul>
+        <li>Full-size photo viewer: added an iPad-width size step for the nav arrows (58px) — they'd been jumping straight from phone size to full desktop size, which looked oversized on a tablet screen.</li>
+        <li>Homepage: fixed the rotating hero showing the wrong (horizontal) photos when a large iPad is held upright — it was deciding by screen width alone, and a big iPad in portrait is wider than the phone cutoff. Now checks actual orientation too.</li>
+        <li>Fixed the hamburger menu colliding with the banner text on a portrait iPad — the header's left spacing now has a permanent minimum instead of a phone-specific patch, so this can't recur at some other in-between screen width later.</li>
+        <li>Homepage: on touch devices, you can now swipe the rotating photo to jump to it directly, which pauses the rotation. Holding a finger on the photo keeps it paused; letting go resumes automatic rotation after 3.5 seconds.</li>
+        <li>Fixed a chain of real bugs found while building the above: the swipe wasn't responding to touch at all (a gradient overlay was silently absorbing every touch before it reached the photo), Safari's long-press "save/share this image" and "pick up and drag this image" gestures were both fighting with the hold-to-pause behavior, and a held finger could jump the photo backward since natural drift over a hold was getting mistaken for a deliberate swipe.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 100</span><span class="version-date">Saturday, August 22, 2026</span></div>
+      <ul>
+        <li>Homepage: slowed the rotating hero photos down by half a second (2.75s → 3.25s per photo).</li>
+        <li>Fixed photo dates being wrong on many photos — the sync script was reading a "last saved" timestamp instead of the photo's real capture date. Corrected 74 photos across Janet Buys a Car, Nova Scotia, and Rhine River Cruise (any date manually corrected already was left untouched). Also fixed a crash risk: reading very large scanned TIFFs for their date no longer loads the entire file into memory.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 99</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul><li>Password-protected the private-access admin page, reusing the same password as the pencil-icon editor rather than a separate one.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 98</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul><li>Private-access admin page: a table of every account and pending request, with a revoke/restore action per account, plus the underlying documentation for the whole system (see <code>Private Access Guide.md</code>).</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 97</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul><li>Built the private-access test system: request → owner-approval email → one-time magic-link login → gated page, backed by its own Postgres database and Vercel Blob storage. Lives in the same codebase but only activates on a second, separate Vercel project — has no effect on the public site.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 96</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul><li>Homepage: Version 95 didn't fully fix it — a leftover minimum-height rule (sized for desktop) was still forcing the hero taller than the screen on some phones. Removed it for mobile, which should actually stop the scroll bounce this time.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 95</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul><li>Homepage: fixed the page feeling "touchy" — a slight scroll bounce would occasionally reveal a sliver of the footer for no reason as Safari's address bar showed/hid itself. The hero now tracks the actual visible screen size live instead of a fixed snapshot of it.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 94</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul>
+        <li>Homepage: sped up the rotating hero photos from every 5.5 seconds to every 2.75 seconds.</li>
+        <li>Homepage: fixed the rotating photo showing huge/zoomed-in when rotating the phone to landscape — the hero box was being forced to a minimum height sized for portrait, taller than an actual landscape screen.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 93</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul><li>Fixed the longstanding bug where certain thumbnails would bleed full-frame past their intended border on iPhone (a Safari-specific quirk, not something visible in ordinary testing) — thumbnails now get their exact display size calculated directly instead of relying on a percentage Safari sometimes gets wrong.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 92</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul>
+        <li>Galleries page: the photo-count line under each gallery now matches the actual font "Galleries" uses on that page (it had been set to the wrong one), a touch smaller, tighter kerning, and tucked flush against the photo instead of floating below it.</li>
+        <li>Galleries page: tightened the line spacing on gallery titles that wrap to multiple lines, and pulled the photo-count line much closer up under the title.</li>
+        <li>Galleries page: switched gallery titles to a compact serif typeface (Zilla Slab) instead of the sans-serif font they'd been using.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 91</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul><li>Reverted Version 90's reload-flash change — it made the flash worse, not better.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 90</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul><li>Full-size photo viewer: tightened up the flash of the thumbnail grid that briefly showed when reloading or opening a link straight to a photo.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 89</span><span class="version-date">Friday, August 21, 2026</span></div>
+      <ul>
+        <li>Full-size photo viewer: brought the site banner (hamburger menu + logo) into the viewer so it no longer feels like a separate bannerless page, and the photo now sits top-aligned beneath it instead of centered in open space. The banner tucks away again on phone-landscape to keep the photo as large as possible there.</li>
+        <li>Nav arrows are now skinny, dark chevrons in a smaller, nearly-see-through white circle sized to fit them closely, overlaid right on the photo itself, and always precisely centered on the photo regardless of its shape or the screen size.</li>
+        <li>"Back" and "Edit" moved off the photo into their own row above it, and "Back" is now bold and darker so it doesn't get lost against the page.</li>
+        <li>Fixed pinch-to-zoom being blocked on the full-size photo (swipe-to-navigate had accidentally disabled it too).</li>
+        <li>Reloading, or opening a link straight to a photo, now reopens that same photo instead of dropping back to the thumbnail grid.</li>
+        <li>Bolded the thin labels and captions across the Galleries page, each gallery's thumbnail grid, and the full-size photo viewer (filter labels, photo counts, the "← Galleries" link, photo captions, "Edit") to match "Back" — the serif gallery/page titles were left as-is.</li>
+        <li>Fixed a bug where a tall (portrait) photo's caption could get pushed off the bottom of the screen — the photo now always leaves room for its caption.</li>
+        <li>Each gallery's page now keeps its banner pinned at the top while scrolling, so you don't have to scroll back up to navigate away.</li>
+        <li>The photo count line under each gallery on the Galleries page now uses the same serif font as the "Galleries" heading above it.</li>
+        <li>Full-size photo viewer: captions in phone-landscape now match the same size as portrait instead of being tiny.</li>
+        <li>Full-size photo viewer: the caption's date now sits on its own line below the description, in smaller type, instead of being crammed onto one line together.</li>
+        <li>Removed the Contact page and its hamburger-menu link.</li>
+        <li>Shortened "photographs" to "Photos" everywhere it appears on the Galleries page and each gallery's page, to save space — new galleries created from here on will match automatically.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 88</span><span class="version-date">Thursday, August 20, 2026</span></div>
+      <ul><li>Contact-sheet pages: lightened the thumbnail mat back down, removed the photo-number badges from thumbnails, and made the "← Galleries" link, collection name, and photo count bigger, bold, and darker so they stand out against the new background.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 87</span><span class="version-date">Thursday, August 20, 2026</span></div>
+      <ul>
+        <li>Full-size photo viewer: bigger caption text, moved the previous/next arrows off the middle of the photo to a fixed spot near the top and made them bigger with no more circle behind them, and renamed "Close" to "Back" with the underline removed.</li>
+        <li>Contact-sheet pages (an individual gallery's thumbnail grid): darkened the mat each photo sits in, and enlarged the collection title and "← Galleries" link.</li>
+        <li>Galleries page and gallery-card titles bumped a bit larger again.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 86</span><span class="version-date">Thursday, August 20, 2026</span></div>
+      <ul>
+        <li>Tightened the Galleries page for mobile: three collections per row, closer/bigger heading, filter dropdowns fit on one line, and everything holds up correctly when the phone is rotated to landscape instead of falling back to desktop sizing.</li>
+        <li>Fixed the header hamburger menu colliding with the site name at phone-landscape widths, and moved it back to the left on mobile.</li>
+        <li>The full-size photo viewer now uses the same light background as the rest of the site.</li>
+        <li>Added two new collections: Norway Cruise and Rhine River Cruise.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 85</span><span class="version-date">Thursday, August 20, 2026</span></div>
+      <ul><li>Replaced the top-right nav buttons with a hamburger menu (left on desktop, right on mobile), tightened and enlarged the homepage "Start Looking" button, and fixed the copyright footer's background to match the rest of the site.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 84</span><span class="version-date">Thursday, August 20, 2026</span></div>
+      <ul><li>Going live with rotating home page photos with separate folders for Mobile and Desktop.</li></ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 83</span><span class="version-date">Thursday, August 20, 2026</span></div>
+      <ul><li>Redesigned the homepage hero for mobile: replaced the single static hero photo with a rotating, full-bleed set of 4-5 photos that fade into each other every ~7 seconds, plus a short tagline and a "Start Looking" button leading to the Galleries page. Uses two separate photo folders — <code>public/homepage/desktop</code> and <code>public/homepage/mobile</code> — with a crop and export size tuned to each screen, so phones only ever download the right-sized photo instead of a shrunk-down desktop one. Removed <code>npm run hero:set</code> and the old single hero photo, both superseded by this.</li></ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 82</span><span class="version-date">Tuesday, August 18, 2026</span></div>
       <ul><li>Built the password-protected remote photo editor: a second Vercel deployment (same repo, <code>main</code> branch) where captions, dates, order, hidden status, and cover photos can be edited from anywhere, with saves committing straight to GitHub and going live the same way <code>npm run save</code> does today. Adding new photos, moving photos between collections, and full resyncs stay local-only. Production is unaffected unless the new <code>EDITOR_MODE</code> variable is deliberately set on that second project — see the README for one-time setup steps.</li></ul>
     </div>
