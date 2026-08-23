@@ -454,7 +454,11 @@ for (const collection of collections) {
         .toFile(fullPath);
       await sharp(workingSource, { unlimited: true })
         .rotate()
-        .resize({ width: 1200, height: 1200, fit: "inside", withoutEnlargement: true })
+        // Grid thumbnails never render past ~350px CSS-wide even on the
+        // widest desktop layout -- 750px covers a sharp 2x-retina display
+        // at that size with real headroom, down from 1200px which was
+        // serving 3-4x more resolution than any screen actually shows.
+        .resize({ width: 750, height: 750, fit: "inside", withoutEnlargement: true })
         .jpeg({ quality: 82, mozjpeg: true })
         .toFile(thumbnailPath);
       await copyFile(fullPath, cacheFullPath);
