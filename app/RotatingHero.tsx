@@ -126,6 +126,13 @@ function PhotoStack({ photos, variant }: { photos: string[]; variant: "desktop" 
           style={{ opacity: i === index ? 1 : 0 }}
         />
       ))}
+      {photos.length > 1 && (
+        <div className="hero-dots" aria-hidden="true">
+          {photos.map((src, i) => (
+            <span key={src} className={i === index ? "hero-dot hero-dot-active" : "hero-dot"} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
