@@ -1,6 +1,12 @@
 import { Resend } from "resend";
 import { getPool } from "../../../../lib/db";
-import { FROM_ADDRESS, OWNER_EMAIL, escapeHtml, randomToken } from "../../../../lib/private-access";
+import {
+  FROM_ADDRESS,
+  OWNER_EMAIL,
+  OWNER_SMS_ADDRESS,
+  escapeHtml,
+  randomToken,
+} from "../../../../lib/private-access";
 import { isPrivateAccessEnabled } from "../../../../lib/private-access-mode";
 
 export const dynamic = "force-dynamic";
@@ -50,6 +56,22 @@ export async function POST(request: Request) {
       </p>
     `,
   });
+
+  if (OWNER_SMS_ADDRESS) {
+    // Best-effort text alert via the carrier's email-to-SMS gateway, so a
+    // new request actually gets noticed instead of sitting unread in an
+    // inbox with no phone notification. Kept short for a single SMS segment,
+    // and a failure here shouldn't block the request -- the email above is
+    // still the real notification of record.
+    resend.emails
+      .send({
+        from: FROM_ADDRESS,
+        to: OWNER_SMS_ADDRESS,
+        subject: "Access request",
+        text: `${name} (${email}) requested access. Check email or the admin page to approve.`,
+      })
+      .catch(() => {});
+  }
 
   // The request is already saved either way (so it'll still show up on the
   // admin page), but the owner needs to know the notification didn't
