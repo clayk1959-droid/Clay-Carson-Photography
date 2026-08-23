@@ -3,7 +3,7 @@ import { getPool } from "./db";
 
 export const SESSION_COOKIE_NAME = "private_session";
 export const OWNER_EMAIL = "clayk1959@gmail.com";
-export const FROM_ADDRESS = "onboarding@resend.dev";
+export const FROM_ADDRESS = "noreply@mail.carsonmullerfamily.com";
 
 const MAGIC_LINK_TTL_MS = 60 * 60 * 1000; // 1 hour, single use
 const THREE_MONTHS_MS = 1000 * 60 * 60 * 24 * 90;
