@@ -15,6 +15,23 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 102 — Saturday, August 22, 2026
+
+- Private-access test system: gave every page a real design (fonts, colors, layout matching the main site) instead of the bare, dev-only look it had — now presentable to invite real people to test. Doesn't touch or affect the public site in any way; the new styling lives entirely in its own file, only loaded on these pages.
+- Private-access test system: landing page now uses Clay's own instructions and large folder icons (with a small lock badge on the protected one) instead of plain bordered boxes, and the "success" pages match wording and a closing note to match.
+
+### Version 101 — Saturday, August 22, 2026
+
+- Full-size photo viewer: added an iPad-width size step for the nav arrows (58px) — they'd been jumping straight from phone size to full desktop size, which looked oversized on a tablet screen. Best guess pending a real iPad check.
+- Homepage: fixed the rotating hero showing the wrong (horizontal) photos when a large iPad is held upright — it was deciding by screen width alone, and a big iPad in portrait is wider than the phone cutoff. Now checks actual orientation too.
+- Fixed the hamburger menu colliding with the banner text on a portrait iPad (the same gap in the phone-only fix that caused the hero bug above) — the header's left spacing now has a permanent minimum instead of a phone-specific patch, so this can't recur at some other in-between screen width later.
+- Homepage: on touch devices, you can now swipe the rotating photo to jump to it directly, which pauses the rotation. Holding a finger on the photo keeps it paused; letting go resumes automatic rotation after 5 seconds (touching again before then cancels the resume and keeps it paused).
+- Fixed the swipe feature above not actually responding to touch — the text-readability gradient overlay sat on top of the photo and silently absorbed every touch before it could reach the photo underneath.
+- Turned off Safari's long-press "save/share this image" menu on the homepage hero photo, so holding a finger there to pause it doesn't also bring up that menu.
+- Fixed holding a finger still on the hero photo sometimes jumping backward to the previous photo — a real hold isn't perfectly motionless, and slow natural drift over a couple seconds could accidentally look like a swipe. A swipe now also has to happen quickly to count, so a slow hold-and-drift no longer gets mistaken for one. (This alone didn't fully fix it — see below.)
+- Turned off Safari's separate "long-press to pick up and drag this image" gesture on the hero photo — distinct from the save/share menu fixed earlier, this one could silently hijack a held touch partway through and hand back a distorted release event, which was the real cause of the jump above. Fully fixed this on iPad; a phone still needed more room for natural finger jitter, since the same physical drift covers more pixels on a smaller, denser screen — swipe distance now needs to be further to register there too.
+- Shortened the pause-after-touch delay before the hero photo resumes auto-rotating (settled on 3.5 seconds) — and fixed it actually taking much longer than whatever this is set to, because the very first photo after resuming waited for a full normal rotation interval on top of the pause delay instead of advancing right away.
+
 ### Version 100 — Saturday, August 22, 2026
 
 - Homepage: slowed the rotating hero photos down by half a second (2.75s → 3.25s per photo).

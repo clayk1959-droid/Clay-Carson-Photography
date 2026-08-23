@@ -26,15 +26,7 @@ export function RevokeButton({ id, revoked }: { id: number; revoked: boolean }) 
       type="button"
       onClick={toggle}
       disabled={busy}
-      style={{
-        padding: "5px 12px",
-        fontSize: 13,
-        border: "1px solid " + (revoked ? "#2a7a4a" : "#a33"),
-        color: revoked ? "#2a7a4a" : "#a33",
-        background: "#fff",
-        borderRadius: 4,
-        cursor: "pointer",
-      }}
+      className={`private-access-pill-btn ${revoked ? "restore" : "revoke"}`}
     >
       {busy ? "…" : revoked ? "Restore" : "Revoke"}
     </button>

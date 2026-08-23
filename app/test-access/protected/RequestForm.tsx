@@ -26,53 +26,48 @@ export function RequestForm() {
 
   if (status === "sent") {
     return (
-      <div>
-        <p style={{ marginBottom: 16 }}>
-          Sent! Check your email for a magic link — once you click it, come back to{" "}
-          <a href="/test-access">the main page</a> and try this folder again.
-        </p>
-      </div>
+      <p className="private-access-sent">
+        Sent! Check your email for a magic link — once you click it, come back to{" "}
+        <a href="/test-access" className="private-access-back">the main page</a> and try this folder
+        again.
+      </p>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: "grid", gap: 16 }}>
-      <label style={{ display: "grid", gap: 6 }}>
+    <form onSubmit={handleSubmit} className="private-access-form">
+      <label className="private-access-field">
         <span>Name</span>
         <input
           required
           value={name}
           onChange={(event) => setName(event.target.value)}
-          style={{ padding: 10, border: "1px solid #7a7a7a" }}
+          className="private-access-input"
         />
       </label>
-      <label style={{ display: "grid", gap: 6 }}>
+      <label className="private-access-field">
         <span>Email</span>
         <input
           required
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          style={{ padding: 10, border: "1px solid #7a7a7a" }}
+          className="private-access-input"
         />
       </label>
-      <label style={{ display: "grid", gap: 6 }}>
+      <label className="private-access-field">
         <span>Note (optional)</span>
         <textarea
           value={note}
           onChange={(event) => setNote(event.target.value)}
           rows={3}
-          style={{ padding: 10, border: "1px solid #7a7a7a", fontFamily: "inherit" }}
+          className="private-access-textarea"
         />
       </label>
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        style={{ padding: "12px 20px", background: "#171a17", color: "#f5f2eb", border: 0, cursor: "pointer" }}
-      >
+      <button type="submit" disabled={status === "sending"} className="private-access-button">
         {status === "sending" ? "Sending…" : "Request Access"}
       </button>
-      {status === "error" && <p style={{ color: "#a33" }}>Something went wrong — try again.</p>}
+      {status === "error" && <p className="private-access-error">Something went wrong — try again.</p>}
     </form>
   );
 }

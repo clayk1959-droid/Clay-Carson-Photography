@@ -1,0 +1,39 @@
+.private-access { min-height: 100svh; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; }
+.private-access-inner { max-width: 480px; margin: 0 auto; padding: 70px 20px 60px; }
+.private-access-inner.wide { max-width: 960px; }
+.private-access h1 { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 32px; font-weight: 400; margin: 0 0 14px; letter-spacing: -.01em; }
+.private-access-lede { color: #454545; font-size: 15px; line-height: 1.55; margin: 0 0 32px; }
+.private-access-banner { padding: 14px 18px; background: var(--cream); border-radius: 4px; margin-bottom: 28px; font-size: 14px; }
+.private-access-signoff { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-style: italic; font-size: 17px; margin: -14px 0 28px; color: #454545; }
+
+.private-access-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.private-access-card { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 34px 18px; border: 1px solid #c9c4b6; border-radius: 4px; background: #ffffff; text-align: center; color: var(--ink); transition: border-color .2s, transform .2s; }
+.private-access-card:hover { border-color: var(--ink); transform: translateY(-2px); }
+.private-access-folder-icon { width: 72px; height: auto; color: #8a8d87; }
+.private-access-card:hover .private-access-folder-icon { color: var(--ink); }
+.private-access-card-label { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 17px; }
+
+.private-access-back { display: inline-block; margin-top: 30px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid rgba(29, 33, 29, .4); padding-bottom: 2px; }
+
+.private-access-form { display: grid; gap: 18px; }
+.private-access-field { display: grid; gap: 7px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #6c6f68; }
+.private-access-input, .private-access-textarea { padding: 12px 13px; border: 1px solid #b7b2a2; border-radius: 3px; background: #ffffff; font: inherit; font-size: 15px; letter-spacing: normal; text-transform: none; color: var(--ink); }
+.private-access-input:focus-visible, .private-access-textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.private-access-button { padding: 13px 22px; background: var(--ink); color: var(--paper); border: 0; border-radius: 3px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.private-access-button:disabled { opacity: .6; cursor: default; }
+.private-access-error { color: #a33; font-size: 14px; margin: 0; }
+.private-access-sent { font-size: 15px; line-height: 1.55; }
+
+.private-access-summary { color: #6c6f68; margin: 0 0 34px; font-size: 14px; }
+.private-access-section { margin-bottom: 40px; }
+.private-access-section h2 { font-size: 15px; font-weight: 700; letter-spacing: .04em; margin: 0 0 12px; }
+.private-access-note { color: #8a8d87; font-size: 13px; margin-top: 10px; }
+.private-access-table-wrap { overflow-x: auto; }
+.private-access-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.private-access-table th { text-align: left; padding: 10px 14px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #6c6f68; border-bottom: 2px solid #ddd8c9; font-weight: 500; }
+.private-access-table td { padding: 12px 14px; border-bottom: 1px solid #e7e2d5; }
+.private-access-table tr.revoked { opacity: .5; }
+.private-access-pill-btn { padding: 5px 13px; font: inherit; font-size: 12px; letter-spacing: .05em; border-radius: 20px; border: 1px solid; background: #ffffff; cursor: pointer; }
+.private-access-pill-btn:disabled { opacity: .6; cursor: default; }
+.private-access-pill-btn.revoke { color: #a33; border-color: #a33; }
+.private-access-pill-btn.restore { color: #2a7a4a; border-color: #2a7a4a; }

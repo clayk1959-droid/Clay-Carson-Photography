@@ -6,7 +6,11 @@ html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; }
 a { color: inherit; text-decoration: none; }
 .site-header { position: relative; z-index: 50; height: 96px; background: #171a17; color: #f5f2eb; }
-.site-header-inner { position: relative; height: 100%; padding: 0 4.5vw; display: flex; align-items: center; }
+/* padding-left can never shrink below the hamburger's own clearance
+   (left:18px + width:26px = 44px, plus a small gap) -- 4.5vw alone drops
+   below that on anything narrower than ~980px, which used to only be
+   patched for phones, leaving tablets in between still colliding. */
+.site-header-inner { position: relative; height: 100%; padding: 0 4.5vw; padding-left: max(4.5vw, 54px); display: flex; align-items: center; }
 .brand { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 35px; font-style: normal; font-weight: 400; letter-spacing: .015em; line-height: 1.05; }
 .brand small { margin-left: 6px; font: inherit; font-size: .53em; font-style: normal; letter-spacing: .11em; vertical-align: baseline; }
 .nav-toggle-wrap { position: absolute; top: 50%; left: 18px; transform: translateY(-50%); }
@@ -19,11 +23,19 @@ a { color: inherit; text-decoration: none; }
 .inquire { justify-self: end; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; border-bottom: 1px solid #6e726c; padding-bottom: 5px; }
 .inquire span { margin-left: 8px; }
 .hero { position: relative; height: calc(100vh - 96px); min-height: 620px; overflow: hidden; color: white; background: #0c0d0c; }
-.hero-photos { position: absolute; inset: 0; }
+.hero-photos { position: absolute; inset: 0; touch-action: pan-y; }
 .hero-photos-mobile { display: none; }
-.hero-photo { object-fit: cover; transition: opacity 1.4s ease; }
+/* Matches RotatingHero.tsx's MOBILE_QUERY exactly -- a portrait tablet
+   mounts the mobile/vertical photo set via that JS query even above the
+   800px width cutoff below, so this has to switch on the same condition
+   or the mounted set would be hidden instead of shown. */
+@media (max-width: 800px), (orientation: portrait) {
+  .hero-photos-desktop { display: none; }
+  .hero-photos-mobile { display: block; }
+}
+.hero-photo { object-fit: cover; transition: opacity 1.4s ease; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-user-drag: none; }
 .hero-wash {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; pointer-events: none;
   background:
     linear-gradient(120deg, rgba(9,10,8,.82) 0%, rgba(9,10,8,.5) 28%, rgba(9,10,8,.1) 54%, transparent 70%),
     linear-gradient(0deg, rgba(6,7,6,.45) 0%, transparent 42%);
@@ -234,16 +246,16 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
 .copyright { grid-column: 1 / -1; margin: 80px 0 0; padding-top: 22px; border-top: 1px solid #3f423e; font-size: 9px; text-transform: uppercase; letter-spacing: .15em; color: #8a8d87; }
 .site-footer { padding: 40px 4.5vw 30px; text-align: center; background: #0c0d0c; }
 .site-footer p { max-width: 560px; margin: 0 auto; font-size: 11px; line-height: 1.6; color: #8a8d87; }
+/* iPad-width screens (roughly 801-1200px) fell into the same bucket as a
+   full desktop monitor, using the same absolute arrow size -- fine on a
+   27" screen, oversized-looking on a handheld tablet at the same CSS
+   pixel width. This is a best-guess size pending a real iPad check. */
+@media (min-width: 801px) and (max-width: 1200px) {
+  .lightbox-arrow { width: 58px; height: 58px; }
+}
 @media (max-width: 800px) {
-  /* The hamburger stays fixed at the header's left padding edge (18px) at
-     every width, but the brand text's own left inset (4.5vw) shrinks below
-     that on a phone -- without this clearance margin, the brand wordmark
-     would start underneath the hamburger. */
-  .brand-block { margin-left: 36px; }
   .brand { font-size: 29px; }
   .hero { height: calc(100dvh - 96px); min-height: 0; }
-  .hero-photos-desktop { display: none; }
-  .hero-photos-mobile { display: block; }
   .hero-copy { left: 6vw; right: 6vw; bottom: 6vh; max-width: none; text-align: center; }
   .hero-eyebrow { font-size: 10px; letter-spacing: .24em; margin-bottom: 16px; }
   .hero-headline { font-size: clamp(34px, 10vw, 46px); margin-bottom: 26px; }
@@ -302,11 +314,6 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
    so the photo gets that height back. Keyed on height, not orientation,
    so it also helps a short desktop browser window. */
 @media (max-height: 500px) {
-  /* A phone landscape width (routinely 812-932px) is wider than the
-     max-width:800px breakpoint above, so without this the header falls
-     through to desktop's wide 4.5vw brand inset -- which is too narrow a
-     gutter for the hamburger at that width and the two collide. */
-  .brand-block { margin-left: 36px; }
   /* No room to spare here for a 96px banner too -- same reasoning as the
      rest of this block, so the lightbox drops it and gives that height
      back to the photo instead. */

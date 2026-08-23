@@ -12,16 +12,16 @@ export default async function AdminLoginPage({
   const { redirect, error } = await searchParams;
 
   return (
-    <main style={{ maxWidth: 360, margin: "80px auto", padding: "0 20px", fontFamily: "sans-serif" }}>
-      <form method="POST" action="/api/test-access/admin-login" style={{ display: "grid", gap: 14 }}>
-        <h1 style={{ fontSize: 22, margin: 0 }}>Password required</h1>
-        {error && <p style={{ color: "#a33", margin: 0 }}>Wrong password. Try again.</p>}
+    <main className="private-access-inner">
+      <form method="POST" action="/api/test-access/admin-login" className="private-access-form">
+        <h1>Password required</h1>
+        {error && <p className="private-access-error">Wrong password. Try again.</p>}
         <input type="hidden" name="redirect" value={redirect ?? ""} />
-        <label style={{ display: "grid", gap: 6 }}>
-          Password
-          <input type="password" name="password" autoFocus required style={{ padding: 10, border: "1px solid #999" }} />
+        <label className="private-access-field">
+          <span>Password</span>
+          <input type="password" name="password" autoFocus required className="private-access-input" />
         </label>
-        <button type="submit" style={{ padding: "10px 16px", cursor: "pointer" }}>
+        <button type="submit" className="private-access-button">
           Continue
         </button>
       </form>

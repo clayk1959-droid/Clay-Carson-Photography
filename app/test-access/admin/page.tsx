@@ -30,16 +30,6 @@ function formatDate(value: string | null) {
   return new Date(value).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 }
 
-const tableStyle: React.CSSProperties = { width: "100%", borderCollapse: "collapse", fontSize: 14 };
-const thStyle: React.CSSProperties = {
-  textAlign: "left",
-  padding: "10px 12px",
-  background: "#f2f2f2",
-  borderBottom: "2px solid #ddd",
-  fontWeight: 600,
-};
-const tdStyle: React.CSSProperties = { padding: "10px 12px", borderBottom: "1px solid #eee" };
-
 export default async function AdminPage() {
   if (!isPrivateAccessEnabled()) notFound();
 
@@ -68,78 +58,80 @@ export default async function AdminPage() {
   const pending = pendingResult.rows as PendingRequest[];
 
   return (
-    <main style={{ maxWidth: 900, margin: "50px auto", padding: "0 20px", fontFamily: "sans-serif", color: "#222" }}>
-      <h1 style={{ fontSize: 24, marginBottom: 4 }}>Private Access — Admin</h1>
-      <p style={{ color: "#666", marginBottom: 32 }}>
+    <main className="private-access-inner wide">
+      <h1>Private Access — Admin</h1>
+      <p className="private-access-summary">
         {accounts.length} account{accounts.length === 1 ? "" : "s"}
         {pending.length > 0 ? ` · ${pending.length} pending request${pending.length === 1 ? "" : "s"}` : ""}
       </p>
 
       {pending.length > 0 && (
-        <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 16, marginBottom: 10 }}>Pending requests</h2>
-          <table style={tableStyle}>
-            <thead>
-              <tr>
-                <th style={thStyle}>Name</th>
-                <th style={thStyle}>Email</th>
-                <th style={thStyle}>Note</th>
-                <th style={thStyle}>Requested</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pending.map((row) => (
-                <tr key={row.id}>
-                  <td style={tdStyle}>{row.name}</td>
-                  <td style={tdStyle}>{row.email}</td>
-                  <td style={tdStyle}>{row.note ?? "—"}</td>
-                  <td style={tdStyle}>{formatDate(row.requested_at)}</td>
+        <section className="private-access-section">
+          <h2>Pending requests</h2>
+          <div className="private-access-table-wrap">
+            <table className="private-access-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Note</th>
+                  <th>Requested</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <p style={{ color: "#888", fontSize: 13, marginTop: 8 }}>
-            Approve or deny these from the links in the request email.
-          </p>
+              </thead>
+              <tbody>
+                {pending.map((row) => (
+                  <tr key={row.id}>
+                    <td>{row.name}</td>
+                    <td>{row.email}</td>
+                    <td>{row.note ?? "—"}</td>
+                    <td>{formatDate(row.requested_at)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="private-access-note">Approve or deny these from the links in the request email.</p>
         </section>
       )}
 
-      <section>
-        <h2 style={{ fontSize: 16, marginBottom: 10 }}>Accounts</h2>
+      <section className="private-access-section">
+        <h2>Accounts</h2>
         {accounts.length === 0 ? (
-          <p style={{ color: "#888" }}>No one has been approved yet.</p>
+          <p className="private-access-note">No one has been approved yet.</p>
         ) : (
-          <table style={tableStyle}>
-            <thead>
-              <tr>
-                <th style={thStyle}>Name</th>
-                <th style={thStyle}>Email</th>
-                <th style={thStyle}>Registered</th>
-                <th style={thStyle}>Key</th>
-                <th style={thStyle}>Last login</th>
-                <th style={thStyle}>Status</th>
-                <th style={thStyle} />
-              </tr>
-            </thead>
-            <tbody>
-              {accounts.map((account) => {
-                const revoked = Boolean(account.revoked_at);
-                return (
-                  <tr key={account.id} style={revoked ? { opacity: 0.55 } : undefined}>
-                    <td style={tdStyle}>{account.name}</td>
-                    <td style={tdStyle}>{account.email}</td>
-                    <td style={tdStyle}>{formatDate(account.created_at)}</td>
-                    <td style={tdStyle}>{account.session_type === "forever" ? "Forever" : "3 months"}</td>
-                    <td style={tdStyle}>{formatDate(account.last_login)}</td>
-                    <td style={tdStyle}>{revoked ? "Revoked" : "Active"}</td>
-                    <td style={tdStyle}>
-                      <RevokeButton id={account.id} revoked={revoked} />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <div className="private-access-table-wrap">
+            <table className="private-access-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Registered</th>
+                  <th>Key</th>
+                  <th>Last login</th>
+                  <th>Status</th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                {accounts.map((account) => {
+                  const revoked = Boolean(account.revoked_at);
+                  return (
+                    <tr key={account.id} className={revoked ? "revoked" : undefined}>
+                      <td>{account.name}</td>
+                      <td>{account.email}</td>
+                      <td>{formatDate(account.created_at)}</td>
+                      <td>{account.session_type === "forever" ? "Forever" : "3 months"}</td>
+                      <td>{formatDate(account.last_login)}</td>
+                      <td>{revoked ? "Revoked" : "Active"}</td>
+                      <td>
+                        <RevokeButton id={account.id} revoked={revoked} />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         )}
       </section>
     </main>

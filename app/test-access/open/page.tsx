@@ -7,10 +7,13 @@ export default function OpenFolderPage() {
   if (!isPrivateAccessEnabled()) notFound();
 
   return (
-    <main style={{ maxWidth: 480, margin: "60px auto", padding: "0 20px", fontFamily: "sans-serif" }}>
+    <main className="private-access-inner">
       <h1>Success!</h1>
-      <p>This one wasn&rsquo;t protected -- anyone can see it.</p>
-      <a href="/test-access">← Back</a>
+      <p className="private-access-lede">This one wasn&rsquo;t protected — anyone can see it.</p>
+      <p className="private-access-lede">
+        Please click on the Back button and click on Try Me Second.
+      </p>
+      <a href="/test-access" className="private-access-back">← Back</a>
     </main>
   );
 }

@@ -13,17 +13,24 @@ export default async function ProtectedFolderPage() {
   const account = await getAccountForSession(cookieStore.get(SESSION_COOKIE_NAME)?.value);
 
   return (
-    <main style={{ maxWidth: 480, margin: "60px auto", padding: "0 20px", fontFamily: "sans-serif" }}>
+    <main className="private-access-inner">
       {account ? (
         <>
           <h1>Success!</h1>
-          <p>This one was protected, and you got in, {account.name}.</p>
-          <a href="/test-access">← Back</a>
+          <p className="private-access-lede">This one was protected, and you got in, {account.name}.</p>
+          <p className="private-access-lede">
+            I really appreciate your help, have a great day!
+            <br />
+            Clay
+          </p>
+          <a href="/test-access" className="private-access-back">← Back</a>
         </>
       ) : (
         <>
           <h1>This folder is protected</h1>
-          <p>Kindly fill this out and you&rsquo;ll receive an email shortly with the magic link.</p>
+          <p className="private-access-lede">
+            Kindly fill this out and you&rsquo;ll receive an email shortly with the magic link.
+          </p>
           <RequestForm />
         </>
       )}
