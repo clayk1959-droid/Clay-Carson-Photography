@@ -100,4 +100,16 @@ variable" pattern.
 - [ ] SMS notification to the owner, as an alternative/addition to email.
 - [ ] A way to mark a real gallery as private, and to grant access to
       specific galleries rather than everything at once.
+
+      **Design decided 2026-08-22, not yet built:** access is per-gallery,
+      decided by Clay each time (not automatic/blanket for every future
+      private gallery) — but with a one-click "grant everyone who already
+      has access" bulk action on the admin page when a new gallery is
+      flagged private, so the common case (most new galleries go to
+      everyone) doesn't mean clicking through every account one at a time.
+      Individual people can still be excluded from a given gallery. No
+      named groups/tiers (e.g. "immediate family" vs "extended family") —
+      considered and deliberately skipped as unneeded complexity for how
+      Clay expects to actually use this; revisit only if a real need for
+      distinct circles of people shows up later.
 - [ ] A shorter, easier-to-share URL for the private site (custom domain).

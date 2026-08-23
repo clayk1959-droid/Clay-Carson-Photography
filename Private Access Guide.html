@@ -246,7 +246,20 @@
       <li><s>Password-protect the admin page</s> — done, reuses the existing editor's <code>EDITOR_PASSWORD</code> login.</li>
       <li>Wire actual photos into it (Blob storage) instead of the placeholder "protected folder" test page.</li>
       <li>SMS notification to the owner, as an alternative/addition to email.</li>
-      <li>A way to mark a real gallery as private, and to grant access to specific galleries rather than everything at once.</li>
+      <li>
+        A way to mark a real gallery as private, and to grant access to specific galleries rather than everything at once.
+        <div class="note">
+          <strong>Design decided 2026-08-22, not yet built:</strong> access is per-gallery, decided
+          by Clay each time (not automatic/blanket for every future private gallery) — but with a
+          one-click "grant everyone who already has access" bulk action on the admin page when a
+          new gallery is flagged private, so the common case (most new galleries go to everyone)
+          doesn't mean clicking through every account one at a time. Individual people can still be
+          excluded from a given gallery. No named groups/tiers (e.g. "immediate family" vs
+          "extended family") — considered and deliberately skipped as unneeded complexity for how
+          Clay expects to actually use this; revisit only if a real need for distinct circles of
+          people shows up later.
+        </div>
+      </li>
       <li>A shorter, easier-to-share URL for the private site (custom domain).</li>
     </ul>
   </section>
