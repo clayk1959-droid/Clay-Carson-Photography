@@ -37,6 +37,18 @@ Last updated: Friday, August 21, 2026
 - Homepage: slowed the rotating hero photos down by half a second (2.75s → 3.25s per photo).
 - Fixed photo dates being wrong on many photos — the sync script was reading a "last saved" timestamp instead of the photo's real capture date. Corrected 74 photos across Janet Buys a Car, Nova Scotia, and Rhine River Cruise (any date you've manually corrected yourself was left untouched). Also fixed a crash risk: reading very large scanned TIFFs for their date no longer loads the entire file into memory.
 
+### Version 99 — Friday, August 21, 2026
+
+- Password-protected the private-access admin page, reusing the same password as the pencil-icon editor rather than a separate one.
+
+### Version 98 — Friday, August 21, 2026
+
+- Private-access admin page: a table of every account and pending request, with a revoke/restore action per account, plus the underlying documentation for the whole system (see `Private Access Guide.md`).
+
+### Version 97 — Friday, August 21, 2026
+
+- Built the private-access test system: request → owner-approval email → one-time magic-link login → gated page, backed by its own Postgres database and Vercel Blob storage. Lives in the same codebase but only activates on a second, separate Vercel project — has no effect on the public site.
+
 ### Version 96 — Friday, August 21, 2026
 
 - Homepage: Version 95 didn't fully fix it — a leftover minimum-height rule (sized for desktop) was still forcing the hero taller than the screen on some phones. Removed it for mobile, which should actually stop the scroll bounce this time.
