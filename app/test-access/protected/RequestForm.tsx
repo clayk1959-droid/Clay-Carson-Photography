@@ -7,6 +7,7 @@ export function RequestForm() {
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -17,9 +18,13 @@ export function RequestForm() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ name, email, note }),
       });
-      if (!response.ok) throw new Error("Request failed");
+      if (!response.ok) {
+        const body = await response.json().catch(() => null);
+        throw new Error(body?.error || "Request failed");
+      }
       setStatus("sent");
-    } catch {
+    } catch (err) {
+      setErrorMessage(err instanceof Error ? err.message : "Something went wrong — try again.");
       setStatus("error");
     }
   }
@@ -67,7 +72,7 @@ export function RequestForm() {
       <button type="submit" disabled={status === "sending"} className="private-access-button">
         {status === "sending" ? "Sending…" : "Request Access"}
       </button>
-      {status === "error" && <p className="private-access-error">Something went wrong — try again.</p>}
+      {status === "error" && <p className="private-access-error">{errorMessage}</p>}
     </form>
   );
 }

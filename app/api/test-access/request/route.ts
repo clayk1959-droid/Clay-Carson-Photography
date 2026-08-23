@@ -36,7 +36,7 @@ export async function POST(request: Request) {
   };
 
   const resend = new Resend(process.env.RESEND_API_KEY);
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: FROM_ADDRESS,
     to: OWNER_EMAIL,
     subject: `Access request: ${name}`,
@@ -50,6 +50,16 @@ export async function POST(request: Request) {
       </p>
     `,
   });
+
+  // The request is already saved either way (so it'll still show up on the
+  // admin page), but the owner needs to know the notification didn't
+  // actually arrive rather than silently never finding out.
+  if (error) {
+    return Response.json(
+      { error: `Request saved, but the owner-notification email failed to send: ${error.message}` },
+      { status: 502 },
+    );
+  }
 
   return Response.json({ ok: true });
 }

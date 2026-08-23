@@ -70,12 +70,25 @@ export async function GET(request: Request) {
   const loginLink = `${url.origin}/api/test-access/verify?email=${encodeURIComponent(reqRow.email)}&token=${magicToken}`;
 
   const resend = new Resend(process.env.RESEND_API_KEY);
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: FROM_ADDRESS,
     to: reqRow.email,
     subject: "You're in — Carson & Muller private access",
     html: `<p>Hi ${escapeHtml(reqRow.name)},</p><p>You've been approved. <a href="${loginLink}">Click here to log in</a>.</p><p>This link works once and expires in an hour.</p>`,
   });
+
+  if (error) {
+    // Resend's SDK returns an error object here rather than throwing --
+    // without this check, a failed send (e.g. sandbox mode only allowing
+    // the account owner as a recipient) looked identical to a real one.
+    return htmlResponse(
+      `Approved ${escapeHtml(reqRow.name)}, but the login-link email failed to send: <strong>${escapeHtml(error.message)}</strong>. ` +
+        `This usually means the sending domain (<code>${escapeHtml(FROM_ADDRESS)}</code>) isn't verified with Resend yet, ` +
+        `so it can only email the account owner, not other people. The account itself was created, so a fresh login link can ` +
+        `still be sent once that's fixed.`,
+      200,
+    );
+  }
 
   return htmlResponse(
     `Approved ${escapeHtml(reqRow.name)} (${sessionType === "forever" ? "forever" : "3 months"}) and sent them a login link.`,
