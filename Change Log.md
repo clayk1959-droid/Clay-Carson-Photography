@@ -15,6 +15,11 @@ Last updated: Friday, August 21, 2026
 
 ## Version history
 
+### Version 103 — Sunday, August 23, 2026
+
+- Added a `.vercelignore` file so deploys stop uploading the 3.2GB "Gallery Originals" folder — it's only used locally for syncing, never read by the live site, but was going out with every single deploy regardless. Speeds up every future deploy, main site and the private-access system alike.
+- Shrunk gallery thumbnails from a 1200px max size down to 750px — they never render past ~350px on screen even on the widest desktop layout, so 1200px was serving several times more resolution than any screen actually shows. Cuts total thumbnail weight roughly in half (regenerated all 190 existing photos), with no visible quality difference at any size, including retina screens.
+
 ### Version 102 — Saturday, August 22, 2026
 
 - Private-access test system: gave every page a real design (fonts, colors, layout matching the main site) instead of the bare, dev-only look it had — now presentable to invite real people to test. Doesn't touch or affect the public site in any way; the new styling lives entirely in its own file, only loaded on these pages.
