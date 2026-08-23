@@ -15,6 +15,14 @@ Last updated: Sunday, August 23, 2026
 
 ## Version history
 
+### Version 107 — Sunday, August 23, 2026
+
+- Fixed the approve/deny confirmation page (what you land on after clicking a link in the access-request notification) showing text so small it was unreadable on a phone. That page is built by hand rather than as a normal site page, so it was missing the tag that tells mobile browsers not to render it at desktop width and shrink it to fit — added that, and bumped the text size a bit for good measure.
+
+### Version 106 — Sunday, August 23, 2026
+
+- Access-request notifications now also send a short text message alongside the email, since email alone doesn't trigger a phone alert. Uses the carrier's email-to-text gateway rather than a separate paid service — free, and reuses the sending setup already in place. Best-effort: if it fails for any reason, the regular email notification still goes through as before.
+
 ### Version 105 — Sunday, August 23, 2026
 
 - Homepage: added small dots centered under the rotating hero photos, one per photo in the current set, with the active one brighter — a passive indicator of where you are, especially useful once you've paused rotation by swiping or holding a finger on the photo. Not clickable, just a visual marker, and doesn't interfere with the swipe/hold touch handling.
