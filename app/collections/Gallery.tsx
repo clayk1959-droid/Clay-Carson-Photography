@@ -422,6 +422,7 @@ function ReorderPanel({
   const [dirty, setDirty] = useState(false);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
   const dragIndex = useRef<number | null>(null);
   const dragOverIndex = useRef<number | null>(null);
 
@@ -446,6 +447,49 @@ function ReorderPanel({
     });
     dragIndex.current = targetIndex;
     setDirty(true);
+  }
+
+  // Pointer Events (not the native HTML5 drag-and-drop API) so this works
+  // the same way with mouse, touch, and pen -- native drag-and-drop simply
+  // never fires on touch devices at all. Pointer capture keeps move/up
+  // events targeted at the thumb a drag started on even as the finger
+  // moves elsewhere, so hit-testing what's actually under the pointer has
+  // to go through elementFromPoint rather than the event's own target.
+  function handlePointerDown(event: React.PointerEvent, index: number) {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    dragIndex.current = index;
+    dragOverIndex.current = index;
+    setDraggingIndex(index);
+    // Best-effort -- touch already gets implicit capture per the pointer
+    // events spec, so a failure here (seen in a couple of edge cases) isn't
+    // fatal to the drag, just not worth letting crash the whole panel.
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Ignored -- see comment above.
+    }
+  }
+
+  function handlePointerMove(event: React.PointerEvent) {
+    if (dragIndex.current === null) return;
+    event.preventDefault();
+    const target = document.elementFromPoint(event.clientX, event.clientY);
+    const thumbEl = target?.closest<HTMLElement>("[data-reorder-index]");
+    if (!thumbEl) return;
+    const overIndex = Number(thumbEl.dataset.reorderIndex);
+    if (!Number.isNaN(overIndex) && dragOverIndex.current !== overIndex) {
+      dragOverIndex.current = overIndex;
+      moveTo(overIndex);
+    }
+  }
+
+  function handlePointerUp(event: React.PointerEvent) {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    dragIndex.current = null;
+    dragOverIndex.current = null;
+    setDraggingIndex(null);
   }
 
   async function handleSave() {
@@ -502,22 +546,12 @@ function ReorderPanel({
             return (
               <div
                 key={filename}
-                className="reorder-thumb"
-                draggable
-                onDragStart={() => {
-                  dragIndex.current = index;
-                }}
-                onDragEnter={() => {
-                  if (dragOverIndex.current !== index) {
-                    dragOverIndex.current = index;
-                    moveTo(index);
-                  }
-                }}
-                onDragOver={(event) => event.preventDefault()}
-                onDragEnd={() => {
-                  dragIndex.current = null;
-                  dragOverIndex.current = null;
-                }}
+                className={index === draggingIndex ? "reorder-thumb is-dragging" : "reorder-thumb"}
+                data-reorder-index={index}
+                onPointerDown={(event) => handlePointerDown(event, index)}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerUp}
               >
                 <img
                   src={photograph.src.replace("/galleries/", "/gallery-thumbnails/")}
