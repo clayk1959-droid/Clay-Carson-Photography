@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { isRemoteEditorMode } from "../../../lib/editor-mode";
 import { applyRemoteEdit } from "../../../lib/remote-editor";
+import { getLoggedInEditorName } from "../../../lib/session-cookie";
 
 export const dynamic = "force-dynamic";
 
@@ -60,6 +61,7 @@ export async function POST(request: Request) {
 
   try {
     if (remote) {
+      const editorName = await getLoggedInEditorName(request);
       await applyRemoteEdit(
         slug,
         ({ collectionOverrides }) => {
@@ -68,7 +70,7 @@ export async function POST(request: Request) {
             collectionOverrides[filename] = { ...existing, order: index + 1 };
           });
         },
-        `Editor: reorder photos in ${slug}`,
+        `Editor${editorName ? ` (${editorName})` : ""}: reorder photos in ${slug}`,
       );
     } else {
       const overrides = await readOverrides();

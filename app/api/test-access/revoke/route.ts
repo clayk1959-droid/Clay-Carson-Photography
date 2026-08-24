@@ -1,6 +1,6 @@
 import { getPool } from "../../../../lib/db";
 import { isPrivateAccessEnabled } from "../../../../lib/private-access-mode";
-import { SESSION_COOKIE_NAME, isValidSessionCookieValue } from "../../../../lib/session-cookie";
+import { SESSION_COOKIE_NAME, verifySessionCookieValue } from "../../../../lib/session-cookie";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +13,7 @@ function readCookie(request: Request, name: string): string | undefined {
 export async function POST(request: Request) {
   if (!isPrivateAccessEnabled()) return new Response("Not found", { status: 404 });
 
-  const loggedIn = await isValidSessionCookieValue(readCookie(request, SESSION_COOKIE_NAME));
+  const loggedIn = await verifySessionCookieValue(readCookie(request, SESSION_COOKIE_NAME));
   if (!loggedIn) return new Response("Unauthorized", { status: 401 });
 
   const body = await request.json().catch(() => null);

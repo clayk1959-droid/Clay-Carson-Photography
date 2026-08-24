@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import { isPrivateAccessEnabled } from "../../../lib/private-access-mode";
 import { getPool } from "../../../lib/db";
-import { SESSION_COOKIE_NAME, isValidSessionCookieValue } from "../../../lib/session-cookie";
+import { SESSION_COOKIE_NAME, verifySessionCookieValue } from "../../../lib/session-cookie";
 import { RevokeButton } from "./RevokeButton";
 
 export const dynamic = "force-dynamic";
@@ -34,7 +34,7 @@ export default async function AdminPage() {
   if (!isPrivateAccessEnabled()) notFound();
 
   const cookieStore = await cookies();
-  const loggedIn = await isValidSessionCookieValue(cookieStore.get(SESSION_COOKIE_NAME)?.value);
+  const loggedIn = await verifySessionCookieValue(cookieStore.get(SESSION_COOKIE_NAME)?.value);
   if (!loggedIn) redirect("/test-access/admin-login?redirect=/test-access/admin");
 
   const pool = getPool();

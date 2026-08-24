@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { isRemoteEditorMode } from "../../../lib/editor-mode";
 import { applyPinRemote } from "../../../lib/remote-editor";
+import { getLoggedInEditorName } from "../../../lib/session-cookie";
 
 export const dynamic = "force-dynamic";
 
@@ -44,7 +45,8 @@ export async function POST(request: Request) {
 
   try {
     if (remote) {
-      const { pinned } = await applyPinRemote(slug);
+      const editorName = await getLoggedInEditorName(request);
+      const { pinned } = await applyPinRemote(slug, editorName);
       return Response.json({ ok: true, pinned });
     }
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { SESSION_COOKIE_NAME, isValidSessionCookieValue } from "./lib/session-cookie";
+import { SESSION_COOKIE_NAME, verifySessionCookieValue } from "./lib/session-cookie";
 
 export async function proxy(request: NextRequest) {
   // This is the single line that guarantees zero effect on production:
@@ -10,7 +10,7 @@ export async function proxy(request: NextRequest) {
   }
 
   const cookie = request.cookies.get(SESSION_COOKIE_NAME)?.value;
-  if (await isValidSessionCookieValue(cookie)) {
+  if (await verifySessionCookieValue(cookie)) {
     return NextResponse.next();
   }
 

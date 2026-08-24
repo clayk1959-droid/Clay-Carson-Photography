@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createSessionCookieValue, SESSION_COOKIE_MAX_AGE_SECONDS, SESSION_COOKIE_NAME } from "../../../../lib/session-cookie";
 import { isPrivateAccessEnabled } from "../../../../lib/private-access-mode";
+import { OWNER_NAME } from "../../../../lib/editor-users";
 
 function timingSafeEqual(a: string, b: string): boolean {
   if (a.length !== b.length) return false;
@@ -40,7 +41,7 @@ export async function POST(request: Request) {
       : "/test-access/admin";
 
   const response = NextResponse.redirect(new URL(destination, request.url), { status: 303 });
-  response.cookies.set(SESSION_COOKIE_NAME, await createSessionCookieValue(), {
+  response.cookies.set(SESSION_COOKIE_NAME, await createSessionCookieValue(OWNER_NAME, expectedPassword!), {
     httpOnly: true,
     secure: true,
     sameSite: "lax",

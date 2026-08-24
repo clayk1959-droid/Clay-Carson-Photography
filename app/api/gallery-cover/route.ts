@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { isRemoteEditorMode } from "../../../lib/editor-mode";
 import { applyRemoteEdit } from "../../../lib/remote-editor";
+import { getLoggedInEditorName } from "../../../lib/session-cookie";
 
 export const dynamic = "force-dynamic";
 
@@ -62,6 +63,7 @@ export async function POST(request: Request) {
 
   try {
     if (remote) {
+      const editorName = await getLoggedInEditorName(request);
       await applyRemoteEdit(
         slug,
         ({ coverOverrides }) => {
@@ -70,7 +72,7 @@ export async function POST(request: Request) {
           // would silently wipe every time a cover photo changes.
           coverOverrides[slug] = { ...(coverOverrides[slug] ?? {}), coverPhoto: filename, coverPosition: position };
         },
-        `Editor: set cover of ${slug} to ${filename}`,
+        `Editor${editorName ? ` (${editorName})` : ""}: set cover of ${slug} to ${filename}`,
       );
     } else {
       const overrides = await readOverrides();

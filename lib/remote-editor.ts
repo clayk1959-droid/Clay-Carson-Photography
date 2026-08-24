@@ -132,7 +132,7 @@ export async function applyRemoteEdit(
 // card sits relative to each other, so the whole cards array gets
 // re-sorted with the same function the local sync script uses, rather than
 // patched in place.
-export async function applyPinRemote(slug: string): Promise<{ pinned: boolean }> {
+export async function applyPinRemote(slug: string, editorName: string | null): Promise<{ pinned: boolean }> {
   const title = await getCollectionTitle(slug);
   if (!title) throw new Error("Unknown collection");
 
@@ -156,7 +156,7 @@ export async function applyPinRemote(slug: string): Promise<{ pinned: boolean }>
       { path: COVER_OVERRIDES_PATH, content: `${JSON.stringify(sortedEntries(coverOverrides), null, 2)}\n` },
       { path: INDEX_PATH, content: `${JSON.stringify(indexData, null, 2)}\n` },
     ],
-    nowPinned ? `Editor: pin ${slug} to top` : `Editor: unpin ${slug}`,
+    `Editor${editorName ? ` (${editorName})` : ""}: ${nowPinned ? `pin ${slug} to top` : `unpin ${slug}`}`,
   );
 
   return { pinned: nowPinned };

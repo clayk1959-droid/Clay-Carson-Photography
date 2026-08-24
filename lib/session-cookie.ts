@@ -1,22 +1,18 @@
 // A stateless, signed session cookie for the password-protected remote
-// editor -- no session store or database, just an HMAC over an expiry
-// timestamp. Built only with Web Crypto/btoa/atob so it works unchanged in
-// both the Edge middleware runtime and a normal Node API route.
+// editor -- no session store or database, just an HMAC over the logged-in
+// person's name and an expiry timestamp. Built only with Web Crypto/btoa/
+// atob so it works unchanged in both the Edge middleware runtime and a
+// normal Node API route.
 //
-// Reuses EDITOR_PASSWORD itself as the signing key rather than adding a
-// second secret env var -- the whole security model already rests on that
-// one password, so a separate signing secret wouldn't meaningfully change
-// the threat model for a private family site, just add one more value to
-// keep track of.
+// Each person's own password (see editor-users.ts) doubles as their
+// session's signing key rather than adding a separate secret env var --
+// the whole security model already rests on those passwords, and keying
+// the signature by the specific person's own password means changing just
+// one person's password invalidates only their sessions, not everyone's.
+import { findEditorUser } from "./editor-users";
 
 export const SESSION_COOKIE_NAME = "editor_session";
 export const SESSION_COOKIE_MAX_AGE_SECONDS = 30 * 24 * 60 * 60; // 30 days
-
-function getSecret(): string {
-  const value = process.env.EDITOR_PASSWORD;
-  if (!value) throw new Error("Missing required environment variable: EDITOR_PASSWORD");
-  return value;
-}
 
 function toBase64Url(bytes: ArrayBuffer): string {
   let binary = "";
@@ -43,18 +39,38 @@ function timingSafeEqual(a: string, b: string): boolean {
   return result === 0;
 }
 
-export async function createSessionCookieValue(): Promise<string> {
+export async function createSessionCookieValue(name: string, password: string): Promise<string> {
   const expiry = Math.floor(Date.now() / 1000) + SESSION_COOKIE_MAX_AGE_SECONDS;
-  const signature = await hmac(getSecret(), `editor_session:${expiry}`);
-  return `${expiry}.${signature}`;
+  const encodedName = encodeURIComponent(name);
+  const signature = await hmac(password, `editor_session:${encodedName}:${expiry}`);
+  return `${encodedName}.${expiry}.${signature}`;
 }
 
-export async function isValidSessionCookieValue(value: string | undefined | null): Promise<boolean> {
-  if (!value) return false;
-  const [expiryText, signature] = value.split(".");
-  if (!expiryText || !signature) return false;
+// Returns the logged-in person's name if the cookie is valid, null
+// otherwise -- callers that only need a yes/no check can just test
+// truthiness.
+export async function verifySessionCookieValue(value: string | undefined | null): Promise<string | null> {
+  if (!value) return null;
+  const [encodedName, expiryText, signature] = value.split(".");
+  if (!encodedName || !expiryText || !signature) return null;
   const expiry = Number(expiryText);
-  if (!Number.isFinite(expiry) || expiry < Math.floor(Date.now() / 1000)) return false;
-  const expected = await hmac(getSecret(), `editor_session:${expiry}`);
-  return timingSafeEqual(expected, signature);
+  if (!Number.isFinite(expiry) || expiry < Math.floor(Date.now() / 1000)) return null;
+
+  const user = findEditorUser(decodeURIComponent(encodedName));
+  if (!user) return null;
+
+  const expected = await hmac(user.password, `editor_session:${encodedName}:${expiry}`);
+  return timingSafeEqual(expected, signature) ? user.name : null;
+}
+
+export function readSessionCookieFromRequest(request: Request): string | undefined {
+  const header = request.headers.get("cookie") ?? "";
+  const match = header.match(new RegExp(`${SESSION_COOKIE_NAME}=([^;]+)`));
+  return match?.[1];
+}
+
+// Convenience for the editor's write routes, which want to know who's
+// making a change so commit messages can say so.
+export async function getLoggedInEditorName(request: Request): Promise<string | null> {
+  return verifySessionCookieValue(readSessionCookieFromRequest(request));
 }
