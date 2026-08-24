@@ -1,20 +1,6 @@
 {
   "cards": [
     {
-      "slug": "janet-buys-a-car",
-      "title": "Janet Buys a car",
-      "person": [
-        "Janet Carson"
-      ],
-      "event": [
-        "Janet buys a car"
-      ],
-      "count": 13,
-      "pinned": false,
-      "coverBasename": "janet-buys-a-car-12.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "rhine-river-cruise",
       "title": "Rhine River Cruise",
       "person": [],
@@ -54,6 +40,20 @@
       "count": 62,
       "pinned": false,
       "coverBasename": "nova-scotia-11.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "janet-buys-a-car",
+      "title": "Janet Buys a car",
+      "person": [
+        "Janet Carson"
+      ],
+      "event": [
+        "Janet buys a car"
+      ],
+      "count": 13,
+      "pinned": false,
+      "coverBasename": "janet-buys-a-car-12.jpg",
       "coverPosition": "center center"
     }
   ],
