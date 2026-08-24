@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Sunday, August 23, 2026
+Last updated: Monday, August 24, 2026
 
 ## Current status
 
@@ -14,6 +14,11 @@ Last updated: Sunday, August 23, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 115 — Monday, August 24, 2026
+
+- Galleries index now sorts newest gallery first, based on each gallery's actual folder creation date — captured once the first time a gallery is synced and frozen from then on, so it can't shift later even if the folder itself gets touched again. Existing galleries were backfilled from their current folder dates.
+- Added a "Nudge to Top" toggle on each gallery card, editor-mode only (not visible on the public site) — for when a significant update to an older gallery should surface it again. Nudged galleries sort above everything else, most-recently-nudged on top; click again to un-nudge.
 
 ### Version 114 — Sunday, August 23, 2026
 

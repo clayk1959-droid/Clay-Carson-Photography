@@ -413,6 +413,13 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 115</span><span class="version-date">Monday, August 24, 2026</span></div>
+      <ul>
+        <li>Galleries index now sorts newest gallery first, based on each gallery's actual folder creation date — captured once the first time a gallery is synced and frozen from then on, so it can't shift later even if the folder itself gets touched again. Existing galleries were backfilled from their current folder dates.</li>
+        <li>Added a "Nudge to Top" toggle on each gallery card, editor-mode only (not visible on the public site) — for when a significant update to an older gallery should surface it again. Nudged galleries sort above everything else, most-recently-nudged on top; click again to un-nudge.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 114</span><span class="version-date">Sunday, August 23, 2026</span></div>
       <ul>
         <li>Fixed the editor's "Reorder Photos" drag-to-sort grid not working at all on touch devices (iPad). It was built on the browser's native drag-and-drop, which is mouse-only and simply never activates on touch — rebuilt on a touch-and-mouse-compatible input system instead. Verified with both a real mouse drag and a simulated touch drag; also hardened against a rare error that could otherwise interrupt a drag mid-gesture.</li>
