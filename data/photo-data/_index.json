@@ -1,6 +1,18 @@
 {
   "cards": [
     {
+      "slug": "norway-cruise",
+      "title": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "count": 93,
+      "pinned": false,
+      "coverBasename": "norway-cruise-91.jpg",
+      "coverPosition": "left center"
+    },
+    {
       "slug": "rhine-river-cruise",
       "title": "Rhine River Cruise",
       "person": [],
@@ -23,18 +35,6 @@
       "pinned": true,
       "coverBasename": "janet-buys-a-car-12.jpg",
       "coverPosition": "center center"
-    },
-    {
-      "slug": "norway-cruise",
-      "title": "Norway Cruise",
-      "person": [],
-      "event": [
-        "Norway Cruise"
-      ],
-      "count": 93,
-      "pinned": false,
-      "coverBasename": "norway-cruise-91.jpg",
-      "coverPosition": "left center"
     },
     {
       "slug": "nova-scotia",
