@@ -10,7 +10,7 @@
 // only their own sessions, not everyone else's.
 export type EditorUser = { name: string; password: string };
 
-export const OWNER_NAME = "Clay";
+export const OWNER_NAME = "clayk1959@gmail.com";
 
 function timingSafeEqual(a: string, b: string): boolean {
   if (a.length !== b.length) return false;
