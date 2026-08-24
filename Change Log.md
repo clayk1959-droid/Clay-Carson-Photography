@@ -15,6 +15,10 @@ Last updated: Sunday, August 23, 2026
 
 ## Version history
 
+### Version 114 — Sunday, August 23, 2026
+
+- Fixed the editor's "Reorder Photos" drag-to-sort grid not working at all on touch devices (iPad). It was built on the browser's native drag-and-drop, which is mouse-only and simply never activates on touch — rebuilt on a touch-and-mouse-compatible input system instead. Verified with both a real mouse drag and a simulated touch drag; also hardened against a rare error that could otherwise interrupt a drag mid-gesture.
+
 ### Version 113 — Sunday, August 23, 2026
 
 - Refined the Version 112 iPad fix: it helped (button went from fully off-screen to mostly visible) but a real iPad still showed a small residual clip, since iPad Safari's toolbar doesn't collapse as predictably as an iPhone's. Switched to a more conservative measurement (the guaranteed-smallest possible screen size, as if the toolbar is always fully showing) — a few unused pixels when the toolbar happens to be tucked away, but the button can no longer get clipped regardless.
