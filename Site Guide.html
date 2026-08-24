@@ -413,6 +413,19 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 117</span><span class="version-date">Monday, August 24, 2026</span></div>
+      <ul>
+        <li>Fixed the cover-photo picker silently wiping a gallery's pin/creation-date info (added in Version 115) any time a cover photo was changed afterward — it was overwriting that gallery's whole metadata record instead of updating just the cover fields. Restored the dates that had been wiped; can't recur now.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 116</span><span class="version-date">Monday, August 24, 2026</span></div>
+      <ul>
+        <li>Fixed the "Reorder Photos" grid showing all the thumbnails jumbled and overlapping on mobile, in both orientations — a CSS sizing conflict was collapsing every row down to a sliver instead of the photo's actual height. Switched to a more old-fashioned but bulletproof way of keeping the thumbnails square that doesn't have that problem.</li>
+        <li>Fixed dragging to reorder also swallowing ordinary scrolling on touch — any swipe was being treated as picking up a photo, which is what caused the jumbling above to look like it was happening live as you tried to scroll. A quick swipe now scrolls normally; holding still on a photo for a moment is what picks it up to drag.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 115</span><span class="version-date">Monday, August 24, 2026</span></div>
       <ul>
         <li>Galleries index now sorts newest gallery first, based on each gallery's actual folder creation date — captured once the first time a gallery is synced and frozen from then on, so it can't shift later even if the folder itself gets touched again. Existing galleries were backfilled from their current folder dates.</li>

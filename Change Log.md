@@ -15,6 +15,15 @@ Last updated: Monday, August 24, 2026
 
 ## Version history
 
+### Version 117 — Monday, August 24, 2026
+
+- Fixed the cover-photo picker silently wiping a gallery's pin/creation-date info (added in Version 115) any time a cover photo was changed afterward — it was overwriting that gallery's whole metadata record instead of updating just the cover fields. Restored the dates that had been wiped; can't recur now.
+
+### Version 116 — Monday, August 24, 2026
+
+- Fixed the "Reorder Photos" grid showing all the thumbnails jumbled and overlapping on mobile, in both orientations — a CSS sizing conflict was collapsing every row down to a sliver instead of the photo's actual height. Switched to a more old-fashioned but bulletproof way of keeping the thumbnails square that doesn't have that problem.
+- Fixed dragging to reorder also swallowing ordinary scrolling on touch — any swipe was being treated as picking up a photo, which is what caused the jumbling above to look like it was happening live as you tried to scroll. A quick swipe now scrolls normally; holding still on a photo for a moment is what picks it up to drag.
+
 ### Version 115 — Monday, August 24, 2026
 
 - Galleries index now sorts newest gallery first, based on each gallery's actual folder creation date — captured once the first time a gallery is synced and frozen from then on, so it can't shift later even if the folder itself gets touched again. Existing galleries were backfilled from their current folder dates.
