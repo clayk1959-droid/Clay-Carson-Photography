@@ -413,6 +413,12 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 113</span><span class="version-date">Sunday, August 23, 2026</span></div>
+      <ul>
+        <li>Refined the Version 112 iPad fix: it helped (button went from fully off-screen to mostly visible) but a real iPad still showed a small residual clip, since iPad Safari's toolbar doesn't collapse as predictably as an iPhone's. Switched to a more conservative measurement (the guaranteed-smallest possible screen size, as if the toolbar is always fully showing) — a few unused pixels when the toolbar happens to be tucked away, but the button can no longer get clipped regardless.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 112</span><span class="version-date">Sunday, August 23, 2026</span></div>
       <ul>
         <li>Fixed the homepage "Start Looking" button getting pushed off the bottom of the screen on an iPad. The hero's height was based on a browser measurement that Mobile Safari calculates using the toolbar-collapsed screen size, taller than what's actually visible with the address bar showing — already fixed for phones, but a portrait iPad is wider than the breakpoint that fix was scoped to, so it slipped through. Fixed at the shared root instead of patching another breakpoint, so it can't recur at any width; phone sizing is untouched.</li>

@@ -15,6 +15,10 @@ Last updated: Sunday, August 23, 2026
 
 ## Version history
 
+### Version 113 — Sunday, August 23, 2026
+
+- Refined the Version 112 iPad fix: it helped (button went from fully off-screen to mostly visible) but a real iPad still showed a small residual clip, since iPad Safari's toolbar doesn't collapse as predictably as an iPhone's. Switched to a more conservative measurement (the guaranteed-smallest possible screen size, as if the toolbar is always fully showing) — a few unused pixels when the toolbar happens to be tucked away, but the button can no longer get clipped regardless.
+
 ### Version 112 — Sunday, August 23, 2026
 
 - Fixed the homepage "Start Looking" button getting pushed off the bottom of the screen on an iPad. The hero's height was based on a browser measurement that Mobile Safari calculates using the toolbar-collapsed screen size, taller than what's actually visible with the address bar showing — already fixed for phones, but a portrait iPad is wider than the breakpoint that fix was scoped to, so it slipped through. Fixed at the shared root instead of patching another breakpoint, so it can't recur at any width; phone sizing is untouched.
