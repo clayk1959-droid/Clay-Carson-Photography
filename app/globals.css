@@ -22,13 +22,17 @@ a { color: inherit; text-decoration: none; }
 .nav-menu a:hover { color: #171a17; background: #f5f2eb; }
 .inquire { justify-self: end; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; border-bottom: 1px solid #6e726c; padding-bottom: 5px; }
 .inquire span { margin-left: 8px; }
-/* dvh (not vh) everywhere -- Mobile Safari sizes 100vh off the
+/* svh (not vh) everywhere -- Mobile Safari sizes 100vh off the
    collapsed-toolbar viewport, taller than what's actually visible with the
    address bar showing, which pushed the CTA button below the real fold on
    an iPad (portrait iPads are wider than the 800px breakpoint the phone fix
-   below was scoped to, so they fell through to the old vh behavior). dvh
-   tracks the real visible viewport and is a no-op on desktop/non-Safari. */
-.hero { position: relative; height: calc(100dvh - 96px); min-height: 620px; overflow: hidden; color: white; background: #0c0d0c; }
+   below was scoped to, so they fell through to the old vh behavior). svh is
+   the guaranteed-smallest viewport size (as if chrome is always fully
+   shown) -- a few unused pixels when the chrome happens to be collapsed,
+   but never clips the button. Tried dvh (viewport that tracks the current
+   chrome state live) first; iPad's chrome didn't collapse predictably
+   enough for it to fully solve this. No-op on desktop/non-Safari. */
+.hero { position: relative; height: calc(100svh - 96px); min-height: 620px; overflow: hidden; color: white; background: #0c0d0c; }
 .hero-photos { position: absolute; inset: 0; touch-action: pan-y; }
 .hero-photos-mobile { display: none; }
 /* Matches RotatingHero.tsx's MOBILE_QUERY exactly -- a portrait tablet
