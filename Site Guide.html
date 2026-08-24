@@ -413,6 +413,18 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 120</span><span class="version-date">Monday, August 24, 2026</span></div>
+      <ul>
+        <li>Fixed editor login breaking entirely after switching to email addresses in Version 119 — the session cookie's internal format used a period as a separator, and an email address like "barthur.ar@gmail.com" contains a literal period that corrupted it. Fixed the underlying format so this can't happen regardless of what a login name looks like; verified an email-address login now works correctly start to finish.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 119</span><span class="version-date">Monday, August 24, 2026</span></div>
+      <ul>
+        <li>Editor login names switched from first names to email addresses (clayk1959@gmail.com / barthur.ar@gmail.com), per request.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 118</span><span class="version-date">Monday, August 24, 2026</span></div>
       <ul>
         <li>Editor collaborators now get their own name + password instead of sharing your one password. Two real benefits beyond not sharing a password: changing one person's password only signs that person out, not everyone; and every edit made through the editor now records who made it, instead of every action looking identical to your own.</li>

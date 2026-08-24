@@ -15,6 +15,14 @@ Last updated: Monday, August 24, 2026
 
 ## Version history
 
+### Version 120 — Monday, August 24, 2026
+
+- Fixed editor login breaking entirely after switching to email addresses in Version 119 — the session cookie's internal format used a period as a separator, and an email address like "barthur.ar@gmail.com" contains a literal period that corrupted it. Fixed the underlying format so this can't happen regardless of what a login name looks like; verified an email-address login now works correctly start to finish.
+
+### Version 119 — Monday, August 24, 2026
+
+- Editor login names switched from first names to email addresses (clayk1959@gmail.com / barthur.ar@gmail.com), per request.
+
 ### Version 118 — Monday, August 24, 2026
 
 - Editor collaborators now get their own name + password instead of sharing your one password. Two real benefits beyond not sharing a password: changing one person's password only signs that person out, not everyone; and every edit made through the editor now records who made it, instead of every action looking identical to your own.
