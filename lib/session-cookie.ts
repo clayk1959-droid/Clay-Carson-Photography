@@ -43,7 +43,11 @@ export async function createSessionCookieValue(name: string, password: string): 
   const expiry = Math.floor(Date.now() / 1000) + SESSION_COOKIE_MAX_AGE_SECONDS;
   const encodedName = encodeURIComponent(name);
   const signature = await hmac(password, `editor_session:${encodedName}:${expiry}`);
-  return `${encodedName}.${expiry}.${signature}`;
+  // ":" (not ".") as the delimiter -- encodeURIComponent always escapes ":"
+  // (to "%3A") but leaves "." untouched, and names are now email addresses,
+  // which routinely contain literal periods (e.g. "barthur.ar@gmail.com").
+  // A "." delimiter would silently split the name itself into extra pieces.
+  return `${encodedName}:${expiry}:${signature}`;
 }
 
 // Returns the logged-in person's name if the cookie is valid, null
@@ -51,7 +55,7 @@ export async function createSessionCookieValue(name: string, password: string): 
 // truthiness.
 export async function verifySessionCookieValue(value: string | undefined | null): Promise<string | null> {
   if (!value) return null;
-  const [encodedName, expiryText, signature] = value.split(".");
+  const [encodedName, expiryText, signature] = value.split(":");
   if (!encodedName || !expiryText || !signature) return null;
   const expiry = Number(expiryText);
   if (!Number.isFinite(expiry) || expiry < Math.floor(Date.now() / 1000)) return null;
