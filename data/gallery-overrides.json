@@ -127,11 +127,23 @@
       "order": 43
     }
   },
+  "norway-cruise": {
+    "NORWAY_7.tif": {
+      "caption": "Norway Cruise",
+      "date": "2025-08-16",
+      "order": 91
+    }
+  },
   "nova-scotia": {
     "L1019987.jpg": {
       "caption": "Relaxing in our new digs at Chutch Point",
       "date": "2026-08-17",
       "order": 1
+    },
+    "L1019992.jpg": {
+      "caption": "Nova Scotia",
+      "date": "2026-08-10",
+      "order": 2
     },
     "L1020078.jpg": {
       "caption": "Albert and Karen in front ot ftheir family home",
@@ -144,7 +156,7 @@
     "L1020121.jpg": {
       "caption": "Sandy Cove family home",
       "date": "2026-08-17",
-      "order": 10
+      "order": 9
     },
     "L1020157.jpg": {
       "caption": "L1020157",
@@ -206,6 +218,13 @@
       "caption": "An excuse to rest while climbing lighthouse",
       "date": "2026-08-20",
       "order": 62
+    }
+  },
+  "rhine-river-cruise": {
+    "_DSC0092.jpg": {
+      "caption": "Rhine River Cruise",
+      "date": "2018-08-22",
+      "order": 8
     }
   }
 }
