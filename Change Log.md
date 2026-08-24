@@ -15,6 +15,10 @@ Last updated: Monday, August 24, 2026
 
 ## Version history
 
+### Version 118 — Monday, August 24, 2026
+
+- Editor collaborators now get their own name + password instead of sharing your one password. Two real benefits beyond not sharing a password: changing one person's password only signs that person out, not everyone; and every edit made through the editor now records who made it, instead of every action looking identical to your own.
+
 ### Version 117 — Monday, August 24, 2026
 
 - Fixed the cover-photo picker silently wiping a gallery's pin/creation-date info (added in Version 115) any time a cover photo was changed afterward — it was overwriting that gallery's whole metadata record instead of updating just the cover fields. Restored the dates that had been wiped; can't recur now.
