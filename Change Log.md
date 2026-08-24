@@ -15,6 +15,10 @@ Last updated: Sunday, August 23, 2026
 
 ## Version history
 
+### Version 111 — Sunday, August 23, 2026
+
+- Shrunk the Galleries index cards (cover photo, title, photo count) on desktop — they were oversized, so roughly halved their size (3 columns to 6) with the title and count text scaled down to match. Mobile and landscape-phone are untouched, both already have their own separately-tuned sizing.
+
 ### Version 110 — Sunday, August 23, 2026
 
 - Reverted the text alert back to the carrier email-to-text gateway (see Version 108/109) after a push-notification alternative (ntfy) also failed to actually land on the phone, for reasons that weren't worth chasing further. Not guaranteed to arrive, but free, simple, and the email notification remains the real, reliable alert either way.
