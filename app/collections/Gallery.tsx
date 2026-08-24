@@ -425,6 +425,18 @@ function ReorderPanel({
   const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
   const dragIndex = useRef<number | null>(null);
   const dragOverIndex = useRef<number | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  // A touch that starts on a thumb is ambiguous -- it could be the start of
+  // a drag, or just a normal scroll swipe that happens to begin on one of
+  // the (nearly wall-to-wall) thumbnails. Committing to "drag" immediately
+  // made every scroll attempt instead cascade a photo through several
+  // positions as the finger moved. Resolved the same way as most touch
+  // reorder UIs: a quick move is a scroll, a held-still press is a drag.
+  const pendingTouchDrag = useRef<{ index: number; startX: number; startY: number; pointerId: number } | null>(
+    null,
+  );
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const activeTouchScroll = useRef<{ pointerId: number; lastY: number } | null>(null);
 
   const byFilename = new Map(photographs.map((photograph) => [photograph.filename, photograph]));
 
@@ -435,6 +447,12 @@ function ReorderPanel({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
+
+  useEffect(() => {
+    return () => {
+      if (longPressTimer.current) clearTimeout(longPressTimer.current);
+    };
+  }, []);
 
   function moveTo(targetIndex: number) {
     const fromIndex = dragIndex.current;
@@ -455,8 +473,7 @@ function ReorderPanel({
   // events targeted at the thumb a drag started on even as the finger
   // moves elsewhere, so hit-testing what's actually under the pointer has
   // to go through elementFromPoint rather than the event's own target.
-  function handlePointerDown(event: React.PointerEvent, index: number) {
-    if (event.pointerType === "mouse" && event.button !== 0) return;
+  function beginDrag(currentTarget: Element, pointerId: number, index: number) {
     dragIndex.current = index;
     dragOverIndex.current = index;
     setDraggingIndex(index);
@@ -464,26 +481,78 @@ function ReorderPanel({
     // events spec, so a failure here (seen in a couple of edge cases) isn't
     // fatal to the drag, just not worth letting crash the whole panel.
     try {
-      event.currentTarget.setPointerCapture(event.pointerId);
+      currentTarget.setPointerCapture(pointerId);
     } catch {
       // Ignored -- see comment above.
     }
   }
 
+  function handlePointerDown(event: React.PointerEvent, index: number) {
+    if (event.pointerType === "mouse") {
+      if (event.button !== 0) return;
+      beginDrag(event.currentTarget, event.pointerId, index);
+      return;
+    }
+    // Touch/pen: don't commit to a drag immediately -- a quick swipe
+    // through this same starting point is far more often someone trying to
+    // scroll the grid than pick up a photo. Wait for either a hold (starts
+    // the drag) or enough movement (treated as a scroll instead, below).
+    const currentTarget = event.currentTarget;
+    const pointerId = event.pointerId;
+    pendingTouchDrag.current = { index, startX: event.clientX, startY: event.clientY, pointerId };
+    longPressTimer.current = setTimeout(() => {
+      if (!pendingTouchDrag.current || pendingTouchDrag.current.pointerId !== pointerId) return;
+      pendingTouchDrag.current = null;
+      beginDrag(currentTarget, pointerId, index);
+    }, 160);
+  }
+
   function handlePointerMove(event: React.PointerEvent) {
-    if (dragIndex.current === null) return;
-    event.preventDefault();
-    const target = document.elementFromPoint(event.clientX, event.clientY);
-    const thumbEl = target?.closest<HTMLElement>("[data-reorder-index]");
-    if (!thumbEl) return;
-    const overIndex = Number(thumbEl.dataset.reorderIndex);
-    if (!Number.isNaN(overIndex) && dragOverIndex.current !== overIndex) {
-      dragOverIndex.current = overIndex;
-      moveTo(overIndex);
+    if (dragIndex.current !== null) {
+      event.preventDefault();
+      const target = document.elementFromPoint(event.clientX, event.clientY);
+      const thumbEl = target?.closest<HTMLElement>("[data-reorder-index]");
+      if (!thumbEl) return;
+      const overIndex = Number(thumbEl.dataset.reorderIndex);
+      if (!Number.isNaN(overIndex) && dragOverIndex.current !== overIndex) {
+        dragOverIndex.current = overIndex;
+        moveTo(overIndex);
+      }
+      return;
+    }
+
+    const pending = pendingTouchDrag.current;
+    if (pending && pending.pointerId === event.pointerId) {
+      const dx = event.clientX - pending.startX;
+      const dy = event.clientY - pending.startY;
+      if (Math.hypot(dx, dy) > 10) {
+        // Moved enough before the hold timer fired -- this is a scroll, not
+        // a drag. The grid's own touch scrolling is off (touch-action:none,
+        // needed so a real drag can't be hijacked by it), so it's driven by
+        // hand from here for the rest of this gesture.
+        if (longPressTimer.current) clearTimeout(longPressTimer.current);
+        pendingTouchDrag.current = null;
+        activeTouchScroll.current = { pointerId: event.pointerId, lastY: event.clientY };
+        if (gridRef.current) gridRef.current.scrollTop -= dy;
+      }
+      return;
+    }
+
+    const scroll = activeTouchScroll.current;
+    if (scroll && scroll.pointerId === event.pointerId && gridRef.current) {
+      gridRef.current.scrollTop -= event.clientY - scroll.lastY;
+      scroll.lastY = event.clientY;
     }
   }
 
   function handlePointerUp(event: React.PointerEvent) {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+    pendingTouchDrag.current = null;
+    if (activeTouchScroll.current?.pointerId === event.pointerId) activeTouchScroll.current = null;
+
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
@@ -539,7 +608,7 @@ function ReorderPanel({
             </button>
           </div>
         </div>
-        <div className="reorder-grid">
+        <div className="reorder-grid" ref={gridRef}>
           {order.map((filename, index) => {
             const photograph = byFilename.get(filename);
             if (!photograph) return null;
