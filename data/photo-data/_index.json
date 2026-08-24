@@ -6,7 +6,7 @@
       "person": [],
       "event": [],
       "count": 21,
-      "pinned": false,
+      "pinned": true,
       "coverBasename": "rhine-river-cruise-10.jpg",
       "coverPosition": "center center"
     },
@@ -20,9 +20,21 @@
         "Janet buys a car"
       ],
       "count": 13,
-      "pinned": false,
+      "pinned": true,
       "coverBasename": "janet-buys-a-car-12.jpg",
       "coverPosition": "center center"
+    },
+    {
+      "slug": "norway-cruise",
+      "title": "Norway Cruise",
+      "person": [],
+      "event": [
+        "Norway Cruise"
+      ],
+      "count": 93,
+      "pinned": false,
+      "coverBasename": "norway-cruise-91.jpg",
+      "coverPosition": "left center"
     },
     {
       "slug": "nova-scotia",
@@ -43,18 +55,6 @@
       "pinned": false,
       "coverBasename": "nova-scotia-11.jpg",
       "coverPosition": "center center"
-    },
-    {
-      "slug": "norway-cruise",
-      "title": "Norway Cruise",
-      "person": [],
-      "event": [
-        "Norway Cruise"
-      ],
-      "count": 93,
-      "pinned": false,
-      "coverBasename": "norway-cruise-91.jpg",
-      "coverPosition": "left center"
     }
   ],
   "photos": [

@@ -65,13 +65,16 @@ export async function POST(request: Request) {
       await applyRemoteEdit(
         slug,
         ({ coverOverrides }) => {
-          coverOverrides[slug] = { coverPhoto: filename, coverPosition: position };
+          // Merge, don't replace -- this object also carries firstSyncedAt
+          // and pinnedAt (set elsewhere), which a wholesale overwrite here
+          // would silently wipe every time a cover photo changes.
+          coverOverrides[slug] = { ...(coverOverrides[slug] ?? {}), coverPhoto: filename, coverPosition: position };
         },
         `Editor: set cover of ${slug} to ${filename}`,
       );
     } else {
       const overrides = await readOverrides();
-      overrides[slug] = { coverPhoto: filename, coverPosition: position };
+      overrides[slug] = { ...(overrides[slug] ?? {}), coverPhoto: filename, coverPosition: position };
 
       await mkdir(path.dirname(overridesPath), { recursive: true });
       await writeFile(overridesPath, `${JSON.stringify(overrides, null, 2)}\n`, "utf8");

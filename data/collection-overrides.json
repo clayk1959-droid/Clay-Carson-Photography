@@ -7,15 +7,18 @@
   },
   "norway-cruise": {
     "coverPhoto": "NORWAY_7.tif",
-    "coverPosition": "left center"
+    "coverPosition": "left center",
+    "firstSyncedAt": "2026-08-21T02:02:02.000Z"
   },
   "nova-scotia": {
     "coverPhoto": "L1020121.jpg",
-    "coverPosition": "center center"
+    "coverPosition": "center center",
+    "firstSyncedAt": "2026-08-17T19:08:39.000Z"
   },
   "rhine-river-cruise": {
     "coverPhoto": "_DSC0210.jpg",
     "coverPosition": "center center",
-    "pinnedAt": "2026-08-24T20:38:00.064Z"
+    "pinnedAt": "2026-08-24T20:38:00.064Z",
+    "firstSyncedAt": "2026-08-21T01:59:34.000Z"
   }
 }
