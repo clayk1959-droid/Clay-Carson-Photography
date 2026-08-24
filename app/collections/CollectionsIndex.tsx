@@ -8,6 +8,7 @@ type CollectionCard = {
   person: string[];
   event: string[];
   count: number;
+  pinned: boolean;
   coverBasename: string;
   coverPosition: string;
 };
@@ -26,7 +27,15 @@ type IndexPhoto = {
 };
 
 // An empty selection means "All" — no separate All state to keep in sync.
-export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; photos: IndexPhoto[] }) {
+export function CollectionsIndex({
+  cards,
+  photos,
+  editable = false,
+}: {
+  cards: CollectionCard[];
+  photos: IndexPhoto[];
+  editable?: boolean;
+}) {
   const [selectedPeople, setSelectedPeople] = useState<string[]>([]);
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
@@ -143,6 +152,7 @@ export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; p
                   alt={`${card.title} gallery`}
                   style={{ objectPosition: card.coverPosition }}
                 />
+                {editable && <PinButton slug={card.slug} initiallyPinned={card.pinned} />}
               </div>
               <div className="collection-details">
                 <div>
@@ -165,6 +175,47 @@ export function CollectionsIndex({ cards, photos }: { cards: CollectionCard[]; p
         />
       )}
     </>
+  );
+}
+
+function PinButton({ slug, initiallyPinned }: { slug: string; initiallyPinned: boolean }) {
+  const [pinned, setPinned] = useState(initiallyPinned);
+  const [busy, setBusy] = useState(false);
+
+  async function toggle(event: React.MouseEvent) {
+    // The whole card is a link to the gallery -- this button sits on top
+    // of it and must never trigger that navigation.
+    event.preventDefault();
+    event.stopPropagation();
+    if (busy) return;
+    setBusy(true);
+    try {
+      const response = await fetch("/api/collection-pin", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ slug }),
+      });
+      if (!response.ok) throw new Error(await response.text());
+      const body = await response.json();
+      setPinned(body.pinned);
+    } catch {
+      // Left as-is -- the button reverting to its prior state (nothing
+      // changed) is feedback enough for a low-stakes editor action.
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      className={pinned ? "card-pin-button is-pinned" : "card-pin-button"}
+      onClick={toggle}
+      disabled={busy}
+      title={pinned ? "Pinned to top — click to unpin" : "Nudge to top of the Galleries list"}
+    >
+      {pinned ? "Pinned" : "Nudge to Top"}
+    </button>
   );
 }
 

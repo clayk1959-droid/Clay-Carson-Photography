@@ -9,12 +9,17 @@
 import { getFileContent, commitFiles } from "./github-commit";
 // Plain JS module, shared with scripts/sync-gallery.mjs so remote edits can
 // never compute a different result than a local sync.
-import { computeDisplayOrder, computeIndexCard, computeIndexPhotos } from "../scripts/lib/photo-ranking.mjs";
+import {
+  computeDisplayOrder,
+  computeIndexCard,
+  computeIndexPhotos,
+  sortIndexCards,
+} from "../scripts/lib/photo-ranking.mjs";
 
 export type PhotoOverride = { caption?: string; date?: string; order?: number; hidden?: boolean };
 export type Overrides = Record<string, Record<string, PhotoOverride>>;
 export type CollectionOverrides = Record<string, PhotoOverride>;
-export type CoverOverride = { coverPhoto?: string; coverPosition?: string };
+export type CoverOverride = { coverPhoto?: string; coverPosition?: string; firstSyncedAt?: string; pinnedAt?: string };
 export type CoverOverrides = Record<string, CoverOverride>;
 export type PhotographDataEntry = {
   filename: string;
@@ -120,4 +125,39 @@ export async function applyRemoteEdit(
     ],
     commitMessage,
   );
+}
+
+// Toggles a collection's "nudge to top" pin. Unlike applyRemoteEdit above,
+// this doesn't touch a single card's contents -- it changes where every
+// card sits relative to each other, so the whole cards array gets
+// re-sorted with the same function the local sync script uses, rather than
+// patched in place.
+export async function applyPinRemote(slug: string): Promise<{ pinned: boolean }> {
+  const title = await getCollectionTitle(slug);
+  if (!title) throw new Error("Unknown collection");
+
+  const coverOverrides = await readJson<CoverOverrides>(COVER_OVERRIDES_PATH, {});
+  const indexData = await readJson<{ cards: { slug: string }[]; photos: unknown[] }>(INDEX_PATH, {
+    cards: [],
+    photos: [],
+  });
+
+  const existing = coverOverrides[slug] ?? {};
+  const nowPinned = !existing.pinnedAt;
+  coverOverrides[slug] = nowPinned
+    ? { ...existing, pinnedAt: new Date().toISOString() }
+    : { ...existing, pinnedAt: undefined };
+  if (!nowPinned) delete coverOverrides[slug].pinnedAt;
+
+  indexData.cards = sortIndexCards(indexData.cards, coverOverrides);
+
+  await commitFiles(
+    [
+      { path: COVER_OVERRIDES_PATH, content: `${JSON.stringify(sortedEntries(coverOverrides), null, 2)}\n` },
+      { path: INDEX_PATH, content: `${JSON.stringify(indexData, null, 2)}\n` },
+    ],
+    nowPinned ? `Editor: pin ${slug} to top` : `Editor: unpin ${slug}`,
+  );
+
+  return { pinned: nowPinned };
 }

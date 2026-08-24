@@ -6,7 +6,7 @@ import { promisify } from "node:util";
 import sharp from "sharp";
 import { toSlug, toComponentName } from "./lib/naming.mjs";
 import { formatDate } from "./lib/format-date.mjs";
-import { computeDisplayOrder, computeIndexCard, computeIndexPhotos } from "./lib/photo-ranking.mjs";
+import { computeDisplayOrder, computeIndexCard, computeIndexPhotos, sortIndexCards } from "./lib/photo-ranking.mjs";
 
 // This Mac has 8GB of RAM, and originals can run 50+ megapixels -- sharp's
 // own operation cache and multi-threaded pipeline (both outside Node's JS
@@ -358,6 +358,22 @@ for (const collection of collections) {
     continue;
   }
 
+  // Captured once, the first time a collection is ever synced, then frozen
+  // -- this is what the Collections index sorts newest-first by. Reading
+  // birthtime fresh every sync instead would seem equivalent day-to-day,
+  // but would silently reset to "now" if the folder were ever recreated
+  // (moved, restored from a backup, reorganized), quietly reshuffling the
+  // whole index. Existing collections synced before this feature existed
+  // get backfilled from their current birthtime on their next sync -- the
+  // best available stand-in for a real historical record.
+  if (!collectionCoverOverrides[collection.slug]?.firstSyncedAt) {
+    const { birthtime } = await stat(sourceDirectory);
+    collectionCoverOverrides[collection.slug] = {
+      ...(collectionCoverOverrides[collection.slug] ?? {}),
+      firstSyncedAt: birthtime.toISOString(),
+    };
+  }
+
   const fullDirectory = path.join(root, "public", "galleries", collection.slug);
   const thumbnailDirectory = path.join(root, "public", "gallery-thumbnails", collection.slug);
   const cacheFullDirectory = path.join(cacheRoot, collection.slug, "full");
@@ -567,14 +583,17 @@ for (const collection of collections) {
   );
 }
 
+await writeFile(collectionCoverOverridesPath, `${JSON.stringify(collectionCoverOverrides, null, 2)}\n`);
+
 await writeFile(
   path.join(photoDataRoot, "_index.json"),
-  `${JSON.stringify({ cards: indexCards, photos: indexPhotos }, null, 2)}\n`,
+  `${JSON.stringify({ cards: sortIndexCards(indexCards, collectionCoverOverrides), photos: indexPhotos }, null, 2)}\n`,
 );
 
 const indexPage = `import { SiteHeader } from "../SiteHeader";
 import { SiteFooter } from "../SiteFooter";
 import { CollectionsIndex } from "./CollectionsIndex";
+import { isEditorEnabled } from "../../lib/editor-mode";
 import indexData from "../../data/photo-data/_index.json";
 
 export default function CollectionsPage() {
@@ -583,7 +602,7 @@ export default function CollectionsPage() {
       <SiteHeader showHome />
       <section className="collections-layout">
         <h1 className="page-title">Galleries</h1>
-        <CollectionsIndex cards={indexData.cards} photos={indexData.photos} />
+        <CollectionsIndex cards={indexData.cards} photos={indexData.photos} editable={isEditorEnabled()} />
       </section>
 
       <SiteFooter />

@@ -54,9 +54,38 @@ export function computeIndexCard({ slug, title, photographData, collectionOverri
     person: [...collectionPeople].sort(),
     event: [...collectionEvents].sort(),
     count: displayOrder.length,
+    pinned: Boolean(coverOverride.pinnedAt),
     coverBasename: `${slug}-${String(coverNumber).padStart(2, "0")}.jpg`,
     coverPosition: coverOverride.coverPosition ?? "center center",
   };
+}
+
+// Order for the Collections-index cards: pinned collections first (most
+// recently pinned on top, so nudging a newer one above an older pin just
+// works), then everything else newest-created first. A collection with no
+// recorded creation date yet (shouldn't happen after a collection's first
+// sync, but covers a stale/partial overrides file) sinks to the very
+// bottom rather than crashing or landing somewhere arbitrary.
+export function sortIndexCards(cards, collectionMeta) {
+  const timeOf = (value) => (value ? new Date(value).getTime() : null);
+  return [...cards]
+    .map((card, index) => ({ card, index, meta: collectionMeta[card.slug] ?? {} }))
+    .sort((a, b) => {
+      const aPinned = timeOf(a.meta.pinnedAt);
+      const bPinned = timeOf(b.meta.pinnedAt);
+      if (aPinned !== null && bPinned !== null) return bPinned - aPinned;
+      if (aPinned !== null) return -1;
+      if (bPinned !== null) return 1;
+
+      const aCreated = timeOf(a.meta.firstSyncedAt);
+      const bCreated = timeOf(b.meta.firstSyncedAt);
+      if (aCreated !== null && bCreated !== null) return bCreated - aCreated;
+      if (aCreated !== null) return -1;
+      if (bCreated !== null) return 1;
+
+      return a.index - b.index; // stable fallback when neither has a date
+    })
+    .map((entry) => entry.card);
 }
 
 // Flat list of every visible, tagged photo in the collection, for the
