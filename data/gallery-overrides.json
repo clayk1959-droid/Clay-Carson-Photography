@@ -127,6 +127,13 @@
       "order": 43
     }
   },
+  "norway-cruise": {
+    "NORWAY_7.tif": {
+      "caption": "Norway Cruise",
+      "date": "2025-08-16",
+      "order": 91
+    }
+  },
   "nova-scotia": {
     "L1019987.jpg": {
       "caption": "Relaxing in our new digs at Chutch Point",
