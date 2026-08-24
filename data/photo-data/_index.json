@@ -1,16 +1,6 @@
 {
   "cards": [
     {
-      "slug": "rhine-river-cruise",
-      "title": "Rhine River Cruise",
-      "person": [],
-      "event": [],
-      "count": 21,
-      "pinned": false,
-      "coverBasename": "rhine-river-cruise-08.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "nova-scotia",
       "title": "Nova Scotia",
       "person": [
@@ -54,6 +44,16 @@
       "count": 93,
       "pinned": false,
       "coverBasename": "norway-cruise-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "rhine-river-cruise",
+      "title": "Rhine River Cruise",
+      "person": [],
+      "event": [],
+      "count": 21,
+      "pinned": false,
+      "coverBasename": "rhine-river-cruise-08.jpg",
       "coverPosition": "center center"
     }
   ],
