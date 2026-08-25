@@ -225,8 +225,7 @@
       ],
       "event": [],
       "width": 720,
-      "height": 446,
-      "hidden": true
+      "height": 446
     }
   ],
   "displayOrder": [
@@ -242,6 +241,7 @@
     10,
     12,
     13,
-    4
+    4,
+    14
   ]
 }
