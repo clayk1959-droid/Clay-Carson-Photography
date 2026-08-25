@@ -14,7 +14,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1019992.jpg",
@@ -29,7 +30,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1019997.jpg",
@@ -45,7 +47,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020004.jpg",
@@ -60,7 +63,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020029.jpg",
@@ -75,7 +79,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1579
+      "height": 1579,
+      "hidden": false
     },
     {
       "filename": "L1020055.jpg",
@@ -88,7 +93,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1465
+      "height": 1465,
+      "hidden": false
     },
     {
       "filename": "L1020063.jpg",
@@ -104,7 +110,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1463
+      "height": 1463,
+      "hidden": false
     },
     {
       "filename": "L1020078.jpg",
@@ -120,18 +127,25 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020089.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
-      "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "date": "2026-08-10",
+      "description": "Albert and Karen in front ot ftheir family home",
+      "caption": "August 10, 2026 — Albert and Karen in front ot ftheir family home",
+      "altText": "Albert and Karen in front ot ftheir family home",
+      "person": [
+        "Albert Everett",
+        "Karen"
+      ],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1464,
+      "hidden": true
     },
     {
       "filename": "L1020102.jpg",
@@ -144,7 +158,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020121.jpg",
@@ -157,7 +172,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1950
+      "height": 1950,
+      "hidden": false
     },
     {
       "filename": "L1020141.jpg",
@@ -173,18 +189,25 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1463
+      "height": 1463,
+      "hidden": false
     },
     {
       "filename": "L1020157.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
-      "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "date": "2026-08-17",
+      "description": "L1020157",
+      "caption": "August 17, 2026 — L1020157",
+      "altText": "L1020157",
+      "person": [
+        "Albert Everett",
+        "Karen"
+      ],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 1835,
+      "height": 1862,
+      "hidden": true
     },
     {
       "filename": "L1020158.jpg",
@@ -200,7 +223,8 @@
         "Nova Scotia Trip"
       ],
       "width": 1257,
-      "height": 1385
+      "height": 1385,
+      "hidden": false
     },
     {
       "filename": "L1020165.jpg",
@@ -213,7 +237,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020174.jpg",
@@ -226,7 +251,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1327
+      "height": 1327,
+      "hidden": false
     },
     {
       "filename": "L1020198.jpg",
@@ -243,7 +269,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020235.jpg",
@@ -258,7 +285,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1653
+      "height": 1653,
+      "hidden": false
     },
     {
       "filename": "L1020242.jpg",
@@ -271,7 +299,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1616
+      "height": 1616,
+      "hidden": false
     },
     {
       "filename": "L1020254.jpg",
@@ -284,7 +313,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020277.jpg",
@@ -297,7 +327,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1463
+      "height": 1463,
+      "hidden": false
     },
     {
       "filename": "L1020302.jpg",
@@ -312,18 +343,22 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020332.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
+      "date": "2026-08-17",
+      "description": "L1020332",
+      "caption": "August 17, 2026 — L1020332",
+      "altText": "L1020332",
       "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1465,
+      "hidden": true
     },
     {
       "filename": "L1020338.jpg",
@@ -336,7 +371,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020361.jpg",
@@ -353,7 +389,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020365.jpg",
@@ -368,7 +405,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1479
+      "height": 1479,
+      "hidden": false
     },
     {
       "filename": "L1020370.jpg",
@@ -381,7 +419,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1512
+      "height": 1512,
+      "hidden": false
     },
     {
       "filename": "L1020376.jpg",
@@ -396,7 +435,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020380.jpg",
@@ -411,7 +451,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020386.jpg",
@@ -424,7 +465,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1854
+      "height": 1854,
+      "hidden": false
     },
     {
       "filename": "L1020395.jpg",
@@ -439,7 +481,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020416.jpg",
@@ -452,7 +495,8 @@
         "Nova Scotia Trip"
       ],
       "width": 1306,
-      "height": 2200
+      "height": 2200,
+      "hidden": false
     },
     {
       "filename": "L1020449.jpg",
@@ -465,7 +509,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020461.jpg",
@@ -478,18 +523,22 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020473.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
+      "date": "2026-08-12",
+      "description": "More bouys",
+      "caption": "August 12, 2026 — More bouys",
+      "altText": "More bouys",
       "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1467,
+      "hidden": true
     },
     {
       "filename": "L1020496.jpg",
@@ -504,7 +553,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1467
+      "height": 1467,
+      "hidden": false
     },
     {
       "filename": "L1020511.jpg",
@@ -520,18 +570,25 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020514.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
-      "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "date": "2026-08-17",
+      "description": "Lighthouse",
+      "caption": "August 17, 2026 — Lighthouse",
+      "altText": "Lighthouse",
+      "person": [
+        "Carol Mendal",
+        "Janet Carson"
+      ],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1942,
+      "hidden": true
     },
     {
       "filename": "L1020525.jpg",
@@ -547,7 +604,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1442
+      "height": 1442,
+      "hidden": false
     },
     {
       "filename": "L1020539.jpg",
@@ -563,7 +621,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1675
+      "height": 1675,
+      "hidden": false
     },
     {
       "filename": "L1020541.jpg",
@@ -576,7 +635,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1530
+      "height": 1530,
+      "hidden": false
     },
     {
       "filename": "L1020550.jpg",
@@ -589,7 +649,8 @@
         "Nova Scotia Trip"
       ],
       "width": 1091,
-      "height": 680
+      "height": 680,
+      "hidden": false
     },
     {
       "filename": "L1020560.jpg",
@@ -602,7 +663,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020586.jpg",
@@ -615,7 +677,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2155,
-      "height": 2200
+      "height": 2200,
+      "hidden": false
     },
     {
       "filename": "L1020595.jpg",
@@ -633,7 +696,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1020615.jpg",
@@ -646,7 +710,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1423
+      "height": 1423,
+      "hidden": false
     },
     {
       "filename": "L1020651.jpg",
@@ -659,18 +724,22 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1252
+      "height": 1252,
+      "hidden": false
     },
     {
       "filename": "L1020772.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
+      "date": "2026-08-12",
+      "description": "Whale watching",
+      "caption": "August 12, 2026 — Whale watching",
+      "altText": "Whale watching",
       "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 908,
+      "height": 563,
+      "hidden": true
     },
     {
       "filename": "L1020855.jpg",
@@ -683,18 +752,22 @@
         "Nova Scotia Trip"
       ],
       "width": 2122,
-      "height": 1443
+      "height": 1443,
+      "hidden": false
     },
     {
       "filename": "L1020908.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
+      "date": "2026-08-17",
+      "description": "Whale watching",
+      "caption": "August 17, 2026 — Whale watching",
+      "altText": "Whale watching",
       "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1490,
+      "hidden": true
     },
     {
       "filename": "L1020971.jpg",
@@ -709,7 +782,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1388
+      "height": 1388,
+      "hidden": false
     },
     {
       "filename": "L1020991.jpg",
@@ -722,7 +796,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1441
+      "height": 1441,
+      "hidden": false
     },
     {
       "filename": "L1020995.jpg",
@@ -735,29 +810,36 @@
         "Nova Scotia Trip"
       ],
       "width": 1774,
-      "height": 2200
+      "height": 2200,
+      "hidden": false
     },
     {
       "filename": "L1021003.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
+      "date": "2026-08-12",
+      "description": "Whale watching",
+      "caption": "August 12, 2026 — Whale watching",
+      "altText": "Whale watching",
       "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1666,
+      "hidden": true
     },
     {
       "filename": "L1021059.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
+      "date": "2026-08-17",
+      "description": "Whale watching",
+      "caption": "August 17, 2026 — Whale watching",
+      "altText": "Whale watching",
       "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 494,
+      "height": 362,
+      "hidden": true
     },
     {
       "filename": "L1021067.jpg",
@@ -770,18 +852,22 @@
         "Nova Scotia Trip"
       ],
       "width": 663,
-      "height": 414
+      "height": 414,
+      "hidden": false
     },
     {
       "filename": "L1021082.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
+      "date": "2026-08-12",
+      "description": "Whale watching",
+      "caption": "August 12, 2026 — Whale watching",
+      "altText": "Whale watching",
       "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 1519,
+      "height": 768,
+      "hidden": true
     },
     {
       "filename": "L1021088.jpg",
@@ -794,18 +880,22 @@
         "Nova Scotia Trip"
       ],
       "width": 484,
-      "height": 267
+      "height": 267,
+      "hidden": false
     },
     {
       "filename": "L1021098.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
+      "date": "2026-08-12",
+      "description": "Whale watching",
+      "caption": "August 12, 2026 — Whale watching",
+      "altText": "Whale watching",
       "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1392,
+      "hidden": true
     },
     {
       "filename": "L1021113.jpg",
@@ -818,7 +908,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1807
+      "height": 1807,
+      "hidden": false
     },
     {
       "filename": "L1021146.jpg",
@@ -831,7 +922,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1185
+      "height": 1185,
+      "hidden": false
     },
     {
       "filename": "L1021174.jpg",
@@ -847,7 +939,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1472
+      "height": 1472,
+      "hidden": false
     },
     {
       "filename": "L1021176.jpg",
@@ -863,7 +956,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1568
+      "height": 1568,
+      "hidden": false
     },
     {
       "filename": "L1021182.jpg",
@@ -876,7 +970,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1464
+      "height": 1464,
+      "hidden": false
     },
     {
       "filename": "L1021187.jpg",
@@ -889,7 +984,8 @@
         "Nova Scotia Trip"
       ],
       "width": 1156,
-      "height": 747
+      "height": 747,
+      "hidden": false
     },
     {
       "filename": "L1021226.jpg",
@@ -902,7 +998,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1445
+      "height": 1445,
+      "hidden": false
     },
     {
       "filename": "L1021249.jpg",
@@ -915,7 +1012,8 @@
         "Nova Scotia Trip"
       ],
       "width": 1318,
-      "height": 2200
+      "height": 2200,
+      "hidden": false
     },
     {
       "filename": "L1021253.jpg",
@@ -928,7 +1026,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1653
+      "height": 1653,
+      "hidden": false
     },
     {
       "filename": "L1021261.jpg",
@@ -941,7 +1040,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1383
+      "height": 1383,
+      "hidden": false
     },
     {
       "filename": "L1021263.jpg",
@@ -954,7 +1054,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1595
+      "height": 1595,
+      "hidden": false
     },
     {
       "filename": "L1021276.jpg",
@@ -967,7 +1068,8 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1411
+      "height": 1411,
+      "hidden": false
     },
     {
       "filename": "L1021297.jpg",
@@ -980,18 +1082,25 @@
         "Nova Scotia Trip"
       ],
       "width": 2200,
-      "height": 1013
+      "height": 1013,
+      "hidden": false
     },
     {
       "filename": "Sunset.jpg",
-      "date": null,
-      "description": "",
-      "caption": "",
-      "altText": "",
-      "person": [],
-      "event": [],
-      "width": 0,
-      "height": 0
+      "date": "2026-08-17",
+      "description": "Sunset",
+      "caption": "August 17, 2026 — Sunset",
+      "altText": "Sunset",
+      "person": [
+        "Mark Conard",
+        "Janet Carson"
+      ],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1464,
+      "hidden": true
     },
     {
       "filename": "resized.jpg",
@@ -1004,7 +1113,8 @@
         "Nova Scotia Trip"
       ],
       "width": 1069,
-      "height": 1800
+      "height": 1800,
+      "hidden": false
     }
   ],
   "displayOrder": [

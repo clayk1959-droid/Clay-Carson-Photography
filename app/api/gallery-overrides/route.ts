@@ -69,7 +69,7 @@ export async function POST(request: Request) {
   }
 
   let entry: PhotoOverride | null = null;
-  if (reset !== true && hidden !== true) {
+  if (reset !== true && hidden !== true && hidden !== false) {
     entry = {};
 
     if (caption !== undefined) {
@@ -108,19 +108,27 @@ export async function POST(request: Request) {
           if (photoIndex === -1) throw new Error("Unknown photo");
 
           if (hidden === true) {
+            // Preserve the photo's caption/date/dimensions -- only the
+            // hidden flag changes. The image files stay too (the sync
+            // script no longer deletes a hidden photo's output), so a
+            // hidden photo can still be browsed and unhidden later without
+            // losing anything or needing the original file again.
             const existing = collectionOverrides[filename] ?? {};
             collectionOverrides[filename] = { ...existing, hidden: true };
-            photoData.photographData[photoIndex] = {
-              filename,
-              date: null,
-              description: "",
-              caption: "",
-              altText: "",
-              person: [],
-              event: [],
-              width: 0,
-              height: 0,
-            };
+            photoData.photographData[photoIndex] = { ...photoData.photographData[photoIndex], hidden: true };
+            return;
+          }
+
+          if (hidden === false) {
+            const existing = collectionOverrides[filename] ?? {};
+            const { hidden: _hiddenFlag, ...rest } = existing;
+            if (Object.keys(rest).length === 0) {
+              delete collectionOverrides[filename];
+            } else {
+              collectionOverrides[filename] = rest;
+            }
+            const { hidden: _photoHidden, ...restPhoto } = photoData.photographData[photoIndex];
+            photoData.photographData[photoIndex] = restPhoto;
             return;
           }
 
@@ -148,10 +156,26 @@ export async function POST(request: Request) {
         }
       } else if (hidden === true) {
         // Hide the photo from the site without touching any caption/date/order
-        // overrides already set for it — "Reset to auto-detected" is what
-        // un-hides (and clears everything else too).
+        // overrides already set for it.
         const existing = overrides[slug]?.[filename] ?? {};
         overrides[slug] = sortedEntries({ ...overrides[slug], [filename]: { ...existing, hidden: true } });
+      } else if (hidden === false) {
+        // Unhide without disturbing any other override on this photo --
+        // distinct from "Reset to auto-detected", which also clears
+        // caption/date/order.
+        const existing = overrides[slug]?.[filename] ?? {};
+        const { hidden: _hiddenFlag, ...rest } = existing;
+        const nextForSlug = { ...overrides[slug] };
+        if (Object.keys(rest).length === 0) {
+          delete nextForSlug[filename];
+        } else {
+          nextForSlug[filename] = rest;
+        }
+        if (Object.keys(nextForSlug).length === 0) {
+          delete overrides[slug];
+        } else {
+          overrides[slug] = sortedEntries(nextForSlug);
+        }
       } else {
         overrides[slug] = sortedEntries({ ...overrides[slug], [filename]: entry as PhotoOverride });
       }

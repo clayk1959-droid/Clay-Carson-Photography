@@ -9,6 +9,13 @@ const photographs = data.displayOrder.map((number) => ({
   src: `/galleries/rhine-river-cruise/rhine-river-cruise-${String(number).padStart(2, "0")}.jpg`,
 }));
 
+const hiddenPhotographs = data.photographData
+  .map((photo, index) => ({
+    ...photo,
+    src: `/galleries/rhine-river-cruise/rhine-river-cruise-${String(index + 1).padStart(2, "0")}.jpg`,
+  }))
+  .filter((photo) => photo.hidden);
+
 const otherCollections = [
   {
     "slug": "janet-buys-a-car",
@@ -42,6 +49,7 @@ export default function RhineRiverCruisePage() {
         name="Rhine River Cruise"
         slug="rhine-river-cruise"
         photographs={photographs}
+        hiddenPhotographs={hiddenPhotographs}
         otherCollections={remote ? [] : otherCollections}
         editable={isEditorEnabled()}
         remoteMode={remote}

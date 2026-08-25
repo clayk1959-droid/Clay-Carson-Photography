@@ -406,25 +406,8 @@ for (const collection of collections) {
     const number = String(index + 1).padStart(2, "0");
     setSpinnerStatus(`${collection.title}: ${index + 1}/${filenames.length} — ${filename}`);
 
-    if (collectionOverrides[filename]?.hidden === true) {
-      // Deleted from the site via the local editor. The original file in
-      // Gallery Originals is never touched — this only skips generating
-      // output for it, so "Reset to auto-detected" (or removing the
-      // override by hand) brings it right back.
-      photographData.push({
-        filename,
-        date: null,
-        description: "",
-        caption: "",
-        altText: "",
-        person: [],
-        event: [],
-        width: 0,
-        height: 0,
-      });
-      hiddenCount += 1;
-      continue;
-    }
+    const isHidden = collectionOverrides[filename]?.hidden === true;
+    if (isHidden) hiddenCount += 1;
 
     const source = path.join(sourceDirectory, filename);
     const protectedMetadataSource = path.join(
@@ -511,6 +494,7 @@ for (const collection of collections) {
       event: auto.event ?? [],
       width: outputMetadata.width,
       height: outputMetadata.height,
+      hidden: isHidden,
     });
   }
 
@@ -554,13 +538,13 @@ for (const collection of collections) {
     `${JSON.stringify({ photographData, displayOrder }, null, 2)}\n`,
   );
 
-  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { SiteFooter } from "../../SiteFooter";\nimport { Gallery } from "../Gallery";\nimport { isEditorEnabled, isRemoteEditorMode } from "../../../lib/editor-mode";\nimport data from "../../../data/photo-data/${collection.slug}.json";\n\nconst photographs = data.displayOrder.map((number) => ({\n  ...data.photographData[number - 1],\n  src: \`/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,\n}));\n\nconst otherCollections = ${JSON.stringify(
+  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { SiteFooter } from "../../SiteFooter";\nimport { Gallery } from "../Gallery";\nimport { isEditorEnabled, isRemoteEditorMode } from "../../../lib/editor-mode";\nimport data from "../../../data/photo-data/${collection.slug}.json";\n\nconst photographs = data.displayOrder.map((number) => ({\n  ...data.photographData[number - 1],\n  src: \`/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,\n}));\n\nconst hiddenPhotographs = data.photographData\n  .map((photo, index) => ({\n    ...photo,\n    src: \`/galleries/${collection.slug}/${collection.slug}-\${String(index + 1).padStart(2, "0")}.jpg\`,\n  }))\n  .filter((photo) => photo.hidden);\n\nconst otherCollections = ${JSON.stringify(
     collections
       .filter((other) => other.slug !== collection.slug)
       .map((other) => ({ slug: other.slug, title: other.title })),
     null,
     2,
-  )};\n\nconst collectionSubtitle: string | null = ${quoted(collection.subtitle)};\n\nexport default function ${collection.component}() {\n  const remote = isRemoteEditorMode();\n  const photoCountText = data.displayOrder.length + \" Photos\";\n  const subtitle = collectionSubtitle ? collectionSubtitle + \" \u00b7 \" + photoCountText : photoCountText;\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>{subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        otherCollections={remote ? [] : otherCollections}\n        editable={isEditorEnabled()}\n        remoteMode={remote}\n      />\n\n      <SiteFooter />\n    </main>\n  );\n}\n`;
+  )};\n\nconst collectionSubtitle: string | null = ${quoted(collection.subtitle)};\n\nexport default function ${collection.component}() {\n  const remote = isRemoteEditorMode();\n  const photoCountText = data.displayOrder.length + \" Photos\";\n  const subtitle = collectionSubtitle ? collectionSubtitle + \" \u00b7 \" + photoCountText : photoCountText;\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>{subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        hiddenPhotographs={hiddenPhotographs}\n        otherCollections={remote ? [] : otherCollections}\n        editable={isEditorEnabled()}\n        remoteMode={remote}\n      />\n\n      <SiteFooter />\n    </main>\n  );\n}\n`;
   const collectionPageDirectory = path.join(root, "app", "collections", collection.slug);
   await mkdir(collectionPageDirectory, { recursive: true });
   await writeFile(path.join(collectionPageDirectory, "page.tsx"), page);

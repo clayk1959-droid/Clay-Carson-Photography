@@ -31,6 +31,7 @@ export type PhotographDataEntry = {
   event: string[];
   width: number;
   height: number;
+  hidden?: boolean;
 };
 export type PhotoData = { photographData: PhotographDataEntry[]; displayOrder: number[] };
 

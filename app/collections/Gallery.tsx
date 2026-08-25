@@ -21,6 +21,7 @@ export function Gallery({
   name,
   slug,
   photographs,
+  hiddenPhotographs = [],
   otherCollections = [],
   editable = false,
   remoteMode = false,
@@ -28,6 +29,7 @@ export function Gallery({
   name: string;
   slug: string;
   photographs: GalleryPhoto[];
+  hiddenPhotographs?: GalleryPhoto[];
   otherCollections?: CollectionOption[];
   editable?: boolean;
   // True only on the password-protected remote editor deployment. Neither
@@ -46,6 +48,7 @@ export function Gallery({
   } | null>(null);
   const [editingPhoto, setEditingPhoto] = useState<number | null>(null);
   const [reordering, setReordering] = useState(false);
+  const [showingHidden, setShowingHidden] = useState(false);
   const activeImage = useRef<HTMLImageElement | null>(null);
   const photoGallery = useRef<HTMLDivElement | null>(null);
   const dialog = useRef<HTMLDivElement | null>(null);
@@ -395,11 +398,25 @@ export function Gallery({
         />
       )}
 
+      {showingHidden && (
+        <HiddenPhotosPanel
+          slug={slug}
+          photographs={hiddenPhotographs}
+          remoteMode={remoteMode}
+          onClose={() => setShowingHidden(false)}
+        />
+      )}
+
       {editable && (
         <div className="editor-toolbar">
           <button type="button" className="reorder-button" onClick={() => setReordering(true)}>
             Reorder Photos
           </button>
+          {hiddenPhotographs.length > 0 && (
+            <button type="button" className="reorder-button" onClick={() => setShowingHidden(true)}>
+              Hidden Photos ({hiddenPhotographs.length})
+            </button>
+          )}
           {!remoteMode && <SyncButton />}
         </div>
       )}
@@ -632,6 +649,88 @@ function ReorderPanel({
             );
           })}
         </div>
+      </div>
+    </div>
+  );
+}
+
+function HiddenPhotosPanel({
+  slug,
+  photographs,
+  remoteMode = false,
+  onClose,
+}: {
+  slug: string;
+  photographs: GalleryPhoto[];
+  remoteMode?: boolean;
+  onClose: () => void;
+}) {
+  const [items, setItems] = useState(photographs);
+  const [busyFilename, setBusyFilename] = useState<string | null>(null);
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  async function handleUnhide(filename: string) {
+    setBusyFilename(filename);
+    setErrorMessage("");
+    try {
+      const response = await fetch("/api/gallery-overrides", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, filename, hidden: false }),
+      });
+      if (!response.ok) throw new Error(await response.text());
+      setItems((current) => current.filter((photo) => photo.filename !== filename));
+      setMessage(
+        remoteMode ? "Unhidden — live on the site within a minute or two." : "Unhidden — click Sync Gallery to apply.",
+      );
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
+    } finally {
+      setBusyFilename(null);
+    }
+  }
+
+  return (
+    <div className="reorder-overlay" onClick={onClose}>
+      <div className="reorder-panel" onClick={(event) => event.stopPropagation()}>
+        <div className="reorder-header">
+          <h2>Hidden photos</h2>
+          <div className="reorder-header-actions">
+            {errorMessage && <span className="edit-photo-status is-error">{errorMessage}</span>}
+            {!errorMessage && message && <span className="edit-photo-status">{message}</span>}
+            <button type="button" onClick={onClose}>
+              Close
+            </button>
+          </div>
+        </div>
+        {items.length === 0 ? (
+          <p className="hidden-photos-empty">No hidden photos left in this gallery.</p>
+        ) : (
+          <div className="reorder-grid">
+            {items.map((photo) => (
+              <div key={photo.filename} className="reorder-thumb hidden-photo-thumb">
+                <img src={photo.src.replace("/galleries/", "/gallery-thumbnails/")} alt={photo.altText} />
+                <button
+                  type="button"
+                  className="hidden-photo-unhide"
+                  disabled={busyFilename === photo.filename}
+                  onClick={() => handleUnhide(photo.filename)}
+                >
+                  {busyFilename === photo.filename ? "Unhiding…" : "Unhide"}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

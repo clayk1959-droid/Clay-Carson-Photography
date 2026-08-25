@@ -9,6 +9,13 @@ const photographs = data.displayOrder.map((number) => ({
   src: `/galleries/janet-buys-a-car/janet-buys-a-car-${String(number).padStart(2, "0")}.jpg`,
 }));
 
+const hiddenPhotographs = data.photographData
+  .map((photo, index) => ({
+    ...photo,
+    src: `/galleries/janet-buys-a-car/janet-buys-a-car-${String(index + 1).padStart(2, "0")}.jpg`,
+  }))
+  .filter((photo) => photo.hidden);
+
 const otherCollections = [
   {
     "slug": "nova-scotia",
@@ -42,6 +49,7 @@ export default function JanetBuysACarPage() {
         name="Janet Buys a car"
         slug="janet-buys-a-car"
         photographs={photographs}
+        hiddenPhotographs={hiddenPhotographs}
         otherCollections={remote ? [] : otherCollections}
         editable={isEditorEnabled()}
         remoteMode={remote}
