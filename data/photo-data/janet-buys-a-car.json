@@ -167,18 +167,14 @@
     },
     {
       "filename": "Janet Buys a Car-9.jpg",
-      "date": "2026-08-08",
-      "description": "Janet Buys a Car - Learning all of the new features",
-      "caption": "August 8, 2026 — Janet Buys a Car - Learning all of the new features",
-      "altText": "Janet Buys a Car - Learning all of the new features",
-      "person": [
-        "Janet Carson"
-      ],
-      "event": [
-        "Janet buys a car"
-      ],
-      "width": 720,
-      "height": 484
+      "date": null,
+      "description": "",
+      "caption": "",
+      "altText": "",
+      "person": [],
+      "event": [],
+      "width": 0,
+      "height": 0
     },
     {
       "filename": "Janet Buys a Car.jpg",
@@ -218,7 +214,6 @@
     11,
     5,
     13,
-    12,
     4,
     10
   ]

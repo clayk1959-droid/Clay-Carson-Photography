@@ -111,7 +111,8 @@
     "Janet Buys a Car-9.jpg": {
       "caption": "Janet Buys a Car - Learning all of the new features",
       "date": "2026-08-08",
-      "order": 11
+      "order": 11,
+      "hidden": true
     },
     "Janet Buys a Car.jpg": {
       "order": 10
