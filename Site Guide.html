@@ -413,6 +413,12 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 121</span><span class="version-date">Tuesday, August 25, 2026</span></div>
+      <ul>
+        <li>Fixed a real bug: a tester submitting the same email with different capitalization on a retry (e.g. a phone auto-capitalizing it) could create a duplicate account instead of being recognized as the same person — caught this actually happening to one tester. Emails are now normalized to lowercase the moment a request comes in, so this can't happen again. Also cleaned out a handful of leftover test rows from earlier debugging sessions that had accumulated in the private-access admin panel.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 120</span><span class="version-date">Monday, August 24, 2026</span></div>
       <ul>
         <li>Fixed editor login breaking entirely after switching to email addresses in Version 119 — the session cookie's internal format used a period as a separator, and an email address like "barthur.ar@gmail.com" contains a literal period that corrupted it. Fixed the underlying format so this can't happen regardless of what a login name looks like; verified an email-address login now works correctly start to finish.</li>

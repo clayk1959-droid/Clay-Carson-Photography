@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Monday, August 24, 2026
+Last updated: Tuesday, August 25, 2026
 
 ## Current status
 
@@ -14,6 +14,10 @@ Last updated: Monday, August 24, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 121 — Tuesday, August 25, 2026
+
+- Fixed a real bug: a tester submitting the same email with different capitalization on a retry (e.g. a phone auto-capitalizing it) could create a duplicate account instead of being recognized as the same person — caught this actually happening to one tester. Emails are now normalized to lowercase the moment a request comes in, so this can't happen again. Also cleaned out a handful of leftover test rows from earlier debugging sessions that had accumulated in the private-access admin panel.
 
 ### Version 120 — Monday, August 24, 2026
 
