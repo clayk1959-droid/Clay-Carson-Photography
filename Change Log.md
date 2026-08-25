@@ -15,6 +15,11 @@ Last updated: Tuesday, August 25, 2026
 
 ## Version history
 
+### Version 122 — Tuesday, August 25, 2026
+
+- Hiding a photo used to permanently delete its actual image the next time the site synced, and wiped its caption/date down to nothing — there was no way to see what a hidden photo even was afterward. The only undo, "Reset to auto-detected," only ever worked locally on your own Mac, not the remote editor you and Barry actually use.
+- Hidden photos now keep their real image and caption/date, and a new "Hidden Photos" button shows how many are hidden in a gallery and lets you browse and unhide them from wherever you're working — remote or local — without losing any edits, separate from the full reset. Retroactively restored every photo that had already been hidden and deleted across all four galleries.
+
 ### Version 121 — Tuesday, August 25, 2026
 
 - Fixed a real bug: a tester submitting the same email with different capitalization on a retry (e.g. a phone auto-capitalizing it) could create a duplicate account instead of being recognized as the same person — caught this actually happening to one tester. Emails are now normalized to lowercase the moment a request comes in, so this can't happen again. Also cleaned out a handful of leftover test rows from earlier debugging sessions that had accumulated in the private-access admin panel.
