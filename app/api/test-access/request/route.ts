@@ -16,7 +16,12 @@ export async function POST(request: Request) {
 
   const body = await request.json().catch(() => null);
   const name = typeof body?.name === "string" ? body.name.trim() : "";
-  const email = typeof body?.email === "string" ? body.email.trim() : "";
+  // Lowercased so two submissions that differ only in casing (e.g. an
+  // iPhone auto-capitalizing the first letter on a retry) are recognized as
+  // the same person -- this value flows straight into the accounts table's
+  // upsert-by-email later, which would otherwise treat them as different
+  // people and create a real duplicate account.
+  const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
   const note = typeof body?.note === "string" ? body.note.trim() : "";
 
   if (!name || !email) {
