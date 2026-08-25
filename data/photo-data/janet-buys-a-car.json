@@ -189,8 +189,7 @@
         "Janet buys a car"
       ],
       "width": 720,
-      "height": 484,
-      "hidden": true
+      "height": 484
     },
     {
       "filename": "Janet Buys a Car.jpg",
@@ -241,6 +240,7 @@
     11,
     5,
     10,
+    12,
     13,
     4
   ]
