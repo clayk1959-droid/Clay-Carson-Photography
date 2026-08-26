@@ -19,7 +19,14 @@ export default async function AdminLoginPage({
         <input type="hidden" name="redirect" value={redirect ?? ""} />
         <label className="private-access-field">
           <span>Password</span>
-          <input type="password" name="password" autoFocus required className="private-access-input" />
+          <input
+            type="password"
+            name="password"
+            autoFocus
+            required
+            autoComplete="off"
+            className="private-access-input"
+          />
         </label>
         <button type="submit" className="private-access-button">
           Continue
