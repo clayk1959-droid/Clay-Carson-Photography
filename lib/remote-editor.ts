@@ -19,7 +19,13 @@ import {
 export type PhotoOverride = { caption?: string; date?: string; order?: number; hidden?: boolean };
 export type Overrides = Record<string, Record<string, PhotoOverride>>;
 export type CollectionOverrides = Record<string, PhotoOverride>;
-export type CoverOverride = { coverPhoto?: string; coverPosition?: string; firstSyncedAt?: string; pinnedAt?: string };
+export type CoverOverride = {
+  coverPhoto?: string;
+  coverPosition?: string;
+  firstSyncedAt?: string;
+  pinnedAt?: string;
+  private?: boolean;
+};
 export type CoverOverrides = Record<string, CoverOverride>;
 export type PhotographDataEntry = {
   filename: string;
@@ -161,4 +167,32 @@ export async function applyPinRemote(slug: string, editorName: string | null): P
   );
 
   return { pinned: nowPinned };
+}
+
+// Toggles a collection's private flag. Unlike pin, this doesn't change
+// where the card sits or how it looks in the Galleries list (visible,
+// no lock icon, by explicit design) -- it only changes whether the sync
+// script routes that collection's images to non-public storage and
+// whether its page requires a session. Just one file to commit.
+export async function applyPrivacyRemote(slug: string, editorName: string | null): Promise<{ private: boolean }> {
+  const title = await getCollectionTitle(slug);
+  if (!title) throw new Error("Unknown collection");
+
+  const coverOverrides = await readJson<CoverOverrides>(COVER_OVERRIDES_PATH, {});
+
+  const existing = coverOverrides[slug] ?? {};
+  const nowPrivate = !existing.private;
+  if (nowPrivate) {
+    coverOverrides[slug] = { ...existing, private: true };
+  } else {
+    const { private: _private, ...rest } = existing;
+    coverOverrides[slug] = rest;
+  }
+
+  await commitFiles(
+    [{ path: COVER_OVERRIDES_PATH, content: `${JSON.stringify(sortedEntries(coverOverrides), null, 2)}\n` }],
+    `Editor${editorName ? ` (${editorName})` : ""}: ${nowPrivate ? `mark ${slug} private` : `mark ${slug} public`}`,
+  );
+
+  return { private: nowPrivate };
 }

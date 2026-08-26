@@ -1,19 +1,20 @@
+import { cookies } from "next/headers";
 import { getPool } from "../../../../lib/db";
 import { isPrivateAccessEnabled } from "../../../../lib/private-access-mode";
 import { SESSION_COOKIE_NAME, verifySessionCookieValue } from "../../../../lib/session-cookie";
 
 export const dynamic = "force-dynamic";
 
-function readCookie(request: Request, name: string): string | undefined {
-  const header = request.headers.get("cookie") ?? "";
-  const match = header.match(new RegExp(`${name}=([^;]+)`));
-  return match?.[1];
-}
-
 export async function POST(request: Request) {
   if (!isPrivateAccessEnabled()) return new Response("Not found", { status: 404 });
 
-  const loggedIn = await verifySessionCookieValue(readCookie(request, SESSION_COOKIE_NAME));
+  const cookieStore = await cookies();
+  // next/headers' cookies() decodes the value back down to the app's own
+  // "name:expiry:signature" format -- reading request.headers.get("cookie")
+  // directly instead left it percent-encoded (Next encodes cookie values on
+  // the way out) and verifySessionCookieValue's colon-split silently failed
+  // on that, so Revoke always 401'd regardless of login state.
+  const loggedIn = await verifySessionCookieValue(cookieStore.get(SESSION_COOKIE_NAME)?.value);
   if (!loggedIn) return new Response("Unauthorized", { status: 401 });
 
   const body = await request.json().catch(() => null);

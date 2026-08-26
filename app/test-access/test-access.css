@@ -37,3 +37,9 @@
 .private-access-pill-btn:disabled { opacity: .6; cursor: default; }
 .private-access-pill-btn.revoke { color: #a33; border-color: #a33; }
 .private-access-pill-btn.restore { color: #2a7a4a; border-color: #2a7a4a; }
+.private-access-pill-btn:not(.revoke):not(.restore) { color: #4a6a8a; border-color: #4a6a8a; }
+
+.gallery-access-grid th, .gallery-access-grid td { text-align: center; }
+.gallery-access-grid th:first-child, .gallery-access-grid td:first-child { text-align: left; }
+.gallery-access-column-head { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.gallery-access-cell input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }

@@ -45,11 +45,28 @@ CREATE TABLE IF NOT EXISTS login_log (
   logged_in_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Which real galleries (identified by slug, not a foreign key -- galleries
+-- live in the git repo, not this database) a given account is allowed into.
+-- Presence of a row is the grant; there's no separate "denied" state -- an
+-- account either has a row for a gallery or it doesn't.
+CREATE TABLE IF NOT EXISTS gallery_access (
+  id SERIAL PRIMARY KEY,
+  account_id INTEGER NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+  gallery_slug TEXT NOT NULL,
+  granted_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (account_id, gallery_slug)
+);
+
 CREATE INDEX IF NOT EXISTS idx_sessions_account_id ON sessions(account_id);
 CREATE INDEX IF NOT EXISTS idx_login_log_account_id ON login_log(account_id);
+CREATE INDEX IF NOT EXISTS idx_gallery_access_account_id ON gallery_access(account_id);
+CREATE INDEX IF NOT EXISTS idx_gallery_access_gallery_slug ON gallery_access(gallery_slug);
 
 -- Additive changes for tables that may already exist from an earlier run.
 ALTER TABLE access_requests ADD COLUMN IF NOT EXISTS action_token TEXT;
 ALTER TABLE accounts ADD COLUMN IF NOT EXISTS magic_token_hash TEXT;
 ALTER TABLE accounts ADD COLUMN IF NOT EXISTS magic_token_expires_at TIMESTAMPTZ;
 ALTER TABLE sessions ADD COLUMN IF NOT EXISTS notified_at TIMESTAMPTZ;
+-- A request is now for one specific gallery (nullable so the old test rows,
+-- created before real galleries existed, aren't broken).
+ALTER TABLE access_requests ADD COLUMN IF NOT EXISTS gallery_slug TEXT;

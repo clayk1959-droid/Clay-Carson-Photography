@@ -55,3 +55,15 @@ export async function getAccountForSession(rawToken: string | undefined | null) 
   );
   return (rows[0] as { account_id: number; email: string; name: string } | undefined) ?? null;
 }
+
+// Whether a logged-in account has been granted this specific gallery --
+// presence of a gallery_access row is the only thing that matters, checked
+// on every page load and every image request (see app/api/private-photo).
+export async function hasGalleryAccess(accountId: number, gallerySlug: string): Promise<boolean> {
+  const pool = getPool();
+  const { rows } = await pool.query(
+    `select 1 from gallery_access where account_id = $1 and gallery_slug = $2`,
+    [accountId, gallerySlug],
+  );
+  return rows.length > 0;
+}

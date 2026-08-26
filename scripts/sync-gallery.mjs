@@ -353,6 +353,11 @@ for (const collection of collections) {
     await rm(path.join(root, "app", "collections", collection.slug), { recursive: true, force: true });
     await rm(path.join(root, "public", "galleries", collection.slug), { recursive: true, force: true });
     await rm(path.join(root, "public", "gallery-thumbnails", collection.slug), { recursive: true, force: true });
+    await rm(path.join(root, "private-galleries", "galleries", collection.slug), { recursive: true, force: true });
+    await rm(path.join(root, "private-galleries", "gallery-thumbnails", collection.slug), {
+      recursive: true,
+      force: true,
+    });
     await rm(path.join(photoDataRoot, `${collection.slug}.json`), { force: true });
     logLine(`${collection.title}: 0 photographs — skipped (folder is empty)`);
     continue;
@@ -374,8 +379,22 @@ for (const collection of collections) {
     };
   }
 
-  const fullDirectory = path.join(root, "public", "galleries", collection.slug);
-  const thumbnailDirectory = path.join(root, "public", "gallery-thumbnails", collection.slug);
+  // A private collection's actual image files never go under public/ --
+  // that folder is served unauthenticated by Next.js to anyone who knows
+  // (or guesses) the URL, which would make the page-level gate below
+  // meaningless. They go to a same-shaped tree outside public/ instead,
+  // read only by the authenticated app/api/private-photo route. If a
+  // collection's privacy flag flipped since the last sync, its old
+  // location's output is removed so nothing lingers somewhere it
+  // shouldn't (or wastes space somewhere it no longer needs to).
+  const isPrivateCollection = collectionCoverOverrides[collection.slug]?.private === true;
+  const outputRoot = path.join(root, isPrivateCollection ? "private-galleries" : "public");
+  const staleRoot = path.join(root, isPrivateCollection ? "public" : "private-galleries");
+  await rm(path.join(staleRoot, "galleries", collection.slug), { recursive: true, force: true });
+  await rm(path.join(staleRoot, "gallery-thumbnails", collection.slug), { recursive: true, force: true });
+
+  const fullDirectory = path.join(outputRoot, "galleries", collection.slug);
+  const thumbnailDirectory = path.join(outputRoot, "gallery-thumbnails", collection.slug);
   const cacheFullDirectory = path.join(cacheRoot, collection.slug, "full");
   const cacheThumbnailDirectory = path.join(cacheRoot, collection.slug, "thumbnails");
   await mkdir(fullDirectory, { recursive: true });
@@ -538,13 +557,93 @@ for (const collection of collections) {
     `${JSON.stringify({ photographData, displayOrder }, null, 2)}\n`,
   );
 
-  const page = `import { SiteHeader } from "../../SiteHeader";\nimport { SiteFooter } from "../../SiteFooter";\nimport { Gallery } from "../Gallery";\nimport { isEditorEnabled, isRemoteEditorMode } from "../../../lib/editor-mode";\nimport data from "../../../data/photo-data/${collection.slug}.json";\n\nconst photographs = data.displayOrder.map((number) => ({\n  ...data.photographData[number - 1],\n  src: \`/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,\n}));\n\nconst hiddenPhotographs = data.photographData\n  .map((photo, index) => ({\n    ...photo,\n    src: \`/galleries/${collection.slug}/${collection.slug}-\${String(index + 1).padStart(2, "0")}.jpg\`,\n  }))\n  .filter((photo) => photo.hidden);\n\nconst otherCollections = ${JSON.stringify(
+  const otherCollectionsJson = JSON.stringify(
     collections
       .filter((other) => other.slug !== collection.slug)
       .map((other) => ({ slug: other.slug, title: other.title })),
     null,
     2,
-  )};\n\nconst collectionSubtitle: string | null = ${quoted(collection.subtitle)};\n\nexport default function ${collection.component}() {\n  const remote = isRemoteEditorMode();\n  const photoCountText = data.displayOrder.length + \" Photos\";\n  const subtitle = collectionSubtitle ? collectionSubtitle + \" \u00b7 \" + photoCountText : photoCountText;\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>{subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        hiddenPhotographs={hiddenPhotographs}\n        otherCollections={remote ? [] : otherCollections}\n        editable={isEditorEnabled()}\n        remoteMode={remote}\n      />\n\n      <SiteFooter />\n    </main>\n  );\n}\n`;
+  );
+
+  // Private collections get a dynamic page that re-checks the visitor's
+  // session and gallery_access on every request (see the plan's leak #2 --
+  // a static page can't gate anything), pulling photos through the
+  // authenticated /api/private-photo route instead of a public/ URL, and
+  // showing GalleryAccessGate in place of the gallery when unauthorized.
+  const page = isPrivateCollection
+    ? `import { cookies } from "next/headers";
+import { SiteHeader } from "../../SiteHeader";
+import { SiteFooter } from "../../SiteFooter";
+import { Gallery } from "../Gallery";
+import { GalleryAccessGate } from "../GalleryAccessGate";
+import { isEditorEnabled, isRemoteEditorMode } from "../../../lib/editor-mode";
+import { getAccountForSession, hasGalleryAccess, SESSION_COOKIE_NAME } from "../../../lib/private-access";
+import data from "../../../data/photo-data/${collection.slug}.json";
+
+export const dynamic = "force-dynamic";
+
+const photographs = data.displayOrder.map((number) => ({
+  ...data.photographData[number - 1],
+  src: \`/api/private-photo/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,
+}));
+
+const hiddenPhotographs = data.photographData
+  .map((photo, index) => ({
+    ...photo,
+    src: \`/api/private-photo/galleries/${collection.slug}/${collection.slug}-\${String(index + 1).padStart(2, "0")}.jpg\`,
+  }))
+  .filter((photo) => photo.hidden);
+
+const otherCollections = ${otherCollectionsJson};
+
+const collectionSubtitle: string | null = ${quoted(collection.subtitle)};
+
+export default async function ${collection.component}() {
+  const cookieStore = await cookies();
+  const account = await getAccountForSession(cookieStore.get(SESSION_COOKIE_NAME)?.value);
+  const authorized = account ? await hasGalleryAccess(account.account_id, ${quoted(collection.slug)}) : false;
+
+  if (!authorized) {
+    return (
+      <main className="subpage collection-page">
+        <SiteHeader showHome />
+        <header className="collection-heading">
+          <a href="/collections">← Galleries</a>
+          <h1>${collection.title}</h1>
+        </header>
+        <GalleryAccessGate gallerySlug=${quoted(collection.slug)} />
+        <SiteFooter />
+      </main>
+    );
+  }
+
+  const remote = isRemoteEditorMode();
+  const photoCountText = data.displayOrder.length + " Photos";
+  const subtitle = collectionSubtitle ? collectionSubtitle + " \u00b7 " + photoCountText : photoCountText;
+  return (
+    <main className="subpage collection-page">
+      <SiteHeader showHome />
+      <header className="collection-heading">
+        <a href="/collections">← Galleries</a>
+        <h1>${collection.title}</h1>
+        <p>{subtitle}</p>
+      </header>
+      <Gallery
+        name=${quoted(collection.title)}
+        slug=${quoted(collection.slug)}
+        photographs={photographs}
+        hiddenPhotographs={hiddenPhotographs}
+        otherCollections={remote ? [] : otherCollections}
+        editable={isEditorEnabled()}
+        remoteMode={remote}
+      />
+
+      <SiteFooter />
+    </main>
+  );
+}
+`
+    : `import { SiteHeader } from "../../SiteHeader";\nimport { SiteFooter } from "../../SiteFooter";\nimport { Gallery } from "../Gallery";\nimport { isEditorEnabled, isRemoteEditorMode } from "../../../lib/editor-mode";\nimport data from "../../../data/photo-data/${collection.slug}.json";\n\nconst photographs = data.displayOrder.map((number) => ({\n  ...data.photographData[number - 1],\n  src: \`/galleries/${collection.slug}/${collection.slug}-\${String(number).padStart(2, "0")}.jpg\`,\n}));\n\nconst hiddenPhotographs = data.photographData\n  .map((photo, index) => ({\n    ...photo,\n    src: \`/galleries/${collection.slug}/${collection.slug}-\${String(index + 1).padStart(2, "0")}.jpg\`,\n  }))\n  .filter((photo) => photo.hidden);\n\nconst otherCollections = ${otherCollectionsJson};\n\nconst collectionSubtitle: string | null = ${quoted(collection.subtitle)};\n\nexport default function ${collection.component}() {\n  const remote = isRemoteEditorMode();\n  const photoCountText = data.displayOrder.length + \" Photos\";\n  const subtitle = collectionSubtitle ? collectionSubtitle + \" \u00b7 \" + photoCountText : photoCountText;\n  return (\n    <main className="subpage collection-page">\n      <SiteHeader showHome />\n      <header className="collection-heading">\n        <a href="/collections">← Galleries</a>\n        <h1>${collection.title}</h1>\n        <p>{subtitle}</p>\n      </header>\n      <Gallery\n        name=${quoted(collection.title)}\n        slug=${quoted(collection.slug)}\n        photographs={photographs}\n        hiddenPhotographs={hiddenPhotographs}\n        otherCollections={remote ? [] : otherCollections}\n        editable={isEditorEnabled()}\n        remoteMode={remote}\n      />\n\n      <SiteFooter />\n    </main>\n  );\n}\n`;
   const collectionPageDirectory = path.join(root, "app", "collections", collection.slug);
   await mkdir(collectionPageDirectory, { recursive: true });
   await writeFile(path.join(collectionPageDirectory, "page.tsx"), page);
@@ -562,9 +661,15 @@ for (const collection of collections) {
       coverOverride,
     }),
   );
-  indexPhotos.push(
-    ...computeIndexPhotos({ slug: collection.slug, title: collection.title, photographData, displayOrder }),
-  );
+  // A private collection's photos never enter the sitewide person/event
+  // search index -- that index is served flat and ungated on the public
+  // Galleries page, so including them would let anyone search a name into
+  // seeing a private gallery's photos without ever passing the gate.
+  if (!isPrivateCollection) {
+    indexPhotos.push(
+      ...computeIndexPhotos({ slug: collection.slug, title: collection.title, photographData, displayOrder }),
+    );
+  }
 }
 
 await writeFile(collectionCoverOverridesPath, `${JSON.stringify(collectionCoverOverrides, null, 2)}\n`);

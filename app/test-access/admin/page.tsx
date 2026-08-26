@@ -4,6 +4,8 @@ import { isPrivateAccessEnabled } from "../../../lib/private-access-mode";
 import { getPool } from "../../../lib/db";
 import { SESSION_COOKIE_NAME, verifySessionCookieValue } from "../../../lib/session-cookie";
 import { RevokeButton } from "./RevokeButton";
+import { GalleryAccessGrid } from "./GalleryAccessGrid";
+import collectionIndex from "../../../data/photo-data/_index.json";
 
 export const dynamic = "force-dynamic";
 
@@ -37,8 +39,12 @@ export default async function AdminPage() {
   const loggedIn = await verifySessionCookieValue(cookieStore.get(SESSION_COOKIE_NAME)?.value);
   if (!loggedIn) redirect("/test-access/admin-login?redirect=/test-access/admin");
 
+  const privateGalleries = (collectionIndex.cards as Array<{ slug: string; title: string; private: boolean }>)
+    .filter((card) => card.private)
+    .map((card) => ({ slug: card.slug, title: card.title }));
+
   const pool = getPool();
-  const [accountsResult, pendingResult] = await Promise.all([
+  const [accountsResult, pendingResult, grantsResult] = await Promise.all([
     pool.query(
       `select accounts.id, accounts.name, accounts.email, accounts.session_type,
               accounts.created_at, accounts.revoked_at,
@@ -52,10 +58,18 @@ export default async function AdminPage() {
         where status = 'pending'
         order by requested_at desc`,
     ),
+    privateGalleries.length > 0
+      ? pool.query(`select account_id, gallery_slug from gallery_access`)
+      : Promise.resolve({ rows: [] }),
   ]);
 
   const accounts = accountsResult.rows as Account[];
   const pending = pendingResult.rows as PendingRequest[];
+  const grants = new Set(
+    (grantsResult.rows as Array<{ account_id: number; gallery_slug: string }>).map(
+      (row) => `${row.account_id}:${row.gallery_slug}`,
+    ),
+  );
 
   return (
     <main className="private-access-inner wide">
@@ -133,6 +147,19 @@ export default async function AdminPage() {
             </table>
           </div>
         )}
+      </section>
+
+      <section className="private-access-section">
+        <h2>Private gallery access</h2>
+        <p className="private-access-note">
+          One row per account, one column per private gallery. Check a box to grant that person
+          access immediately — no email round trip needed.
+        </p>
+        <GalleryAccessGrid
+          accounts={accounts.filter((account) => !account.revoked_at)}
+          privateGalleries={privateGalleries}
+          grants={grants}
+        />
       </section>
     </main>
   );

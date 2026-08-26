@@ -55,6 +55,7 @@ export function computeIndexCard({ slug, title, photographData, collectionOverri
     event: [...collectionEvents].sort(),
     count: displayOrder.length,
     pinned: Boolean(coverOverride.pinnedAt),
+    private: Boolean(coverOverride.private),
     coverBasename: `${slug}-${String(coverNumber).padStart(2, "0")}.jpg`,
     coverPosition: coverOverride.coverPosition ?? "center center",
   };

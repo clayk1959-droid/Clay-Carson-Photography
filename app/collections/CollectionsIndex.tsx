@@ -9,6 +9,7 @@ type CollectionCard = {
   event: string[];
   count: number;
   pinned: boolean;
+  private: boolean;
   coverBasename: string;
   coverPosition: string;
 };
@@ -148,11 +149,28 @@ export function CollectionsIndex({
             <a className="collection-card" href={`/collections/${card.slug}`} key={card.slug}>
               <div className="collection-cover">
                 <img
-                  src={`/gallery-thumbnails/${card.slug}/${card.coverBasename}`}
+                  src={
+                    card.private
+                      ? `/api/private-photo/gallery-thumbnails/${card.slug}/${card.coverBasename}`
+                      : `/gallery-thumbnails/${card.slug}/${card.coverBasename}`
+                  }
                   alt={`${card.title} gallery`}
                   style={{ objectPosition: card.coverPosition }}
+                  onError={(event) => {
+                    // A private gallery's cover only loads for a visitor who
+                    // already has access -- /api/private-photo 404s for
+                    // everyone else. No lock icon by design (Clay wants
+                    // these cards indistinguishable in the list), so an
+                    // unauthorized visitor just sees the card without art.
+                    event.currentTarget.style.display = "none";
+                  }}
                 />
-                {editable && <PinButton slug={card.slug} initiallyPinned={card.pinned} />}
+                {editable && (
+                  <>
+                    <PinButton slug={card.slug} initiallyPinned={card.pinned} />
+                    <PrivacyButton slug={card.slug} initiallyPrivate={card.private} />
+                  </>
+                )}
               </div>
               <div className="collection-details">
                 <div>
@@ -215,6 +233,48 @@ function PinButton({ slug, initiallyPinned }: { slug: string; initiallyPinned: b
       title={pinned ? "Pinned to top — click to unpin" : "Nudge to top of the Galleries list"}
     >
       {pinned ? "Pinned" : "Nudge to Top"}
+    </button>
+  );
+}
+
+function PrivacyButton({ slug, initiallyPrivate }: { slug: string; initiallyPrivate: boolean }) {
+  const [isPrivate, setIsPrivate] = useState(initiallyPrivate);
+  const [busy, setBusy] = useState(false);
+
+  async function toggle(event: React.MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (busy) return;
+    setBusy(true);
+    try {
+      const response = await fetch("/api/collection-privacy", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ slug }),
+      });
+      if (!response.ok) throw new Error(await response.text());
+      const body = await response.json();
+      setIsPrivate(body.private);
+    } catch {
+      // Left as-is -- see PinButton's identical comment above.
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      className={isPrivate ? "card-privacy-button is-private" : "card-privacy-button"}
+      onClick={toggle}
+      disabled={busy}
+      title={
+        isPrivate
+          ? "Private — click to make public again"
+          : "Make private (needs a Sync Gallery run to fully take effect)"
+      }
+    >
+      {isPrivate ? "Private" : "Make Private"}
     </button>
   );
 }

@@ -123,6 +123,10 @@ h1 em, h2 em { font-weight: 400; }
 .card-pin-button:hover { background: rgba(7, 8, 7, .92); }
 .card-pin-button:disabled { opacity: .6; cursor: default; }
 .card-pin-button.is-pinned { background: #b08d57; color: #171a17; }
+.card-privacy-button { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 5px 9px; border: 0; background: rgba(7, 8, 7, .78); color: #f5f2eb; font: inherit; font-size: 9px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: background .15s ease; }
+.card-privacy-button:hover { background: rgba(7, 8, 7, .92); }
+.card-privacy-button:disabled { opacity: .6; cursor: default; }
+.card-privacy-button.is-private { background: #8a3f3f; color: #f5f2eb; }
 .collection-cover img { width: 100%; height: 100%; object-fit: cover; display: block; border: 3px solid #ffffff; transition: transform .8s ease; }
 .collection-card:hover .collection-cover img { transform: scale(1.018); }
 .collection-placeholder { border: 1px solid rgba(255, 255, 255, .6); display: grid; place-items: center; color: #454545; font-size: 9px; letter-spacing: .17em; text-transform: uppercase; }
@@ -134,6 +138,16 @@ h1 em, h2 em { font-weight: 400; }
 .collection-heading h1 { font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: clamp(15px, 1.8vw, 27px); font-style: normal; line-height: 1; }
 .collection-heading p { margin: 0 0 8px; color: #1c1c1c; font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
 .photo-gallery { max-width: 1440px; margin: 0 auto; padding: 16px 5vw 130px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.gallery-gate { max-width: 440px; margin: 40px auto 130px; padding: 32px 28px; background: var(--paper); }
+.gallery-gate-copy, .gallery-gate-sent { margin: 0 0 20px; font-size: 15px; line-height: 1.5; }
+.gallery-gate-form { display: grid; gap: 14px; }
+.gallery-gate-field { display: grid; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #454545; }
+.gallery-gate-input { padding: 10px 11px; border: 1px solid #b9b4a6; background: #ffffff; color: #1c1c1c; font: inherit; font-size: 14px; letter-spacing: normal; text-transform: none; }
+.gallery-gate-input:focus-visible { outline: 2px solid #1c1c1c; outline-offset: 1px; }
+.gallery-gate-button { padding: 12px 16px; border: 1px solid #1c1c1c; background: #1c1c1c; color: #f5f2eb; font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s; }
+.gallery-gate-button:hover { background: transparent; color: #1c1c1c; }
+.gallery-gate-button:disabled { opacity: .6; cursor: default; }
+.gallery-gate-error { margin: 10px 0 0; font-size: 13px; color: #a33; }
 .gallery-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; margin: 0; padding: 10px; border: 0; overflow: hidden; background: #cccccc; color: inherit; cursor: zoom-in; display: flex; align-items: center; justify-content: center; transition: transform .2s ease, box-shadow .2s ease; }
 .gallery-thumb img { max-width: var(--thumb-inner, 100%); max-height: var(--thumb-inner, 100%); width: auto; height: auto; display: block; border: 3px solid #ffffff; transition: opacity .25s ease, transform .5s cubic-bezier(.2,.65,.3,1); }
 .gallery-thumb:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .28); transform: translateY(-2px); }
