@@ -15,6 +15,11 @@ Last updated: Thursday, August 27, 2026
 
 ## Version history
 
+### Version 131 — Thursday, August 27, 2026
+
+- Fixed the sync crashing entirely when a gallery folder has anything other than finished images in it. Katie & Ben's Wedding was set up straight from a camera/Lightroom export — raw camera files and metadata sidecar files mixed in with the real photos — and one of the raw files looks enough like a TIFF internally that the sync tried to read it as one and crashed on camera-specific quirks it can't decode. The sync now quietly skips anything that isn't a real image file instead of crashing, so this can't take down every other gallery's sync again. Archived the 48 raw/sidecar files that don't belong on the site to a local-only folder — nothing was deleted.
+- Katie & Ben's Wedding is live with its 9 real photos, correctly tagged.
+
 ### Version 130 — Thursday, August 27, 2026
 
 - Added new Katie & Ben's Wedding
