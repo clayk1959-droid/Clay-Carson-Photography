@@ -136,6 +136,7 @@ const collections = [
   { folder: "Nova Scotia Trip", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null },
   { folder: "Norway Cruise", slug: "norway-cruise", title: "Norway Cruise", component: "NorwayCruisePage", subtitle: null },
   { folder: "Rhine River Cruise", slug: "rhine-river-cruise", title: "Rhine River Cruise", component: "RhineRiverCruisePage", subtitle: null },
+  { folder: "Katie & Ben's Wedding", slug: "katie-ben-s-wedding", title: "Katie & Ben's Wedding", component: "KatieBenSWeddingPage", subtitle: null },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.

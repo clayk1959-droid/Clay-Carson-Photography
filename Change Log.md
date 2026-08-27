@@ -15,6 +15,10 @@ Last updated: Thursday, August 27, 2026
 
 ## Version history
 
+### Version 130 — Thursday, August 27, 2026
+
+- Added new Katie & Ben's Wedding
+
 ### Version 129 — Thursday, August 27, 2026
 
 - Search results can now be edited directly, not just viewed. Searching People/Event tags is mainly useful for finding and fixing a typo, but there was no way to actually edit the photo you found — you had to leave search, find the right gallery, and hunt for the same photo again by sight. A new "Edit this photo" link on a search result now opens straight into that exact photo's edit form.
