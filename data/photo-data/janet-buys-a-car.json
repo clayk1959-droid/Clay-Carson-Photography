@@ -211,20 +211,13 @@
     {
       "filename": "L1019979 copy.jpg",
       "date": "2026-08-09",
-      "description": "Janet Buys a car",
-      "caption": "August 9, 2026 — Janet Buys a car",
-      "altText": "Janet Buys a car",
-      "person": [
-        "Albert Everett",
-        "Clay Carson",
-        "Janet Carson",
-        "Mark Cobard",
-        "Phylis Conard",
-        "Alex Brandon",
-        "DSandy Covem Church Point",
-        "Digby"
+      "description": "First Sunset",
+      "caption": "August 9, 2026 — First Sunset",
+      "altText": "First Sunset",
+      "person": [],
+      "event": [
+        "Nova Scotia Trip"
       ],
-      "event": [],
       "width": 720,
       "height": 446,
       "hidden": false
