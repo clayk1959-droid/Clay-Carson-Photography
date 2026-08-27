@@ -73,7 +73,15 @@
       "order": 7
     },
     "Janet Buys a Car-11.jpg": {
-      "order": 1
+      "caption": "Janet Buys a Car - Checking out window stickers",
+      "date": "2024-08-11",
+      "order": 1,
+      "person": [
+        "Janet Carson"
+      ],
+      "event": [
+        "Janet Buys a Car"
+      ]
     },
     "Janet Buys a Car-12.jpg": {
       "order": 3

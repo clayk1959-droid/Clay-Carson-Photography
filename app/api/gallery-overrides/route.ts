@@ -9,7 +9,26 @@ export const dynamic = "force-dynamic";
 
 const overridesPath = path.join(process.cwd(), "data", "gallery-overrides.json");
 
-type PhotoOverride = { caption?: string; date?: string; order?: number; hidden?: boolean };
+type PhotoOverride = {
+  caption?: string;
+  date?: string;
+  order?: number;
+  hidden?: boolean;
+  person?: string[];
+  event?: string[];
+};
+
+// Trimmed, deduplicated, non-empty strings, capped at a sane length -- same
+// shape whether it came from a comma-separated form field or elsewhere.
+function parseTagList(value: unknown): string[] | null {
+  if (!Array.isArray(value)) return null;
+  const seen = new Set<string>();
+  for (const entry of value) {
+    if (typeof entry !== "string" || entry.length === 0 || entry.length > 100) return null;
+    seen.add(entry);
+  }
+  return [...seen];
+}
 type Overrides = Record<string, Record<string, PhotoOverride>>;
 
 async function readOverrides(): Promise<Overrides> {
@@ -52,7 +71,7 @@ export async function POST(request: Request) {
     return new Response("Invalid request body", { status: 400 });
   }
 
-  const { slug, filename, caption, date, order, reset, hidden } = body as Record<string, unknown>;
+  const { slug, filename, caption, date, order, reset, hidden, person, event } = body as Record<string, unknown>;
 
   if (typeof slug !== "string" || !/^[a-z0-9-]+$/.test(slug)) {
     return new Response("Invalid slug", { status: 400 });
@@ -91,6 +110,18 @@ export async function POST(request: Request) {
         return new Response("Invalid order", { status: 400 });
       }
       entry.order = order;
+    }
+
+    if (person !== undefined) {
+      const parsed = parseTagList(person);
+      if (!parsed) return new Response("Invalid person list", { status: 400 });
+      entry.person = parsed;
+    }
+
+    if (event !== undefined) {
+      const parsed = parseTagList(event);
+      if (!parsed) return new Response("Invalid event list", { status: 400 });
+      entry.event = parsed;
     }
 
     if (Object.keys(entry).length === 0) {
@@ -141,6 +172,12 @@ export async function POST(request: Request) {
           }
           if (entry?.date !== undefined) {
             photo.date = entry.date;
+          }
+          if (entry?.person !== undefined) {
+            photo.person = entry.person;
+          }
+          if (entry?.event !== undefined) {
+            photo.event = entry.event;
           }
           photo.caption = photo.date ? `${formatDate(photo.date)} — ${photo.description}` : photo.description;
         },

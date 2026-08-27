@@ -13,6 +13,8 @@ type GalleryPhoto = {
   filename: string;
   date: string | null;
   description: string;
+  person: string[];
+  event: string[];
 };
 
 type CollectionOption = { slug: string; title: string };
@@ -807,6 +809,8 @@ function EditPhotoForm({
 }) {
   const [caption, setCaption] = useState(photograph.description);
   const [date, setDate] = useState(photograph.date ?? "");
+  const [person, setPerson] = useState(photograph.person.join(", "));
+  const [event, setEvent] = useState(photograph.event.join(", "));
   const [order, setOrder] = useState(String(position));
   const [moveTarget, setMoveTarget] = useState(otherCollections[0]?.slug ?? "");
   const [coverPosition, setCoverPosition] = useState("center center");
@@ -860,10 +864,20 @@ function EditPhotoForm({
     <>click <strong>Sync Gallery</strong> (bottom right) to apply.</>
   );
 
-  function handleSave(event: FormEvent) {
-    event.preventDefault();
+  function parseTagList(value: string): string[] {
+    return [...new Set(value.split(",").map((entry) => entry.trim()).filter(Boolean))];
+  }
+
+  function handleSave(formEvent: FormEvent) {
+    formEvent.preventDefault();
     submitChange(
-      { caption: caption.trim(), date: date || null, order: Number(order) },
+      {
+        caption: caption.trim(),
+        date: date || null,
+        order: Number(order),
+        person: parseTagList(person),
+        event: parseTagList(event),
+      },
       <>Saved — {applyMessage}</>,
     );
   }
@@ -952,6 +966,26 @@ function EditPhotoForm({
             type="date"
             value={date}
             onChange={(event) => setDate(event.target.value)}
+          />
+        </label>
+
+        <label>
+          People
+          <input
+            type="text"
+            value={person}
+            onChange={(changeEvent) => setPerson(changeEvent.target.value)}
+            placeholder="Comma-separated, e.g. Janet Carson, Barry"
+          />
+        </label>
+
+        <label>
+          Event
+          <input
+            type="text"
+            value={event}
+            onChange={(changeEvent) => setEvent(changeEvent.target.value)}
+            placeholder="Comma-separated, e.g. Nova Scotia Trip"
           />
         </label>
 

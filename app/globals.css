@@ -181,7 +181,7 @@ h1 em, h2 em { font-weight: 400; }
 .lightbox-previous { left: 12px; }
 .lightbox-next { right: 12px; }
 
-.edit-photo-overlay { position: fixed; inset: 0; z-index: 1100; padding: 24px; display: grid; place-items: center; background: rgba(5, 6, 5, .82); }
+.edit-photo-overlay { position: fixed; inset: 0; z-index: 1100; padding: 24px; display: grid; place-items: start center; overflow-y: auto; background: rgba(5, 6, 5, .82); }
 .edit-photo-form { width: min(360px, 100%); padding: 28px 26px; border: 1px solid #343733; background: #0c0d0c; color: #f5f2eb; display: grid; gap: 16px; }
 .edit-photo-form h2 { margin: 0; font-family: 'Bookman Old Style', Bookman, 'URW Bookman L', Georgia, serif; font-size: 18px; font-weight: 400; }
 .edit-photo-form label { display: grid; gap: 6px; font-size: 9px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #969a93; }

@@ -16,7 +16,14 @@ import {
   sortIndexCards,
 } from "../scripts/lib/photo-ranking.mjs";
 
-export type PhotoOverride = { caption?: string; date?: string; order?: number; hidden?: boolean };
+export type PhotoOverride = {
+  caption?: string;
+  date?: string;
+  order?: number;
+  hidden?: boolean;
+  person?: string[];
+  event?: string[];
+};
 export type Overrides = Record<string, Record<string, PhotoOverride>>;
 export type CollectionOverrides = Record<string, PhotoOverride>;
 export type CoverOverride = {
