@@ -1,8 +1,14 @@
 {
+  "france-trip": {
+    "firstSyncedAt": "2026-08-27T16:50:35.000Z"
+  },
   "janet-buys-a-car": {
     "coverPhoto": "Janet Buys a Car-9.jpg",
     "coverPosition": "center center",
     "firstSyncedAt": "2026-08-08T16:21:08.000Z"
+  },
+  "katie-ben-s-wedding": {
+    "firstSyncedAt": "2026-08-27T13:51:13.000Z"
   },
   "norway-cruise": {
     "coverPhoto": "NORWAY_7.tif",
@@ -20,11 +26,5 @@
     "coverPhoto": "_DSC0210.jpg",
     "coverPosition": "center center",
     "firstSyncedAt": "2026-08-21T01:59:34.000Z"
-  },
-  "katie-ben-s-wedding": {
-    "firstSyncedAt": "2026-08-27T13:51:13.000Z"
-  },
-  "france-trip": {
-    "firstSyncedAt": "2026-08-27T16:50:35.000Z"
   }
 }
