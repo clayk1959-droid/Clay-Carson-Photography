@@ -1,0 +1,152 @@
+{
+  "photographData": [
+    {
+      "filename": "01-IMG_9785 copy.tif",
+      "date": "2026-08-27",
+      "description": "Katie & Ben's Wedding",
+      "caption": "August 27, 2026 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [
+        "Ben Muller",
+        "Katie Muller"
+      ],
+      "event": [
+        "Katie & Ben's Wedding"
+      ],
+      "width": 1482,
+      "height": 2200,
+      "hidden": false
+    },
+    {
+      "filename": "IMG_0099 copy.tif",
+      "date": "2026-08-27",
+      "description": "Katie & Ben's Wedding",
+      "caption": "August 27, 2026 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [
+        "Nen Muller",
+        "Carol Muller"
+      ],
+      "event": [
+        "Katie & Ben's Wedding"
+      ],
+      "width": 1953,
+      "height": 2200,
+      "hidden": false
+    },
+    {
+      "filename": "IMG_9513 copy.tif",
+      "date": "2026-08-27",
+      "description": "Katie & Ben's Wedding",
+      "caption": "August 27, 2026 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [
+        "Ben Muller",
+        "Katie Muller"
+      ],
+      "event": [
+        "Katie & Ben's Wedding"
+      ],
+      "width": 2200,
+      "height": 1467,
+      "hidden": false
+    },
+    {
+      "filename": "IMG_9532 copy.tif",
+      "date": "2026-08-27",
+      "description": "Katie & Ben's Wedding",
+      "caption": "August 27, 2026 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [
+        "Katie Muller",
+        "Ben Muller"
+      ],
+      "event": [
+        "Katie & Ben's Wedding"
+      ],
+      "width": 2200,
+      "height": 1467,
+      "hidden": false
+    },
+    {
+      "filename": "IMG_9597 copy.tif",
+      "date": "2026-08-27",
+      "description": "Katie & Ben's Wedding",
+      "caption": "August 27, 2026 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [],
+      "event": [
+        "Katie & Ben's Wedding"
+      ],
+      "width": 2200,
+      "height": 1467,
+      "hidden": false
+    },
+    {
+      "filename": "IMG_9623 copy.tif",
+      "date": "2026-08-27",
+      "description": "Katie & Ben's Wedding",
+      "caption": "August 27, 2026 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [
+        "Brittany",
+        "Alyson",
+        "Katie Muller. Ben Muller",
+        "Kyle Carson"
+      ],
+      "event": [
+        "Katie & Ben's Wedding"
+      ],
+      "width": 2200,
+      "height": 1467,
+      "hidden": false
+    },
+    {
+      "filename": "_DSC2118.JPG",
+      "date": "2018-02-08",
+      "description": "Katie & Ben's Wedding",
+      "caption": "February 8, 2018 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [],
+      "event": [],
+      "width": 1468,
+      "height": 2200,
+      "hidden": false
+    },
+    {
+      "filename": "_DSC2178.JPG",
+      "date": "2018-02-08",
+      "description": "Katie & Ben's Wedding",
+      "caption": "February 8, 2018 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [],
+      "event": [],
+      "width": 2200,
+      "height": 1468,
+      "hidden": false
+    },
+    {
+      "filename": "_DSC2239.JPG",
+      "date": "2018-02-08",
+      "description": "Katie & Ben's Wedding",
+      "caption": "February 8, 2018 — Katie & Ben's Wedding",
+      "altText": "Katie & Ben's Wedding",
+      "person": [],
+      "event": [],
+      "width": 1468,
+      "height": 2200,
+      "hidden": false
+    }
+  ],
+  "displayOrder": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}

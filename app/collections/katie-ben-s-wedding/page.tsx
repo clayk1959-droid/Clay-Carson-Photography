@@ -1,0 +1,65 @@
+import { SiteHeader } from "../../SiteHeader";
+import { SiteFooter } from "../../SiteFooter";
+import { Gallery } from "../Gallery";
+import { isEditorEnabled, isRemoteEditorMode } from "../../../lib/editor-mode";
+import data from "../../../data/photo-data/katie-ben-s-wedding.json";
+
+const photographs = data.displayOrder.map((number) => ({
+  ...data.photographData[number - 1],
+  src: `/galleries/katie-ben-s-wedding/katie-ben-s-wedding-${String(number).padStart(2, "0")}.jpg`,
+}));
+
+const hiddenPhotographs = data.photographData
+  .map((photo, index) => ({
+    ...photo,
+    src: `/galleries/katie-ben-s-wedding/katie-ben-s-wedding-${String(index + 1).padStart(2, "0")}.jpg`,
+  }))
+  .filter((photo) => photo.hidden);
+
+const otherCollections = [
+  {
+    "slug": "janet-buys-a-car",
+    "title": "Janet Buys a car"
+  },
+  {
+    "slug": "nova-scotia",
+    "title": "Nova Scotia"
+  },
+  {
+    "slug": "norway-cruise",
+    "title": "Norway Cruise"
+  },
+  {
+    "slug": "rhine-river-cruise",
+    "title": "Rhine River Cruise"
+  }
+];
+
+const collectionSubtitle: string | null = null;
+
+export default function KatieBenSWeddingPage() {
+  const remote = isRemoteEditorMode();
+  const photoCountText = data.displayOrder.length + " Photos";
+  const subtitle = collectionSubtitle ? collectionSubtitle + " · " + photoCountText : photoCountText;
+  return (
+    <main className="subpage collection-page">
+      <SiteHeader showHome />
+      <header className="collection-heading">
+        <a href="/collections">← Galleries</a>
+        <h1>Katie & Ben's Wedding</h1>
+        <p>{subtitle}</p>
+      </header>
+      <Gallery
+        name="Katie & Ben's Wedding"
+        slug="katie-ben-s-wedding"
+        photographs={photographs}
+        hiddenPhotographs={hiddenPhotographs}
+        otherCollections={remote ? [] : otherCollections}
+        editable={isEditorEnabled()}
+        remoteMode={remote}
+      />
+
+      <SiteFooter />
+    </main>
+  );
+}

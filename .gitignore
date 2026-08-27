@@ -1,9 +1,11 @@
 node_modules/
 .next/
 Gallery Originals/
+RAW Archive/
 .DS_Store
 .claude/settings.local.json
 .cache/
 tsconfig.tsbuildinfo
 .vercel
 .env*
+work/

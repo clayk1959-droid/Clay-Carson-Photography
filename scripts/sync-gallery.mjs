@@ -345,9 +345,42 @@ const indexPhotos = [];
 startSpinner();
 for (const collection of collections) {
   const sourceDirectory = path.join(sourceRoot, collection.folder);
-  const filenames = (await readdir(sourceDirectory))
-    .filter((filename) => !filename.startsWith("."))
+  const sourceEntries = await readdir(sourceDirectory, { withFileTypes: true });
+  // Only real, directly-processable image files -- a raw camera file (e.g.
+  // .CR2) is internally TIFF-shaped enough that sharp will attempt to read
+  // it as one and crash the whole sync on Canon-specific quirks it can't
+  // decode, and a sidecar like .XMP is plain text, not an image at all.
+  // Skipping anything else here (with a clear log line) means dropping a
+  // folder straight from a camera/Lightroom export -- raw + sidecars mixed
+  // in with the real originals -- degrades to "those files are ignored"
+  // instead of crashing every other collection's sync too.
+  //
+  // Deliberately just "ends with jpg/jpeg/tif/tiff/png", not a strict
+  // path.extname() match requiring a literal "." right before it -- an
+  // existing, long-published Norway Cruise photo is named
+  // "...ride_1.1tif" (odd, but a real TIFF, likely a stray rename from
+  // whenever it was scanned) and would otherwise get silently dropped
+  // despite having always synced fine. No raw or sidecar extension
+  // (cr2, xmp, nef, dng, ...) ends in those letters, so this stays just as
+  // effective at excluding them.
+  const KNOWN_IMAGE_SUFFIX = /(?:jpe?g|tiff?|png)$/i;
+  const skipped = [];
+  const filenames = sourceEntries
+    .filter((entry) => {
+      if (!entry.isFile() || entry.name.startsWith(".")) return false;
+      if (!KNOWN_IMAGE_SUFFIX.test(entry.name)) {
+        skipped.push(entry.name);
+        return false;
+      }
+      return true;
+    })
+    .map((entry) => entry.name)
     .sort();
+  if (skipped.length > 0) {
+    logLine(
+      `${collection.title}: skipped ${skipped.length} non-image file(s) (not .jpg/.jpeg/.tif/.tiff/.png): ${skipped.join(", ")}`,
+    );
+  }
 
   if (filenames.length === 0) {
     // Ignore empty folders until they actually have photos — clean up any
