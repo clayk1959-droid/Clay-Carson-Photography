@@ -414,6 +414,31 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 128</span><span class="version-date">Thursday, August 27, 2026</span></div>
+      <ul>
+        <li>Photos can now have their People and Event tags edited directly, the same way captions and dates already could — no more needing to go back and fix the original file just to correct a typo or clean up an inconsistent name. New fields in the photo edit form, comma-separated to match how you'd naturally type multiple names.</li>
+        <li>Fixed a real bug found while adding those fields: the photo edit window had no way to scroll on a shorter screen, so the Save button (and everything below it) could become completely unreachable. Now scrolls properly regardless of how many fields it holds.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 127</span><span class="version-date">Thursday, August 27, 2026</span></div>
+      <ul>
+        <li>A private gallery's cover photo now shows on its card to every visitor, not just people with access — your call, since a blank card next to real photos on every other gallery looked wrong. The photo is reachable only through a long, random, one-of-a-kind link that has nothing to do with the gallery's name or file names, so nobody can find or guess their way to it — a narrower guarantee than the real login check protecting the rest of the gallery, but nobody stumbles onto it by chance either.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 126</span><span class="version-date">Thursday, August 27, 2026</span></div>
+      <ul>
+        <li>Fixed a real gap: the editor (you, or anyone logged into the remote editor) couldn't actually view or manage a private gallery's own photos without first going through the same family request/approval process as an outside visitor. The editor now always sees every gallery, private or not — the access grant only applies to family visitors on the real site, never to the person managing privacy in the first place.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 125</span><span class="version-date">Wednesday, August 26, 2026</span></div>
+      <ul>
+        <li>Added a self-serve "resend my login link" option to a private gallery's request page. Until now, switching devices or clearing your browser's cookies meant submitting a whole new access request and waiting on approval again, even though you were already granted access — now you just re-enter your email and get a fresh login link immediately, no approval needed.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 124</span><span class="version-date">Wednesday, August 26, 2026</span></div>
       <ul>
         <li>Fixed two real bugs found while building private galleries. The admin page's Revoke button (and its new companion, the private-gallery access checkboxes) had been silently broken since Revoke first shipped — clicking it always failed, due to how the login cookie was being read back. Both now work correctly. Also found and replaced an expired Resend sending key that was silently blocking every private-access email — request notifications and approval links — from going out. New key confirmed working with a real test send.</li>

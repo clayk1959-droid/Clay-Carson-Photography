@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Wednesday, August 26, 2026
+Last updated: Thursday, August 27, 2026
 
 ## Current status
 
@@ -14,6 +14,23 @@ Last updated: Wednesday, August 26, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 128 — Thursday, August 27, 2026
+
+- Photos can now have their People and Event tags edited directly, the same way captions and dates already could — no more needing to go back and fix the original file just to correct a typo or clean up an inconsistent name. New fields in the photo edit form, comma-separated to match how you'd naturally type multiple names.
+- Fixed a real bug found while adding those fields: the photo edit window had no way to scroll on a shorter screen, so the Save button (and everything below it) could become completely unreachable. Now scrolls properly regardless of how many fields it holds.
+
+### Version 127 — Thursday, August 27, 2026
+
+- A private gallery's cover photo now shows on its card to every visitor, not just people with access — your call, since a blank card next to real photos on every other gallery looked wrong. The photo is reachable only through a long, random, one-of-a-kind link that has nothing to do with the gallery's name or file names, so nobody can find or guess their way to it — a narrower guarantee than the real login check protecting the rest of the gallery, but nobody stumbles onto it by chance either.
+
+### Version 126 — Thursday, August 27, 2026
+
+- Fixed a real gap: the editor (you, or anyone logged into the remote editor) couldn't actually view or manage a private gallery's own photos without first going through the same family request/approval process as an outside visitor. The editor now always sees every gallery, private or not — the access grant only applies to family visitors on the real site, never to the person managing privacy in the first place.
+
+### Version 125 — Wednesday, August 26, 2026
+
+- Added a self-serve "resend my login link" option to a private gallery's request page. Until now, switching devices or clearing your browser's cookies meant submitting a whole new access request and waiting on approval again, even though you were already granted access — now you just re-enter your email and get a fresh login link immediately, no approval needed.
 
 ### Version 124 — Wednesday, August 26, 2026
 
