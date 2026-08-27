@@ -32,6 +32,10 @@ const otherCollections = [
   {
     "slug": "rhine-river-cruise",
     "title": "Rhine River Cruise"
+  },
+  {
+    "slug": "france-trip",
+    "title": "France trip"
   }
 ];
 

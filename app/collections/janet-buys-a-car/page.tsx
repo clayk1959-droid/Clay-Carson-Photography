@@ -32,6 +32,10 @@ const otherCollections = [
   {
     "slug": "katie-ben-s-wedding",
     "title": "Katie & Ben's Wedding"
+  },
+  {
+    "slug": "france-trip",
+    "title": "France trip"
   }
 ];
 

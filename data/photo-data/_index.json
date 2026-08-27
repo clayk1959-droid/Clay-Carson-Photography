@@ -23,6 +23,21 @@
       "coverPosition": "center center"
     },
     {
+      "slug": "france-trip",
+      "title": "France trip",
+      "person": [
+        "Carol Mendal",
+        "Janet"
+      ],
+      "event": [],
+      "count": 113,
+      "pinned": false,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "france-trip-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
       "slug": "katie-ben-s-wedding",
       "title": "Katie & Ben's Wedding",
       "person": [
@@ -2637,6 +2652,106 @@
       "width": 2200,
       "height": 1467,
       "src": "/galleries/katie-ben-s-wedding/katie-ben-s-wedding-06.jpg"
+    },
+    {
+      "collectionSlug": "france-trip",
+      "collectionTitle": "France trip",
+      "filename": "1 - 118 (1).jpeg",
+      "caption": "May 20, 2024 — France trip",
+      "altText": "France trip",
+      "person": [
+        "Janet"
+      ],
+      "event": [],
+      "width": 1280,
+      "height": 920,
+      "src": "/galleries/france-trip/france-trip-25.jpg"
+    },
+    {
+      "collectionSlug": "france-trip",
+      "collectionTitle": "France trip",
+      "filename": "1 - 121 (1).jpeg",
+      "caption": "May 22, 2024 — France trip",
+      "altText": "France trip",
+      "person": [
+        "Carol Mendal",
+        "Janet"
+      ],
+      "event": [],
+      "width": 1176,
+      "height": 814,
+      "src": "/galleries/france-trip/france-trip-30.jpg"
+    },
+    {
+      "collectionSlug": "france-trip",
+      "collectionTitle": "France trip",
+      "filename": "1 - 155.jpeg",
+      "caption": "May 9, 2024 — France trip",
+      "altText": "France trip",
+      "person": [
+        "Janet"
+      ],
+      "event": [],
+      "width": 1280,
+      "height": 830,
+      "src": "/galleries/france-trip/france-trip-37.jpg"
+    },
+    {
+      "collectionSlug": "france-trip",
+      "collectionTitle": "France trip",
+      "filename": "1 - 185.jpeg",
+      "caption": "May 22, 2024 — France trip",
+      "altText": "France trip",
+      "person": [
+        "Carol Mendal",
+        "Janet"
+      ],
+      "event": [],
+      "width": 1176,
+      "height": 814,
+      "src": "/galleries/france-trip/france-trip-46.jpg"
+    },
+    {
+      "collectionSlug": "france-trip",
+      "collectionTitle": "France trip",
+      "filename": "1 - 33.jpeg",
+      "caption": "April 26, 2024 — France trip",
+      "altText": "France trip",
+      "person": [
+        "Janet"
+      ],
+      "event": [],
+      "width": 960,
+      "height": 1280,
+      "src": "/galleries/france-trip/france-trip-59.jpg"
+    },
+    {
+      "collectionSlug": "france-trip",
+      "collectionTitle": "France trip",
+      "filename": "1 - 79 (1).jpeg",
+      "caption": "May 9, 2024 — France trip",
+      "altText": "France trip",
+      "person": [
+        "Janet"
+      ],
+      "event": [],
+      "width": 1280,
+      "height": 869,
+      "src": "/galleries/france-trip/france-trip-89.jpg"
+    },
+    {
+      "collectionSlug": "france-trip",
+      "collectionTitle": "France trip",
+      "filename": "1 - 91 (1).jpeg",
+      "caption": "May 9, 2024 — France trip",
+      "altText": "France trip",
+      "person": [
+        "Janet"
+      ],
+      "event": [],
+      "width": 1280,
+      "height": 830,
+      "src": "/galleries/france-trip/france-trip-104.jpg"
     }
   ]
 }
