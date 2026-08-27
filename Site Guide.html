@@ -414,6 +414,19 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 133</span><span class="version-date">Thursday, August 27, 2026</span></div>
+      <ul>
+        <li>Added email and text alerts for when a deploy fails on Vercel. Running a local sync and pushing to GitHub already show real errors right in the terminal, but a failed build after that has always been silent — you'd have no idea unless you happened to check the Vercel dashboard. Now you get an email and a text the moment one fails, covering all three projects (main site, private-access, editor).</li>
+        <li>Fixed a real, separate bug found along the way: your phone number for text alerts had gotten silently corrupted to a literal placeholder at some point (a known Vercel CLI quirk when exporting certain sensitive values) — this is why local testing of text alerts wasn't working. Restored the real number and changed how it's stored so this specific corruption can't happen again.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 132</span><span class="version-date">Thursday, August 27, 2026</span></div>
+      <ul>
+        <li>Added France gallery</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 131</span><span class="version-date">Thursday, August 27, 2026</span></div>
       <ul>
         <li>Fixed the sync crashing entirely when a gallery folder has anything other than finished images in it. Katie & Ben's Wedding was set up straight from a camera/Lightroom export — raw camera files and metadata sidecar files mixed in with the real photos — and one of the raw files looks enough like a TIFF internally that the sync tried to read it as one and crashed on camera-specific quirks it can't decode. The sync now quietly skips anything that isn't a real image file instead of crashing, so this can't take down every other gallery's sync again. Archived the 48 raw/sidecar files that don't belong on the site to a local-only folder — nothing was deleted.</li>

@@ -15,6 +15,11 @@ Last updated: Thursday, August 27, 2026
 
 ## Version history
 
+### Version 133 — Thursday, August 27, 2026
+
+- Added email and text alerts for when a deploy fails on Vercel. Running a local sync and pushing to GitHub already show real errors right in the terminal, but a failed build after that has always been silent — you'd have no idea unless you happened to check the Vercel dashboard. Now you get an email and a text the moment one fails, covering all three projects (main site, private-access, editor).
+- Fixed a real, separate bug found along the way: your phone number for text alerts had gotten silently corrupted to a literal placeholder at some point (a known Vercel CLI quirk when exporting certain sensitive values) — this is why local testing of text alerts wasn't working. Restored the real number and changed how it's stored so this specific corruption can't happen again.
+
 ### Version 132 — Thursday, August 27, 2026
 
 - Added France gallery
