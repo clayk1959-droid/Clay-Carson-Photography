@@ -79,10 +79,10 @@
       "order": 3
     },
     "Janet Buys a Car-13.jpg": {
-      "order": 12
+      "order": 13
     },
     "Janet Buys a Car-2.jpg": {
-      "order": 9
+      "order": 10
     },
     "Janet Buys a Car-3.jpg": {
       "order": 4,
@@ -103,12 +103,12 @@
       "date": "2024-08-11"
     },
     "Janet Buys a Car-7.jpg": {
-      "order": 10,
+      "order": 14,
       "caption": "Janet Buys a Car - Done deal.….",
       "date": "2026-08-08"
     },
     "Janet Buys a Car-8.jpg": {
-      "order": 8
+      "order": 9
     },
     "Janet Buys a Car-9.jpg": {
       "caption": "Janet Buys a Car - Learning all of the new features",
@@ -116,7 +116,10 @@
       "order": 11
     },
     "Janet Buys a Car.jpg": {
-      "order": 11
+      "order": 12
+    },
+    "L1019979 copy.jpg": {
+      "order": 8
     }
   },
   "norway": {
