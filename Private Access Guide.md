@@ -1,8 +1,12 @@
 # Private Access System — Guide
 
-**Status: in testing.** This is a work in progress, not a finished feature.
-Nothing here affects the live public site — see "Why it's kept separate"
-below.
+**Status: live.** Any gallery on the real public site can be marked
+private from the editor. The request → approve → login mechanism was
+built and proven out against placeholder pages on a separate, isolated
+Vercel project first (see "How it was tested" below) — that project still
+exists for testing and as the account-admin panel, but the actual
+gate now runs for real on `carsonmullerfamily.com` itself, protecting
+real galleries and real photos.
 
 ## The concept
 
@@ -23,44 +27,87 @@ The requirements this was designed against:
 - Log logins
 - Give the owner an easy way to kill any one person's access instantly
 
-## Why it's kept separate
+## How a gallery becomes private
 
-So nothing about this system can ever affect or break the live public site
-at carsonmullerfamily.com. It's built into the *same codebase* (so one
-person — or one Claude session — can maintain everything in one place),
-but it only *activates* on a second, separate Vercel project. The main
-site's build never even compiles these pages into itself; hitting any of
-these URLs on the main site returns a plain 404, same as a page that
-doesn't exist.
+1. In the editor, click "Make Private" on a gallery's card in the
+   Galleries index. It stays visible in the public list — no lock icon —
+   but clicking into it now shows a request-access gate instead of
+   photos, for anyone without a granted account.
+2. Run "Sync Gallery." This moves that gallery's images out of `public/`
+   (served unauthenticated by Next.js to anyone who knows the URL) into a
+   sibling `private-galleries/` tree that isn't, and switches its page to
+   a dynamic one that checks the visitor's session on every load.
+3. For people already in the account list, grant them access directly
+   from the admin page's checkbox grid — no email round trip needed. New
+   people click into the gallery and go through the request/approve/
+   magic-link flow below.
 
-This mirrors the existing password-protected remote editor project, which
-uses the same "same repo, second Vercel project, gated by an environment
-variable" pattern.
+Two things beyond simply gating the page make this actually private, not
+just hidden:
+
+- **The images themselves aren't public.** Every photo in a private
+  gallery is served through `app/api/private-photo/`, which re-checks the
+  visitor's session and grant on every single request — not just the
+  page. There's no direct-URL or guessed-link bypass.
+- **Private photos are excluded from the sitewide search.** The
+  Galleries-page person/event search index only ever includes photos from
+  public collections.
+
+## Why the test project still exists
+
+The original request → approve → login mechanism was built and proven out
+against placeholder pages on a second, separate Vercel project
+(`clay-carson-photography-private`) before ever being wired to a real
+gallery — so nothing about it could affect or break the live public site
+while it was still unproven. That project remains useful as the
+account-admin panel (the checkbox grid above lives there) and as a place
+to test future changes to the login mechanism itself in isolation before
+they touch real galleries. It mirrors the existing password-protected
+remote editor project, which uses the same "same repo, second Vercel
+project, gated by an environment variable" pattern.
 
 ## How it's built
 
 - **Database:** Postgres, via Neon, connected through Vercel. Holds access
-  requests, approved accounts, login sessions, and login history.
+  requests, approved accounts, per-gallery grants (`gallery_access`),
+  login sessions, and login history. The main site's Vercel project has
+  its own `DATABASE_URL` pointed at the same database as the
+  test/admin project.
   - Schema: `db/schema.sql`
   - Apply schema changes: `npm run db:migrate`
-- **File storage:** Vercel Blob — for the actual private photos later. Not
-  wired up to real photos yet; this phase only tests the login system
-  itself against placeholder pages.
+- **File storage:** a private gallery's actual image files live in
+  `private-galleries/` at the repo root — committed to git like `public/`
+  is, just outside the folder Next.js serves unauthenticated. Read only
+  by `app/api/private-photo/`, which re-checks the session on every
+  request.
 - **Email:** Resend — sends the owner-notification and magic-link emails.
-- **The on/off switch:** `PRIVATE_ACCESS_MODE=1`, set as an environment
-  variable on the second Vercel project (`clay-carson-photography-private`)
-  only. Every private-access page and API route checks
+- **The on/off switch for the test/admin project:**
+  `PRIVATE_ACCESS_MODE=1`, set only on `clay-carson-photography-private`.
+  Every route under `app/test-access/` and `app/api/test-access/` checks
   `lib/private-access-mode.ts` first and returns a plain 404 if that
-  variable isn't set.
+  variable isn't set. The *real* gallery-gating routes (below) have no
+  such switch — they're part of the main site and always active.
 
 ### Where the code lives
 
-- `app/test-access/` — the pages (landing, open, protected, admin)
-- `app/api/test-access/` — the API routes (request, decide, verify, revoke)
-- `lib/private-access.ts`, `lib/private-access-mode.ts`, `lib/db.ts` — shared
-  helpers, sitting alongside the site's other `lib/` files
+- `app/test-access/` — the test/admin pages (landing, open, protected,
+  admin — the account list and the private-galleries checkbox grid)
+- `app/api/test-access/` — the test-project API routes (request, decide,
+  verify, revoke, plus the admin grid's grant/revoke route)
+- `app/api/gallery-access/` — the real request/decide/verify routes used
+  by actual private galleries on the main site
+- `app/api/private-photo/` — serves a private gallery's images,
+  re-checking the session and grant on every request
+- `app/api/collection-privacy/` — the editor's "Make Private" toggle
+- `app/collections/GalleryAccessGate.tsx` — the request-access form shown
+  in place of a gallery's photos when the visitor isn't granted
+- `lib/private-access.ts`, `lib/private-access-mode.ts`, `lib/db.ts` —
+  shared helpers, sitting alongside the site's other `lib/` files
 - `db/schema.sql` — the database schema
 - `scripts/db-migrate.mjs` — applies the schema
+- `scripts/sync-gallery.mjs` — branches a private collection's output
+  between `public/` and `private-galleries/`, and excludes it from the
+  sitewide search index
 
 ## How the login flow works (no passwords, ever)
 
@@ -76,40 +123,36 @@ variable" pattern.
 5. Session length is chosen per person at approval time: 3 months, or
    forever (either one revocable anytime regardless).
 
-## Testing it yourself
+## Trying a real private gallery
 
-- **Start here:**
-  https://clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access
-  — two folders: "Open Me First" (unprotected, just proves the page
-  renders) and "Try Me Next" (protected — walks through the real
-  request/approve/login flow end to end, and emails the owner the moment
-  someone successfully gets in).
-- **Admin view** (every account, when they registered, how long their key
-  lasts, a revoke button):
+- Mark any gallery private from the editor ("Make Private" on its
+  Galleries-index card), run "Sync Gallery," and visit that gallery's
+  page on `carsonmullerfamily.com` while logged out — you'll see the
+  request-access gate instead of photos.
+- Submit a request, approve it from the owner-notification email, then
+  click the login link in the follow-up email — you'll land on the
+  actual gated gallery.
+- Grant an already-registered account instantly, no email round trip,
+  from the checkbox grid at
   https://clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access/admin
-  — password-protected with the same password as the pencil-icon editor.
-- Main site (`carsonmullerfamily.com`) is unaffected by any of this —
-  confirmed by hitting `/test-access` there directly, which correctly 404s.
+  (password-protected with the same password as the pencil-icon editor).
 
-## Still to do before this is real
+## Testing the login mechanism in isolation
 
-- [x] Password-protect the admin page — reuses the existing editor's
-      `EDITOR_PASSWORD` login rather than a new password.
-- [ ] Wire actual photos into it (Blob storage) instead of the placeholder
-      "protected folder" test page.
+The original placeholder-page test system is still there for trying
+changes to the request/approve/login mechanism itself before they touch
+a real gallery:
+https://clay-carson-photography-private-clayk1959-droids-projects.vercel.app/test-access
+— two folders: "Open Me First" (unprotected, just proves the page
+renders) and "Try Me Next" (protected — walks through the request/
+approve/login flow end to end against a placeholder page).
+
+Hitting `/test-access` on the main site (`carsonmullerfamily.com`)
+correctly 404s — that test system has no effect on the real site.
+
+## Possible future work
+
 - [ ] SMS notification to the owner, as an alternative/addition to email.
-- [ ] A way to mark a real gallery as private, and to grant access to
-      specific galleries rather than everything at once.
-
-      **Design decided 2026-08-22, not yet built:** access is per-gallery,
-      decided by Clay each time (not automatic/blanket for every future
-      private gallery) — but with a one-click "grant everyone who already
-      has access" bulk action on the admin page when a new gallery is
-      flagged private, so the common case (most new galleries go to
-      everyone) doesn't mean clicking through every account one at a time.
-      Individual people can still be excluded from a given gallery. No
-      named groups/tiers (e.g. "immediate family" vs "extended family") —
-      considered and deliberately skipped as unneeded complexity for how
-      Clay expects to actually use this; revisit only if a real need for
-      distinct circles of people shows up later.
-- [ ] A shorter, easier-to-share URL for the private site (custom domain).
+- [ ] A shorter, easier-to-share URL for the private test/admin site
+      (custom domain) — not needed for real galleries, which live on
+      `carsonmullerfamily.com` itself.

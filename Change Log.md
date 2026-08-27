@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Tuesday, August 25, 2026
+Last updated: Wednesday, August 26, 2026
 
 ## Current status
 
@@ -14,6 +14,16 @@ Last updated: Tuesday, August 25, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 124 — Wednesday, August 26, 2026
+
+- Fixed two real bugs found while building private galleries. The admin page's Revoke button (and its new companion, the private-gallery access checkboxes) had been silently broken since Revoke first shipped — clicking it always failed, due to how the login cookie was being read back. Both now work correctly. Also found and replaced an expired Resend sending key that was silently blocking every private-access email — request notifications and approval links — from going out. New key confirmed working with a real test send.
+
+### Version 123 — Wednesday, August 26, 2026
+
+- Private galleries are live. Any gallery can be marked private from the editor — it stays visible in the public Galleries list with no lock icon, but clicking into it asks for a name and email instead of showing photos. You approve access from the request email, or with a new one-click checkbox grid on the admin page for people already registered.
+- Closed two real privacy gaps as part of this, not just gating the page itself: a private gallery's photos no longer show up in the sitewide person/event search, and the actual image files moved out of the folder the site serves publicly — there's no way to see them by guessing or sharing a direct link, since every single photo request re-checks who's asking.
+- Tested end-to-end against a full copy of the real database before anything went live, then verified again for real on the live site: submitted a real access request, approved it from a real email, and confirmed the login and gallery view worked correctly.
 
 ### Version 122 — Tuesday, August 25, 2026
 

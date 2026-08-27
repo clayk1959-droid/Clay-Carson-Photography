@@ -167,10 +167,11 @@
       <code>noindex</code> meta tags, and an <code>X-Robots-Tag</code> header on every response)
       so it won't show up in search results or get indexed. It's still reachable by anyone with
       the direct link — this isn't password-protected.</p>
-    <p>A separate, in-progress private-access system (request → approve → login, for sharing
-      sensitive photos with specific people only) lives in this same codebase but doesn't affect
-      the public site — see <code>Private Access Guide.md</code> / <code>.html</code> for how it
-      works, current status, and what's still to do before it's real.</p>
+    <p>Any gallery can be marked private from the editor (request → approve → login, for sharing
+      sensitive photos with specific people only). A private gallery stays visible in the public
+      Galleries list with no lock icon, but requires a granted account to view — see
+      <code>Private Access Guide.md</code> / <code>.html</code> for how the request/approval flow
+      works and how to grant access from the admin page.</p>
     <nav class="toc">
       <a href="#workflow">Your regular workflow</a>
       <a href="#commands">Command reference</a>
@@ -412,6 +413,20 @@ vercel --prod # promotes to production</code></pre>
     <h2>Version history</h2>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 124</span><span class="version-date">Wednesday, August 26, 2026</span></div>
+      <ul>
+        <li>Fixed two real bugs found while building private galleries. The admin page's Revoke button (and its new companion, the private-gallery access checkboxes) had been silently broken since Revoke first shipped — clicking it always failed, due to how the login cookie was being read back. Both now work correctly. Also found and replaced an expired Resend sending key that was silently blocking every private-access email — request notifications and approval links — from going out. New key confirmed working with a real test send.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 123</span><span class="version-date">Wednesday, August 26, 2026</span></div>
+      <ul>
+        <li>Private galleries are live. Any gallery can be marked private from the editor — it stays visible in the public Galleries list with no lock icon, but clicking into it asks for a name and email instead of showing photos. You approve access from the request email, or with a new one-click checkbox grid on the admin page for people already registered.</li>
+        <li>Closed two real privacy gaps as part of this, not just gating the page itself: a private gallery's photos no longer show up in the sitewide person/event search, and the actual image files moved out of the folder the site serves publicly — there's no way to see them by guessing or sharing a direct link, since every single photo request re-checks who's asking.</li>
+        <li>Tested end-to-end against a full copy of the real database before anything went live, then verified again for real on the live site: submitted a real access request, approved it from a real email, and confirmed the login and gallery view worked correctly.</li>
+      </ul>
+    </div>
     <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 122</span><span class="version-date">Tuesday, August 25, 2026</span></div>
       <ul>
