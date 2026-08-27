@@ -1,6 +1,7 @@
 import { access, copyFile, mkdir, open, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { randomBytes } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import sharp from "sharp";
@@ -392,6 +393,24 @@ for (const collection of collections) {
   const staleRoot = path.join(root, isPrivateCollection ? "public" : "private-galleries");
   await rm(path.join(staleRoot, "galleries", collection.slug), { recursive: true, force: true });
   await rm(path.join(staleRoot, "gallery-thumbnails", collection.slug), { recursive: true, force: true });
+
+  // A private collection's cover thumbnail is deliberately shown to every
+  // visitor on the Galleries index -- Clay wants the card to look normal,
+  // not blank -- but that means it can't go through the session-checked
+  // /api/private-photo route the rest of the gallery uses, or the card
+  // would be blank for anyone without access. Instead it gets its own
+  // long random token, unguessable and unrelated to the collection's slug
+  // or filenames, generated once and frozen (like firstSyncedAt above) so
+  // the same URL keeps working across syncs. Nobody can find or enumerate
+  // it without already having the rendered page in front of them -- a much
+  // narrower exposure than a predictable URL, though not the same
+  // real-login guarantee the rest of the gallery has.
+  if (isPrivateCollection && !collectionCoverOverrides[collection.slug]?.coverToken) {
+    collectionCoverOverrides[collection.slug] = {
+      ...(collectionCoverOverrides[collection.slug] ?? {}),
+      coverToken: randomBytes(24).toString("base64url"),
+    };
+  }
 
   const fullDirectory = path.join(outputRoot, "galleries", collection.slug);
   const thumbnailDirectory = path.join(outputRoot, "gallery-thumbnails", collection.slug);

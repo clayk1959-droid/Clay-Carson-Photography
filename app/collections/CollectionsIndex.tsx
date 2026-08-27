@@ -10,6 +10,7 @@ type CollectionCard = {
   count: number;
   pinned: boolean;
   private: boolean;
+  coverToken: string | null;
   coverBasename: string;
   coverPosition: string;
 };
@@ -150,18 +151,18 @@ export function CollectionsIndex({
               <div className="collection-cover">
                 <img
                   src={
-                    card.private
-                      ? `/api/private-photo/gallery-thumbnails/${card.slug}/${card.coverBasename}`
+                    card.private && card.coverToken
+                      ? `/api/gallery-cover/${card.coverToken}`
                       : `/gallery-thumbnails/${card.slug}/${card.coverBasename}`
                   }
                   alt={`${card.title} gallery`}
                   style={{ objectPosition: card.coverPosition }}
                   onError={(event) => {
-                    // A private gallery's cover only loads for a visitor who
-                    // already has access -- /api/private-photo 404s for
-                    // everyone else. No lock icon by design (Clay wants
-                    // these cards indistinguishable in the list), so an
-                    // unauthorized visitor just sees the card without art.
+                    // Shouldn't happen once a private collection has been
+                    // synced at least once (that's when coverToken gets
+                    // generated) -- kept as a fallback so a stale/missing
+                    // token just leaves the card without art instead of a
+                    // broken-image icon.
                     event.currentTarget.style.display = "none";
                   }}
                 />

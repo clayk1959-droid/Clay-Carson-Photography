@@ -10,6 +10,7 @@
       "count": 93,
       "pinned": true,
       "private": false,
+      "coverToken": null,
       "coverBasename": "norway-cruise-91.jpg",
       "coverPosition": "left center"
     },
@@ -21,6 +22,7 @@
       "count": 21,
       "pinned": true,
       "private": false,
+      "coverToken": null,
       "coverBasename": "rhine-river-cruise-10.jpg",
       "coverPosition": "center center"
     },
@@ -43,6 +45,7 @@
       "count": 14,
       "pinned": true,
       "private": false,
+      "coverToken": null,
       "coverBasename": "janet-buys-a-car-12.jpg",
       "coverPosition": "center center"
     },
@@ -64,6 +67,7 @@
       "count": 62,
       "pinned": false,
       "private": true,
+      "coverToken": "taVAY5nbnX2sfocsIFIQvgzqfMXHNKlB",
       "coverBasename": "nova-scotia-11.jpg",
       "coverPosition": "center center"
     }
