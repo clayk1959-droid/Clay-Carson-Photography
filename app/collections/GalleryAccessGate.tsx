@@ -73,8 +73,8 @@ export function GalleryAccessGate({ gallerySlug }: { gallerySlug: string }) {
       {mode === "request" ? (
         <>
           <p className="gallery-gate-copy">
-            This gallery is private. Ask for access below and you'll get an email once it's
-            approved.
+            This gallery is private. Ask for access below and you&apos;ll get an email once
+            it&apos;s approved.
           </p>
           <form onSubmit={handleRequestSubmit} className="gallery-gate-form">
             <label className="gallery-gate-field">
@@ -116,8 +116,8 @@ export function GalleryAccessGate({ gallerySlug }: { gallerySlug: string }) {
       ) : (
         <>
           <p className="gallery-gate-copy">
-            Already have access? Enter the email you were approved with and we'll send a fresh
-            login link.
+            Already have access? Enter the email you were approved with and we&apos;ll send a
+            fresh login link.
           </p>
           <form onSubmit={handleResendSubmit} className="gallery-gate-form">
             <label className="gallery-gate-field">

@@ -152,7 +152,7 @@ export function CollectionsIndex({
                 <img
                   src={
                     card.private && card.coverToken
-                      ? `/api/gallery-cover/${card.coverToken}`
+                      ? `/api/private-cover/${card.coverToken}`
                       : `/gallery-thumbnails/${card.slug}/${card.coverBasename}`
                   }
                   alt={`${card.title} gallery`}
