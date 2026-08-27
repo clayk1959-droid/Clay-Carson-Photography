@@ -1,29 +1,6 @@
 {
   "cards": [
     {
-      "slug": "janet-buys-a-car",
-      "title": "Janet Buys a car",
-      "person": [
-        "Albert Everett",
-        "Alex Brandon",
-        "Clay Carson",
-        "DSandy Covem Church Point",
-        "Digby",
-        "Janet Carson",
-        "Mark Cobard",
-        "Phylis Conard"
-      ],
-      "event": [
-        "Janet buys a car"
-      ],
-      "count": 14,
-      "pinned": true,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "janet-buys-a-car-12.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "nova-scotia",
       "title": "Nova Scotia",
       "person": [
@@ -69,6 +46,29 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "rhine-river-cruise-10.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "janet-buys-a-car",
+      "title": "Janet Buys a car",
+      "person": [
+        "Albert Everett",
+        "Alex Brandon",
+        "Clay Carson",
+        "DSandy Covem Church Point",
+        "Digby",
+        "Janet Carson",
+        "Mark Cobard",
+        "Phylis Conard"
+      ],
+      "event": [
+        "Janet buys a car"
+      ],
+      "count": 14,
+      "pinned": true,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "janet-buys-a-car-12.jpg",
       "coverPosition": "center center"
     }
   ],
