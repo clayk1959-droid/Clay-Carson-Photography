@@ -1,6 +1,28 @@
 {
   "cards": [
     {
+      "slug": "nova-scotia",
+      "title": "Nova Scotia",
+      "person": [
+        "Albert Everett",
+        "Alex Brandon",
+        "Carol Mendal",
+        "Janet Carson",
+        "Karen",
+        "Mark Conard",
+        "Phyllis Conard"
+      ],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "count": 62,
+      "pinned": true,
+      "private": true,
+      "coverToken": "taVAY5nbnX2sfocsIFIQvgzqfMXHNKlB",
+      "coverBasename": "nova-scotia-11.jpg",
+      "coverPosition": "center center"
+    },
+    {
       "slug": "norway-cruise",
       "title": "Norway Cruise",
       "person": [],
@@ -24,28 +46,6 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "rhine-river-cruise-10.jpg",
-      "coverPosition": "center center"
-    },
-    {
-      "slug": "nova-scotia",
-      "title": "Nova Scotia",
-      "person": [
-        "Albert Everett",
-        "Alex Brandon",
-        "Carol Mendal",
-        "Janet Carson",
-        "Karen",
-        "Mark Conard",
-        "Phyllis Conard"
-      ],
-      "event": [
-        "Nova Scotia Trip"
-      ],
-      "count": 62,
-      "pinned": true,
-      "private": true,
-      "coverToken": "taVAY5nbnX2sfocsIFIQvgzqfMXHNKlB",
-      "coverBasename": "nova-scotia-11.jpg",
       "coverPosition": "center center"
     },
     {
