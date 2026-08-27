@@ -15,6 +15,10 @@ Last updated: Thursday, August 27, 2026
 
 ## Version history
 
+### Version 134 — Thursday, August 27, 2026
+
+- Added an email alert for when a local gallery sync skips files it doesn't recognize as images (raw camera files, sidecar files, ...). It already printed to the terminal, but that's easy to miss if you're not watching closely while it runs — now you get an email listing exactly what got skipped and from which gallery, whether or not you noticed it happen.
+
 ### Version 133 — Thursday, August 27, 2026
 
 - Added email and text alerts for when a deploy fails on Vercel. Running a local sync and pushing to GitHub already show real errors right in the terminal, but a failed build after that has always been silent — you'd have no idea unless you happened to check the Vercel dashboard. Now you get an email and a text the moment one fails, covering all three projects (main site, private-access, editor).

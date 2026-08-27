@@ -5,6 +5,7 @@ import { randomBytes } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import sharp from "sharp";
+import { Resend } from "resend";
 import { toSlug, toComponentName } from "./lib/naming.mjs";
 import { formatDate } from "./lib/format-date.mjs";
 import { computeDisplayOrder, computeIndexCard, computeIndexPhotos, sortIndexCards } from "./lib/photo-ranking.mjs";
@@ -342,6 +343,10 @@ const indexCards = [];
 // photo no matter which collection it's filed under, not just filter
 // which collection cards show.
 const indexPhotos = [];
+// Non-image files (raw camera files, .XMP sidecars, ...) skipped across the
+// whole run, collected here so one summary email can go out at the end
+// instead of the warning only living in a terminal Clay may not be watching.
+const allSkippedFiles = [];
 
 startSpinner();
 for (const collection of collections) {
@@ -381,6 +386,7 @@ for (const collection of collections) {
     logLine(
       `${collection.title}: skipped ${skipped.length} non-image file(s) (not .jpg/.jpeg/.tif/.tiff/.png): ${skipped.join(", ")}`,
     );
+    allSkippedFiles.push({ collection: collection.title, files: skipped });
   }
 
   if (filenames.length === 0) {
@@ -764,5 +770,28 @@ export default function CollectionsPage() {
 await writeFile(path.join(root, "app", "collections", "page.tsx"), indexPage);
 stopSpinner();
 console.log("Collections index page regenerated.");
+
+if (allSkippedFiles.length > 0) {
+  const totalSkipped = allSkippedFiles.reduce((sum, entry) => sum + entry.files.length, 0);
+  if (process.env.RESEND_API_KEY) {
+    const listHtml = allSkippedFiles
+      .map((entry) => `<li><strong>${entry.collection}</strong>: ${entry.files.join(", ")}</li>`)
+      .join("");
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      await resend.emails.send({
+        from: "noreply@mail.carsonmullerfamily.com",
+        to: "clayk1959@gmail.com",
+        subject: `Gallery sync skipped ${totalSkipped} file(s)`,
+        html: `<p>The gallery sync just finished but skipped ${totalSkipped} file(s) that weren't recognized as images (not .jpg/.jpeg/.tif/.tiff/.png) -- most likely raw camera files or sidecar files mixed into a folder, in which case they were correctly ignored and nothing needs doing. Worth a look only if a real photo shows up in this list.</p><ul>${listHtml}</ul>`,
+      });
+      console.log(`Skipped-file alert email sent (${totalSkipped} file(s)).`);
+    } catch (error) {
+      console.error("Skipped-file alert email failed to send:", error.message);
+    }
+  } else {
+    console.warn(`Skipped-file alert email not sent: RESEND_API_KEY is not set (${totalSkipped} file(s) skipped).`);
+  }
+}
 
 await rm(temporaryRoot, { recursive: true, force: true });
