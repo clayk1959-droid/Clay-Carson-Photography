@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { cookies } from "next/headers";
+import { isEditorEnabled } from "../../../../lib/editor-mode";
 import { getAccountForSession, hasGalleryAccess, SESSION_COOKIE_NAME } from "../../../../lib/private-access";
 
 export const dynamic = "force-dynamic";
@@ -34,13 +35,19 @@ export async function GET(request: Request, { params }: { params: Promise<{ path
     return new Response("Not found", { status: 404 });
   }
 
-  const cookieStore = await cookies();
-  const account = await getAccountForSession(cookieStore.get(SESSION_COOKIE_NAME)?.value);
-  // Same response for "not logged in" and "logged in but not granted this
-  // gallery" -- doesn't confirm or deny anything about whether the file
-  // exists or who has access to it.
-  if (!account || !(await hasGalleryAccess(account.account_id, slug))) {
-    return new Response("Not found", { status: 404 });
+  // The editor (local dev, or the password-gated remote-editor deployment)
+  // always sees every gallery, private or not, for editing -- the family
+  // access grant is a visitor concept, not something that should also gate
+  // the person managing privacy in the first place.
+  if (!isEditorEnabled()) {
+    const cookieStore = await cookies();
+    const account = await getAccountForSession(cookieStore.get(SESSION_COOKIE_NAME)?.value);
+    // Same response for "not logged in" and "logged in but not granted this
+    // gallery" -- doesn't confirm or deny anything about whether the file
+    // exists or who has access to it.
+    if (!account || !(await hasGalleryAccess(account.account_id, slug))) {
+      return new Response("Not found", { status: 404 });
+    }
   }
 
   const filePath = path.join(STORAGE_ROOT, type, slug, filename);

@@ -39,9 +39,17 @@ const otherCollections = [
 const collectionSubtitle: string | null = null;
 
 export default async function NovaScotiaPage() {
-  const cookieStore = await cookies();
-  const account = await getAccountForSession(cookieStore.get(SESSION_COOKIE_NAME)?.value);
-  const authorized = account ? await hasGalleryAccess(account.account_id, "nova-scotia") : false;
+  // The editor (local dev, or the password-gated remote-editor deployment)
+  // always sees every gallery, private or not, for editing -- the family
+  // access grant is a visitor concept, not something that should also gate
+  // the person managing privacy in the first place.
+  const editorEnabled = isEditorEnabled();
+  let authorized = editorEnabled;
+  if (!authorized) {
+    const cookieStore = await cookies();
+    const account = await getAccountForSession(cookieStore.get(SESSION_COOKIE_NAME)?.value);
+    authorized = account ? await hasGalleryAccess(account.account_id, "nova-scotia") : false;
+  }
 
   if (!authorized) {
     return (
@@ -74,7 +82,7 @@ export default async function NovaScotiaPage() {
         photographs={photographs}
         hiddenPhotographs={hiddenPhotographs}
         otherCollections={remote ? [] : otherCollections}
-        editable={isEditorEnabled()}
+        editable={editorEnabled}
         remoteMode={remote}
       />
 
