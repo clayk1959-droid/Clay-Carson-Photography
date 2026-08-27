@@ -782,8 +782,8 @@ if (allSkippedFiles.length > 0) {
       await resend.emails.send({
         from: "noreply@mail.carsonmullerfamily.com",
         to: "clayk1959@gmail.com",
-        subject: `Gallery sync skipped ${totalSkipped} file(s)`,
-        html: `<p>The gallery sync just finished but skipped ${totalSkipped} file(s) that weren't recognized as images (not .jpg/.jpeg/.tif/.tiff/.png) -- most likely raw camera files or sidecar files mixed into a folder, in which case they were correctly ignored and nothing needs doing. Worth a look only if a real photo shows up in this list.</p><ul>${listHtml}</ul>`,
+        subject: `Gallery sync complete, but skipped ${totalSkipped} file(s)`,
+        html: `<p>Syncing is complete. However, there was an error with ${totalSkipped} file(s) -- listed below by gallery.</p><p><strong>What the error is:</strong> each one isn't recognized as an image (not .jpg/.jpeg/.tif/.tiff/.png), so it was skipped rather than published. Most likely a raw camera file or a sidecar file mixed into the folder, in which case it was correctly ignored and nothing needs doing. Worth a look only if a real photo shows up in this list.</p><ul>${listHtml}</ul>`,
       });
       console.log(`Skipped-file alert email sent (${totalSkipped} file(s)).`);
     } catch (error) {
