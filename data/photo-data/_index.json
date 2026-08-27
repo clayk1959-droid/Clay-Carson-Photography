@@ -1,27 +1,6 @@
 {
   "cards": [
     {
-      "slug": "nova-scotia",
-      "title": "Nova Scotia",
-      "person": [
-        "Albert Everett",
-        "Alex Brandon",
-        "Carol Mendal",
-        "Janet Carson",
-        "Karen",
-        "Mark Conard",
-        "Phyllis Conard"
-      ],
-      "event": [
-        "Nova Scotia Trip"
-      ],
-      "count": 62,
-      "pinned": true,
-      "private": true,
-      "coverBasename": "nova-scotia-11.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "norway-cruise",
       "title": "Norway Cruise",
       "person": [],
@@ -65,6 +44,27 @@
       "pinned": true,
       "private": false,
       "coverBasename": "janet-buys-a-car-12.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "nova-scotia",
+      "title": "Nova Scotia",
+      "person": [
+        "Albert Everett",
+        "Alex Brandon",
+        "Carol Mendal",
+        "Janet Carson",
+        "Karen",
+        "Mark Conard",
+        "Phyllis Conard"
+      ],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "count": 62,
+      "pinned": true,
+      "private": true,
+      "coverBasename": "nova-scotia-11.jpg",
       "coverPosition": "center center"
     }
   ],
