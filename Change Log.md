@@ -15,6 +15,11 @@ Last updated: Thursday, August 27, 2026
 
 ## Version history
 
+### Version 129 — Thursday, August 27, 2026
+
+- Search results can now be edited directly, not just viewed. Searching People/Event tags is mainly useful for finding and fixing a typo, but there was no way to actually edit the photo you found — you had to leave search, find the right gallery, and hunt for the same photo again by sight. A new "Edit this photo" link on a search result now opens straight into that exact photo's edit form.
+- Along the way, tracked down a real, older data problem this surfaced: one photo in "Janet Buys a car" is actually a Nova Scotia sunset that's been sitting there, mistagged, since Nova Scotia was first added to the site over a month ago — unrelated to anything recent, just finally visible now that search and editing both work correctly. Belongs in Nova Scotia instead; still needs to be moved and cleaned up.
+
 ### Version 128 — Thursday, August 27, 2026
 
 - Photos can now have their People and Event tags edited directly, the same way captions and dates already could — no more needing to go back and fix the original file just to correct a typo or clean up an inconsistent name. New fields in the photo edit form, comma-separated to match how you'd naturally type multiple names.
