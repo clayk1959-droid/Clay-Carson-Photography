@@ -1472,27 +1472,6 @@
     {
       "collectionSlug": "janet-buys-a-car",
       "collectionTitle": "Janet Buys a car",
-      "filename": "L1019979 copy.jpg",
-      "caption": "August 9, 2026 — Janet Buys a car",
-      "altText": "Janet Buys a car",
-      "person": [
-        "Albert Everett",
-        "Clay Carson",
-        "Janet Carson",
-        "Mark Cobard",
-        "Phylis Conard",
-        "Alex Brandon",
-        "DSandy Covem Church Point",
-        "Digby"
-      ],
-      "event": [],
-      "width": 720,
-      "height": 446,
-      "src": "/galleries/janet-buys-a-car/janet-buys-a-car-14.jpg"
-    },
-    {
-      "collectionSlug": "janet-buys-a-car",
-      "collectionTitle": "Janet Buys a car",
       "filename": "Janet Buys a Car-8.jpg",
       "caption": "August 12, 2024 — Janet Buys a Car - Wiil the finance guy ever finish up?",
       "altText": "Janet Buys a Car - Wiil the finance guy ever finish up?",
@@ -1585,6 +1564,27 @@
       "width": 720,
       "height": 482,
       "src": "/galleries/janet-buys-a-car/janet-buys-a-car-10.jpg"
+    },
+    {
+      "collectionSlug": "janet-buys-a-car",
+      "collectionTitle": "Janet Buys a car",
+      "filename": "L1019979 copy.jpg",
+      "caption": "August 9, 2026 — Janet Buys a car",
+      "altText": "Janet Buys a car",
+      "person": [
+        "Albert Everett",
+        "Clay Carson",
+        "Janet Carson",
+        "Mark Cobard",
+        "Phylis Conard",
+        "Alex Brandon",
+        "DSandy Covem Church Point",
+        "Digby"
+      ],
+      "event": [],
+      "width": 720,
+      "height": 446,
+      "src": "/galleries/janet-buys-a-car/janet-buys-a-car-14.jpg"
     }
   ]
 }
