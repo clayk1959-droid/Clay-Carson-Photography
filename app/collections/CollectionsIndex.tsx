@@ -188,6 +188,7 @@ export function CollectionsIndex({
         <SearchLightbox
           photos={matchingPhotos}
           activePhoto={activePhoto}
+          editable={editable}
           onClose={() => setActivePhoto(null)}
           onPrevious={showPreviousPhoto}
           onNext={showNextPhoto}
@@ -369,12 +370,14 @@ function MultiFilterSelect({
 function SearchLightbox({
   photos,
   activePhoto,
+  editable = false,
   onClose,
   onPrevious,
   onNext,
 }: {
   photos: IndexPhoto[];
   activePhoto: number;
+  editable?: boolean;
   onClose: () => void;
   onPrevious: () => void;
   onNext: () => void;
@@ -432,6 +435,17 @@ function SearchLightbox({
             <a className="search-result-link" href={`/collections/${photo.collectionSlug}`}>
               From &ldquo;{photo.collectionTitle}&rdquo; →
             </a>
+            {editable && (
+              <>
+                <br />
+                <a
+                  className="search-result-link search-result-edit"
+                  href={`/collections/${photo.collectionSlug}?edit=${encodeURIComponent(photo.filename)}`}
+                >
+                  Edit this photo →
+                </a>
+              </>
+            )}
           </span>
           <span className="lightbox-count">
             {String(activePhoto + 1).padStart(2, "0")} / {photos.length}

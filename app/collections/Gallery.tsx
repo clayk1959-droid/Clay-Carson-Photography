@@ -102,6 +102,23 @@ export function Gallery({
     }
   }, [photographs.length]);
 
+  // Lets a search result (which has no idea what position a photo holds in
+  // its own gallery, only its filename) deep-link straight into that
+  // photo's edit form -- e.g. "Edit this photo" from the search lightbox
+  // opens exactly this, instead of dropping someone into the gallery and
+  // making them hunt for the right thumbnail themselves.
+  useEffect(() => {
+    if (!editable) return;
+    const editParam = new URLSearchParams(window.location.search).get("edit");
+    if (editParam === null) return;
+
+    const index = photographs.findIndex((photograph) => photograph.filename === editParam);
+    if (index !== -1) {
+      setActivePhoto(index);
+      setEditingPhoto(index);
+    }
+  }, [editable, photographs]);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (activePhoto === null) {
