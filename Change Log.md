@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Thursday, August 27, 2026
+Last updated: Friday, August 28, 2026
 
 ## Current status
 
@@ -14,6 +14,10 @@ Last updated: Thursday, August 27, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 135 — Friday, August 28, 2026
+
+- Fixed a real bug: moving a photo between galleries used to wipe its caption, date, People, and Event tags, not just its position — silently, with no warning. If you'd cleaned up a photo's tags and then moved it, that cleanup was gone and had to be redone. Now only position resets on a move; everything else about the photo comes with it.
 
 ### Version 134 — Thursday, August 27, 2026
 

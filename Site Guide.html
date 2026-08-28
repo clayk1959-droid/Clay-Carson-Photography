@@ -414,6 +414,12 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 135</span><span class="version-date">Friday, August 28, 2026</span></div>
+      <ul>
+        <li>Fixed a real bug: moving a photo between galleries used to wipe its caption, date, People, and Event tags, not just its position — silently, with no warning. If you'd cleaned up a photo's tags and then moved it, that cleanup was gone and had to be redone. Now only position resets on a move; everything else about the photo comes with it.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 134</span><span class="version-date">Thursday, August 27, 2026</span></div>
       <ul>
         <li>Added an email alert for when a local gallery sync skips files it doesn't recognize as images (raw camera files, sidecar files, ...). It already printed to the terminal, but that's easy to miss if you're not watching closely while it runs — now you get an email listing exactly what got skipped and from which gallery, whether or not you noticed it happen.</li>
