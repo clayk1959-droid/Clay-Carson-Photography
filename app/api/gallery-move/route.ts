@@ -85,13 +85,23 @@ export async function POST(request: Request) {
   await mkdir(path.join(galleryOriginalsRoot, to.folder), { recursive: true });
   await rename(sourcePath, destinationPath);
 
-  // Caption/date/order overrides (especially order) don't carry meaning in
-  // the new collection, so drop them rather than leave stale state behind.
+  // Caption/date/person/event describe the photo itself and still apply
+  // after a move, so they carry over to the new collection. Only `order` is
+  // gallery-specific and doesn't carry meaning in the destination's
+  // ordering, so that's the one field that gets dropped.
   try {
     const overrides = JSON.parse(await readFile(overridesPath, "utf8"));
-    if (overrides[fromSlug]?.[filename]) {
+    const existing = overrides[fromSlug]?.[filename];
+    if (existing) {
       delete overrides[fromSlug][filename];
       if (Object.keys(overrides[fromSlug]).length === 0) delete overrides[fromSlug];
+
+      const { order: _order, ...carriedOverride } = existing;
+      if (Object.keys(carriedOverride).length > 0) {
+        overrides[toSlug] = overrides[toSlug] ?? {};
+        overrides[toSlug][filename] = carriedOverride;
+      }
+
       await writeFile(overridesPath, `${JSON.stringify(overrides, null, 2)}\n`, "utf8");
     }
   } catch {
