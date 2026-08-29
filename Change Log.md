@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Friday, August 28, 2026
+Last updated: Saturday, August 29, 2026
 
 ## Current status
 
@@ -14,6 +14,11 @@ Last updated: Friday, August 28, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 139 — Friday, August 28, 2026
+
+- Deploy alerts now name which of the three sites deployed — "Open," "Editable," or "Private" — instead of a generic "a project." Found and fixed a real bug along the way: the field the code was reading to identify the project doesn't actually exist in Vercel's webhook data (their own docs were wrong about this); switched to the field that's actually there, confirmed against a real captured event before shipping.
+- The People search filter on the Galleries page now sorts case-insensitively, so an inconsistently-capitalized name doesn't land in the wrong spot in the list.
 
 ### Version 138 — Friday, August 28, 2026
 

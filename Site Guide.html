@@ -414,6 +414,25 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 139</span><span class="version-date">Friday, August 28, 2026</span></div>
+      <ul>
+        <li>Deploy alerts now name which of the three sites deployed — "Open," "Editable," or "Private" — instead of a generic "a project." Found and fixed a real bug along the way: the field the code was reading to identify the project doesn't actually exist in Vercel's webhook data (their own docs were wrong about this); switched to the field that's actually there, confirmed against a real captured event before shipping.</li>
+        <li>The People search filter on the Galleries page now sorts case-insensitively, so an inconsistently-capitalized name doesn't land in the wrong spot in the list.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 138</span><span class="version-date">Friday, August 28, 2026</span></div>
+      <ul>
+        <li>Removed BYN duplicates</li>
+      </ul>
+    </div>
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 137</span><span class="version-date">Friday, August 28, 2026</span></div>
+      <ul>
+        <li>Added Blue Yoga Nyle gallery</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 136</span><span class="version-date">Friday, August 28, 2026</span></div>
       <ul>
         <li>Sync and deploy alerts now confirm success, not just failure. A quiet inbox used to mean either "everything's fine" or "nobody noticed it crashed" — no way to tell which. Every sync now emails a status the moment it finishes, subject starting with SUCCESS or FAILED, including how long it took. Deploy alerts do the same for each of the three sites (main site, private-access, editor) — since one push deploys all three independently, each confirms on its own.</li>
