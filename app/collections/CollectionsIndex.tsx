@@ -43,7 +43,9 @@ export function CollectionsIndex({
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
 
   const people = useMemo(
-    () => Array.from(new Set(cards.flatMap((card) => card.person))).sort(),
+    // Case-insensitive so e.g. "deWitt" doesn't sort away from the rest of
+    // the D's just because of how it happens to be capitalized.
+    () => Array.from(new Set(cards.flatMap((card) => card.person))).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" })),
     [cards],
   );
   const events = useMemo(
