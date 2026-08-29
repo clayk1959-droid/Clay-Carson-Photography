@@ -112,6 +112,11 @@ export function GalleryAccessGate({ gallerySlug }: { gallerySlug: string }) {
           >
             Already approved on another device? Resend my login link
           </button>
+          <p className="gallery-gate-copy">
+            These requests for access have to be approved by Clay. Sometimes he is busy and
+            doesn&apos;t see it for a while. But he promises to approve it as soon as possible.
+            Thank you for your patience.
+          </p>
         </>
       ) : (
         <>
