@@ -1,4 +1,8 @@
 {
+  "blue-yoga-nyla": {
+    "firstSyncedAt": "2026-08-29T03:13:40.000Z",
+    "private": true
+  },
   "france-trip": {
     "firstSyncedAt": "2026-08-27T16:50:35.000Z",
     "coverPhoto": "1 - 186.jpeg",
@@ -30,8 +34,5 @@
     "coverPhoto": "_DSC0210.jpg",
     "coverPosition": "center center",
     "firstSyncedAt": "2026-08-21T01:59:34.000Z"
-  },
-  "blue-yoga-nyla": {
-    "firstSyncedAt": "2026-08-29T03:13:40.000Z"
   }
 }
