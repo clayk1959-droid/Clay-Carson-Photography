@@ -180,6 +180,7 @@
       <a href="#editing">Editing locally</a>
       <a href="#hero">Homepage hero photos</a>
       <a href="#deploy">Deploying</a>
+      <a href="#architecture">Architecture &amp; external services</a>
       <a href="#save">Saving &amp; publishing</a>
       <a href="#history">Version history</a>
       <a href="#previous-agents">Previous versions</a>
@@ -384,6 +385,76 @@ vercel --prod # promotes to production</code></pre>
       Once deployed, add your domain under the project's Settings → Domains in the Vercel
       dashboard, and update your domain registrar's DNS records as Vercel instructs (usually a
       single CNAME or A record). Propagation is typically minutes to a few hours.
+    </p>
+  </section>
+
+  <section id="architecture">
+    <h2>Architecture &amp; external services</h2>
+    <p>
+      What this site actually depends on outside its own code, and how much work it'd take to
+      repurpose this for a different site (a friend's art gallery, say) — confirmed by checking
+      the actual code and dependencies, not assumed.
+    </p>
+
+    <h3>Always required, as currently built</h3>
+    <ul>
+      <li><strong>GitHub</strong> — the source of truth. A push to <code>main</code> is what
+        triggers every deploy.</li>
+      <li><strong>Vercel</strong> — hosting, split across three separate projects that all
+        deploy from this one repo: the public site, the password-gated private-access/admin
+        system, and the remote editor.</li>
+      <li><strong>Google Fonts</strong> (<code>fonts.googleapis.com</code>) — loaded live by
+        every visitor's browser for the site's typefaces. Free, but a real external
+        dependency — the site isn't fully self-contained.</li>
+    </ul>
+
+    <h3>Only required if you use the feature that needs it</h3>
+    <ul>
+      <li><strong>Resend</strong> (email) — only touched by private-gallery request/approval
+        emails and the sync/deploy alert emails. A site with no private galleries and no
+        alerting needs no email service at all.</li>
+      <li><strong>Neon Postgres</strong> — only touched by the private-gallery system
+        (accounts, sessions, access grants). Fully public galleries never open a database
+        connection.</li>
+      <li><strong>A GitHub Personal Access Token</strong> (separate from GitHub hosting the
+        repo) — only used by the remote editor project, so someone without local file access
+        can edit captions/tags from a browser. Skip the editor project, skip this token.</li>
+    </ul>
+
+    <h3>Present but unused</h3>
+    <p>
+      <code>@vercel/blob</code> and Tailwind CSS are both wired into <code>package.json</code>
+      / <code>postcss.config.mjs</code> but nothing in the code actually references either one —
+      leftovers from the original project template. Safe to remove if repurposing this codebase.
+    </p>
+
+    <h3>Repurposing this for a different site</h3>
+    <p>
+      The core mechanism — drop images in a folder, run a sync script, get generated gallery
+      pages with captions/tags, optional password-gated editing — isn't tied to photography or
+      family content anywhere structurally. What genuinely isn't a cosmetic change:
+    </p>
+    <ul>
+      <li><strong>About 9 hardcoded strings</strong> — the owner's email address, the
+        <code>mail.carsonmullerfamily.com</code> sending domain, and "Carson &amp; Muller
+        Family" branding are literal text in several files (<code>lib/private-access.ts</code>,
+        <code>lib/editor-users.ts</code>, the deploy-webhook route, the sync script, email
+        subject lines, page titles) — not driven by one central setting. Real find-and-replace
+        work, not a config flip.</li>
+      <li><strong>Fresh accounts across the board</strong> — a new GitHub repo, a new Vercel
+        account (one project if skipping private galleries/editor, three for the full setup), a
+        new domain with its own DNS/SPF/DKIM if sending mail from it, a new Neon database and
+        Resend account if using the private/alerting features at all.</li>
+      <li><strong>A real simplification option</strong> — a site with no password-gated albums
+        and no browser-based remote editing can drop Postgres and Resend entirely and run on
+        just GitHub + Vercel.</li>
+    </ul>
+    <p>
+      Any capable coding AI (or a developer) can do this work — nothing here is specific to
+      Claude. Don't hand over the real data along with the code: <code>data/photo-data/*.json</code>,
+      <code>data/gallery-overrides.json</code>, and <code>Gallery Originals/</code> contain real
+      names and photos, and <code>.env.local</code> has live credentials that should never be
+      shared — start fresh accounts under the new owner regardless of who writes the code.
     </p>
   </section>
 
