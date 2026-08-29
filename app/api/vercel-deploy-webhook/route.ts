@@ -10,6 +10,14 @@ const OWNER_EMAIL = "clayk1959@gmail.com";
 // text alerts are skipped if unset, matching that same pattern.
 const OWNER_SMS_ADDRESS = process.env.OWNER_SMS_ADDRESS || null;
 
+// Friendly names for the three Vercel projects this repo deploys, so the
+// alert says "Open"/"Editable"/"Private" instead of the raw project slug.
+const PROJECT_LABELS: Record<string, string> = {
+  "clay-carson-photography": "Open",
+  "clay-carson-photography-editor": "Editable",
+  "clay-carson-photography-private": "Private",
+};
+
 function verifySignature(rawBody: string, signature: string | null, secret: string): boolean {
   if (!signature) return false;
   const expected = createHmac("sha1", secret).update(rawBody).digest("hex");
@@ -53,8 +61,9 @@ export async function POST(request: Request) {
 
   const failed = type === "deployment.error";
   const projectName = payload?.project?.name ?? "a project";
+  const projectLabel = PROJECT_LABELS[projectName] ?? projectName;
   const deployUrl = payload?.deployment?.url ? `https://${payload.deployment.url}` : null;
-  const subject = failed ? `FAILED: Deploy failed -- ${projectName}` : `SUCCESS: Deploy succeeded -- ${projectName}`;
+  const subject = failed ? `FAILED: Deploy failed -- ${projectLabel}` : `SUCCESS: Deploy succeeded -- ${projectLabel}`;
   const detail = deployUrl
     ? `<p><a href="${deployUrl}">View the deployment</a> ${failed ? "for build logs" : ""}.</p>`
     : "";
@@ -65,8 +74,8 @@ export async function POST(request: Request) {
     to: OWNER_EMAIL,
     subject,
     html: failed
-      ? `<p>A deploy for <strong>${projectName}</strong> just failed. Your live site is unaffected -- Vercel never replaces it with a broken build.</p>${detail}`
-      : `<p>A deploy for <strong>${projectName}</strong> just went live.</p>${detail}`,
+      ? `<p>A deploy for <strong>${projectLabel}</strong> just failed. Your live site is unaffected -- Vercel never replaces it with a broken build.</p>${detail}`
+      : `<p>A deploy for <strong>${projectLabel}</strong> just went live.</p>${detail}`,
   });
 
   // Text alerts stay failure-only -- a routine successful deploy isn't
@@ -76,7 +85,7 @@ export async function POST(request: Request) {
       from: FROM_ADDRESS,
       to: OWNER_SMS_ADDRESS,
       subject: "Deploy failed",
-      text: `Deploy failed: ${projectName}. Live site is fine (Vercel keeps serving the last good build). Check email for details.`,
+      text: `Deploy failed: ${projectLabel}. Live site is fine (Vercel keeps serving the last good build). Check email for details.`,
     });
     if (smsError) {
       console.error("Deploy-failure text alert failed to send:", smsError.message);
