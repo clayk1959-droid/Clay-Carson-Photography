@@ -15,6 +15,10 @@ Last updated: Saturday, August 29, 2026
 
 ## Version history
 
+### Version 142 — Saturday, August 29, 2026
+
+- Fixed a real, significant bug: submitting more than a couple of real photos always failed with "Something went wrong." Root cause was a hard 4.5MB request-size limit Vercel imposes on every function, no way around it directly -- your phone's photos add up past that in a handful of files. Rebuilt the upload path so files go directly from the browser to storage instead of through that limit at all. Verified with a real 6MB file (well over the old cap) and a real multi-file batch, both uploading successfully now.
+
 ### Version 141 — Saturday, August 29, 2026
 
 - Fixed a real gap in the photo-submission feature found right after shipping: there was no way to actually grant upload access to someone who'd never requested (or been granted) anything before — no account existed for them, so the "next time you're signed in" email made no sense since they had no way to sign in at all. Added a proper "invite" flow on the admin page for exactly this case: it creates their account and emails a real, one-click login link, same as the private-gallery approval flow already does. Also fixed `/submit-photos` itself, which used to just say "not available" to anyone signed out — it now offers to send a login link, covering both a fresh invite and an existing account that's simply signed out on this device.

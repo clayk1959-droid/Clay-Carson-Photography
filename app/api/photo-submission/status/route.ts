@@ -17,6 +17,7 @@ export async function GET() {
   return Response.json({
     hasAccess: true,
     name: account.name,
+    accountId: account.account_id,
     pendingCount: blobs.length,
     limit: SUBMISSION_LIMIT,
   });
