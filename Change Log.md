@@ -15,6 +15,12 @@ Last updated: Friday, August 28, 2026
 
 ## Version history
 
+### Version 136 — Friday, August 28, 2026
+
+- Sync and deploy alerts now confirm success, not just failure. A quiet inbox used to mean either "everything's fine" or "nobody noticed it crashed" — no way to tell which. Every sync now emails a status the moment it finishes, subject starting with SUCCESS or FAILED, including how long it took. Deploy alerts do the same for each of the three sites (main site, private-access, editor) — since one push deploys all three independently, each confirms on its own.
+- A sync that crashes outright (not just skips a bad file, but dies completely — bad file, disk full, out of memory) used to fail silently with nothing but a stack trace in the terminal. Now sends the same kind of alert email as any other failure, so a crash you didn't happen to be watching for still gets caught.
+- The private-gallery request page now reassures visitors that approval isn't instant: a short note explaining requests need Clay's manual approval and he may not see it right away, but will get to it.
+
 ### Version 135 — Friday, August 28, 2026
 
 - Fixed a real bug: moving a photo between galleries used to wipe its caption, date, People, and Event tags, not just its position — silently, with no warning. If you'd cleaned up a photo's tags and then moved it, that cleanup was gone and had to be redone. Now only position resets on a move; everything else about the photo comes with it.
