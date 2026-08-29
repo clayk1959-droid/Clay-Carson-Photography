@@ -48,6 +48,11 @@ export async function POST(request: Request) {
     return new Response("Invalid JSON", { status: 400 });
   }
 
+  // TEMPORARY: logging the real payload shape to confirm field names before
+  // trusting them -- docs said payload.project.name exists and it doesn't
+  // (every alert so far has said "a project"). Remove once confirmed.
+  console.log("Deploy webhook payload:", rawBody);
+
   const { type, payload } = event as {
     type?: string;
     payload?: { deployment?: { url?: string; meta?: Record<string, string> }; project?: { name?: string } };
