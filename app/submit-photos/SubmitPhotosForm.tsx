@@ -130,10 +130,13 @@ export function SubmitPhotosForm({ name }: { name: string }) {
             />
           </label>
           {files.length > 0 && (
-            <p className="gallery-gate-copy" style={{ margin: 0 }}>
-              {`${files.length} file${files.length === 1 ? "" : "s"} selected${
-                remaining !== null && files.length > remaining ? ` — only ${remaining} slot(s) left` : ""
-              }`}
+            <p
+              className={remaining !== null && files.length > remaining ? "gallery-gate-error" : "gallery-gate-copy"}
+              style={{ margin: 0 }}
+            >
+              {remaining !== null && files.length > remaining
+                ? `You selected ${files.length} files, but only ${remaining} slot${remaining === 1 ? "" : "s"} are left. Remove ${files.length - remaining} to continue, or submit in batches.`
+                : `${files.length} file${files.length === 1 ? "" : "s"} selected`}
             </p>
           )}
           <button
