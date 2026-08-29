@@ -150,6 +150,7 @@ h1 em, h2 em { font-weight: 400; }
 .gallery-gate-error { margin: 10px 0 0; font-size: 13px; color: #a33; }
 .gallery-gate-switch { display: block; margin: 18px 0 0; padding: 0; background: none; border: 0; font: inherit; font-size: 13px; color: #454545; text-decoration: underline; cursor: pointer; text-align: left; }
 .gallery-gate-switch:hover { color: #1c1c1c; }
+.gallery-gate-switch + .gallery-gate-copy { margin-top: 18px; }
 .gallery-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; margin: 0; padding: 10px; border: 0; overflow: hidden; background: #cccccc; color: inherit; cursor: zoom-in; display: flex; align-items: center; justify-content: center; transition: transform .2s ease, box-shadow .2s ease; }
 .gallery-thumb img { max-width: var(--thumb-inner, 100%); max-height: var(--thumb-inner, 100%); width: auto; height: auto; display: block; border: 3px solid #ffffff; transition: opacity .25s ease, transform .5s cubic-bezier(.2,.65,.3,1); }
 .gallery-thumb:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .28); transform: translateY(-2px); }
