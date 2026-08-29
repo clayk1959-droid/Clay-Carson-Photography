@@ -1,7 +1,8 @@
 {
   "blue-yoga-nyla": {
     "firstSyncedAt": "2026-08-29T03:13:40.000Z",
-    "private": true
+    "private": true,
+    "coverToken": "W8IodUqlvwlB6J8NuAetTH9wTFPuegrb"
   },
   "france-trip": {
     "firstSyncedAt": "2026-08-27T16:50:35.000Z",

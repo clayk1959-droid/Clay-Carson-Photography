@@ -46,7 +46,7 @@ export async function POST(request: Request) {
           from: FROM_ADDRESS,
           to: account.email,
           subject: "You can now submit photos — Carson & Muller",
-          html: `<p>Hi ${escapeHtml(account.name)},</p><p>Clay has given you the ability to submit photos for a gallery. Look for the "Submit Photos" link at the top right of the <a href="https://www.carsonmullerfamily.com/collections">Galleries page</a> the next time you're signed in.</p><p>You can submit up to 30 photos at a time. Clay reviews everything himself and will build the gallery as soon as he can.</p>`,
+          html: `<p>Hi ${escapeHtml(account.name)},</p><p>Clay has given you the ability to submit photos for a gallery. <a href="https://www.carsonmullerfamily.com/submit-photos">Get started here</a> — if you're not already signed in, that page will ask for your email and send you a fresh login link.</p><p>You can submit up to 30 photos at a time. Clay reviews everything himself and will build the gallery as soon as he can.</p>`,
         });
       }
     }

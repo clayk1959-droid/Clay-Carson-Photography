@@ -6,12 +6,14 @@ export const dynamic = "force-dynamic";
 // Same magic-link redemption as the test system's verify route -- one
 // difference: redirects straight to the gallery the person requested
 // instead of a generic landing page, since that's the whole point here.
+// gallery is optional -- a link minted for upload-only access (no specific
+// gallery to go to) omits it and lands on /submit-photos instead.
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const email = url.searchParams.get("email") ?? "";
   const token = url.searchParams.get("token") ?? "";
   const gallerySlug = url.searchParams.get("gallery") ?? "";
-  if (!email || !token || !gallerySlug) {
+  if (!email || !token) {
     return new Response("Invalid link.", { status: 400 });
   }
 
@@ -65,7 +67,7 @@ export async function GET(request: Request) {
   return new Response(null, {
     status: 302,
     headers: {
-      Location: `${url.origin}/collections/${encodeURIComponent(gallerySlug)}`,
+      Location: gallerySlug ? `${url.origin}/collections/${encodeURIComponent(gallerySlug)}` : `${url.origin}/submit-photos`,
       "Set-Cookie": cookieParts.join("; "),
     },
   });

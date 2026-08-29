@@ -15,6 +15,10 @@ Last updated: Saturday, August 29, 2026
 
 ## Version history
 
+### Version 141 — Saturday, August 29, 2026
+
+- Fixed a real gap in the photo-submission feature found right after shipping: there was no way to actually grant upload access to someone who'd never requested (or been granted) anything before — no account existed for them, so the "next time you're signed in" email made no sense since they had no way to sign in at all. Added a proper "invite" flow on the admin page for exactly this case: it creates their account and emails a real, one-click login link, same as the private-gallery approval flow already does. Also fixed `/submit-photos` itself, which used to just say "not available" to anyone signed out — it now offers to send a login link, covering both a fresh invite and an existing account that's simply signed out on this device.
+
 ### Version 140 — Saturday, August 29, 2026
 
 - Added a photo-submission feature: someone you specifically grant this ability to (separate from private-gallery access, invite-only, no self-serve request) can submit up to 30 photos through a new "Submit Photos" link on the Galleries page. You get an email when photos come in, run `npm run submissions:pull` to bring them into a local `Submitted/` folder for review in Photo Mechanic exactly like any other originals, then move the ones you want into `Gallery Originals` and sync as normal. Nothing auto-publishes — you stay the only one deciding what goes on the site. A "Gallery live" button on the admin page lets you notify them once it's ready.

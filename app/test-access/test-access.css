@@ -29,6 +29,8 @@
 .private-access-section h2 { font-size: 15px; font-weight: 700; letter-spacing: .04em; margin: 0 0 12px; }
 .private-access-note { color: #8a8d87; font-size: 13px; margin-top: 10px; }
 .private-access-table-wrap { overflow-x: auto; }
+.invite-upload-access-form { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+.invite-upload-access-form .private-access-input { flex: 1 1 200px; padding: 9px 12px; font-size: 14px; }
 .private-access-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .private-access-table th { text-align: left; padding: 6px 14px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #6c6f68; border-bottom: 2px solid #ddd8c9; font-weight: 500; }
 .private-access-table td { padding: 6px 14px; border-bottom: 1px solid #e7e2d5; }

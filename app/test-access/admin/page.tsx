@@ -7,6 +7,7 @@ import { RevokeButton } from "./RevokeButton";
 import { GalleryAccessGrid } from "./GalleryAccessGrid";
 import { UploadAccessToggle } from "./UploadAccessToggle";
 import { NotifyGalleryLiveButton } from "./NotifyGalleryLiveButton";
+import { InviteUploadAccessForm } from "./InviteUploadAccessForm";
 import collectionIndex from "../../../data/photo-data/_index.json";
 
 export const dynamic = "force-dynamic";
@@ -161,6 +162,12 @@ export default async function AdminPage() {
             </table>
           </div>
         )}
+        <p className="private-access-note">
+          For someone who&apos;s never requested access before — no account to toggle above yet —
+          invite them for upload access directly. This creates their account and emails them a
+          real login link, no gallery access implied.
+        </p>
+        <InviteUploadAccessForm />
       </section>
 
       <section className="private-access-section">
