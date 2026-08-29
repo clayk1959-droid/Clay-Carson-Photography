@@ -491,6 +491,12 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 143</span><span class="version-date">Saturday, August 29, 2026</span></div>
+      <ul>
+        <li>Phone photo submissions now work reliably. The upload page used to only let people pick jpg/png/tiff files, which risked hiding an iPhone's own photo library (stored as HEIC by default) from the picker entirely, depending on browser/OS version. It now accepts any image and recognizes real HEIC/HEIF photos by their actual file content, not just by name. Note: a submitted HEIC photo still needs converting before it can go through the regular gallery sync, same as a raw camera file already does — Clay reviews it in Photo Mechanic first either way.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 142</span><span class="version-date">Saturday, August 29, 2026</span></div>
       <ul>
         <li>Fixed a real, significant bug: submitting more than a couple of real photos always failed with "Something went wrong." Root cause was a hard 4.5MB request-size limit Vercel imposes on every function, no way around it directly — your phone's photos add up past that in a handful of files. Rebuilt the upload path so files go directly from the browser to storage instead of through that limit at all. Verified with a real 6MB file (well over the old cap) and a real multi-file batch, both uploading successfully now.</li>

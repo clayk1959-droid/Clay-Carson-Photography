@@ -43,7 +43,7 @@ export async function POST(request: Request) {
       }
 
       return {
-        allowedContentTypes: ["image/jpeg", "image/png", "image/tiff"],
+        allowedContentTypes: ["image/jpeg", "image/png", "image/tiff", "image/heic", "image/heif"],
         maximumSizeInBytes: MAX_FILE_BYTES,
         addRandomSuffix: false,
       };

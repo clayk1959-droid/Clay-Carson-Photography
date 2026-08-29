@@ -15,6 +15,10 @@ Last updated: Saturday, August 29, 2026
 
 ## Version history
 
+### Version 143 — Saturday, August 29, 2026
+
+- Phone photo submissions now work reliably. The upload page used to only let people pick jpg/png/tiff files, which risked hiding an iPhone's own photo library (stored as HEIC by default) from the picker entirely, depending on browser/OS version. It now accepts any image and recognizes real HEIC/HEIF photos by their actual file content, not just by name. Note: a submitted HEIC photo still needs converting before it can go through the regular gallery sync, same as a raw camera file already does — Clay reviews it in Photo Mechanic first either way.
+
 ### Version 142 — Saturday, August 29, 2026
 
 - Fixed a real, significant bug: submitting more than a couple of real photos always failed with "Something went wrong." Root cause was a hard 4.5MB request-size limit Vercel imposes on every function, no way around it directly -- your phone's photos add up past that in a handful of files. Rebuilt the upload path so files go directly from the browser to storage instead of through that limit at all. Verified with a real 6MB file (well over the old cap) and a real multi-file batch, both uploading successfully now.

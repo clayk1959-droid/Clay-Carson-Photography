@@ -3,7 +3,12 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { upload } from "@vercel/blob/client";
 
-const ACCEPTED_TYPES = "image/jpeg,image/png,image/tiff";
+// image/* rather than listing exact types -- an iPhone's library is full
+// of HEIC photos, and being restrictive here risks hiding someone's own
+// photos from the picker entirely on some browser/OS combinations. The
+// real gate is server-side (allowedContentTypes + a real signature check
+// after upload), not this attribute, which is only a picker-UI hint.
+const ACCEPTED_TYPES = "image/*";
 const LIMIT = 30;
 
 export function SubmitPhotosForm({ name }: { name: string }) {
