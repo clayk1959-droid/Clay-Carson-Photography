@@ -19,6 +19,54 @@ sharp.concurrency(1);
 
 const run = promisify(execFile);
 
+const runStartedAt = Date.now();
+
+function formatDuration(ms) {
+  const totalSeconds = Math.round(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+}
+
+async function sendSyncAlertEmail(subject, html) {
+  if (!process.env.RESEND_API_KEY) {
+    console.warn(`Sync alert email not sent (RESEND_API_KEY not set): ${subject}`);
+    return;
+  }
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    await resend.emails.send({
+      from: "noreply@mail.carsonmullerfamily.com",
+      to: "clayk1959@gmail.com",
+      subject,
+      html,
+    });
+    console.log(`Sync alert email sent: ${subject}`);
+  } catch (error) {
+    console.error("Sync alert email failed to send:", error.message);
+  }
+}
+
+// A sync that crashes outright (bad file, disk full, out of memory, ...)
+// used to fail completely silently unless someone was watching the
+// terminal -- these two catch that case and send the same kind of alert
+// email as a clean failure, instead of just vanishing.
+let fatalAlertSent = false;
+async function handleFatalError(error) {
+  if (fatalAlertSent) return;
+  fatalAlertSent = true;
+  console.error("Gallery sync crashed:", error);
+  const duration = formatDuration(Date.now() - runStartedAt);
+  const message = String(error?.stack || error?.message || error).replace(/</g, "&lt;");
+  await sendSyncAlertEmail(
+    `FAILED: Gallery sync crashed after ${duration}`,
+    `<p>The gallery sync crashed and did not finish -- nothing after the point of failure was processed. Rerun <code>npm run gallery:sync</code> once the underlying issue below is fixed.</p><pre>${message}</pre>`,
+  );
+  process.exit(1);
+}
+process.on("uncaughtException", handleFatalError);
+process.on("unhandledRejection", handleFatalError);
+
 // A live spinner so a big sync (lots of new/changed photos) doesn't look
 // frozen during the slow part -- resizing each original. Any console.log
 // that needs to print while the spinner is running should go through
@@ -771,27 +819,22 @@ await writeFile(path.join(root, "app", "collections", "page.tsx"), indexPage);
 stopSpinner();
 console.log("Collections index page regenerated.");
 
-if (allSkippedFiles.length > 0) {
-  const totalSkipped = allSkippedFiles.reduce((sum, entry) => sum + entry.files.length, 0);
-  if (process.env.RESEND_API_KEY) {
-    const listHtml = allSkippedFiles
-      .map((entry) => `<li><strong>${entry.collection}</strong>: ${entry.files.join(", ")}</li>`)
-      .join("");
-    try {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      await resend.emails.send({
-        from: "noreply@mail.carsonmullerfamily.com",
-        to: "clayk1959@gmail.com",
-        subject: `Gallery sync complete, but skipped ${totalSkipped} file(s)`,
-        html: `<p>Syncing is complete. However, there was an error with ${totalSkipped} file(s) -- listed below by gallery.</p><p><strong>What the error is:</strong> each one isn't recognized as an image (not .jpg/.jpeg/.tif/.tiff/.png), so it was skipped rather than published. Most likely a raw camera file or a sidecar file mixed into the folder, in which case it was correctly ignored and nothing needs doing. Worth a look only if a real photo shows up in this list.</p><ul>${listHtml}</ul>`,
-      });
-      console.log(`Skipped-file alert email sent (${totalSkipped} file(s)).`);
-    } catch (error) {
-      console.error("Skipped-file alert email failed to send:", error.message);
-    }
-  } else {
-    console.warn(`Skipped-file alert email not sent: RESEND_API_KEY is not set (${totalSkipped} file(s) skipped).`);
-  }
-}
-
 await rm(temporaryRoot, { recursive: true, force: true });
+
+const runDuration = formatDuration(Date.now() - runStartedAt);
+const totalSkipped = allSkippedFiles.reduce((sum, entry) => sum + entry.files.length, 0);
+
+if (totalSkipped > 0) {
+  const listHtml = allSkippedFiles
+    .map((entry) => `<li><strong>${entry.collection}</strong>: ${entry.files.join(", ")}</li>`)
+    .join("");
+  await sendSyncAlertEmail(
+    `FAILED: Gallery sync skipped ${totalSkipped} file(s) (${runDuration})`,
+    `<p>Syncing is complete in ${runDuration}. However, there was an error with ${totalSkipped} file(s) -- listed below by gallery.</p><p><strong>What the error is:</strong> each one isn't recognized as an image (not .jpg/.jpeg/.tif/.tiff/.png), so it was skipped rather than published. Most likely a raw camera file or a sidecar file mixed into the folder, in which case it was correctly ignored and nothing needs doing. Worth a look only if a real photo shows up in this list.</p><ul>${listHtml}</ul>`,
+  );
+} else {
+  await sendSyncAlertEmail(
+    `SUCCESS: Gallery sync complete (${runDuration})`,
+    `<p>Syncing is complete in ${runDuration}. Every file was recognized and processed normally -- nothing was skipped.</p>`,
+  );
+}

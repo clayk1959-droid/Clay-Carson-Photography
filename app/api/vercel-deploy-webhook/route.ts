@@ -45,17 +45,18 @@ export async function POST(request: Request) {
     payload?: { deployment?: { url?: string; meta?: Record<string, string> }; project?: { name?: string } };
   };
 
-  if (type !== "deployment.error") {
-    // Only failures are worth interrupting Clay for -- acknowledge
-    // anything else (deployment.created, deployment.ready, ...) quietly.
+  // Only these two are worth an email -- acknowledge anything else
+  // (deployment.created, deployment.canceled, ...) quietly.
+  if (type !== "deployment.error" && type !== "deployment.succeeded") {
     return Response.json({ ok: true, ignored: type });
   }
 
+  const failed = type === "deployment.error";
   const projectName = payload?.project?.name ?? "a project";
   const deployUrl = payload?.deployment?.url ? `https://${payload.deployment.url}` : null;
-  const subject = `Deploy failed: ${projectName}`;
+  const subject = failed ? `FAILED: Deploy failed -- ${projectName}` : `SUCCESS: Deploy succeeded -- ${projectName}`;
   const detail = deployUrl
-    ? `<p><a href="${deployUrl}">View the failed deployment</a> for build logs.</p>`
+    ? `<p><a href="${deployUrl}">View the deployment</a> ${failed ? "for build logs" : ""}.</p>`
     : "";
 
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -63,10 +64,14 @@ export async function POST(request: Request) {
     from: FROM_ADDRESS,
     to: OWNER_EMAIL,
     subject,
-    html: `<p>A deploy for <strong>${projectName}</strong> just failed. Your live site is unaffected -- Vercel never replaces it with a broken build.</p>${detail}`,
+    html: failed
+      ? `<p>A deploy for <strong>${projectName}</strong> just failed. Your live site is unaffected -- Vercel never replaces it with a broken build.</p>${detail}`
+      : `<p>A deploy for <strong>${projectName}</strong> just went live.</p>${detail}`,
   });
 
-  if (OWNER_SMS_ADDRESS) {
+  // Text alerts stay failure-only -- a routine successful deploy isn't
+  // worth interrupting Clay for, only a broken one is.
+  if (failed && OWNER_SMS_ADDRESS) {
     const { error: smsError } = await resend.emails.send({
       from: FROM_ADDRESS,
       to: OWNER_SMS_ADDRESS,
