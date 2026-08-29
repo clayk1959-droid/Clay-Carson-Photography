@@ -15,6 +15,10 @@ Last updated: Friday, August 28, 2026
 
 ## Version history
 
+### Version 137 — Friday, August 28, 2026
+
+- Added Blue Yoga Nyle gallery
+
 ### Version 136 — Friday, August 28, 2026
 
 - Sync and deploy alerts now confirm success, not just failure. A quiet inbox used to mean either "everything's fine" or "nobody noticed it crashed" — no way to tell which. Every sync now emails a status the moment it finishes, subject starting with SUCCESS or FAILED, including how long it took. Deploy alerts do the same for each of the three sites (main site, private-access, editor) — since one push deploys all three independently, each confirms on its own.
