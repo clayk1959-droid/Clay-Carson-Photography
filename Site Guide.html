@@ -220,6 +220,7 @@
       <tr><td><code>npm run collection:cover</code></td><td>Terminal alternative to the pencil icon's cover-photo picker — asks which collection and which photo filename, then how to crop it.</td></tr>
       <tr><td><code>npm run trim-filenames -- "Gallery Originals/Some Folder" "word"</code></td><td>Strips a given word (and everything after it) from every filename in a folder, keeping the extension. Walks through each rename one at a time so you can accept, edit, or skip it.</td></tr>
       <tr><td><code>npm run save</code></td><td>Records what changed in the changelog, commits, and offers to push live.</td></tr>
+      <tr><td><code>npm run submissions:pull</code></td><td>Downloads everything waiting in the "Submit Photos" queue into a local <code>Submitted/</code> folder and clears it from cloud storage. Run after getting a "submitted N photo(s)" email.</td></tr>
       <tr><td><code>npm run build</code> / <code>npm run lint</code> / <code>npm start</code></td><td>Production build check / code-quality check / runs a production build locally — mainly for troubleshooting.</td></tr>
     </table>
   </section>
@@ -419,13 +420,18 @@ vercel --prod # promotes to production</code></pre>
       <li><strong>A GitHub Personal Access Token</strong> (separate from GitHub hosting the
         repo) — only used by the remote editor project, so someone without local file access
         can edit captions/tags from a browser. Skip the editor project, skip this token.</li>
+      <li><strong>Vercel Blob</strong> (temporary photo-submission storage) — only touched by
+        the "Submit Photos" flow, granted per-account and separate from private-gallery access.
+        Files sit there just long enough to be reviewed — <code>npm run submissions:pull</code>
+        downloads them locally and deletes them from Blob storage in the same step, so nothing
+        accumulates there and there's nothing to pay for on the free tier.</li>
     </ul>
 
     <h3>Present but unused</h3>
     <p>
-      <code>@vercel/blob</code> and Tailwind CSS are both wired into <code>package.json</code>
-      / <code>postcss.config.mjs</code> but nothing in the code actually references either one —
-      leftovers from the original project template. Safe to remove if repurposing this codebase.
+      Tailwind CSS is wired into <code>package.json</code>
+      / <code>postcss.config.mjs</code> but nothing in the code actually references it —
+      a leftover from the original project template. Safe to remove if repurposing this codebase.
     </p>
 
     <h3>Repurposing this for a different site</h3>
@@ -484,6 +490,13 @@ vercel --prod # promotes to production</code></pre>
     <h2>Version history</h2>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
+    <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 140</span><span class="version-date">Saturday, August 29, 2026</span></div>
+      <ul>
+        <li>Added a photo-submission feature: someone you specifically grant this ability to (separate from private-gallery access, invite-only, no self-serve request) can submit up to 30 photos through a new "Submit Photos" link on the Galleries page. You get an email when photos come in, run <code>npm run submissions:pull</code> to bring them into a local <code>Submitted/</code> folder for review in Photo Mechanic exactly like any other originals, then move the ones you want into <code>Gallery Originals</code> and sync as normal. Nothing auto-publishes — you stay the only one deciding what goes on the site. A "Gallery live" button on the admin page lets you notify them once it's ready.</li>
+        <li>New admin controls: a "Can submit photos" toggle per account, and a "Gallery live" button to send that notification manually.</li>
+      </ul>
+    </div>
     <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 139</span><span class="version-date">Friday, August 28, 2026</span></div>
       <ul>

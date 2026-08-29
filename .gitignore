@@ -2,6 +2,7 @@ node_modules/
 .next/
 Gallery Originals/
 RAW Archive/
+Submitted/
 .DS_Store
 .claude/settings.local.json
 .cache/

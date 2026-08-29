@@ -5,6 +5,8 @@ import { getPool } from "../../../lib/db";
 import { SESSION_COOKIE_NAME, verifySessionCookieValue } from "../../../lib/session-cookie";
 import { RevokeButton } from "./RevokeButton";
 import { GalleryAccessGrid } from "./GalleryAccessGrid";
+import { UploadAccessToggle } from "./UploadAccessToggle";
+import { NotifyGalleryLiveButton } from "./NotifyGalleryLiveButton";
 import collectionIndex from "../../../data/photo-data/_index.json";
 
 export const dynamic = "force-dynamic";
@@ -44,7 +46,7 @@ export default async function AdminPage() {
     .map((card) => ({ slug: card.slug, title: card.title }));
 
   const pool = getPool();
-  const [accountsResult, pendingResult, grantsResult] = await Promise.all([
+  const [accountsResult, pendingResult, grantsResult, uploadGrantsResult] = await Promise.all([
     pool.query(
       `select accounts.id, accounts.name, accounts.email, accounts.session_type,
               accounts.created_at, accounts.revoked_at,
@@ -61,6 +63,7 @@ export default async function AdminPage() {
     privateGalleries.length > 0
       ? pool.query(`select account_id, gallery_slug from gallery_access`)
       : Promise.resolve({ rows: [] }),
+    pool.query(`select account_id from upload_access`),
   ]);
 
   const accounts = accountsResult.rows as Account[];
@@ -69,6 +72,9 @@ export default async function AdminPage() {
     (grantsResult.rows as Array<{ account_id: number; gallery_slug: string }>).map(
       (row) => `${row.account_id}:${row.gallery_slug}`,
     ),
+  );
+  const uploadGrants = new Set(
+    (uploadGrantsResult.rows as Array<{ account_id: number }>).map((row) => row.account_id),
   );
 
   return (
@@ -123,6 +129,8 @@ export default async function AdminPage() {
                   <th>Key</th>
                   <th>Last login</th>
                   <th>Status</th>
+                  <th>Can submit photos</th>
+                  <th />
                   <th />
                 </tr>
               </thead>
@@ -137,6 +145,12 @@ export default async function AdminPage() {
                       <td>{account.session_type === "forever" ? "Forever" : "3 months"}</td>
                       <td>{formatDate(account.last_login)}</td>
                       <td>{revoked ? "Revoked" : "Active"}</td>
+                      <td>
+                        <UploadAccessToggle accountId={account.id} granted={uploadGrants.has(account.id)} />
+                      </td>
+                      <td>
+                        <NotifyGalleryLiveButton accountId={account.id} />
+                      </td>
                       <td>
                         <RevokeButton id={account.id} revoked={revoked} />
                       </td>

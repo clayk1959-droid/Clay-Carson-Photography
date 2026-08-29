@@ -15,6 +15,11 @@ Last updated: Saturday, August 29, 2026
 
 ## Version history
 
+### Version 140 — Saturday, August 29, 2026
+
+- Added a photo-submission feature: someone you specifically grant this ability to (separate from private-gallery access, invite-only, no self-serve request) can submit up to 30 photos through a new "Submit Photos" link on the Galleries page. You get an email when photos come in, run `npm run submissions:pull` to bring them into a local `Submitted/` folder for review in Photo Mechanic exactly like any other originals, then move the ones you want into `Gallery Originals` and sync as normal. Nothing auto-publishes — you stay the only one deciding what goes on the site. A "Gallery live" button on the admin page lets you notify them once it's ready.
+- New admin controls: a "Can submit photos" toggle per account, and a "Gallery live" button to send that notification manually.
+
 ### Version 139 — Friday, August 28, 2026
 
 - Deploy alerts now name which of the three sites deployed — "Open," "Editable," or "Private" — instead of a generic "a project." Found and fixed a real bug along the way: the field the code was reading to identify the project doesn't actually exist in Vercel's webhook data (their own docs were wrong about this); switched to the field that's actually there, confirmed against a real captured event before shipping.

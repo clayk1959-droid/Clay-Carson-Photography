@@ -17,7 +17,8 @@
     "collection:add": "node scripts/add-collection.mjs",
     "collection:cover": "node scripts/set-cover-photo.mjs",
     "trim-filenames": "node scripts/trim-filenames.mjs",
-    "db:migrate": "node --env-file=.env.local scripts/db-migrate.mjs"
+    "db:migrate": "node --env-file=.env.local scripts/db-migrate.mjs",
+    "submissions:pull": "node --env-file=.env.local scripts/pull-submissions.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

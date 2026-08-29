@@ -57,10 +57,21 @@ CREATE TABLE IF NOT EXISTS gallery_access (
   UNIQUE (account_id, gallery_slug)
 );
 
+-- Whether an account can submit photos for Clay to review, separate from
+-- (and not implied by) gallery_access -- an account either has this row or
+-- it doesn't, same pattern as gallery_access.
+CREATE TABLE IF NOT EXISTS upload_access (
+  id SERIAL PRIMARY KEY,
+  account_id INTEGER NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+  granted_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (account_id)
+);
+
 CREATE INDEX IF NOT EXISTS idx_sessions_account_id ON sessions(account_id);
 CREATE INDEX IF NOT EXISTS idx_login_log_account_id ON login_log(account_id);
 CREATE INDEX IF NOT EXISTS idx_gallery_access_account_id ON gallery_access(account_id);
 CREATE INDEX IF NOT EXISTS idx_gallery_access_gallery_slug ON gallery_access(gallery_slug);
+CREATE INDEX IF NOT EXISTS idx_upload_access_account_id ON upload_access(account_id);
 
 -- Additive changes for tables that may already exist from an earlier run.
 ALTER TABLE access_requests ADD COLUMN IF NOT EXISTS action_token TEXT;

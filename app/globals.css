@@ -93,7 +93,10 @@ h1 em, h2 em { font-weight: 400; }
 .about-copy p:last-child { margin-bottom: 0; }
 .sentence-gap { display: inline-block; width: .65em; font-size: inherit; overflow: hidden; }
 .collections-layout { max-width: 1440px; margin: 0 auto; padding: 0 5vw 120px; }
-.collections-layout .page-title { padding: 6px 0 9px; border-bottom: 1px solid rgba(255, 255, 255, .6); font-size: clamp(14px, 1.6vw, 22px); font-family: Helvetica, Arial, sans-serif; }
+.collections-title-row { display: flex; align-items: baseline; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 6px 0 9px; border-bottom: 1px solid rgba(255, 255, 255, .6); }
+.collections-layout .page-title { padding: 0; border-bottom: 0; font-size: clamp(14px, 1.6vw, 22px); font-family: Helvetica, Arial, sans-serif; }
+.submit-photos-link { padding: 7px 14px; border: 1px solid #1c1c1c; color: #1c1c1c; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s; }
+.submit-photos-link:hover { background: #1c1c1c; color: #f5f2eb; }
 .collections-filters { display: flex; flex-wrap: wrap; gap: 20px 40px; margin: 15px 0 3px; }
 .collections-filter-group { position: relative; display: flex; flex-direction: column; gap: 6px; }
 .collections-filter-label { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #1c1c1c; }
@@ -317,7 +320,8 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
   .about-copy { margin-top: 6px; }
   .about-copy p { font-size: 16px; line-height: 1.6; }
   .collections-layout { padding: 0 7vw 90px; }
-  .collections-layout .page-title { padding-top: 2px; font-size: 18px; line-height: 1.1; }
+  .collections-title-row { padding-top: 2px; }
+  .collections-layout .page-title { font-size: 18px; line-height: 1.1; }
   .collections-filters { gap: 10px; }
   .collections-filter-group { flex: 1 1 0; min-width: 0; }
   .collections-filter-select { min-width: 0; width: 100%; }
@@ -390,7 +394,8 @@ footer { background: #171a17; color: #f3f0e8; padding: 120px 7vw 35px; display: 
      above (routinely 812-930px), so without this it would fall through to
      full desktop sizing mid-rotation -- keyed on height so it still lands
      here regardless of that width. */
-  .collections-layout .page-title { padding-top: 2px; font-size: 18px; line-height: 1.1; }
+  .collections-title-row { padding-top: 2px; }
+  .collections-layout .page-title { font-size: 18px; line-height: 1.1; }
   .collections-filters { gap: 10px; }
   .collections-filter-group { flex: 1 1 0; min-width: 0; }
   .collections-filter-select { min-width: 0; width: 100%; }

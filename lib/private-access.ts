@@ -67,3 +67,12 @@ export async function hasGalleryAccess(accountId: number, gallerySlug: string): 
   );
   return rows.length > 0;
 }
+
+// Deliberately separate from hasGalleryAccess -- having private-gallery
+// access doesn't imply upload access, or vice versa. Invite-only: there's
+// no self-serve way to request this, only Clay granting it directly.
+export async function hasUploadAccess(accountId: number): Promise<boolean> {
+  const pool = getPool();
+  const { rows } = await pool.query(`select 1 from upload_access where account_id = $1`, [accountId]);
+  return rows.length > 0;
+}
