@@ -48,14 +48,9 @@ export async function POST(request: Request) {
     return new Response("Invalid JSON", { status: 400 });
   }
 
-  // TEMPORARY: logging the real payload shape to confirm field names before
-  // trusting them -- docs said payload.project.name exists and it doesn't
-  // (every alert so far has said "a project"). Remove once confirmed.
-  console.log("Deploy webhook payload:", rawBody);
-
   const { type, payload } = event as {
     type?: string;
-    payload?: { deployment?: { url?: string; meta?: Record<string, string> }; project?: { name?: string } };
+    payload?: { deployment?: { url?: string; name?: string; meta?: Record<string, string> } };
   };
 
   // Only these two are worth an email -- acknowledge anything else
@@ -65,7 +60,9 @@ export async function POST(request: Request) {
   }
 
   const failed = type === "deployment.error";
-  const projectName = payload?.project?.name ?? "a project";
+  // Confirmed from a real logged payload -- payload.project only has an id,
+  // the project's slug lives at payload.deployment.name instead.
+  const projectName = payload?.deployment?.name ?? "a project";
   const projectLabel = PROJECT_LABELS[projectName] ?? projectName;
   const deployUrl = payload?.deployment?.url ? `https://${payload.deployment.url}` : null;
   const subject = failed ? `FAILED: Deploy failed -- ${projectLabel}` : `SUCCESS: Deploy succeeded -- ${projectLabel}`;
