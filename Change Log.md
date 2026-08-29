@@ -15,6 +15,10 @@ Last updated: Friday, August 28, 2026
 
 ## Version history
 
+### Version 138 — Friday, August 28, 2026
+
+- Removed BYN duplicates
+
 ### Version 137 — Friday, August 28, 2026
 
 - Added Blue Yoga Nyle gallery
