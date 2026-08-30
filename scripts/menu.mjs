@@ -9,6 +9,7 @@ import { stdin, stdout } from "node:process";
 const commands = [
   { label: "Start the site on your Mac (npm run dev)", run: ["npm", "run", "dev"] },
   { label: "Sync new/changed photos (npm run gallery:sync)", run: ["npm", "run", "gallery:sync"] },
+  { label: "Pull submitted photos for review (npm run submissions:pull)", run: ["npm", "run", "submissions:pull"] },
   { label: "Save & publish your changes (npm run save)", run: ["npm", "run", "save"] },
   { label: "Add a new empty collection (npm run collection:add)", run: ["npm", "run", "collection:add"] },
   { label: "Set a collection's cover photo (npm run collection:cover)", run: ["npm", "run", "collection:cover"] },

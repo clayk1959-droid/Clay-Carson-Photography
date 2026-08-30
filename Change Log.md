@@ -15,6 +15,10 @@ Last updated: Saturday, August 29, 2026
 
 ## Version history
 
+### Version 147 — Saturday, August 29, 2026
+
+- Added "Pull submitted photos for review" to the `npm run menu` command list, so `submissions:pull` doesn't need to be typed by hand.
+
 ### Version 146 — Saturday, August 29, 2026
 
 - Fixed the same bug as Version 145, in a second place: `npm run submissions:pull` also fetched private storage without proper credentials, so instead of downloading real photos it was writing a tiny "Forbidden" error file with the original filename, then deleting the real photo from storage regardless. This is why your last two batches (12, then 6 real photos) came out as unreadable, near-empty files and are now unrecoverable. Fixed and verified with a real file, confirmed byte-for-byte correct after pulling this time. Audited the rest of the codebase for the same pattern — these were the only two places it existed, both now fixed.
