@@ -573,18 +573,44 @@ for (const collection of collections) {
       if (isTiff) {
         await run("sips", ["-s", "format", "jpeg", source, "--out", workingSource]);
       }
-      await sharp(workingSource, { unlimited: true })
-        .rotate()
-        .resize({ width: 2200, height: 2200, fit: "inside", withoutEnlargement: true })
+      // A true single-channel grayscale source (channels === 1, e.g. a B&W
+      // conversion exported that way from Photoshop) otherwise gets
+      // silently upconverted to 3-channel RGB by sharp's default JPEG
+      // encoding -- at that point the original grayscale ICC profile no
+      // longer even applies, so keepIccProfile() correctly (but silently)
+      // drops it rather than attach a mismatched profile. Explicitly
+      // holding the output in the same colorspace as the source keeps the
+      // profile valid and preserved. Color sources are untouched.
+      const isGrayscaleSource = (await sharp(workingSource, { unlimited: true }).metadata()).channels === 1;
+
+      function resizedWithProfile(resizeOptions) {
+        const pipeline = sharp(workingSource, { unlimited: true })
+          .rotate()
+          .resize(resizeOptions);
+        if (isGrayscaleSource) pipeline.toColorspace("b-w");
+        // Keep the embedded color profile -- not full metadata, which would
+        // also bring back EXIF/GPS that was never in the published output
+        // before. Without this, sharp strips the profile entirely, so a
+        // browser falls back to assuming plain sRGB -- if the original was
+        // tagged with a different profile, the same pixel values get
+        // silently reinterpreted, showing up as a real color/toning shift
+        // (most visible in B&W photos, where neutral gray picks up a cast).
+        return pipeline.keepIccProfile();
+      }
+
+      await resizedWithProfile({ width: 2200, height: 2200, fit: "inside", withoutEnlargement: true })
         .jpeg({ quality: 88, mozjpeg: true })
         .toFile(fullPath);
-      await sharp(workingSource, { unlimited: true })
-        .rotate()
+      await resizedWithProfile({
         // Grid thumbnails never render past ~350px CSS-wide even on the
         // widest desktop layout -- 750px covers a sharp 2x-retina display
         // at that size with real headroom, down from 1200px which was
         // serving 3-4x more resolution than any screen actually shows.
-        .resize({ width: 750, height: 750, fit: "inside", withoutEnlargement: true })
+        width: 750,
+        height: 750,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
         .jpeg({ quality: 82, mozjpeg: true })
         .toFile(thumbnailPath);
       await copyFile(fullPath, cacheFullPath);
