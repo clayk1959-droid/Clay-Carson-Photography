@@ -45,6 +45,10 @@ const otherCollections = [
   {
     "slug": "france-trip",
     "title": "France trip"
+  },
+  {
+    "slug": "submit-test",
+    "title": "Submit Test"
   }
 ];
 

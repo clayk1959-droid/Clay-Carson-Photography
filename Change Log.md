@@ -15,6 +15,10 @@ Last updated: Saturday, August 29, 2026
 
 ## Version history
 
+### Version 148 — Saturday, August 29, 2026
+
+- Added test folder for submitted photos
+
 ### Version 147 — Saturday, August 29, 2026
 
 - Added "Pull submitted photos for review" to the `npm run menu` command list, so `submissions:pull` doesn't need to be typed by hand.

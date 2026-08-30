@@ -1,6 +1,22 @@
 {
   "photographData": [
     {
+      "filename": "L1015067.JPG",
+      "date": "2026-02-03",
+      "description": "Blue Yoga Nyla",
+      "caption": "February 3, 2026 — Blue Yoga Nyla",
+      "altText": "Blue Yoga Nyla",
+      "person": [
+        "Stacey Reynolds"
+      ],
+      "event": [
+        "BYN-Saphire Grand Opening"
+      ],
+      "width": 2200,
+      "height": 1464,
+      "hidden": false
+    },
+    {
       "filename": "L1015067A.JPG",
       "date": "2026-02-03",
       "description": "Blue Yoga Nyla, Sapphire studio grand opening.",
@@ -694,6 +710,7 @@
     42,
     43,
     44,
-    45
+    45,
+    46
   ]
 }

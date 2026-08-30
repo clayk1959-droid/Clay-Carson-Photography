@@ -188,6 +188,7 @@ const collections = [
   { folder: "Katie & Ben's Wedding", slug: "katie-ben-s-wedding", title: "Katie & Ben's Wedding", component: "KatieBenSWeddingPage", subtitle: null },
   { folder: "France trip", slug: "france-trip", title: "France trip", component: "FranceTripPage", subtitle: null },
   { folder: "Blue Yoga Nyla", slug: "blue-yoga-nyla", title: "Blue Yoga Nyla", component: "BlueYogaNylaPage", subtitle: null },
+  { folder: "Submit Test", slug: "submit-test", title: "Submit Test", component: "SubmitTestPage", subtitle: null },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.

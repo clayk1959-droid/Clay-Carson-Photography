@@ -40,6 +40,10 @@ const otherCollections = [
   {
     "slug": "blue-yoga-nyla",
     "title": "Blue Yoga Nyla"
+  },
+  {
+    "slug": "submit-test",
+    "title": "Submit Test"
   }
 ];
 
