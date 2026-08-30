@@ -30,26 +30,18 @@ const otherCollections = [
     "title": "Rhine River Cruise"
   },
   {
-    "slug": "katie-ben-s-wedding",
-    "title": "Katie & Ben's Wedding"
-  },
-  {
-    "slug": "france-trip",
-    "title": "France trip"
-  },
-  {
     "slug": "blue-yoga-nyla",
     "title": "Blue Yoga Nyla"
   },
   {
-    "slug": "submit-test",
-    "title": "Submit Test"
+    "slug": "kyle",
+    "title": "Kyle"
   }
 ];
 
 const collectionSubtitle: string | null = null;
 
-export default function NovaScotiaPage() {
+export default function NovaScotia2Page() {
   const remote = isRemoteEditorMode();
   const photoCountText = data.displayOrder.length + " Photos";
   const subtitle = collectionSubtitle ? collectionSubtitle + " · " + photoCountText : photoCountText;

@@ -18,10 +18,6 @@ const hiddenPhotographs = data.photographData
 
 const otherCollections = [
   {
-    "slug": "nova-scotia",
-    "title": "Nova Scotia"
-  },
-  {
     "slug": "norway-cruise",
     "title": "Norway Cruise"
   },
@@ -30,20 +26,16 @@ const otherCollections = [
     "title": "Rhine River Cruise"
   },
   {
-    "slug": "katie-ben-s-wedding",
-    "title": "Katie & Ben's Wedding"
-  },
-  {
-    "slug": "france-trip",
-    "title": "France trip"
-  },
-  {
     "slug": "blue-yoga-nyla",
     "title": "Blue Yoga Nyla"
   },
   {
-    "slug": "submit-test",
-    "title": "Submit Test"
+    "slug": "kyle",
+    "title": "Kyle"
+  },
+  {
+    "slug": "nova-scotia",
+    "title": "Nova Scotia"
   }
 ];
 

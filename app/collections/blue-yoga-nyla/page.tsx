@@ -27,10 +27,6 @@ const otherCollections = [
     "title": "Janet Buys a car"
   },
   {
-    "slug": "nova-scotia",
-    "title": "Nova Scotia"
-  },
-  {
     "slug": "norway-cruise",
     "title": "Norway Cruise"
   },
@@ -39,16 +35,12 @@ const otherCollections = [
     "title": "Rhine River Cruise"
   },
   {
-    "slug": "katie-ben-s-wedding",
-    "title": "Katie & Ben's Wedding"
+    "slug": "kyle",
+    "title": "Kyle"
   },
   {
-    "slug": "france-trip",
-    "title": "France trip"
-  },
-  {
-    "slug": "submit-test",
-    "title": "Submit Test"
+    "slug": "nova-scotia",
+    "title": "Nova Scotia"
   }
 ];
 

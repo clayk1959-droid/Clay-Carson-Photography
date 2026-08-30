@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Saturday, August 29, 2026
+Last updated: Sunday, August 30, 2026
 
 ## Current status
 
@@ -14,6 +14,10 @@ Last updated: Saturday, August 29, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 149 — Sunday, August 30, 2026
+
+- Added Kyle Gallery, Removed stale Galleries
 
 ### Version 148 — Saturday, August 29, 2026
 

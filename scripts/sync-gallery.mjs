@@ -182,13 +182,11 @@ try {
 // auto-detected data below and survive future syncs.
 const collections = [
   { folder: "Janet Buys a car", slug: "janet-buys-a-car", title: "Janet Buys a car", component: "JanetBuysACarPage", subtitle: null },
-  { folder: "Nova Scotia Trip", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotiaPage", subtitle: null },
   { folder: "Norway Cruise", slug: "norway-cruise", title: "Norway Cruise", component: "NorwayCruisePage", subtitle: null },
   { folder: "Rhine River Cruise", slug: "rhine-river-cruise", title: "Rhine River Cruise", component: "RhineRiverCruisePage", subtitle: null },
-  { folder: "Katie & Ben's Wedding", slug: "katie-ben-s-wedding", title: "Katie & Ben's Wedding", component: "KatieBenSWeddingPage", subtitle: null },
-  { folder: "France trip", slug: "france-trip", title: "France trip", component: "FranceTripPage", subtitle: null },
   { folder: "Blue Yoga Nyla", slug: "blue-yoga-nyla", title: "Blue Yoga Nyla", component: "BlueYogaNylaPage", subtitle: null },
-  { folder: "Submit Test", slug: "submit-test", title: "Submit Test", component: "SubmitTestPage", subtitle: null },
+  { folder: "Kyle", slug: "kyle", title: "Kyle", component: "KylePage", subtitle: null },
+  { folder: "Nova Scotia", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotia2Page", subtitle: null },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.
