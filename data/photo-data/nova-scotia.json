@@ -1058,6 +1058,20 @@
       "hidden": false
     },
     {
+      "filename": "L1021276-before-fix.jpg",
+      "date": "2026-08-14",
+      "description": "Peggy’s cove",
+      "caption": "August 14, 2026 — Peggy’s cove",
+      "altText": "Peggy’s cove",
+      "person": [],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "width": 2200,
+      "height": 1411,
+      "hidden": false
+    },
+    {
       "filename": "L1021276.jpg",
       "date": "2026-08-14",
       "description": "Peggy’s cove",
@@ -1168,7 +1182,7 @@
     58,
     60,
     61,
-    74,
+    75,
     62,
     63,
     64,
@@ -1179,6 +1193,7 @@
     69,
     70,
     71,
-    72
+    72,
+    73
   ]
 }
