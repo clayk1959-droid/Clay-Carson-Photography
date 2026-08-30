@@ -15,6 +15,10 @@ Last updated: Saturday, August 29, 2026
 
 ## Version history
 
+### Version 145 — Saturday, August 29, 2026
+
+- Fixed a serious bug: every real photo submitted through Submit Photos was being silently deleted right after upload, including your own 12-photo test. The safety check that verifies a file is really an image (added in Version 142) fetched the file to inspect it, but private storage rejects that fetch without proper credentials — the rejection message itself doesn't look like a real photo, so the check concluded every single upload was fake and deleted it, valid or not. Caught this directly from your test before it went further. Fixed and confirmed working against real storage before shipping. Your 12 photos from before this fix are gone and will need resubmitting.
+
 ### Version 144 — Saturday, August 29, 2026
 
 - Clearer message when you select more photos than you have slots for on the Submit Photos page. It used to just say "only N slot(s) left" with no explanation of what to do about it — now it spells it out: "You selected 34 files, but only 30 slots are left. Remove 4 to continue, or submit in batches."

@@ -51,15 +51,26 @@ export async function POST(request: Request) {
     onUploadCompleted: async ({ blob }) => {
       // allowedContentTypes only checked what the browser claimed the file
       // was -- this checks what it actually is, and removes it if it lied.
+      // A private blob's URL 403s without auth -- caught this in testing
+      // before it shipped: the error body doesn't look like a real image
+      // either, so an unauthenticated fetch here would delete every real
+      // upload, not just bad ones.
       try {
-        const response = await fetch(blob.url, { headers: { Range: "bytes=0-15" } });
-        const head = new Uint8Array(await response.arrayBuffer());
-        if (!isRecognizedImage(head)) {
-          await del(blob.url);
+        const response = await fetch(blob.url, {
+          headers: { Range: "bytes=0-15", Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` },
+        });
+        // Only ever delete on a confirmed bad signature from a successful
+        // read -- any failure here (network hiccup, auth misconfigured,
+        // whatever) leaves the file alone for Clay to check manually
+        // rather than risk deleting something real.
+        if (response.ok) {
+          const head = new Uint8Array(await response.arrayBuffer());
+          if (!isRecognizedImage(head)) {
+            await del(blob.url);
+          }
         }
       } catch {
-        // If this check itself fails for some reason, err on the side of
-        // leaving the file for Clay to review manually rather than losing it.
+        // Same reasoning -- leave the file rather than risk losing it.
       }
     },
   });
