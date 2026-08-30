@@ -491,6 +491,12 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 146</span><span class="version-date">Saturday, August 29, 2026</span></div>
+      <ul>
+        <li>Fixed the same bug as Version 145, in a second place: <code>npm run submissions:pull</code> also fetched private storage without proper credentials, so instead of downloading real photos it was writing a tiny "Forbidden" error file with the original filename, then deleting the real photo from storage regardless. This is why the last two batches (12, then 6 real photos) came out as unreadable, near-empty files and are now unrecoverable. Fixed and verified with a real file, confirmed byte-for-byte correct after pulling this time. Audited the rest of the codebase for the same pattern — these were the only two places it existed, both now fixed.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 145</span><span class="version-date">Saturday, August 29, 2026</span></div>
       <ul>
         <li>Fixed a serious bug: every real photo submitted through Submit Photos was being silently deleted right after upload, including Clay's own 12-photo test. The safety check that verifies a file is really an image (added in Version 142) fetched the file to inspect it, but private storage rejects that fetch without proper credentials — the rejection message itself doesn't look like a real photo, so the check concluded every single upload was fake and deleted it, valid or not. Fixed and confirmed working against real storage before shipping.</li>

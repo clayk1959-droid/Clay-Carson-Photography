@@ -45,7 +45,17 @@ for (const blob of blobs) {
   const destDir = path.join(submittedRoot, label);
   await mkdir(destDir, { recursive: true });
 
-  const response = await fetch(blob.url);
+  // A private blob's URL 403s without auth -- the error body ("Forbidden")
+  // was getting written to disk as if it were the real photo, and then the
+  // real blob deleted right after regardless. Only ever write/delete on a
+  // confirmed successful, authenticated read.
+  const response = await fetch(blob.url, {
+    headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` },
+  });
+  if (!response.ok) {
+    console.warn(`Skipping ${filename}: fetch failed (${response.status}). Left in place, try again later.`);
+    continue;
+  }
   const data = Buffer.from(await response.arrayBuffer());
   await writeFile(path.join(destDir, filename), data);
   await del(blob.url);

@@ -15,6 +15,10 @@ Last updated: Saturday, August 29, 2026
 
 ## Version history
 
+### Version 146 — Saturday, August 29, 2026
+
+- Fixed the same bug as Version 145, in a second place: `npm run submissions:pull` also fetched private storage without proper credentials, so instead of downloading real photos it was writing a tiny "Forbidden" error file with the original filename, then deleting the real photo from storage regardless. This is why your last two batches (12, then 6 real photos) came out as unreadable, near-empty files and are now unrecoverable. Fixed and verified with a real file, confirmed byte-for-byte correct after pulling this time. Audited the rest of the codebase for the same pattern — these were the only two places it existed, both now fixed.
+
 ### Version 145 — Saturday, August 29, 2026
 
 - Fixed a serious bug: every real photo submitted through Submit Photos was being silently deleted right after upload, including your own 12-photo test. The safety check that verifies a file is really an image (added in Version 142) fetched the file to inspect it, but private storage rejects that fetch without proper credentials — the rejection message itself doesn't look like a real photo, so the check concluded every single upload was fake and deleted it, valid or not. Caught this directly from your test before it went further. Fixed and confirmed working against real storage before shipping. Your 12 photos from before this fix are gone and will need resubmitting.
