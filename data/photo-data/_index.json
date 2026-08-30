@@ -1,6 +1,18 @@
 {
   "cards": [
     {
+      "slug": "kyle",
+      "title": "Kyle",
+      "person": [],
+      "event": [],
+      "count": 57,
+      "pinned": false,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "kyle-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
       "slug": "nova-scotia",
       "title": "Nova Scotia",
       "person": [
@@ -20,18 +32,6 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "nova-scotia-11.jpg",
-      "coverPosition": "center center"
-    },
-    {
-      "slug": "kyle",
-      "title": "Kyle",
-      "person": [],
-      "event": [],
-      "count": 57,
-      "pinned": false,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "kyle-01.jpg",
       "coverPosition": "center center"
     },
     {
