@@ -13,28 +13,6 @@
       "coverPosition": "center center"
     },
     {
-      "slug": "nova-scotia",
-      "title": "Nova Scotia",
-      "person": [
-        "Albert Everett",
-        "Alex Brandon",
-        "Carol Mendal",
-        "Janet Carson",
-        "Karen",
-        "Mark Conard",
-        "Phyllis Conard"
-      ],
-      "event": [
-        "Nova Scotia Trip"
-      ],
-      "count": 62,
-      "pinned": true,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "nova-scotia-11.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "blue-yoga-nyla",
       "title": "Blue Yoga Nyla",
       "person": [
@@ -74,6 +52,28 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "rhine-river-cruise-10.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "nova-scotia",
+      "title": "Nova Scotia",
+      "person": [
+        "Albert Everett",
+        "Alex Brandon",
+        "Carol Mendal",
+        "Janet Carson",
+        "Karen",
+        "Mark Conard",
+        "Phyllis Conard"
+      ],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "count": 62,
+      "pinned": true,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "nova-scotia-11.jpg",
       "coverPosition": "center center"
     },
     {
