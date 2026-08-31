@@ -16,6 +16,35 @@
       "order": 11
     }
   },
+  "christian-2nd-year": {
+    "Christian jumps out iof box with Ben.jpg": {
+      "caption": "He just wanted the box",
+      "date": "2026-04-19",
+      "order": 6,
+      "person": [
+        "Christian Muller",
+        "Benjamin Muller"
+      ],
+      "event": []
+    },
+    "Eating orange bw good light.jpg": {
+      "caption": "Don’t know what it is but interesting",
+      "date": "2026-06-12",
+      "order": 12,
+      "person": [
+        "Christian Muller"
+      ],
+      "event": []
+    },
+    "Eating wide open.jpg": {
+      "hidden": true,
+      "caption": "Christian 2nd Year",
+      "date": "2026-06-28",
+      "order": 13,
+      "person": [],
+      "event": []
+    }
+  },
   "gulf-shores-2025": {
     "BEACH- Ben and Christian in sand_1.tif": {
       "order": 5

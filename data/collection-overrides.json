@@ -4,6 +4,17 @@
     "private": true,
     "coverToken": "W8IodUqlvwlB6J8NuAetTH9wTFPuegrb"
   },
+  "christian-2nd-year": {
+    "firstSyncedAt": "2026-08-31T19:35:05.000Z",
+    "coverPhoto": "Christian jumps out iof box with Ben.jpg",
+    "coverPosition": "center center",
+    "private": true
+  },
+  "christian-janet-read": {
+    "firstSyncedAt": "2026-08-31T19:52:45.000Z",
+    "pinnedAt": "2026-08-31T21:36:31.702Z",
+    "private": true
+  },
   "france-trip": {
     "firstSyncedAt": "2026-08-27T16:50:35.000Z",
     "coverPhoto": "1 - 186.jpeg",
@@ -32,8 +43,7 @@
     "coverPhoto": "L1020121.jpg",
     "coverPosition": "center center",
     "firstSyncedAt": "2026-08-17T19:08:39.000Z",
-    "coverToken": "taVAY5nbnX2sfocsIFIQvgzqfMXHNKlB",
-    "pinnedAt": "2026-08-30T18:21:49.522Z"
+    "coverToken": "taVAY5nbnX2sfocsIFIQvgzqfMXHNKlB"
   },
   "rhine-river-cruise": {
     "coverPhoto": "_DSC0210.jpg",
@@ -42,11 +52,5 @@
   },
   "submit-test": {
     "firstSyncedAt": "2026-08-30T04:15:19.000Z"
-  },
-  "christian-janet-read": {
-    "firstSyncedAt": "2026-08-31T19:52:45.000Z"
-  },
-  "christian-2nd-year": {
-    "firstSyncedAt": "2026-08-31T19:35:05.000Z"
   }
 }

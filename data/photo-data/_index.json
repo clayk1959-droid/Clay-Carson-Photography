@@ -1,40 +1,6 @@
 {
   "cards": [
     {
-      "slug": "kyle",
-      "title": "Kyle",
-      "person": [],
-      "event": [],
-      "count": 57,
-      "pinned": true,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "kyle-01.jpg",
-      "coverPosition": "center center"
-    },
-    {
-      "slug": "nova-scotia",
-      "title": "Nova Scotia",
-      "person": [
-        "Albert Everett",
-        "Alex Brandon",
-        "Carol Mendal",
-        "Janet Carson",
-        "Karen",
-        "Mark Conard",
-        "Phyllis Conard"
-      ],
-      "event": [
-        "Nova Scotia Trip"
-      ],
-      "count": 62,
-      "pinned": true,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "nova-scotia-11.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "christian-janet-read",
       "title": "Christian & Janet Read",
       "person": [],
@@ -44,6 +10,18 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "christian-janet-read-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "kyle",
+      "title": "Kyle",
+      "person": [],
+      "event": [],
+      "count": 57,
+      "pinned": true,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "kyle-01.jpg",
       "coverPosition": "center center"
     },
     {
@@ -60,11 +38,11 @@
       "event": [
         "Norway Cruise"
       ],
-      "count": 19,
+      "count": 18,
       "pinned": false,
       "private": false,
       "coverToken": null,
-      "coverBasename": "christian-2nd-year-01.jpg",
+      "coverBasename": "christian-2nd-year-06.jpg",
       "coverPosition": "center center"
     },
     {
@@ -107,6 +85,28 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "rhine-river-cruise-10.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "nova-scotia",
+      "title": "Nova Scotia",
+      "person": [
+        "Albert Everett",
+        "Alex Brandon",
+        "Carol Mendal",
+        "Janet Carson",
+        "Karen",
+        "Mark Conard",
+        "Phyllis Conard"
+      ],
+      "event": [
+        "Nova Scotia Trip"
+      ],
+      "count": 62,
+      "pinned": true,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "nova-scotia-11.jpg",
       "coverPosition": "center center"
     },
     {
@@ -2727,8 +2727,8 @@
       "collectionSlug": "christian-2nd-year",
       "collectionTitle": "Christian 2nd Year",
       "filename": "Eating orange bw good light.jpg",
-      "caption": "June 12, 2026 — Christian Muller",
-      "altText": "Christian Muller",
+      "caption": "June 12, 2026 — Don’t know what it is but interesting",
+      "altText": "Don’t know what it is but interesting",
       "person": [
         "Christian Muller"
       ],
