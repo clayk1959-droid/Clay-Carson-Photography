@@ -15,6 +15,10 @@ Last updated: Monday, August 31, 2026
 
 ## Version history
 
+### Version 155 — Monday, August 31, 2026
+
+- `npm run save` now also updates `Site Guide.html`, not just `Change Log.md`. Previously, if you ran `save` yourself without a Claude session in the loop, Site Guide.html would silently fall behind — that happened with Version 154, caught and fixed by hand. Now every save keeps both in sync automatically.
+
 ### Version 154 — Monday, August 31, 2026
 
 - Added Christian Muller and Janet & Christian Read galleries

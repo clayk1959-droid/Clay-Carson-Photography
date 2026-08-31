@@ -12,6 +12,7 @@ import { stdin, stdout } from "node:process";
 
 const root = process.cwd();
 const changelogPath = path.join(root, "Change Log.md");
+const siteGuidePath = path.join(root, "Site Guide.html");
 
 function runCommand(command, args) {
   return new Promise((resolve, reject) => {
@@ -32,6 +33,48 @@ async function nextVersionNumber(changelog) {
   const numbers = [...changelog.matchAll(/^###\s*Version\s*(\d+)/gm)].map((match) => Number(match[1]));
   const highest = numbers.length > 0 ? Math.max(...numbers) : 0;
   return highest + 1;
+}
+
+// Turns a plain typed line into the same lightweight markup the Site Guide's
+// hand-written entries already use -- HTML-escaped, with `backtick` spans
+// (the only markdown-ish thing anyone types here) converted to <code>.
+function lineToHtml(text) {
+  const escaped = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return escaped.replace(/`([^`]+)`/g, "<code>$1</code>");
+}
+
+// Mirrors the same entry into Site Guide.html's version-history section, so
+// it can't silently fall behind Change Log.md when someone runs `save`
+// without a Claude session in the loop to do this by hand. Best-effort: a
+// changed heading/marker in the file shouldn't block saving the changelog
+// and committing, so this only warns rather than throwing.
+async function appendToSiteGuide(version, dateLabel, lines) {
+  let siteGuide;
+  try {
+    siteGuide = await readFile(siteGuidePath, "utf8");
+  } catch {
+    console.warn("\nSite Guide.html not found -- skipped, only Change Log.md was updated.");
+    return;
+  }
+
+  const marker = '<div class="version-entry">';
+  const insertAt = siteGuide.indexOf(marker);
+  if (insertAt === -1) {
+    console.warn("\nCouldn't find the version-history section in Site Guide.html -- skipped, add this entry by hand.");
+    return;
+  }
+
+  const entry = `<div class="version-entry">
+      <div class="version-head"><span class="version-num">Version ${version}</span><span class="version-date">${dateLabel}</span></div>
+      <ul>
+${lines.map((line) => `        <li>${lineToHtml(line)}</li>`).join("\n")}
+      </ul>
+    </div>
+    `;
+
+  const updatedSiteGuide = siteGuide.slice(0, insertAt) + entry + siteGuide.slice(insertAt + marker.length);
+  await writeFile(siteGuidePath, updatedSiteGuide);
+  console.log(`Added Version ${version} to Site Guide.html.`);
 }
 
 async function main() {
@@ -76,6 +119,7 @@ async function main() {
 
   await writeFile(changelogPath, relabeledChangelog);
   console.log(`\nAdded Version ${version} to Change Log.md.`);
+  await appendToSiteGuide(version, dateLabel, lines);
 
   const commitMessage = `Version ${version}: ${lines[0]}`;
 
