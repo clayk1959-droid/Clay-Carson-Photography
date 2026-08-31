@@ -1,30 +1,6 @@
 {
   "cards": [
     {
-      "slug": "christian-janet-read",
-      "title": "Christian & Janet Read",
-      "person": [],
-      "event": [],
-      "count": 17,
-      "pinned": false,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "christian-janet-read-01.jpg",
-      "coverPosition": "center center"
-    },
-    {
-      "slug": "kyle",
-      "title": "Kyle",
-      "person": [],
-      "event": [],
-      "count": 57,
-      "pinned": true,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "kyle-01.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "christian-2nd-year",
       "title": "Christian 2nd Year",
       "person": [
@@ -39,10 +15,34 @@
         "Norway Cruise"
       ],
       "count": 18,
-      "pinned": false,
-      "private": false,
+      "pinned": true,
+      "private": true,
       "coverToken": null,
       "coverBasename": "christian-2nd-year-06.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "christian-janet-read",
+      "title": "Christian & Janet Read",
+      "person": [],
+      "event": [],
+      "count": 17,
+      "pinned": true,
+      "private": true,
+      "coverToken": null,
+      "coverBasename": "christian-janet-read-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "kyle",
+      "title": "Kyle",
+      "person": [],
+      "event": [],
+      "count": 57,
+      "pinned": true,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "kyle-01.jpg",
       "coverPosition": "center center"
     },
     {
