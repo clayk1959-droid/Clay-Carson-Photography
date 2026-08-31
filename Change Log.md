@@ -15,6 +15,10 @@ Last updated: Monday, August 31, 2026
 
 ## Version history
 
+### Version 152 — Monday, August 31, 2026
+
+- Removed the temporary before/after comparison photo added for the Version 150 color/toning fix, now that it's confirmed working. Nova Scotia gallery count returns to normal.
+
 ### Version 151 — Monday, August 31, 2026
 
 - Increased the max resolution of published full-size photos from 2200px to 3200px (roughly 2x the pixel count), after you noticed fine detail — like the shingle lines on the Sandy Cove church spire — visibly softened at 2200px compared to your original file. Reprocessed every existing photo across every gallery at the new size and confirmed a real improvement with a before/after crop comparison before shipping. Deliberate tradeoff toward more detail in exchange for larger published file sizes; thumbnails are unaffected (still 750px — they never render bigger than that on screen).
