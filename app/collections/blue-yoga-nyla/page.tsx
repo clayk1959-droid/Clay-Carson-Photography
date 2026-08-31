@@ -41,6 +41,14 @@ const otherCollections = [
   {
     "slug": "nova-scotia",
     "title": "Nova Scotia"
+  },
+  {
+    "slug": "christian-janet-read",
+    "title": "Christian & Janet Read"
+  },
+  {
+    "slug": "christian-2nd-year",
+    "title": "Christian 2nd Year"
   }
 ];
 

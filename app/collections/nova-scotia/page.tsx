@@ -36,6 +36,14 @@ const otherCollections = [
   {
     "slug": "kyle",
     "title": "Kyle"
+  },
+  {
+    "slug": "christian-janet-read",
+    "title": "Christian & Janet Read"
+  },
+  {
+    "slug": "christian-2nd-year",
+    "title": "Christian 2nd Year"
   }
 ];
 
