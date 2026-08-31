@@ -6,7 +6,7 @@
 // scripts/sync-gallery.mjs uses locally, and commit every file in one
 // atomic commit. This is the remote equivalent of editing a local JSON
 // file and then clicking "Sync Gallery".
-import { getFileContent, commitFiles } from "./github-commit";
+import { getFileContent, commitFiles, type CommitFile } from "./github-commit";
 // Plain JS module, shared with scripts/sync-gallery.mjs so remote edits can
 // never compute a different result than a local sync.
 import {
@@ -15,6 +15,7 @@ import {
   computeIndexPhotos,
   sortIndexCards,
 } from "../scripts/lib/photo-ranking.mjs";
+import { formatDate } from "../scripts/lib/format-date.mjs";
 
 export type PhotoOverride = {
   caption?: string;
@@ -47,6 +48,36 @@ export type PhotographDataEntry = {
   hidden?: boolean;
 };
 export type PhotoData = { photographData: PhotographDataEntry[]; displayOrder: number[] };
+
+// One staged, not-yet-committed editor action. Each variant maps 1:1 to a
+// single distinct action a person can take in the editor UI (pin, make
+// private, set cover, reorder, edit a photo's fields, hide/unhide) --
+// deliberately split by *what changed*, not by which API route used to
+// handle it, so two different staged actions on the same photo (e.g. a
+// caption edit, then later hiding it) never clobber each other while
+// queued. `pinned`/`private` carry the *target* state rather than "toggle",
+// so staging the same action twice before syncing (pin, then unpin) nets
+// out correctly instead of double-toggling. `key` is how the client
+// deduplicates repeated edits to the same target, keeping only the latest;
+// `label` is a human-readable summary for the pending-changes list.
+export type PendingEdit =
+  | { key: string; type: "pin"; slug: string; pinned: boolean; label: string }
+  | { key: string; type: "privacy"; slug: string; private: boolean; label: string }
+  | { key: string; type: "cover"; slug: string; filename: string; position: string; label: string }
+  | { key: string; type: "reorder"; slug: string; filenames: string[]; label: string }
+  | {
+      key: string;
+      type: "photoFields";
+      slug: string;
+      filename: string;
+      label: string;
+      caption: string;
+      date: string | null;
+      order: number;
+      person: string[];
+      event: string[];
+    }
+  | { key: string; type: "photoHidden"; slug: string; filename: string; label: string; hidden: boolean };
 
 const OVERRIDES_PATH = "data/gallery-overrides.json";
 const COVER_OVERRIDES_PATH = "data/collection-overrides.json";
@@ -202,4 +233,169 @@ export async function applyPrivacyRemote(slug: string, editorName: string | null
   );
 
   return { private: nowPrivate };
+}
+
+// Applies a whole batch of staged editor actions -- possibly spanning
+// several galleries -- as ONE read-mutate-write cycle and ONE commit. This
+// is the fix for the race condition the three functions above have: each of
+// them independently reads-then-writes the shared override files, so two
+// edits fired close together can silently clobber each other (the second
+// commit lands built from a snapshot that never saw the first one's
+// change). Routing every remote edit through a single staged batch instead
+// of committing per-click removes the race entirely, since there's only
+// ever one read and one write per sync, no matter how many actions were
+// staged in between.
+export async function applyBatchRemote(edits: PendingEdit[], editorName: string | null): Promise<void> {
+  if (edits.length === 0) return;
+
+  const collections = await readJson<{ slug: string; title: string }[]>(COLLECTIONS_PATH, []);
+  const titleBySlug = new Map(collections.map((collection) => [collection.slug, collection.title]));
+  for (const edit of edits) {
+    if (!titleBySlug.has(edit.slug)) throw new Error(`Unknown collection: ${edit.slug}`);
+  }
+
+  const overrides = await readJson<Overrides>(OVERRIDES_PATH, {});
+  const coverOverrides = await readJson<CoverOverrides>(COVER_OVERRIDES_PATH, {});
+  const indexData = await readJson<{ cards: { slug: string }[]; photos: { collectionSlug: string }[] }>(
+    INDEX_PATH,
+    { cards: [], photos: [] },
+  );
+
+  const touchedSlugs = new Set(edits.map((edit) => edit.slug));
+  const photoDataBySlug = new Map<string, PhotoData>();
+  for (const slug of touchedSlugs) {
+    photoDataBySlug.set(slug, await readJson<PhotoData>(photoDataPath(slug), { photographData: [], displayOrder: [] }));
+  }
+
+  for (const edit of edits) {
+    if (!overrides[edit.slug]) overrides[edit.slug] = {};
+    const collectionOverrides = overrides[edit.slug];
+    const photoData = photoDataBySlug.get(edit.slug)!;
+
+    switch (edit.type) {
+      case "pin": {
+        const existing = coverOverrides[edit.slug] ?? {};
+        coverOverrides[edit.slug] = edit.pinned
+          ? { ...existing, pinnedAt: new Date().toISOString() }
+          : { ...existing, pinnedAt: undefined };
+        if (!edit.pinned) delete coverOverrides[edit.slug].pinnedAt;
+        break;
+      }
+      case "privacy": {
+        const existing = coverOverrides[edit.slug] ?? {};
+        if (edit.private) {
+          coverOverrides[edit.slug] = { ...existing, private: true };
+        } else {
+          const { private: _private, ...rest } = existing;
+          coverOverrides[edit.slug] = rest;
+        }
+        break;
+      }
+      case "cover": {
+        coverOverrides[edit.slug] = {
+          ...(coverOverrides[edit.slug] ?? {}),
+          coverPhoto: edit.filename,
+          coverPosition: edit.position,
+        };
+        break;
+      }
+      case "reorder": {
+        edit.filenames.forEach((filename, index) => {
+          const existing = collectionOverrides[filename] ?? {};
+          collectionOverrides[filename] = { ...existing, order: index + 1 };
+        });
+        break;
+      }
+      case "photoHidden": {
+        const photoIndex = photoData.photographData.findIndex((photo) => photo.filename === edit.filename);
+        if (photoIndex === -1) throw new Error(`Unknown photo: ${edit.filename} in ${edit.slug}`);
+
+        if (edit.hidden) {
+          const existing = collectionOverrides[edit.filename] ?? {};
+          collectionOverrides[edit.filename] = { ...existing, hidden: true };
+          photoData.photographData[photoIndex] = { ...photoData.photographData[photoIndex], hidden: true };
+        } else {
+          const existing = collectionOverrides[edit.filename] ?? {};
+          const { hidden: _hiddenFlag, ...rest } = existing;
+          if (Object.keys(rest).length === 0) delete collectionOverrides[edit.filename];
+          else collectionOverrides[edit.filename] = rest;
+          const { hidden: _photoHidden, ...restPhoto } = photoData.photographData[photoIndex];
+          photoData.photographData[photoIndex] = restPhoto;
+        }
+        break;
+      }
+      case "photoFields": {
+        const photoIndex = photoData.photographData.findIndex((photo) => photo.filename === edit.filename);
+        if (photoIndex === -1) throw new Error(`Unknown photo: ${edit.filename} in ${edit.slug}`);
+
+        const entry: PhotoOverride = { caption: edit.caption, order: edit.order, person: edit.person, event: edit.event };
+        if (edit.date !== null) entry.date = edit.date;
+        collectionOverrides[edit.filename] = { ...collectionOverrides[edit.filename], ...entry };
+
+        const photo = photoData.photographData[photoIndex];
+        photo.description = edit.caption;
+        photo.altText = edit.caption;
+        if (edit.date !== null) photo.date = edit.date;
+        photo.person = edit.person;
+        photo.event = edit.event;
+        photo.caption = photo.date ? `${formatDate(photo.date)} — ${photo.description}` : photo.description;
+        break;
+      }
+    }
+  }
+
+  for (const slug of touchedSlugs) {
+    if (overrides[slug] && Object.keys(overrides[slug]).length === 0) delete overrides[slug];
+
+    const photoData = photoDataBySlug.get(slug)!;
+    const collectionOverrides = overrides[slug] ?? {};
+    photoData.displayOrder = computeDisplayOrder(photoData.photographData, collectionOverrides);
+
+    const title = titleBySlug.get(slug)!;
+    const coverOverride = coverOverrides[slug] ?? {};
+    const newCard = computeIndexCard({
+      slug,
+      title,
+      photographData: photoData.photographData,
+      collectionOverrides,
+      displayOrder: photoData.displayOrder,
+      coverOverride,
+    });
+    const newPhotosForCollection = computeIndexPhotos({
+      slug,
+      title,
+      photographData: photoData.photographData,
+      displayOrder: photoData.displayOrder,
+    });
+
+    indexData.cards = indexData.cards.map((card) => (card.slug === slug ? newCard : card));
+    indexData.photos = [
+      ...indexData.photos.filter((photo) => photo.collectionSlug !== slug),
+      ...newPhotosForCollection,
+    ];
+  }
+
+  // Re-sort every time, not just when a pin changed -- harmless no-op when
+  // nothing pin-related was touched, and simpler than tracking that.
+  indexData.cards = sortIndexCards(indexData.cards, coverOverrides);
+
+  const sortedOverrides: Overrides = {};
+  for (const key of Object.keys(overrides).sort()) {
+    sortedOverrides[key] = sortedEntries(overrides[key]);
+  }
+
+  const files: CommitFile[] = [
+    { path: OVERRIDES_PATH, content: `${JSON.stringify(sortedOverrides, null, 2)}\n` },
+    { path: COVER_OVERRIDES_PATH, content: `${JSON.stringify(sortedEntries(coverOverrides), null, 2)}\n` },
+    { path: INDEX_PATH, content: `${JSON.stringify(indexData, null, 2)}\n` },
+  ];
+  for (const slug of touchedSlugs) {
+    files.push({ path: photoDataPath(slug), content: `${JSON.stringify(photoDataBySlug.get(slug), null, 2)}\n` });
+  }
+
+  const summary =
+    edits.length === 1
+      ? edits[0].label
+      : `${edits.length} changes across ${[...touchedSlugs].sort().join(", ")}`;
+  await commitFiles(files, `Editor${editorName ? ` (${editorName})` : ""}: ${summary}`);
 }

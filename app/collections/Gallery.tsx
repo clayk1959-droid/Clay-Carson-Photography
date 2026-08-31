@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { SiteHeader } from "../SiteHeader";
 import { formatDate } from "../../scripts/lib/format-date.mjs";
+import { stagePendingEdit } from "./pendingEdits";
+import { EditorSyncBar } from "./EditorSyncBar";
 
 type GalleryPhoto = {
   src: string;
@@ -436,7 +438,7 @@ export function Gallery({
               Hidden Photos ({hiddenPhotographs.length})
             </button>
           )}
-          {!remoteMode && <SyncButton />}
+          {remoteMode ? <EditorSyncBar /> : <SyncButton />}
         </div>
       )}
     </>
@@ -598,6 +600,20 @@ function ReorderPanel({
   }
 
   async function handleSave() {
+    if (remoteMode) {
+      // Staged, not committed -- see app/collections/pendingEdits.ts.
+      stagePendingEdit({
+        key: `reorder:${slug}`,
+        type: "reorder",
+        slug,
+        filenames: order,
+        label: `Reorder photos in ${slug}`,
+      });
+      setStatus("saved");
+      setDirty(false);
+      return;
+    }
+
     setStatus("saving");
     setErrorMessage("");
     try {
@@ -625,7 +641,7 @@ function ReorderPanel({
             {status === "saved" && !dirty && (
               <span className="edit-photo-status">
                 {remoteMode ? (
-                  "Saved — live on the site within a minute or two."
+                  <>Staged — click <strong>Sync</strong> (bottom right) to publish.</>
                 ) : (
                   <>Saved — click <strong>Sync Gallery</strong> to apply.</>
                 )}
@@ -698,6 +714,21 @@ function HiddenPhotosPanel({
   }, [onClose]);
 
   async function handleUnhide(filename: string) {
+    if (remoteMode) {
+      // Staged, not committed -- see app/collections/pendingEdits.ts.
+      stagePendingEdit({
+        key: `photo-hidden:${slug}:${filename}`,
+        type: "photoHidden",
+        slug,
+        filename,
+        hidden: false,
+        label: `Unhide ${filename} in ${slug}`,
+      });
+      setItems((current) => current.filter((photo) => photo.filename !== filename));
+      setMessage("Unhidden — staged, click Sync (bottom right) to publish.");
+      return;
+    }
+
     setBusyFilename(filename);
     setErrorMessage("");
     try {
@@ -708,9 +739,7 @@ function HiddenPhotosPanel({
       });
       if (!response.ok) throw new Error(await response.text());
       setItems((current) => current.filter((photo) => photo.filename !== filename));
-      setMessage(
-        remoteMode ? "Unhidden — live on the site within a minute or two." : "Unhidden — click Sync Gallery to apply.",
-      );
+      setMessage("Unhidden — click Sync Gallery to apply.");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
     } finally {
@@ -858,6 +887,38 @@ function EditPhotoForm({
   }, [onClose]);
 
   async function submitChange(body: Record<string, unknown>, message: ReactNode) {
+    if (remoteMode) {
+      // Staged, not committed -- see app/collections/pendingEdits.ts. Hide
+      // and field-edits use different keys so staging one doesn't discard
+      // an already-staged, not-yet-synced instance of the other.
+      if (body.hidden !== undefined) {
+        stagePendingEdit({
+          key: `photo-hidden:${slug}:${photograph.filename}`,
+          type: "photoHidden",
+          slug,
+          filename: photograph.filename,
+          hidden: body.hidden as boolean,
+          label: `${body.hidden ? "Hide" : "Unhide"} ${photograph.filename} in ${slug}`,
+        });
+      } else {
+        stagePendingEdit({
+          key: `photo-fields:${slug}:${photograph.filename}`,
+          type: "photoFields",
+          slug,
+          filename: photograph.filename,
+          caption: body.caption as string,
+          date: body.date as string | null,
+          order: body.order as number,
+          person: body.person as string[],
+          event: body.event as string[],
+          label: `Edit ${photograph.filename} in ${slug}`,
+        });
+      }
+      setSavedMessage(message);
+      setStatus("saved");
+      return;
+    }
+
     setStatus("saving");
     setErrorMessage("");
     try {
@@ -876,7 +937,7 @@ function EditPhotoForm({
   }
 
   const applyMessage = remoteMode ? (
-    <>live on the site within a minute or two.</>
+    <>staged, click <strong>Sync</strong> (bottom right) to publish.</>
   ) : (
     <>click <strong>Sync Gallery</strong> (bottom right) to apply.</>
   );
@@ -939,6 +1000,20 @@ function EditPhotoForm({
   }
 
   async function handleSetCover(cropPosition: string) {
+    if (remoteMode) {
+      stagePendingEdit({
+        key: `cover:${slug}`,
+        type: "cover",
+        slug,
+        filename: photograph.filename,
+        position: cropPosition,
+        label: `Set cover of ${slug} to ${photograph.filename}`,
+      });
+      setSavedMessage(<>Set as the gallery cover — {applyMessage}</>);
+      setStatus("saved");
+      return;
+    }
+
     setStatus("saving");
     setErrorMessage("");
     try {

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { stagePendingEdit } from "./pendingEdits";
+import { EditorSyncBar } from "./EditorSyncBar";
 
 type CollectionCard = {
   slug: string;
@@ -33,10 +35,12 @@ export function CollectionsIndex({
   cards,
   photos,
   editable = false,
+  remoteMode = false,
 }: {
   cards: CollectionCard[];
   photos: IndexPhoto[];
   editable?: boolean;
+  remoteMode?: boolean;
 }) {
   const [selectedPeople, setSelectedPeople] = useState<string[]>([]);
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
@@ -170,8 +174,8 @@ export function CollectionsIndex({
                 />
                 {editable && (
                   <>
-                    <PinButton slug={card.slug} initiallyPinned={card.pinned} />
-                    <PrivacyButton slug={card.slug} initiallyPrivate={card.private} />
+                    <PinButton slug={card.slug} initiallyPinned={card.pinned} remoteMode={remoteMode} />
+                    <PrivacyButton slug={card.slug} initiallyPrivate={card.private} remoteMode={remoteMode} />
                   </>
                 )}
               </div>
@@ -183,6 +187,12 @@ export function CollectionsIndex({
               </div>
             </a>
           ))}
+        </div>
+      )}
+
+      {editable && remoteMode && (
+        <div className="editor-toolbar">
+          <EditorSyncBar />
         </div>
       )}
 
@@ -200,7 +210,15 @@ export function CollectionsIndex({
   );
 }
 
-function PinButton({ slug, initiallyPinned }: { slug: string; initiallyPinned: boolean }) {
+function PinButton({
+  slug,
+  initiallyPinned,
+  remoteMode = false,
+}: {
+  slug: string;
+  initiallyPinned: boolean;
+  remoteMode?: boolean;
+}) {
   const [pinned, setPinned] = useState(initiallyPinned);
   const [busy, setBusy] = useState(false);
 
@@ -210,6 +228,24 @@ function PinButton({ slug, initiallyPinned }: { slug: string; initiallyPinned: b
     event.preventDefault();
     event.stopPropagation();
     if (busy) return;
+
+    const nowPinned = !pinned;
+
+    if (remoteMode) {
+      // Staged, not committed -- see app/collections/pendingEdits.ts. The
+      // button reflects the target state immediately; the actual commit
+      // happens in one batch when Sync is clicked.
+      setPinned(nowPinned);
+      stagePendingEdit({
+        key: `pin:${slug}`,
+        type: "pin",
+        slug,
+        pinned: nowPinned,
+        label: nowPinned ? `Pin ${slug} to top` : `Unpin ${slug}`,
+      });
+      return;
+    }
+
     setBusy(true);
     try {
       const response = await fetch("/api/collection-pin", {
@@ -241,7 +277,15 @@ function PinButton({ slug, initiallyPinned }: { slug: string; initiallyPinned: b
   );
 }
 
-function PrivacyButton({ slug, initiallyPrivate }: { slug: string; initiallyPrivate: boolean }) {
+function PrivacyButton({
+  slug,
+  initiallyPrivate,
+  remoteMode = false,
+}: {
+  slug: string;
+  initiallyPrivate: boolean;
+  remoteMode?: boolean;
+}) {
   const [isPrivate, setIsPrivate] = useState(initiallyPrivate);
   const [busy, setBusy] = useState(false);
 
@@ -249,6 +293,21 @@ function PrivacyButton({ slug, initiallyPrivate }: { slug: string; initiallyPriv
     event.preventDefault();
     event.stopPropagation();
     if (busy) return;
+
+    const nowPrivate = !isPrivate;
+
+    if (remoteMode) {
+      setIsPrivate(nowPrivate);
+      stagePendingEdit({
+        key: `privacy:${slug}`,
+        type: "privacy",
+        slug,
+        private: nowPrivate,
+        label: nowPrivate ? `Mark ${slug} private` : `Mark ${slug} public`,
+      });
+      return;
+    }
+
     setBusy(true);
     try {
       const response = await fetch("/api/collection-privacy", {

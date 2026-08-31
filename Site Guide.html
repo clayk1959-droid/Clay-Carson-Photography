@@ -502,6 +502,12 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 156</span><span class="version-date">Monday, August 31, 2026</span></div>
+      <ul>
+        <li>Fixed a real race condition in the remote editor: firing off several edits in quick succession (Make Private, Nudge to Top, a caption edit, ...) could silently clobber each other, since each one independently committed straight to GitHub, and two commits built close together can lose track of each other's changes. Editor actions in remote mode now stage locally (in the browser) instead of committing immediately, with a running count of pending changes, and a new "Sync" button applies everything in one single commit — no window left for two edits to race. Pending edits survive a page refresh or navigating between galleries (saved in the browser), and there's a "leave without syncing?" warning before closing the tab with unsynced changes. Local dev editing is unaffected — it already worked this way via "Sync Gallery."</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 155</span><span class="version-date">Monday, August 31, 2026</span></div>
       <ul>
         <li><code>npm run save</code> now also updates <code>Site Guide.html</code>, not just <code>Change Log.md</code>. Previously, running <code>save</code> without a Claude session in the loop would silently leave Site Guide.html behind — that happened with Version 154, caught and fixed by hand. Now every save keeps both in sync automatically.</li>

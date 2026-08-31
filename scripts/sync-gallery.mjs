@@ -831,7 +831,7 @@ const indexPage = `import { SiteHeader } from "../SiteHeader";
 import { SiteFooter } from "../SiteFooter";
 import { CollectionsIndex } from "./CollectionsIndex";
 import { SubmitPhotosLink } from "./SubmitPhotosLink";
-import { isEditorEnabled } from "../../lib/editor-mode";
+import { isEditorEnabled, isRemoteEditorMode } from "../../lib/editor-mode";
 import indexData from "../../data/photo-data/_index.json";
 
 export default function CollectionsPage() {
@@ -843,7 +843,12 @@ export default function CollectionsPage() {
           <h1 className="page-title">Galleries</h1>
           <SubmitPhotosLink />
         </div>
-        <CollectionsIndex cards={indexData.cards} photos={indexData.photos} editable={isEditorEnabled()} />
+        <CollectionsIndex
+          cards={indexData.cards}
+          photos={indexData.photos}
+          editable={isEditorEnabled()}
+          remoteMode={isRemoteEditorMode()}
+        />
       </section>
 
       <SiteFooter />

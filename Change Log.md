@@ -15,7 +15,9 @@ Last updated: Monday, August 31, 2026
 
 ## Version history
 
-### Version 155 — Monday, August 31, 2026
+### Version 156 — Monday, August 31, 2026
+
+- Fixed a real race condition in the remote editor: firing off several edits in quick succession (Make Private, Nudge to Top, a caption edit, ...) could silently clobber each other, since each one independently committed straight to GitHub, and two commits built close together can lose track of each other's changes. Editor actions in remote mode now stage locally (in your browser) instead of committing immediately, with a running count of pending changes, and a new "Sync" button applies everything in one single commit — no window left for two edits to race. Pending edits survive a page refresh or navigating between galleries (they're saved in the browser), and you'll get a "leave without syncing?" warning if you try to close the tab with unsynced changes. Local dev editing (on your own Mac) is unaffected — it already worked this way via "Sync Gallery."
 
 - `npm run save` now also updates `Site Guide.html`, not just `Change Log.md`. Previously, if you ran `save` yourself without a Claude session in the loop, Site Guide.html would silently fall behind — that happened with Version 154, caught and fixed by hand. Now every save keeps both in sync automatically.
 
