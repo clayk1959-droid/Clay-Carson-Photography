@@ -1,12 +1,7 @@
 import { Resend } from "resend";
 import { getPool } from "../../../../lib/db";
-import {
-  FROM_ADDRESS,
-  OWNER_EMAIL,
-  OWNER_SMS_ADDRESS,
-  escapeHtml,
-  randomToken,
-} from "../../../../lib/private-access";
+import { FROM_ADDRESS, OWNER_EMAIL, escapeHtml, randomToken } from "../../../../lib/private-access";
+import { sendSms } from "../../../../lib/sms";
 import { isPrivateAccessEnabled } from "../../../../lib/private-access-mode";
 
 export const dynamic = "force-dynamic";
@@ -62,26 +57,7 @@ export async function POST(request: Request) {
     `,
   });
 
-  if (OWNER_SMS_ADDRESS) {
-    // Best-effort text alert via the carrier's email-to-SMS gateway, so a
-    // new request actually gets noticed instead of sitting unread in an
-    // inbox with no phone notification. Not guaranteed to arrive -- carrier
-    // gateways are known to be inconsistent -- but it's free and doesn't
-    // require a separate account. Awaited (not fire-and-forget), since a
-    // serverless function's runtime can freeze the instant the response is
-    // returned, silently killing an unawaited send before it actually went
-    // out. A failure here still doesn't block the request -- the email
-    // above is the real notification of record.
-    const { error: smsError } = await resend.emails.send({
-      from: FROM_ADDRESS,
-      to: OWNER_SMS_ADDRESS,
-      subject: "Access request",
-      text: `${name} (${email}) requested access. Check email or the admin page to approve.`,
-    });
-    if (smsError) {
-      console.error("Text alert failed to send:", smsError.message);
-    }
-  }
+  await sendSms(`Access request: ${name} (${email}) requested access. Check email or the admin page to approve.`);
 
   // The request is already saved either way (so it'll still show up on the
   // admin page), but the owner needs to know the notification didn't

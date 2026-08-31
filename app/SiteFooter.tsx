@@ -5,6 +5,11 @@ export function SiteFooter() {
       <p>
         {`© ${year} Clay Carson. These photos are shared for the personal enjoyment of family and friends — please don't repost or share them publicly without asking first.`}
       </p>
+      <p className="site-footer-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        {" · "}
+        <a href="/terms">Terms &amp; Conditions</a>
+      </p>
     </div>
   );
 }

@@ -491,6 +491,12 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 153</span><span class="version-date">Monday, August 31, 2026</span></div>
+      <ul>
+        <li>Added real text message alerts via Twilio, replacing the AT&amp;T email-to-text gateway that was discontinued entirely. Real texts now go out for three things: someone requesting access to a private gallery, someone submitting photos, and a deploy failure (successes stay email-only, same as before). Setting this up required a full Twilio account (upgraded from trial), A2P 10DLC carrier registration as a Sole Proprietor, and — a real surprise — carriers requiring a published Privacy Policy and Terms &amp; Conditions page before they'd approve the campaign. Added <code>/privacy-policy</code> and <code>/terms</code>, linked from the site footer.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 152</span><span class="version-date">Monday, August 31, 2026</span></div>
       <ul>
         <li>Removed the temporary before/after comparison photo added for the Version 150 color/toning fix, now that it's confirmed working. Nova Scotia gallery count returns to normal.</li>

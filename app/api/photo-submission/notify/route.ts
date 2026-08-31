@@ -8,6 +8,7 @@ import {
   OWNER_EMAIL,
   escapeHtml,
 } from "../../../../lib/private-access";
+import { sendSms } from "../../../../lib/sms";
 
 export const dynamic = "force-dynamic";
 
@@ -39,6 +40,8 @@ export async function POST(request: Request) {
         .join("")}</ul><p>Run <code>npm run submissions:pull</code> to bring them down for review.</p>`,
     });
   }
+
+  await sendSms(`${account.name} submitted ${filenames.length} photo(s) to your site. Run submissions:pull to review.`);
 
   return Response.json({ ok: true });
 }

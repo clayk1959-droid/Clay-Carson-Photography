@@ -15,6 +15,10 @@ Last updated: Monday, August 31, 2026
 
 ## Version history
 
+### Version 153 — Monday, August 31, 2026
+
+- Added real text message alerts via Twilio, replacing the AT&T email-to-text gateway that was discontinued entirely. You now get a real text for three things: someone requesting access to a private gallery, someone submitting photos, and a deploy failure (successes stay email-only, same as before). Setting this up required a full Twilio account (upgraded from trial), A2P 10DLC carrier registration as a Sole Proprietor, and — a real surprise — carriers requiring a published Privacy Policy and Terms & Conditions page before they'd approve the campaign. Added `/privacy-policy` and `/terms`, linked from the site footer.
+
 ### Version 152 — Monday, August 31, 2026
 
 - Removed the temporary before/after comparison photo added for the Version 150 color/toning fix, now that it's confirmed working. Nova Scotia gallery count returns to normal.

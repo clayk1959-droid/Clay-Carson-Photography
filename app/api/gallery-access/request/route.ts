@@ -1,12 +1,7 @@
 import { Resend } from "resend";
 import { getPool } from "../../../../lib/db";
-import {
-  FROM_ADDRESS,
-  OWNER_EMAIL,
-  OWNER_SMS_ADDRESS,
-  escapeHtml,
-  randomToken,
-} from "../../../../lib/private-access";
+import { FROM_ADDRESS, OWNER_EMAIL, escapeHtml, randomToken } from "../../../../lib/private-access";
+import { sendSms } from "../../../../lib/sms";
 import collectionOverrides from "../../../../data/collection-overrides.json";
 
 export const dynamic = "force-dynamic";
@@ -68,19 +63,7 @@ export async function POST(request: Request) {
     `,
   });
 
-  if (OWNER_SMS_ADDRESS) {
-    // Best-effort, same reasoning as the test system's request route --
-    // awaited so a serverless function freeze can't silently kill it.
-    const { error: smsError } = await resend.emails.send({
-      from: FROM_ADDRESS,
-      to: OWNER_SMS_ADDRESS,
-      subject: "Access request",
-      text: `${name} (${email}) requested access to ${gallerySlug}. Check email to approve.`,
-    });
-    if (smsError) {
-      console.error("Text alert failed to send:", smsError.message);
-    }
-  }
+  await sendSms(`Access request: ${name} (${email}) requested access to ${gallerySlug}. Check email to approve.`);
 
   if (error) {
     return Response.json(

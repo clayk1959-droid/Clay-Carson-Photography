@@ -1,14 +1,11 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { Resend } from "resend";
+import { sendSms } from "../../../lib/sms";
 
 export const dynamic = "force-dynamic";
 
 const FROM_ADDRESS = "noreply@mail.carsonmullerfamily.com";
 const OWNER_EMAIL = "clayk1959@gmail.com";
-// Same carrier email-to-text gateway trick already used for private-access
-// request alerts -- free, no separate SMS service/account needed. Optional:
-// text alerts are skipped if unset, matching that same pattern.
-const OWNER_SMS_ADDRESS = process.env.OWNER_SMS_ADDRESS || null;
 
 // Friendly names for the three Vercel projects this repo deploys, so the
 // alert says "Open"/"Editable"/"Private" instead of the raw project slug.
@@ -82,16 +79,10 @@ export async function POST(request: Request) {
 
   // Text alerts stay failure-only -- a routine successful deploy isn't
   // worth interrupting Clay for, only a broken one is.
-  if (failed && OWNER_SMS_ADDRESS) {
-    const { error: smsError } = await resend.emails.send({
-      from: FROM_ADDRESS,
-      to: OWNER_SMS_ADDRESS,
-      subject: "Deploy failed",
-      text: `Deploy failed: ${projectLabel}. Live site is fine (Vercel keeps serving the last good build). Check email for details.`,
-    });
-    if (smsError) {
-      console.error("Deploy-failure text alert failed to send:", smsError.message);
-    }
+  if (failed) {
+    await sendSms(
+      `Deploy failed: ${projectLabel}. Live site is fine (Vercel keeps serving the last good build). Check email for details.`,
+    );
   }
 
   return Response.json({ ok: true });
