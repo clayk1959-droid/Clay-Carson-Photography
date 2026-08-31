@@ -1,27 +1,6 @@
 {
   "cards": [
     {
-      "slug": "christian-2nd-year",
-      "title": "Christian 2nd Year",
-      "person": [
-        "Benjamin Muller",
-        "Benjamin Mulller",
-        "Christian Muller",
-        "Christian Muller. Katie Muller",
-        "Janet Carson",
-        "Katie Muller"
-      ],
-      "event": [
-        "Norway Cruise"
-      ],
-      "count": 18,
-      "pinned": false,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "christian-2nd-year-06.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "kyle",
       "title": "Kyle",
       "person": [],
@@ -43,6 +22,27 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "christian-janet-read-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "christian-2nd-year",
+      "title": "Christian 2nd Year",
+      "person": [
+        "Benjamin Muller",
+        "Benjamin Mulller",
+        "Christian Muller",
+        "Christian Muller. Katie Muller",
+        "Janet Carson",
+        "Katie Muller"
+      ],
+      "event": [
+        "Norway Cruise"
+      ],
+      "count": 18,
+      "pinned": false,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "christian-2nd-year-06.jpg",
       "coverPosition": "center center"
     },
     {
