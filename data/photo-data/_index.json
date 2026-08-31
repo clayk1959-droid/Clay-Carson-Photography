@@ -1,18 +1,6 @@
 {
   "cards": [
     {
-      "slug": "christian-janet-read",
-      "title": "Christian & Janet Read",
-      "person": [],
-      "event": [],
-      "count": 17,
-      "pinned": false,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "christian-janet-read-01.jpg",
-      "coverPosition": "center center"
-    },
-    {
       "slug": "kyle",
       "title": "Kyle",
       "person": [],
@@ -22,6 +10,18 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "kyle-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
+      "slug": "christian-janet-read",
+      "title": "Christian & Janet Read",
+      "person": [],
+      "event": [],
+      "count": 17,
+      "pinned": false,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "christian-janet-read-01.jpg",
       "coverPosition": "center center"
     },
     {
