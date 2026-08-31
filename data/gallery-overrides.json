@@ -17,6 +17,16 @@
     }
   },
   "christian-2nd-year": {
+    "Christian jumps out iof box with Ben.jpg": {
+      "caption": "He just wanted the box",
+      "date": "2026-04-19",
+      "order": 6,
+      "person": [
+        "Christian Muller",
+        "Benjamin Muller"
+      ],
+      "event": []
+    },
     "Eating wide open.jpg": {
       "hidden": true,
       "caption": "Christian 2nd Year",
