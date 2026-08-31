@@ -12,7 +12,8 @@
   },
   "christian-janet-read": {
     "firstSyncedAt": "2026-08-31T19:52:45.000Z",
-    "pinnedAt": "2026-08-31T21:36:31.702Z"
+    "pinnedAt": "2026-08-31T21:36:31.702Z",
+    "private": true
   },
   "france-trip": {
     "firstSyncedAt": "2026-08-27T16:50:35.000Z",
