@@ -598,7 +598,11 @@ for (const collection of collections) {
         return pipeline.keepIccProfile();
       }
 
-      await resizedWithProfile({ width: 2200, height: 2200, fit: "inside", withoutEnlargement: true })
+      // Bumped from 2200 -> 3200 (roughly 2x the pixel count) after Clay
+      // found fine architectural detail (e.g. a church spire) visibly
+      // softened at 2200 compared to the original -- a deliberate tradeoff
+      // toward more detail at the cost of larger published file sizes.
+      await resizedWithProfile({ width: 3200, height: 3200, fit: "inside", withoutEnlargement: true })
         .jpeg({ quality: 88, mozjpeg: true })
         .toFile(fullPath);
       await resizedWithProfile({

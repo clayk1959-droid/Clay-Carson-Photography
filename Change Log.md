@@ -1,6 +1,6 @@
 # Clay Carson Photography — Change Log
 
-Last updated: Sunday, August 30, 2026
+Last updated: Monday, August 31, 2026
 
 ## Current status
 
@@ -14,6 +14,14 @@ Last updated: Sunday, August 30, 2026
   `/Volumes/Samsung_T5/Website` checked first for metadata when present.
 
 ## Version history
+
+### Version 151 — Monday, August 31, 2026
+
+- Increased the max resolution of published full-size photos from 2200px to 3200px (roughly 2x the pixel count), after you noticed fine detail — like the shingle lines on the Sandy Cove church spire — visibly softened at 2200px compared to your original file. Reprocessed every existing photo across every gallery at the new size and confirmed a real improvement with a before/after crop comparison before shipping. Deliberate tradeoff toward more detail in exchange for larger published file sizes; thumbnails are unaffected (still 750px — they never render bigger than that on screen).
+
+### Version 150 — Sunday, August 30, 2026
+
+- Fixed a real bug behind the color/toning mismatch you noticed between your originals (Quick Look, Photoshop, other editors) and the published site, most visible on B&W photos. The resize pipeline never preserved a photo's embedded color profile (ICC), so browsers fell back to assuming plain sRGB — if the original was tagged with a different profile, the same pixel values got silently reinterpreted, showing up as a real color/toning shift. Fixed for color photos by preserving the embedded profile through the resize. A true single-channel grayscale photo needed a second, separate fix: sharp's default JPEG encoding silently upconverts it to 3-channel RGB, which invalidates the original gray profile — now detected and held in the same colorspace so its profile stays valid. Verified with a real before/after pair published live (Nova Scotia boats photo) before confirming the fix.
 
 ### Version 149 — Sunday, August 30, 2026
 
