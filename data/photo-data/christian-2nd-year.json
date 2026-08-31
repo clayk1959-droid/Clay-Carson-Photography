@@ -184,7 +184,7 @@
       "event": [],
       "width": 2785,
       "height": 3200,
-      "hidden": false
+      "hidden": true
     },
     {
       "filename": "GOOD-Christiam and Katie puzzle.tif",
@@ -290,7 +290,6 @@
     10,
     11,
     12,
-    13,
     14,
     15,
     16,
