@@ -27,7 +27,7 @@
       "event": [
         "Nova Scotia Trip"
       ],
-      "count": 63,
+      "count": 62,
       "pinned": true,
       "private": false,
       "coverToken": null,
@@ -2380,7 +2380,7 @@
       ],
       "width": 1069,
       "height": 1800,
-      "src": "/galleries/nova-scotia/nova-scotia-75.jpg"
+      "src": "/galleries/nova-scotia/nova-scotia-74.jpg"
     },
     {
       "collectionSlug": "nova-scotia",
@@ -2517,7 +2517,7 @@
     {
       "collectionSlug": "nova-scotia",
       "collectionTitle": "Nova Scotia",
-      "filename": "L1021276-before-fix.jpg",
+      "filename": "L1021276.jpg",
       "caption": "August 14, 2026 — Peggy’s cove",
       "altText": "Peggy’s cove",
       "person": [],
@@ -2531,20 +2531,6 @@
     {
       "collectionSlug": "nova-scotia",
       "collectionTitle": "Nova Scotia",
-      "filename": "L1021276.jpg",
-      "caption": "August 14, 2026 — Peggy’s cove",
-      "altText": "Peggy’s cove",
-      "person": [],
-      "event": [
-        "Nova Scotia Trip"
-      ],
-      "width": 2960,
-      "height": 1899,
-      "src": "/galleries/nova-scotia/nova-scotia-72.jpg"
-    },
-    {
-      "collectionSlug": "nova-scotia",
-      "collectionTitle": "Nova Scotia",
       "filename": "L1021297.jpg",
       "caption": "August 14, 2026 — Peggy’s cove",
       "altText": "Peggy’s cove",
@@ -2554,7 +2540,7 @@
       ],
       "width": 3200,
       "height": 1473,
-      "src": "/galleries/nova-scotia/nova-scotia-73.jpg"
+      "src": "/galleries/nova-scotia/nova-scotia-72.jpg"
     }
   ]
 }
