@@ -425,6 +425,17 @@ vercel --prod # promotes to production</code></pre>
         Files sit there just long enough to be reviewed — <code>npm run submissions:pull</code>
         downloads them locally and deletes them from Blob storage in the same step, so nothing
         accumulates there and there's nothing to pay for on the free tier.</li>
+      <li><strong>Twilio</strong> (real text message alerts) — only touched by the three SMS
+        triggers (access requests, photo submissions, deploy failures). Skip it and those alerts
+        just don't send; everything else on the site works the same either way, and the same
+        events still email you regardless. Real money and real paperwork, not a quick add: needs
+        a full (non-trial) Twilio account, a purchased phone number (~$1.15/mo + a fraction of a
+        cent per text), and — because it's texting real US phones — carrier A2P 10DLC
+        registration as a "Sole Proprietor" brand. That registration in turn requires a publicly
+        published Privacy Policy and Terms &amp; Conditions page for the site (carriers won't
+        approve a texting campaign without one) — that's what <code>/privacy-policy</code>
+        and <code>/terms</code> exist for. Budget an hour or two of setup, mostly waiting on
+        Twilio's own review steps, not code.</li>
     </ul>
 
     <h3>Present but unused</h3>
