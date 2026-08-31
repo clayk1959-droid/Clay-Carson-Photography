@@ -18,7 +18,12 @@
   },
   "christian-2nd-year": {
     "Eating wide open.jpg": {
-      "hidden": true
+      "hidden": true,
+      "caption": "Christian 2nd Year",
+      "date": "2026-06-28",
+      "order": 13,
+      "person": [],
+      "event": []
     }
   },
   "gulf-shores-2025": {
