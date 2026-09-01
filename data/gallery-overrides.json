@@ -81,7 +81,14 @@
       "order": 14
     },
     "Reaches for ball.jpg": {
-      "order": 15
+      "order": 15,
+      "caption": "First Swimming lesson.",
+      "person": [
+        "Christian Muller.",
+        "Katie Muller"
+      ],
+      "event": [],
+      "date": "2026-06-13"
     },
     "Read.jpg": {
       "order": 16
