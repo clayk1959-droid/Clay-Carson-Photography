@@ -1,53 +1,61 @@
-/* Black-on-white, square-cornered, no accent colors -- applies to every
-   page under app/test-access/ (login, the public request-access flow, and
-   the admin page), since they all share this one stylesheet. */
-.private-access { min-height: 100svh; background: #ffffff; color: #000000; font-family: 'DM Sans', sans-serif; }
-.private-access-inner { max-width: 480px; margin: 0 auto; padding: 70px 20px 60px; }
-.private-access-inner.wide { max-width: 960px; }
-.private-access h1 { font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.01em; color: #000000; }
-.private-access-lede { color: #333333; font-size: 15px; line-height: 1.55; margin: 0 0 32px; }
-.private-access-banner { padding: 14px 18px; background: #ffffff; border: 1px solid #000000; border-radius: 0; margin-bottom: 28px; font-size: 14px; }
-.private-access-signoff { font-family: 'DM Sans', sans-serif; font-style: italic; font-size: 17px; margin: -14px 0 28px; color: #333333; }
+/* Black-on-white, square-cornered, no accent colors, and text sized for low
+   vision (~20px base instead of the 11-15px this used to run) -- applies to
+   every page under app/test-access/ (login, the public request-access
+   flow, and the admin page), since they all share this one stylesheet.
+   Small-caps/letter-spaced label styling is dropped throughout: it shrinks
+   effective size and hurts legibility more than it helps at this scale. */
+.private-access { min-height: 100svh; background: #ffffff; color: #000000; font-family: 'DM Sans', sans-serif; font-size: 20px; line-height: 1.5; }
+.private-access-inner { max-width: 560px; margin: 0 auto; padding: 70px 20px 60px; }
+.private-access-inner.wide { max-width: 1100px; }
+.private-access h1 { font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 700; margin: 0 0 16px; letter-spacing: -.01em; color: #000000; }
+.private-access-lede { color: #000000; font-size: 20px; line-height: 1.6; margin: 0 0 32px; }
+.private-access-banner { padding: 18px 20px; background: #ffffff; border: 1px solid #000000; border-radius: 0; margin-bottom: 28px; font-size: 20px; }
+.private-access-signoff { font-family: 'DM Sans', sans-serif; font-style: italic; font-size: 20px; margin: -8px 0 28px; color: #000000; }
 
-.private-access-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.private-access-card { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 34px 18px; border: 1px solid #000000; border-radius: 0; background: #ffffff; text-align: center; color: #000000; transition: transform .2s; }
+.private-access-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.private-access-card { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 36px 18px; border: 2px solid #000000; border-radius: 0; background: #ffffff; text-align: center; color: #000000; transition: transform .2s; }
 .private-access-card:hover { transform: translateY(-2px); }
-.private-access-folder-icon { width: 72px; height: auto; color: #000000; }
-.private-access-card-label { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 17px; }
+.private-access-folder-icon { width: 80px; height: auto; color: #000000; }
+.private-access-card-label { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 22px; }
 
-.private-access-back { display: inline-block; margin-top: 30px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #000000; border-bottom: 1px solid #000000; padding-bottom: 2px; }
+.private-access-back { display: inline-block; margin-top: 30px; font-size: 18px; font-weight: 500; color: #000000; border-bottom: 2px solid #000000; padding-bottom: 2px; }
 
-.private-access-form { display: grid; gap: 18px; }
-.private-access-field { display: grid; gap: 7px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #333333; }
-.private-access-input, .private-access-textarea { padding: 12px 13px; border: 1px solid #000000; border-radius: 0; background: #ffffff; font: inherit; font-size: 15px; letter-spacing: normal; text-transform: none; color: #000000; }
-.private-access-input:focus-visible, .private-access-textarea:focus-visible { outline: 2px solid #000000; outline-offset: 1px; }
-.private-access-button { padding: 13px 22px; background: #000000; color: #ffffff; border: 1px solid #000000; border-radius: 0; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.private-access-form { display: grid; gap: 22px; }
+.private-access-field { display: grid; gap: 8px; font-size: 18px; font-weight: 600; color: #000000; }
+.private-access-input, .private-access-textarea { padding: 16px 16px; border: 2px solid #000000; border-radius: 0; background: #ffffff; font: inherit; font-size: 20px; color: #000000; }
+.private-access-input:focus-visible, .private-access-textarea:focus-visible { outline: 3px solid #000000; outline-offset: 2px; }
+.private-access-button { padding: 18px 28px; background: #000000; color: #ffffff; border: 2px solid #000000; border-radius: 0; font-size: 20px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
 .private-access-button:hover { background: #222222; }
 .private-access-button:disabled { opacity: .5; cursor: default; }
 /* No red available for errors -- bold is the black-and-white stand-in for
    "this needs attention". */
-.private-access-error { color: #000000; font-weight: 700; font-size: 14px; margin: 0; }
-.private-access-sent { font-size: 15px; line-height: 1.55; }
+.private-access-error { color: #000000; font-weight: 700; font-size: 20px; margin: 0; }
+.private-access-sent { font-size: 20px; line-height: 1.6; }
 
-.private-access-summary { color: #333333; margin: 0 0 34px; font-size: 14px; }
-.private-access-section { margin-bottom: 40px; }
-.private-access-section h2 { font-size: 15px; font-weight: 700; letter-spacing: .04em; margin: 0 0 12px; color: #000000; }
-.private-access-note { color: #555555; font-size: 13px; margin-top: 10px; }
+.private-access-summary { color: #000000; margin: 0 0 34px; font-size: 20px; }
+.private-access-section { margin-bottom: 44px; }
+/* Explicit font-family needed here -- globals.css has a bare "h1, h2, h3"
+   rule (serif, for the main site's editorial headings) that this page also
+   inherits since it's loaded site-wide; without overriding it, this h2
+   silently fell back to that serif font instead of matching the rest of
+   the page. */
+.private-access-section h2 { font-family: 'DM Sans', sans-serif; font-size: 24px; font-weight: 700; margin: 0 0 14px; color: #000000; }
+.private-access-note { color: #000000; font-size: 18px; margin-top: 12px; }
 .private-access-table-wrap { overflow-x: auto; }
-.invite-upload-access-form { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
-.invite-upload-access-form .private-access-input { flex: 1 1 200px; padding: 9px 12px; font-size: 14px; }
-.private-access-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.private-access-table th { text-align: left; padding: 6px 14px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #333333; border-bottom: 2px solid #000000; font-weight: 700; }
-.private-access-table td { padding: 6px 14px; border-bottom: 1px solid #cccccc; color: #000000; }
+.invite-upload-access-form { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 16px; }
+.invite-upload-access-form .private-access-input { flex: 1 1 240px; padding: 12px 14px; font-size: 18px; }
+.private-access-table { width: 100%; border-collapse: collapse; font-size: 20px; }
+.private-access-table th { text-align: left; padding: 10px 10px; font-size: 18px; color: #000000; border-bottom: 3px solid #000000; font-weight: 700; }
+.private-access-table td { padding: 12px 10px; border-bottom: 2px solid #000000; color: #000000; }
 .private-access-table tr.revoked { opacity: .5; }
 /* Revoke/Restore/plain used to be color-coded (red/green/blue) -- with only
    black available, the button's own text ("Revoke", "Restore", ...) is the
    only differentiator now, all styled identically with an invert-on-hover. */
-.private-access-pill-btn { padding: 5px 13px; font: inherit; font-size: 12px; letter-spacing: .05em; border-radius: 0; border: 1px solid #000000; background: #ffffff; color: #000000; cursor: pointer; }
+.private-access-pill-btn { padding: 8px 12px; font: inherit; font-size: 18px; font-weight: 600; border-radius: 0; border: 2px solid #000000; background: #ffffff; color: #000000; cursor: pointer; }
 .private-access-pill-btn:hover { background: #000000; color: #ffffff; }
 .private-access-pill-btn:disabled { opacity: .5; cursor: default; }
 
 .gallery-access-grid th, .gallery-access-grid td { text-align: center; }
 .gallery-access-grid th:first-child, .gallery-access-grid td:first-child { text-align: left; }
-.gallery-access-column-head { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.gallery-access-cell input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: #000000; }
+.gallery-access-column-head { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.gallery-access-cell input[type="checkbox"] { width: 28px; height: 28px; cursor: pointer; accent-color: #000000; }

@@ -15,6 +15,10 @@ Last updated: Monday, August 31, 2026
 
 ## Version history
 
+### Version 158 — Monday, August 31, 2026
+
+- Low-vision pass on the private-access flow (admin page, login, and the public request-access pages): base text size roughly doubled (14-15px up to 20px, with the tiny 11-13px labels/table headers brought up to match instead of staying small), heavier font weight throughout, bigger buttons and checkboxes, and dropped the small-caps/letter-spaced label styling that was actively shrinking legibility. Also fixed a real bug found along the way — the "Accounts" section heading was silently rendering in the wrong (serif) font because a site-wide heading style was leaking in and nothing here was overriding it. The accounts table fits without horizontal scrolling down to about a 1050px-wide browser window; narrower than that, it scrolls (works fine, just not ideal) since fitting 9 columns of 20px text has a real limit.
+
 ### Version 157 — Monday, August 31, 2026
 
 - Restyled the whole private-access flow (admin page, login, and the public request-access pages — they all share one stylesheet) to pure black-on-white: square-cornered buttons, no rounded corners anywhere, and no color beyond black and white. The Revoke/Restore/other action buttons used to be color-coded (red/green/blue) — with only black available, they're now all styled the same, distinguished by their text label alone. Error messages are now bold instead of red for the same reason.
