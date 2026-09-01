@@ -17,6 +17,21 @@
     }
   },
   "christian-2nd-year": {
+    "Christian eating with spoon_10.tif": {
+      "order": 11
+    },
+    "Christian haircut_4.tif": {
+      "order": 2
+    },
+    "Christian helps Ben with garden cart.tif": {
+      "order": 3
+    },
+    "Christian in book stacks.jpg": {
+      "order": 4
+    },
+    "Christian in sink_5.tif": {
+      "order": 5
+    },
     "Christian jumps out iof box with Ben.jpg": {
       "caption": "He just wanted the box",
       "date": "2026-04-19",
@@ -26,6 +41,21 @@
         "Benjamin Muller"
       ],
       "event": []
+    },
+    "Christian plays on chair on rug_3.tif": {
+      "order": 7
+    },
+    "Christian plays on chair on rug_4.tif": {
+      "order": 8
+    },
+    "Christian plays with kitchen.tif": {
+      "order": 9
+    },
+    "Christian runs front yard into sun.jpg": {
+      "order": 10
+    },
+    "Christian smiles in Bounce house.jpg": {
+      "order": 1
     },
     "Eating orange bw good light.jpg": {
       "caption": "Don’t know what it is but interesting",
@@ -43,6 +73,24 @@
       "order": 13,
       "person": [],
       "event": []
+    },
+    "GOOD-Christiam and Katie puzzle.tif": {
+      "order": 13
+    },
+    "Grandma is home!.jpg": {
+      "order": 14
+    },
+    "Reaches for ball.jpg": {
+      "order": 15
+    },
+    "Read.jpg": {
+      "order": 16
+    },
+    "Runs for airplane bw.jpg": {
+      "order": 17
+    },
+    "Sits on floor looks behind smiles GOOD.jpg": {
+      "order": 18
     }
   },
   "gulf-shores-2025": {
