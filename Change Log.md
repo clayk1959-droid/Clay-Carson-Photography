@@ -15,6 +15,10 @@ Last updated: Monday, August 31, 2026
 
 ## Version history
 
+### Version 157 — Monday, August 31, 2026
+
+- Restyled the whole private-access flow (admin page, login, and the public request-access pages — they all share one stylesheet) to pure black-on-white: square-cornered buttons, no rounded corners anywhere, and no color beyond black and white. The Revoke/Restore/other action buttons used to be color-coded (red/green/blue) — with only black available, they're now all styled the same, distinguished by their text label alone. Error messages are now bold instead of red for the same reason.
+
 ### Version 156 — Monday, August 31, 2026
 
 - Fixed a real race condition in the remote editor: firing off several edits in quick succession (Make Private, Nudge to Top, a caption edit, ...) could silently clobber each other, since each one independently committed straight to GitHub, and two commits built close together can lose track of each other's changes. Editor actions in remote mode now stage locally (in your browser) instead of committing immediately, with a running count of pending changes, and a new "Sync" button applies everything in one single commit — no window left for two edits to race. Pending edits survive a page refresh or navigating between galleries (they're saved in the browser), and you'll get a "leave without syncing?" warning if you try to close the tab with unsynced changes. Local dev editing (on your own Mac) is unaffected — it already worked this way via "Sync Gallery."
