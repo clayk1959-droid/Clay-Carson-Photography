@@ -67,6 +67,20 @@ CREATE TABLE IF NOT EXISTS upload_access (
   UNIQUE (account_id)
 );
 
+-- Real, public opt-in for the site's SMS alerts (access requests, photo
+-- uploads, deploy failures) -- required by carrier A2P 10DLC review, which
+-- needs an actual visitable page to verify consent, not just Clay's word
+-- for it. A phone number here has confirmed_at set only after replying with
+-- the code texted to it; sendSms() only ever sends to confirmed rows.
+CREATE TABLE IF NOT EXISTS sms_subscribers (
+  id SERIAL PRIMARY KEY,
+  phone_number TEXT NOT NULL UNIQUE,
+  confirm_code_hash TEXT,
+  confirm_code_expires_at TIMESTAMPTZ,
+  confirmed_at TIMESTAMPTZ,
+  requested_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 CREATE INDEX IF NOT EXISTS idx_sessions_account_id ON sessions(account_id);
 CREATE INDEX IF NOT EXISTS idx_login_log_account_id ON login_log(account_id);
 CREATE INDEX IF NOT EXISTS idx_gallery_access_account_id ON gallery_access(account_id);

@@ -9,6 +9,8 @@ export function SiteFooter() {
         <a href="/privacy-policy">Privacy Policy</a>
         {" · "}
         <a href="/terms">Terms &amp; Conditions</a>
+        {" · "}
+        <a href="/sms-alerts">Site Alert Texts</a>
       </p>
     </div>
   );
