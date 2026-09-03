@@ -63,7 +63,12 @@ export async function POST(request: Request) {
     `,
   });
 
-  await sendSms(`Access request: ${name} (${email}) requested access to ${gallerySlug}. Check email to approve.`);
+  await sendSms(
+    `Access request: ${name} (${email}) requested access to ${gallerySlug}.\n` +
+      `Approve (3 months): ${link("approve", "3_months")}\n` +
+      `Approve (forever): ${link("approve", "forever")}\n` +
+      `Deny: ${link("deny")}`,
+  );
 
   if (error) {
     return Response.json(

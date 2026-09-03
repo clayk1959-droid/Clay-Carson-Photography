@@ -15,6 +15,10 @@ Last updated: Monday, August 31, 2026
 
 ## Version history
 
+### Version 160 — Thursday, September 3, 2026
+
+- The access-request text alert now includes real Approve/Deny links directly in the message, same as the email — tap to act right from the text instead of needing to open email first.
+
 ### Version 159 — Wednesday, September 2, 2026
 
 - Added a real, public opt-in page for the site's text alerts (`/sms-alerts`, linked from the footer): enter a phone number, get a 6-digit code by text, confirm it. This replaces the old fixed-number setup — text alerts now go to whoever's confirmed there instead of a number baked into an env var. Built specifically because carrier A2P review rejected the SMS campaign for having no real, visitable page to verify how consent is collected — this gives them one. Basic abuse protection built in (one code per number per minute, capped total sends per hour) since it's a public, unauthenticated form.

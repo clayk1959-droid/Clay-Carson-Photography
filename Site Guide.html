@@ -502,6 +502,12 @@ vercel --prod # promotes to production</code></pre>
     <p>Most recent first. Hosted on Vercel, deployed from GitHub — every push to <code>main</code> goes live automatically within a minute or two.</p>
 
     <div class="version-entry">
+      <div class="version-head"><span class="version-num">Version 160</span><span class="version-date">Thursday, September 3, 2026</span></div>
+      <ul>
+        <li>The access-request text alert now includes real Approve/Deny links directly in the message, same as the email — tap to act right from the text instead of needing to open email first.</li>
+      </ul>
+    </div>
+    <div class="version-entry">
       <div class="version-head"><span class="version-num">Version 159</span><span class="version-date">Wednesday, September 2, 2026</span></div>
       <ul>
         <li>Added a real, public opt-in page for the site's text alerts (<code>/sms-alerts</code>, linked from the footer): enter a phone number, get a 6-digit code by text, confirm it. This replaces the old fixed-number setup — text alerts now go to whoever's confirmed there instead of a number baked into an env var. Built specifically because carrier A2P review rejected the SMS campaign for having no real, visitable page to verify how consent is collected — this gives them one. Basic abuse protection built in (one code per number per minute, capped total sends per hour) since it's a public, unauthenticated form.</li>
