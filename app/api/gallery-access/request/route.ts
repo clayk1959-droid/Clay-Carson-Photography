@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { getPool } from "../../../../lib/db";
 import { FROM_ADDRESS, OWNER_EMAIL, escapeHtml, randomToken } from "../../../../lib/private-access";
 import { sendSms } from "../../../../lib/sms";
+import { createShortLink } from "../../../../lib/short-links";
 import collectionOverrides from "../../../../data/collection-overrides.json";
 
 export const dynamic = "force-dynamic";
@@ -63,11 +64,20 @@ export async function POST(request: Request) {
     `,
   });
 
+  // Plain SMS can't turn a label into a tappable link the way the email
+  // above does -- the best achievable version is a short label immediately
+  // followed by a short, clean URL, instead of the ~140-character decide
+  // link with all its query params spelled out.
+  const [approve3moShort, approveForeverShort, denyShort] = await Promise.all([
+    createShortLink(origin, link("approve", "3_months")),
+    createShortLink(origin, link("approve", "forever")),
+    createShortLink(origin, link("deny")),
+  ]);
   await sendSms(
     `Access request: ${name} (${email}) requested access to ${gallerySlug}.\n` +
-      `Approve (3 months): ${link("approve", "3_months")}\n` +
-      `Approve (forever): ${link("approve", "forever")}\n` +
-      `Deny: ${link("deny")}`,
+      `Approve 3 months: ${approve3moShort}\n` +
+      `Approve forever: ${approveForeverShort}\n` +
+      `Reject: ${denyShort}`,
   );
 
   if (error) {

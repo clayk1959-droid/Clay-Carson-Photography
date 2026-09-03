@@ -81,6 +81,18 @@ CREATE TABLE IF NOT EXISTS sms_subscribers (
   requested_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Short redirect links for SMS -- a text message can't turn "Approve 3
+-- months" into a tappable label the way an email link can, so the best
+-- achievable version is a label followed by a short, clean URL instead of
+-- the full ~140-character decide link with all its query params. Generic
+-- (target_url, not tied to access requests specifically) so anything else
+-- that ever needs a short link in a text can reuse this.
+CREATE TABLE IF NOT EXISTS short_links (
+  code TEXT PRIMARY KEY,
+  target_url TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 CREATE INDEX IF NOT EXISTS idx_sessions_account_id ON sessions(account_id);
 CREATE INDEX IF NOT EXISTS idx_login_log_account_id ON login_log(account_id);
 CREATE INDEX IF NOT EXISTS idx_gallery_access_account_id ON gallery_access(account_id);

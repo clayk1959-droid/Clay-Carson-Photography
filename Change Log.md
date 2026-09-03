@@ -15,6 +15,10 @@ Last updated: Monday, August 31, 2026
 
 ## Version history
 
+### Version 161 — Thursday, September 3, 2026
+
+- Cleaned up the access-request text alert: the Approve/Reject links used to show as their full messy ~140-character URL. Added a short-link redirect (`/s/...`) so each line now reads like "Approve 3 months: carsonmullerfamily.com/s/AbC123" — plain SMS can't make custom text itself tappable, so this is the cleanest version actually possible in a text message.
+
 ### Version 160 — Thursday, September 3, 2026
 
 - The access-request text alert now includes real Approve/Deny links directly in the message, same as the email — tap to act right from the text instead of needing to open email first.
