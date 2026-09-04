@@ -15,6 +15,10 @@ Last updated: Thursday, September 3, 2026
 
 ## Version history
 
+### Version 164 — Friday, September 4, 2026
+
+- Fixed the Flying gallery showing a stale, uncropped photo at display position 9 despite the crop being fixed locally. Root cause: the local `npm run save` commit for that fix never got pushed to GitHub, while several rapid remote-editor edits landed on GitHub in the meantime — the live site kept serving the older, pre-fix build the whole time. Resolved by merging the unpushed local fix with the newer remote edits and regenerating the derived gallery data fresh, then pushing. Worth knowing: a `save` that's committed but not pushed is invisible to the live site no matter how correct it looks locally — check `git status`/`git log` against GitHub if a fix "isn't showing up" despite looking right on your Mac.
+
 ### Version 163 — Thursday, September 3, 2026
 
 - Updated Flying
