@@ -94,7 +94,7 @@
       ],
       "width": 3200,
       "height": 2130,
-      "hidden": false
+      "hidden": true
     },
     {
       "filename": "L1021788.JPG",
@@ -375,7 +375,6 @@
     3,
     4,
     5,
-    6,
     7,
     8,
     9,

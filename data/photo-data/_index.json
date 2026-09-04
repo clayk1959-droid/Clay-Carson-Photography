@@ -1,6 +1,22 @@
 {
   "cards": [
     {
+      "slug": "flying",
+      "title": "Flying",
+      "person": [
+        "Steve Dunnagan"
+      ],
+      "event": [
+        "Flying"
+      ],
+      "count": 22,
+      "pinned": true,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "flying-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
       "slug": "christian-2nd-year",
       "title": "Christian 2nd Year",
       "person": [
@@ -43,22 +59,6 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "kyle-01.jpg",
-      "coverPosition": "center center"
-    },
-    {
-      "slug": "flying",
-      "title": "Flying",
-      "person": [
-        "Steve Dunnagan"
-      ],
-      "event": [
-        "Flying"
-      ],
-      "count": 23,
-      "pinned": false,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "flying-01.jpg",
       "coverPosition": "center center"
     },
     {
@@ -2670,22 +2670,6 @@
       "width": 3200,
       "height": 2130,
       "src": "/galleries/flying/flying-05.jpg"
-    },
-    {
-      "collectionSlug": "flying",
-      "collectionTitle": "Flying",
-      "filename": "L1021783.JPG",
-      "caption": "September 3, 2026 — Flying with Steve Dunnagan",
-      "altText": "Flying with Steve Dunnagan",
-      "person": [
-        "Steve Dunnagan"
-      ],
-      "event": [
-        "Flying"
-      ],
-      "width": 3200,
-      "height": 2130,
-      "src": "/galleries/flying/flying-06.jpg"
     },
     {
       "collectionSlug": "flying",
