@@ -189,6 +189,7 @@ const collections = [
   { folder: "Nova Scotia", slug: "nova-scotia", title: "Nova Scotia", component: "NovaScotia2Page", subtitle: null },
   { folder: "Christian & Janet Read", slug: "christian-janet-read", title: "Christian & Janet Read", component: "ChristianJanetReadPage", subtitle: null },
   { folder: "Christian 2nd Year", slug: "christian-2nd-year", title: "Christian 2nd Year", component: "Christian2NdYearPage", subtitle: null },
+  { folder: "Flying", slug: "flying", title: "Flying", component: "FlyingPage", subtitle: null },
 ];
 
 // Auto-discover any "Gallery Originals" folder not already listed above.

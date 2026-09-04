@@ -2,17 +2,17 @@ import { SiteHeader } from "../../SiteHeader";
 import { SiteFooter } from "../../SiteFooter";
 import { Gallery } from "../Gallery";
 import { isEditorEnabled, isRemoteEditorMode } from "../../../lib/editor-mode";
-import data from "../../../data/photo-data/rhine-river-cruise.json";
+import data from "../../../data/photo-data/flying.json";
 
 const photographs = data.displayOrder.map((number) => ({
   ...data.photographData[number - 1],
-  src: `/galleries/rhine-river-cruise/rhine-river-cruise-${String(number).padStart(2, "0")}.jpg`,
+  src: `/galleries/flying/flying-${String(number).padStart(2, "0")}.jpg`,
 }));
 
 const hiddenPhotographs = data.photographData
   .map((photo, index) => ({
     ...photo,
-    src: `/galleries/rhine-river-cruise/rhine-river-cruise-${String(index + 1).padStart(2, "0")}.jpg`,
+    src: `/galleries/flying/flying-${String(index + 1).padStart(2, "0")}.jpg`,
   }))
   .filter((photo) => photo.hidden);
 
@@ -24,6 +24,10 @@ const otherCollections = [
   {
     "slug": "norway-cruise",
     "title": "Norway Cruise"
+  },
+  {
+    "slug": "rhine-river-cruise",
+    "title": "Rhine River Cruise"
   },
   {
     "slug": "blue-yoga-nyla",
@@ -44,16 +48,12 @@ const otherCollections = [
   {
     "slug": "christian-2nd-year",
     "title": "Christian 2nd Year"
-  },
-  {
-    "slug": "flying",
-    "title": "Flying"
   }
 ];
 
 const collectionSubtitle: string | null = null;
 
-export default function RhineRiverCruisePage() {
+export default function FlyingPage() {
   const remote = isRemoteEditorMode();
   const photoCountText = data.displayOrder.length + " Photos";
   const subtitle = collectionSubtitle ? collectionSubtitle + " · " + photoCountText : photoCountText;
@@ -62,12 +62,12 @@ export default function RhineRiverCruisePage() {
       <SiteHeader showHome />
       <header className="collection-heading">
         <a href="/collections">← Galleries</a>
-        <h1>Rhine River Cruise</h1>
+        <h1>Flying</h1>
         <p>{subtitle}</p>
       </header>
       <Gallery
-        name="Rhine River Cruise"
-        slug="rhine-river-cruise"
+        name="Flying"
+        slug="flying"
         photographs={photographs}
         hiddenPhotographs={hiddenPhotographs}
         otherCollections={remote ? [] : otherCollections}

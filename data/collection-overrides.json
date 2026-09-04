@@ -9,12 +9,14 @@
     "coverPhoto": "Christian jumps out iof box with Ben.jpg",
     "coverPosition": "center center",
     "private": true,
-    "pinnedAt": "2026-08-31T22:48:06.131Z"
+    "pinnedAt": "2026-08-31T22:48:06.131Z",
+    "coverToken": "AjOXhsGpdTPpV1kfh2sCwMiyquGGgrNj"
   },
   "christian-janet-read": {
     "firstSyncedAt": "2026-08-31T19:52:45.000Z",
     "pinnedAt": "2026-08-31T21:36:31.702Z",
-    "private": true
+    "private": true,
+    "coverToken": "4eyu8ZXMXu8RPeP80JXTZestQQKjK8Uj"
   },
   "france-trip": {
     "firstSyncedAt": "2026-08-27T16:50:35.000Z",
@@ -53,5 +55,8 @@
   },
   "submit-test": {
     "firstSyncedAt": "2026-08-30T04:15:19.000Z"
+  },
+  "flying": {
+    "firstSyncedAt": "2026-09-04T03:36:58.000Z"
   }
 }

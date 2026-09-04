@@ -49,6 +49,10 @@ const otherCollections = [
   {
     "slug": "christian-2nd-year",
     "title": "Christian 2nd Year"
+  },
+  {
+    "slug": "flying",
+    "title": "Flying"
   }
 ];
 
