@@ -60,8 +60,8 @@
       "event": [
         "Flying"
       ],
-      "width": 2876,
-      "height": 3200,
+      "width": 3200,
+      "height": 2682,
       "hidden": false
     },
     {
@@ -157,7 +157,7 @@
         "Flying"
       ],
       "width": 3200,
-      "height": 2130,
+      "height": 2928,
       "hidden": false
     },
     {
@@ -321,22 +321,6 @@
       "hidden": false
     },
     {
-      "filename": "L1021957.JPG",
-      "date": "2026-09-03",
-      "description": "Flying with Steve Dunnagan",
-      "caption": "September 3, 2026 — Flying with Steve Dunnagan",
-      "altText": "Flying with Steve Dunnagan",
-      "person": [
-        "Steve Dunnagan"
-      ],
-      "event": [
-        "Flying"
-      ],
-      "width": 3200,
-      "height": 2130,
-      "hidden": false
-    },
-    {
       "filename": "L1021984.JPG",
       "date": "2026-09-03",
       "description": "Flying with Steve Dunnagan",
@@ -408,7 +392,6 @@
     20,
     21,
     22,
-    23,
-    24
+    23
   ]
 }

@@ -54,7 +54,7 @@
       "event": [
         "Flying"
       ],
-      "count": 24,
+      "count": 23,
       "pinned": false,
       "private": false,
       "coverToken": null,
@@ -2651,8 +2651,8 @@
       "event": [
         "Flying"
       ],
-      "width": 2876,
-      "height": 3200,
+      "width": 3200,
+      "height": 2682,
       "src": "/galleries/flying/flying-04.jpg"
     },
     {
@@ -2748,7 +2748,7 @@
         "Flying"
       ],
       "width": 3200,
-      "height": 2130,
+      "height": 2928,
       "src": "/galleries/flying/flying-10.jpg"
     },
     {
@@ -2914,7 +2914,7 @@
     {
       "collectionSlug": "flying",
       "collectionTitle": "Flying",
-      "filename": "L1021957.JPG",
+      "filename": "L1021984.JPG",
       "caption": "September 3, 2026 — Flying with Steve Dunnagan",
       "altText": "Flying with Steve Dunnagan",
       "person": [
@@ -2930,7 +2930,7 @@
     {
       "collectionSlug": "flying",
       "collectionTitle": "Flying",
-      "filename": "L1021984.JPG",
+      "filename": "L1021993.JPG",
       "caption": "September 3, 2026 — Flying with Steve Dunnagan",
       "altText": "Flying with Steve Dunnagan",
       "person": [
@@ -2946,22 +2946,6 @@
     {
       "collectionSlug": "flying",
       "collectionTitle": "Flying",
-      "filename": "L1021993.JPG",
-      "caption": "September 3, 2026 — Flying with Steve Dunnagan",
-      "altText": "Flying with Steve Dunnagan",
-      "person": [
-        "Steve Dunnagan"
-      ],
-      "event": [
-        "Flying"
-      ],
-      "width": 3200,
-      "height": 2130,
-      "src": "/galleries/flying/flying-23.jpg"
-    },
-    {
-      "collectionSlug": "flying",
-      "collectionTitle": "Flying",
       "filename": "L1021997.JPG",
       "caption": "September 3, 2026 — Flying with Steve Dunnagan",
       "altText": "Flying with Steve Dunnagan",
@@ -2973,7 +2957,7 @@
       ],
       "width": 3200,
       "height": 2130,
-      "src": "/galleries/flying/flying-24.jpg"
+      "src": "/galleries/flying/flying-23.jpg"
     }
   ]
 }
