@@ -18,6 +18,9 @@
     "private": true,
     "coverToken": "4eyu8ZXMXu8RPeP80JXTZestQQKjK8Uj"
   },
+  "flying": {
+    "firstSyncedAt": "2026-09-04T03:36:58.000Z"
+  },
   "france-trip": {
     "firstSyncedAt": "2026-08-27T16:50:35.000Z",
     "coverPhoto": "1 - 186.jpeg",
@@ -55,8 +58,5 @@
   },
   "submit-test": {
     "firstSyncedAt": "2026-08-30T04:15:19.000Z"
-  },
-  "flying": {
-    "firstSyncedAt": "2026-09-04T03:36:58.000Z"
   }
 }

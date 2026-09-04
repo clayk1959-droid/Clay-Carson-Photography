@@ -55,12 +55,12 @@
       "order": 10
     },
     "Christian smiles in Bounce house.jpg": {
-      "order": 1
+      "order": 12
     },
     "Eating orange bw good light.jpg": {
       "caption": "Don’t know what it is but interesting",
       "date": "2026-06-12",
-      "order": 12,
+      "order": 13,
       "person": [
         "Christian Muller"
       ],
@@ -75,13 +75,13 @@
       "event": []
     },
     "GOOD-Christiam and Katie puzzle.tif": {
-      "order": 13
-    },
-    "Grandma is home!.jpg": {
       "order": 14
     },
+    "Grandma is home!.jpg": {
+      "order": 15
+    },
     "Reaches for ball.jpg": {
-      "order": 15,
+      "order": 16,
       "caption": "First Swimming lesson.",
       "person": [
         "Christian Muller.",
@@ -91,13 +91,27 @@
       "date": "2026-06-13"
     },
     "Read.jpg": {
-      "order": 16
-    },
-    "Runs for airplane bw.jpg": {
       "order": 17
     },
-    "Sits on floor looks behind smiles GOOD.jpg": {
+    "Runs for airplane bw.jpg": {
       "order": 18
+    },
+    "Sits on floor looks behind smiles GOOD.jpg": {
+      "order": 1
+    }
+  },
+  "flying": {
+    "L1021783.JPG": {
+      "hidden": true,
+      "caption": "Flying with Steve Dunnagan",
+      "order": 6,
+      "person": [
+        "Steve Dunnagan"
+      ],
+      "event": [
+        "Flying"
+      ],
+      "date": "2026-09-03"
     }
   },
   "gulf-shores-2025": {
