@@ -1,6 +1,22 @@
 {
   "cards": [
     {
+      "slug": "flying",
+      "title": "Flying",
+      "person": [
+        "Steve Dunnagan"
+      ],
+      "event": [
+        "Flying"
+      ],
+      "count": 23,
+      "pinned": true,
+      "private": false,
+      "coverToken": null,
+      "coverBasename": "flying-01.jpg",
+      "coverPosition": "center center"
+    },
+    {
       "slug": "christian-2nd-year",
       "title": "Christian 2nd Year",
       "person": [
@@ -43,22 +59,6 @@
       "private": false,
       "coverToken": null,
       "coverBasename": "kyle-01.jpg",
-      "coverPosition": "center center"
-    },
-    {
-      "slug": "flying",
-      "title": "Flying",
-      "person": [
-        "Steve Dunnagan"
-      ],
-      "event": [
-        "Flying"
-      ],
-      "count": 23,
-      "pinned": false,
-      "private": false,
-      "coverToken": null,
-      "coverBasename": "flying-01.jpg",
       "coverPosition": "center center"
     },
     {
